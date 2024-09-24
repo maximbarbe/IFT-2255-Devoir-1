@@ -785,10 +785,10 @@
                 <div class="scenario" id="cu-1">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> Créer une séance
+                            <strong>CU:</strong> S'inscrire
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> Un professionnel souhaite donner une séance d'un service au GYM
+                            <strong>Objectif:</strong> Un résident ou un intervenant souhaite s'inscrire à l'application.
                         </p>
                         
                         <hr>
@@ -796,61 +796,58 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Professionnel (Principal)</li>
-                                <li class="cu-actor">Agent (Secondaire)</li>
+                                <li class="cu-actor">Résident (Principal)</li>
+                                <li class="cu-actor">Intervenant (Principal)</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le professionnel a un compte et est présent au GYM.</li>
+                                <li class="dash">Aucun</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
+                                <li class="dash">Un nouveau compte est créé et stocké dans la base de données de l'application.</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part cu-part--notes">
                             <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">Notes additionnelles et hypothèses</p>
+                            <p class="cu-notes">On utilise l'hypothèse que la ville fournit aux intervenants un certain code qui permet de les authentifier.</p>
                         </div>
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le professionnel se présente à l’accueil et donne son numéro.</li>
-                            <li class="scenario-main-step">L’agent entre le numéro dans le système.</li>
-                            <li class="scenario-main-step">Le système valide le numéro du membre.</li>
-                            <li class="scenario-main-step">Le professionnel indique à l’agent le service qu’il souhaite fournir.</li>
-                            <li class="scenario-main-step">L’agent <a href="#cu-2">consulte le Répertoire des services</a> pour trouver le code de service.</li>
-                            <li class="scenario-main-step">L’agent demande au professionnel le reste des informations requises.</li>
-                            <li class="scenario-main-step">L’agent entre les données dans le système.</li>
-                            <li class="scenario-main-step">Le système affiche les détails de la séance nouvellement créée.</li>
+                            <li class="scenario-main-step">L'utilisateur ouvre la page d'inscription.</li>
+                            <li class="scenario-main-step">L'utilisateur choisit entre résident ou intervenant.</li>
+                            <li class="scenario-main-step">L'utilisateur remplit le formulaire d'inscription.</li>
+                            <li class="scenario-main-step">Le système valide les informations entrées.</li>
+                            <li class="scenario-main-step">Le système affiche <em>Compte créé avec succès</em>.</li>
+                            <li class="scenario-main-step">Le système redirige l'utilisateur vers la page de connexion.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="4">
-                                    Le compte est suspendu.
+                                <li class="scenario-alt-step" value="3">
+                                    L'utilisateur est un intervenant.
                                     <ol class="bare-list">
-                                        <li value="4">Le système affiche Compte suspendu à l'écran</li>
-                                        <li value="4">Le scénario se termine</li>
+                                        <li value="3">L'utilisateur entre le code fournit par la ville.</li>
+                                        <li value="3">Le scénario reprend à l'étape 4.</li>
                                     </ol>
                                 </li>
                             </ol>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="6">
-                                    Le service souhaité n'est pas offert chez GYM.
+                                <li class="scenario-alt-step" value="4">
+                                    Les informations entrées sont invalides.
                                     <ol class="bare-list">
-                                        <li value="6">L'agent ne trouve pas le code pour le service demandé.</li>
-                                        <li value="6">L'agent informe le professionnel de la non-disponibilité du service.</li>
-                                        <li value="6">Le scénario se termine.</li>
+                                        <li value="4">Le système affiche <em>Informations invalides</em>.</li>
+                                        <li value="4">Le scénario reprend à l'étape 3.</li>
                                     </ol>
                                 </li>
                             </ol>
