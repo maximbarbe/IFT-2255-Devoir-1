@@ -1,6 +1,6 @@
 import java.util.HashMap;
 /**
- * Classe principale de l'application MaVille..
+ * Classe principale de l'application MaVille.
 **/
 class MaVille {
     
@@ -12,9 +12,11 @@ class MaVille {
         try {
             // Main loop
             while(true) {
+                // Affichage de l'écran d'ouverture
                 int res = controller.showOpeningScreen();
                 switch (res) {
                     case 1:
+                        // Inscription d'un nouvel utilisateur.
                         boolean success = controller.registerUser();
                         if (!success) {
                             continue;
@@ -31,6 +33,7 @@ class MaVille {
                 
                 
             }
+        // Gére toutes erreurs reliées avec l'IO.
         } catch (Exception e) {
             System.out.println("Erreur de lecture, veuillez relancer l'application.");
             System.exit(1);

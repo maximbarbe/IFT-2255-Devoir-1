@@ -30,8 +30,45 @@ public class Controller {
         }
     };
 
+    /**
+     * Crée un nouveau résident <b><i>(ne fait aucune vérification, utilisé uniquement pour simuler)</i></b>
+     * @return <code>true</code> si l'inscription a été un succès <code>false</code> sinon.
+     */
     private boolean registerResident() {
-        return true;
+        while (true) {
+            System.out.println("Formulaire d'inscription:");
+            System.out.print("Nom complet > ");
+            String name = reader.nextLine();
+            System.out.print("Date de naissance (Format:AAAA/MM/JJ) > ");
+            String bday = reader.nextLine();
+            System.out.print("Adresse courriel > ");
+            String email = reader.nextLine();
+            System.out.print("Mot de passe > ");
+            String password =reader.nextLine();
+            System.out.print("Téléphone (optionnel) > ");
+            String telephone = reader.nextLine();
+            System.out.print("Adresse résidentielle > ");
+            String adresse = reader.nextLine();
+            System.out.println("1) Modifier; 2) Confirmer; 3) Annuler");
+        
+            switch (reader.nextLine()) {
+                case "1":
+                    continue;
+                case "2":
+                    return true;
+                case "3":
+                    return false;
+                default:
+                    System.out.println("Mauvais choix, retour à l'écran d'accueil");
+                    return false;
+            }
+        }
+    
+        
+
+
+
+
     }
 
     private boolean registerIntervenant(){
