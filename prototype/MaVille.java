@@ -23,14 +23,16 @@ class MaVille {
                         }
                         break;
                     case 2:
-                        // User user = controller.login();
-                        // break;
+                        User user = controller.loginUser();
+                        if (user.equals(null)) {
+                            continue;
+                        }
                     default:
                         continue;
                         
                 }
                 
-                
+            //!affichage page principale
                 
             }
         // Gére toutes erreurs reliées avec l'IO.

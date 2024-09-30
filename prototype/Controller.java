@@ -147,6 +147,33 @@ public class Controller {
         
     }
 
+    /**
+     * Authentifie un utilisateur et lui donne accès à l'application
+     * @return - l'utilisateur authentifié
+     */
+    public User loginUser() {
+        while (true) {
+            System.out.print("Adresse courielle > ");
+            String email = reader.nextLine();
+            System.out.print("Mot de passe > ");
+            String password = reader.nextLine();
+            if (users.containsKey(email) && users.get(email).getPassword().equals(password)) {
+                return users.get(email);
+            } else {
+                System.out.print("1) Réessayer; 2) Revenir > ");
+                switch (reader.nextLine()) {
+                    case "1":
+                        continue;
+                    case "2":
+                        return null;
+                    default:
+                        System.out.println("Mauvais choix, retour à la page d'accueil");
+                        return null;
+                }
+
+            }
+        }
+    }
 
     /**
      * Crée les comptes prédéfinis pour simuler les cas d'utilisations
