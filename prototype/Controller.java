@@ -36,7 +36,7 @@ public class Controller {
      */
     private boolean registerResident() {
         while (true) {
-            System.out.println("Formulaire d'inscription:");
+            System.out.println("Formulaire d'inscription pour résident:");
             System.out.print("Nom complet > ");
             String name = reader.nextLine();
             System.out.print("Date de naissance (Format:AAAA/MM/JJ) > ");
@@ -72,7 +72,47 @@ public class Controller {
     }
 
     private boolean registerIntervenant(){
-        return true;
+        while (true) {
+            System.out.println("Formulaire d'inscription pour intervenant.");
+            System.out.print("Nom complet > ");
+            String name = reader.nextLine();
+            System.out.print("Adresse courriel > ");
+            String email = reader.nextLine();
+            System.out.print("Mot de passe > ");
+            String password =reader.nextLine();
+            System.out.println("Type: (1) Entreprise publique, (2) Entrepreneur privé, (3) Particulier");
+            String type;
+            switch (reader.nextLine()) {
+                case "1":
+                    type = "Entreprise publique";
+                    break;
+                case "2":
+                    type = "Entrepreneur privé";
+                    break;
+                case "3":
+                    type = "particulier";
+                    break;
+                default:
+                    System.out.println("Mauvais choix, veuillez recommencer.");
+                    continue;
+            }
+            System.out.print("Code fourni par la ville > ");
+            String code = reader.nextLine();
+
+            System.out.println("1) Modifier; 2) Confirmer; 3) Annuler");
+        
+            switch (reader.nextLine()) {
+                case "1":
+                    continue;
+                case "2":
+                    return true;
+                case "3":
+                    return false;
+                default:
+                    System.out.println("Mauvais choix, retour à l'écran d'accueil");
+                    return false;
+            }
+        }
     }
 
     public boolean registerUser() {
@@ -83,10 +123,22 @@ public class Controller {
             String res = reader.nextLine();
             switch (res) {
                 case "1":
-                    return registerResident();
+                    if (registerResident()) {
+                        System.out.println("Le compte a été créé avec succès!");
+                        System.out.println("Appuyez sur n'importe quelle touche pour continuer.");
+                        reader.nextLine();
+                        return true;
+                    }
+                    return false;
                     
                 case "2":
-                    return registerIntervenant();
+                    if (registerIntervenant()) {
+                        System.out.println("Le compte a été créé avec succès!");
+                        System.out.println("Appuyez sur n'importe quelle touche pour continuer.");
+                        reader.nextLine();
+                        return true;
+                    }
+                    return false;
                 default:
                     return false;
             }
