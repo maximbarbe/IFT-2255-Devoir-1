@@ -9,6 +9,7 @@ class MaVille {
 
        
         Controller controller = new Controller();
+        User user = null;
         try {
             // Main loop
             while(true) {
@@ -23,14 +24,25 @@ class MaVille {
                         }
                         break;
                     case 2:
-                        User user = controller.loginUser();
+                        user = controller.loginUser();
                         if (user.equals(null)) {
                             continue;
                         }
+                        break;
                     default:
                         continue;
                         
                 }
+            while (true) {
+                // Menu principal résident
+                if (user instanceof Resident) {
+                    
+
+                } else {
+
+                }
+            }
+
                 
             //!affichage page principale
                 

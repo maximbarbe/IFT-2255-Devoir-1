@@ -160,6 +160,7 @@ public class Controller {
             if (users.containsKey(email) && users.get(email).getPassword().equals(password)) {
                 return users.get(email);
             } else {
+                System.out.println("Erreur lors de l'authentification!");
                 System.out.print("1) Réessayer; 2) Revenir > ");
                 switch (reader.nextLine()) {
                     case "1":
@@ -174,6 +175,14 @@ public class Controller {
             }
         }
     }
+
+    public void showMenuPrincipalResident() {
+        System.out.println("1) Travaux");
+        System.out.println("2) Permettre une planification");
+        System.out.println("3) ");
+    }
+
+
 
     /**
      * Crée les comptes prédéfinis pour simuler les cas d'utilisations
