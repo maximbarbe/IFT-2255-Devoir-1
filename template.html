@@ -984,7 +984,7 @@
                         Comme on sait bien, Montréal est une ville très multi-culturelle avec une population qui parle différentes langues. Sachant cela, lorsqu'on développe une application
                         pour une telle population cible, on ne veut pas forcer tout le monde à utiliser l'application dans un ou deux langages puisque cela pourrait nuire à leur expérience.</li> 
 
-                        <li><b>Fonctionner hors ligne: </b> l’application doit pouvoir marcher sans internet. Elle 
+                        <li><b>Disponibilité</b> l’application doit pouvoir marcher sans internet. Elle 
                             va mémoriser le dernier état des travaux selon la dernière connexion internet. Comme ça, 
                             les résidents qui n’ont pas toujours accès à internet pourront savoir quelles routes sont 
                             en construction. <span style="color:blue">(Riste Popov)</span></li>
@@ -996,16 +996,22 @@
                 <div>
                     <h3 class="subsection-title">Besoins matériels</h3>
                     <p>
-                        D'abord, nous aurons besoin d'un serveur pour communiquer avec une base de données. En effet, nous ne voulons pas stocker les données sur le côté client
+                        Tout d'abord, nous aurons besoin d'un serveur pour communiquer avec une base de données. En effet, nous ne voulons pas stocker les données sur le côté client afin de ne pas demander trop d'espace. 
+                        Il faudra donc un serveur qui établira le lien de communication entre notre base de données et notre application.
                     </p>
                 </div>
 
                 <div>
                     <h3 class="subsection-title">Solution de stockage</h3>
                     <p>
-                        Pour stocker nos données, nous allons utiliser une base de données relationnelle hébergée sur le cloud. Nous choisissons une base de données relationelle puisqu'il existe des liens que nous devons maintenir
+                        Pour stocker nos données, nous allons utiliser une base de données relationnelle sur le cloud. Nous choisissons une base de données relationelle puisqu'il existe des liens que nous devons maintenir
                         entre les différents éléments qui seront stockés dans la base de données. Par exemple, une requête de travail pourrait être stockée dans notre base de données et il faut maintenir le lien
-                        entre la requête et le résident qui l'a écrit. Ensuite, nous avons choisi le cloud comme architecture de stockage puisque nous pensons qu'il s'agit d'une architecture plus robuste et qu'elle est plus facile à 'scale up' si nécesaire.
+                        entre la requête et le résident qui l'a écrit afin de pouvoir la récupérer lorsque l'utilisateur veut voir sa requête. En tenant compte des besoins non-fonctionnels énumérés plus haut, nous pensons également qu'une architecture cloud est le choix adéquat pour l'application.
+                        Supposons que nous utilisons un service tel que AWS ou Google Cloud pour héberger notre base de données, il est alors beaucoup plus facile de 'scaler' puisqu'on a qu'à payer des frais additionnels à la place de devoir tout mettre en place par nous-même.
+                        De plus, en termes de sécurité, il est tout à fait raisonnable d'assumer que des titans de l'industrie tels que Amazon et Google ont des meilleurs mesures de sécurité que celles que nous pouvons implémenter par nous-même.
+                        Finalement, le cloud est extrêmement robuste et nous permettra d'assurer que notre application sera presque tout le temps disponible.
+
+
                     </p>
                 </div>
 
