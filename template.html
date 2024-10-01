@@ -996,14 +996,16 @@
                 <div>
                     <h3 class="subsection-title">Besoins matériels</h3>
                     <p>
-                        <em>Description et justification des ressourcs nécessaires pour le projet...</em>
+                        D'abord, nous aurons besoin d'un serveur pour communiquer avec une base de données. En effet, nous ne voulons pas stocker les données sur le côté client
                     </p>
                 </div>
 
                 <div>
                     <h3 class="subsection-title">Solution de stockage</h3>
                     <p>
-                        <em>Base de données relationnelles, lien entre user_id et requêtes soumises, lien entre projet de travail et intervenant, etc.<span style="color:red">Juste des idées, ne pas considérer comme une réponse complète(Maxim Barbe)</span></em>
+                        Pour stocker nos données, nous allons utiliser une base de données relationnelle hébergée sur le cloud. Nous choisissons une base de données relationelle puisqu'il existe des liens que nous devons maintenir
+                        entre les différents éléments qui seront stockés dans la base de données. Par exemple, une requête de travail pourrait être stockée dans notre base de données et il faut maintenir le lien
+                        entre la requête et le résident qui l'a écrit. Ensuite, nous avons choisi le cloud comme architecture de stockage puisque nous pensons qu'il s'agit d'une architecture plus robuste et qu'elle est plus facile à 'scale up' si nécesaire.
                     </p>
                 </div>
 
