@@ -1429,7 +1429,7 @@
                 <div class="scenario" id="cu-10">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> S'inscrire
+                            <strong>CU:</strong> Donner un avis/preference sur un projet
                         </h4>
                         <p class="cu-goal">
                             <strong>Objectif:</strong> Un résident ou un intervenant souhaite s'inscrire à l'application.
@@ -1441,7 +1441,6 @@
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
                                 <li class="cu-actor">Résident (Principal)</li>
-                                <li class="cu-actor">Intervenant (Principal)</li>
                             </ul>
                         </div>
                         
@@ -1455,46 +1454,44 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Un nouveau compte est créé et stocké dans la base de données de l'application.</li>
+                                <li class="dash">Les avis ou preferences sont enregistres dans la base de donnees et est visible pour les intervenants .</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part cu-part--notes">
                             <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">On utilise l'hypothèse que la ville fournit aux intervenants un certain code qui permet de les authentifier.</p>
+                            <p class="cu-notes"></p>
                         </div>
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">L'utilisateur ouvre la page d'inscription.</li>
-                            <li class="scenario-main-step">L'utilisateur choisit entre résident ou intervenant.</li>
-                            <li class="scenario-main-step">L'utilisateur remplit le formulaire d'inscription.</li>
-                            <li class="scenario-main-step">Le système valide les informations entrées.</li>
-                            <li class="scenario-main-step">Le système affiche <em>Compte créé avec succès</em>.</li>
-                            <li class="scenario-main-step">Le système redirige l'utilisateur vers la page de connexion.</li>
+                            <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe).</li>
+                            <li class="scenario-main-step">Le systeme affiche la page d'acceuil avec le menu.</li>
+                            <li class="scenario-main-step">Le client appuie sur l'onglet formulaires.</li>
+                            <li class="scenario-main-step">Le système affiche la liste des formulaires disponible.</li>
+                            <li class="scenario-main-step">Le client selectionne le formulaire avis/preferences travaux.</li>
+                            <li class="scenario-main-step">Le système affiche le formulaire.</li>
+                            <li class="scenario-main-step">Le client remplis les case requis</li>
+                            <li class="scenario-main-step">Appel du cas rechercher les travaux</li>
+                            <li class="scenario-main-step">Le client choisit le projet dont il souhaiterait donner une plage horaire</li>
+                            <li class="scenario-main-step">Il soumet le formulaire</li>
+                            <li class="scenario-main-step">Le systeme lui indique que les informations ont ete enregistrees et que le formulaire est soumis</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="3">
-                                    L'utilisateur est un intervenant.
+                                <li class="scenario-alt-step" value="9">
+                                    Le client verifie d'abord les preferences des autres residents.
                                     <ol class="bare-list">
-                                        <li value="3">L'utilisateur entre le code fournit par la ville.</li>
-                                        <li value="3">Le scénario reprend à l'étape 4.</li>
+                                        <li value="9">Le client ne choisit pas car les plages horaires selectionnees par les autres residents lui vont.</li>
+                                        <li value="9">Le client ne soumet pas le formulaire.</li>
+                                        <li value="9">Le systeme ne fait aucun ajout et n'envoie pas le formulaire</li>
                                     </ol>
                                 </li>
                             </ol>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="4">
-                                    Les informations entrées sont invalides.
-                                    <ol class="bare-list">
-                                        <li value="4">Le système affiche <em>Informations invalides</em>.</li>
-                                        <li value="4">Le scénario reprend à l'étape 3.</li>
-                                    </ol>
-                                </li>
-                            </ol>
+                        
                         </div>
                     </div>
                 </div>
