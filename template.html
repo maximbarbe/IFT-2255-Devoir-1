@@ -972,10 +972,14 @@
                             <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe)
                             </li>
                             <li class="scenario-main-step">Le systeme verifie si les informations sont correctes .</li>
-                            <li class="scenario-main-step">Appel du cas rechercher des travaux </li>
-                            <li class="scenario-main-step">Le client choisis le projet sur lequel il aimerait signaler un probleme </li>
+                            <li class="scenario-main-step">Le systeme affiche le menu</li>
+                            <li class="scenario-main-step">Le client choisit l'onglet formulaires</li>
+                            <li class="scenario-main-step">Le systeme affiche la liste des formulaire</li>
+                            <li class="scenario-main-step">Le client choisis le formulaire signaler un probleme </li>
                             <li class="scenario-main-step">Le systeme affiche le formulaire a remplir</li>
                             <li class="scenario-main-step">Le client remplit le formulaire en entrant les informations telles que son nom, adresse courriel, adresse de residence etc</li>
+                            <li class="scenario-main-step">Appel du cas rechercher des travaux</li>
+                            <li class="scenario-main-step">Le client choisit le projet qu'il aimerait signaler</li>
                             <li class="scenario-main-step">Le systeme verifie si les champs sont dument remplis et correct</li>
                             <li class="scenario-main-step">Le client soumet le formulaire</li>
                             <li class="scenario-main-step">Le systeme lui indique que le formulaire a ete envoye avec succes</li>
@@ -984,20 +988,20 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="3">
+                                <li class="scenario-alt-step" value="9">
                                     Le projet de travaux recherche par le client n'est plus valide et est termine
 
                                    
                                 </li>
-                                <li class="scenario-alt-step" value="6">Les informations ne sont pas correcte ou ne correspondent pas au profil du client
+                                <li class="scenario-alt-step" value="10">Les informations ne sont pas correcte ou ne correspondent pas au profil du client
                                     <ol class="bare-list">
-                                        <li value="6">Le systeme lui demande de remplir les informations correctement </li>
-                                        <li value="6">Apres trois tentative si les information personnels sont toujours incorrectes le systeme ferme le formulaire.</li>
+                                        <li value="10">Le systeme lui demande de remplir les informations correctement </li>
+                                        <li value="10">Apres trois tentative si les information personnels sont toujours incorrectes le systeme ferme le formulaire.</li>
                                     </ol>
                                 </li>
-                                <li class="scenario-alt-step" value="7"> Le client ne soumet pas le formulaire
+                                <li class="scenario-alt-step" value="11"> Le client ne soumet pas le formulaire
                                     <ol class="bare-list">  
-                                        <li value="7">Au bout de 30 seconde le systeme annule l'envoie du formulaire, les informations memorise par ce derniers sont defaites</li>
+                                        <li value="11">Au bout de 30 seconde le systeme annule l'envoie du formulaire, les informations memorise par ce derniers sont defaites</li>
                                     </ol>
                                 </li>
 
