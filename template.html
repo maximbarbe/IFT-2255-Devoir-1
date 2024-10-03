@@ -951,6 +951,7 @@
                             <ul class="bare-list cu-conditions">
                                 <li class="dash">Le client doit au prealable se creer un compte</li>
                                 <li class="dash">Il faut que le projet de travaux que le client veut signaler soit toujours en cours ou qu'il existe</li>
+                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
                             </ul>
                         </div>
                         
@@ -977,8 +978,7 @@
                             <li class="scenario-main-step">Le client choisis le formulaire signaler un probleme </li>
                             <li class="scenario-main-step">Le systeme affiche le formulaire a remplir</li>
                             <li class="scenario-main-step">Le client remplit le formulaire en entrant les informations telles que son nom, adresse courriel, adresse de residence etc</li>
-                            <li class="scenario-main-step">Appel du cas rechercher des travaux</li>
-                            <li class="scenario-main-step">Le client choisit le projet qu'il aimerait signaler</li>
+                            <li class="scenario-main-step">Le client choisit le projet  qu'il aimerait signaler</li>
                             <li class="scenario-main-step">Le systeme verifie si les champs sont dument remplis et correct</li>
                             <li class="scenario-main-step">Le client soumet le formulaire</li>
                             <li class="scenario-main-step">Le systeme lui indique que le formulaire a ete envoye avec succes</li>
@@ -1031,7 +1031,8 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
+                                <li class="dash">Le resident doit avoir un compte</li>
+                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
                             </ul>
                         </div>
                         
@@ -1102,7 +1103,8 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
+                                <li class="dash">Le resident doit avoir un compte</li>
+                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
                             </ul>
                         </div>
                         
@@ -1115,7 +1117,7 @@
                         
                         <div class="cu-part cu-part--notes">
                             <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">On utilise l'hypothèse que la ville fournit aux intervenants un certain code qui permet de les authentifier.</p>
+                            <p class="cu-notes"></p>
                         </div>
                     </div>
                     <div class="scenario-main">
@@ -1165,7 +1167,8 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
+                                <li class="dash">Le client doit avoir un compte</li>
+                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
                             </ul>
                         </div>
                         
@@ -1233,7 +1236,8 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
+                                <li class="dash">Le client doit avoir un compte</li>
+                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
                             </ul>
                         </div>
                         
@@ -1307,7 +1311,8 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
+                                <li class="dash">Le client doit avoir un compte</li>
+                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
                             </ul>
                         </div>
                         
@@ -1380,7 +1385,8 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
+                                <li class="dash">Le client doit avoir un compte</li>
+                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
                             </ul>
                         </div>
                         
@@ -1436,10 +1442,10 @@
                 <div class="scenario" id="cu-10">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> Donner un avis/preference sur un projet
+                            <strong>CU:</strong> Donner un avis/preference sur un projet 
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> Un résident ou un intervenant souhaite s'inscrire à l'application.
+                            <strong>Objectif:</strong> 
                         </p>
                         
                         <hr>
@@ -1454,14 +1460,16 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
+                                <li class="dash">Le resident doit avoir un compte</li>
+                                <li class="dash">Les informations rentrees par le client doivent etre correctes</li>
+
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Les avis ou preferences sont enregistres dans la base de donnees et est visible pour les intervenants .</li>
+                                <li class="dash">Les avis sont enregistres dans la base de donnees et est visible pour les intervenants.</li>
                             </ul>
                         </div>
                         
@@ -1480,7 +1488,6 @@
                             <li class="scenario-main-step">Le client selectionne le formulaire avis/preferences travaux.</li>
                             <li class="scenario-main-step">Le système affiche le formulaire.</li>
                             <li class="scenario-main-step">Le client remplis les case requis</li>
-                            <li class="scenario-main-step">Appel du cas rechercher les travaux</li>
                             <li class="scenario-main-step">Le client choisit le projet dont il souhaiterait donner une plage horaire</li>
                             <li class="scenario-main-step">Il soumet le formulaire</li>
                             <li class="scenario-main-step">Le systeme lui indique que les informations ont ete enregistrees et que le formulaire est soumis</li>
@@ -1489,19 +1496,31 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="9">
+                                <li class="scenario-alt-step" value="8">
                                     Le client verifie d'abord les preferences des autres residents.
                                     <ol class="bare-list">
-                                        <li value="9">Le client ne choisit pas car les plages horaires selectionnees par les autres residents lui vont.</li>
-                                        <li value="9">Le client ne soumet pas le formulaire.</li>
-                                        <li value="9">Le systeme ne fait aucun ajout et n'envoie pas le formulaire</li>
+                                        <li value="8">Le client ne choisit pas car les plages horaires selectionnees par les autres residents lui vont.</li>
+                                        <li value="8">Le client ne soumet pas le formulaire.</li>
+                                        <li value="8">Le systeme ne fait aucun ajout et n'envoie pas le formulaire</li>
                                     </ol>
                                 </li>
                             </ol>
-                        
+                             <ol class="bare-list scenario-alt-steps">
+                                    <li class="scenario-alt-step" value="7">
+                                        Le client donne son avis sur un projet
+                                        <ol class="bare-list">
+                                            <li value="8">Le systeme lui indique qu'il ne peut donner un avis que sur les projet termine.</li>
+                                            <li value="8">Le client remplis le formulaire et le soumet .</li>
+                                            <li value="8">Le scenario continu a l'etape 10</li>
+                                        </ol>
+                                    </li>
+                                </ol>
+            
                         </div>
                     </div>
                 </div>
+
+                
                 
                 
                   
