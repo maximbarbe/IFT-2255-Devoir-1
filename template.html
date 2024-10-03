@@ -553,8 +553,8 @@
             display: block;
             min-height: 600px;
             min-width: 600px;
-            height: 100%;
-            width: auto;
+            height: auto;
+            width:100%;
             background-color: #d5d5d5;
         }
 
@@ -967,7 +967,6 @@
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
                                 <li class="dash">Le client doit au prealable se creer un compte</li>
-                                <li class="dash">Il faut que le projet de travaux que le client veut signaler soit toujours en cours ou qu'il existe</li>
                                 <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
                             </ul>
                         </div>
@@ -994,6 +993,7 @@
                             <li class="scenario-main-step">Le systeme affiche le formulaire a remplir</li>
                             <li class="scenario-main-step">Le client remplit le formulaire en entrant les informations telles que son nom, adresse courriel, adresse de residence etc</li>
                             <li class="scenario-main-step">Le client choisit le projet  qu'il aimerait signaler</li>
+                            <li class="scenario-main-step">Le client donne la description du probleme</li>
                             <li class="scenario-main-step">Le systeme verifie si les champs sont dument remplis et correct</li>
                             <li class="scenario-main-step">Le client soumet le formulaire</li>
                             <li class="scenario-main-step">Le systeme lui indique que le formulaire a ete envoye avec succes</li>
@@ -1002,18 +1002,22 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="9">
-                                    Le projet de travaux rentrer par le client n'est plus valide et est termine 
-                                </li>
-                                <li class="scenario-alt-step" value="10">Les informations ne sont pas correcte ou ne correspondent pas au profil du client
+                                <li class="scenario-alt-step" value="7">
+                                    Le projet de travaux rentrer par le client n'est plus valide et est termine </li>
                                     <ol class="bare-list">
-                                        <li value="10">Le systeme lui demande de remplir les informations correctement </li>
-                                        <li value="10">Apres trois tentative si les information personnels sont toujours incorrectes le systeme ferme le formulaire.</li>
+                                        <li value="7">Le systeme indique que le projet n'est plus valide </li>
+                                        <li value="7">Le client retourne au menu</li>
+
+                                    </ol>
+                                <li class="scenario-alt-step" value="11">Les informations ne sont pas correcte ou ne correspondent pas au profil du client
+                                    <ol class="bare-list">
+                                        <li value="11">Le systeme lui demande de remplir les informations correctement </li>
+                                        <li value="11">Apres trois tentative si les information personnels sont toujours incorrectes le systeme ferme le formulaire.</li>
                                     </ol>
                                 </li>
-                                <li class="scenario-alt-step" value="11"> Le client ne soumet pas le formulaire
+                                <li class="scenario-alt-step" value="12"> Le client ne soumet pas le formulaire
                                     <ol class="bare-list">  
-                                        <li value="11">Au bout de 30 seconde le systeme annule l'envoie du formulaire, les informations memorise par ce derniers sont defaites</li>
+                                        <li value="12">Au bout de 30 seconde le systeme annule l'envoie du formulaire, les informations memorise par ce derniers sont defaites</li>
                                     </ol>
                                 </li>
 
@@ -1544,8 +1548,16 @@
                     <img class="activity-diagram" src="image/BouclePrincipale.png" alt="Diagramme d'activités">
                 </div>
                 <div class="activity">
-                    <h4>Titre du diagramme 2</h4>
-                    <img class="activity-diagram" src="images/activity_diagram.svg" alt="Diagramme d'activités">
+                    <h4>Diagramme 1</h4>
+                    <img class="activity-diagram" src="image/Diagramme1.svg" alt="Diagramme d'activités">
+                </div>
+                <div class="activity">
+                    <h4>Diagramme 2</h4>
+                    <img class="activity-diagram" src="image/Diagramme2.svg" alt="Diagramme d'activités">
+                </div>
+                <div class="activity">
+                    <h4>Diagramme 3</h4>
+                    <img class="activity-diagram" src="image/Diagramme3.svg" alt="Diagramme d'activités">
                 </div>
             </section>
 
