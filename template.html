@@ -762,7 +762,7 @@
                 <div class="scenario" id="cu-1">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> Creer un compte
+                            <strong>CU:</strong> Créer un compte
                         </h4>
                         <p class="cu-goal">
                             <strong>Objectif:</strong> Un résident ou un intervenant souhaite s'inscrire à l'application.
@@ -788,43 +788,31 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Un nouveau compte est créé et stocké dans la base de données de l'application.</li>
+                                <li class="dash">Un nouveau compte est créé et est stocké dans la base de données de l'application.</li>
                             </ul>
                         </div>
                         
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">On utilise l'hypothèse que la ville fournit aux intervenants un certain code qui permet de les authentifier.</p>
-                        </div>
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
+                            <li class="scenario-main-step">Le système affiche la page d'accueil.</li>
                             <li class="scenario-main-step">L'utilisateur ouvre la page d'inscription.</li>
                             <li class="scenario-main-step">L'utilisateur choisit entre résident ou intervenant.</li>
                             <li class="scenario-main-step">L'utilisateur remplit le formulaire d'inscription.</li>
                             <li class="scenario-main-step">Le système valide les informations entrées.</li>
                             <li class="scenario-main-step">Le système affiche <em>Compte créé avec succès</em>.</li>
-                            <li class="scenario-main-step">Le système redirige l'utilisateur vers la page de connexion.</li>
+                            <li class="scenario-main-step">Le système redirige l'utilisateur vers la page d'accueil.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="3">
-                                    L'utilisateur est un intervenant.
-                                    <ol class="bare-list">
-                                        <li value="3">L'utilisateur entre le code fournit par la ville.</li>
-                                        <li value="3">Le scénario reprend à l'étape 4.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="4">
+                                <li class="scenario-alt-step" value="5">
                                     Les informations entrées sont invalides.
                                     <ol class="bare-list">
-                                        <li value="4">Le système affiche <em>Informations invalides</em>.</li>
-                                        <li value="4">Le scénario reprend à l'étape 3.</li>
+                                        <li value="5">Le système affiche <em>Informations invalides</em>.</li>
+                                        <li value="5">Le scénario reprend à l'étape 3.</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -835,7 +823,7 @@
                 <div class="scenario" id="cu-2">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> Consulter les travaux en cours
+                            <strong>CU:</strong> Consulter les travaux en cours ou futurs
                         </h4>
                         <p class="cu-goal">
                             <strong>Objectif:</strong> 
@@ -844,16 +832,16 @@
                         <hr>
 
                         <div class="cu-part">
-                            <h5 class="cu-part-title">Resident</h5>
+                            <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Agent (Principal)</li>
+                                <li class="cu-actor">Résident (Principal)</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le client doit au prealable se creer un compte</li>
+                                <li class="dash">Le résident doit être connecté à son compte.</li>
                             </ul>
                         </div>
                         
@@ -862,11 +850,6 @@
                             <ul class="bare-list cu-conditions">
                                 <li class="dash">Aucun</li>
                             </ul>
-                        </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">Notes additionnelles et hypothèses</p>
                         </div>
                     </div>
                     <div class="scenario-main">
