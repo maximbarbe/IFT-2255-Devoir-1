@@ -715,13 +715,7 @@
 
                 <h3 class="subsection-title">Hypothèses (optionnel)</h3>
                 <p>
-                    <em>Présentation des hypothèses faites dans l'élaboration des exigences et l'analyse: 
-                        <li>
-                            On suppose que les utilisateurs qui s'inscrivent sont en premier des tous des résidents.
-                            Par la suite, les intervenant font savoir au logiciel qu'il sont des résidents à l'aide
-                            d'un code fourni par le gouvernement et vont débloquer des fonctionalités propres à eux.
-                        </li>
-                    </em>
+                    Aucune hypothèse n'a été posée.
                 </p>
             </section>
 
@@ -750,46 +744,6 @@
                     <dd class="glossary-def"> Désigne toute action ou travail réalisé par un intervenant, qu'il soit public ou privé, dans le cadre de la gestion ou de la maintenance de la ville.</dd>
                 </dl>
 
-                <h3 class="subsection-title">Persona (optionnel)</h3>
-
-                <ul class="bare-list personas">
-                    <li class="persona">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                            <span class="persona-name">Bob &ndash; <em>Comptable</em></span>
-                            <div class="persona-stat">
-                                <span class="persona-type persona-type--pp" title="Pratico-pratique">PP</span>
-                                <span class="persona-market">40%</span>
-                            </div>
-                        </div>
-                        <span class="persona-info">Homme célibataire de 42 ans vivant au Canada</span>
-                        <div class="persona-goal">
-                            <h4 class="persona-title">Buts</h4>
-                            <ul class="bare-list">
-                                <li class="check">But principal</li>
-                                <li class="check">But secondaire</li>
-                                <li class="check">Avantages</li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="persona">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                            <span class="persona-name">Eva &ndash; <em>Pharmacienne</em></span>
-                            <div class="persona-stat">
-                                <span class="persona-type persona-type--eco" title="Ecolo">ECO</span>
-                                <span class="persona-market">20%</span>
-                            </div>
-                        </div>
-                        <span class="persona-info">Femme mariée de 34 ans vivant au Canada</span>
-                        <div class="persona-goal">
-                            <h4 class="persona-title">Buts</h4>
-                            <ul class="bare-list">
-                                <li class="check">But principal</li>
-                                <li class="check">But secondaire</li>
-                                <li class="check">Avantages</li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
              
                 <h3 class="subsection-title">Cas d'utilisation</h3>
                 <div class="use-case">
@@ -1649,7 +1603,7 @@
                     <h3 class="subsection-title">Besoins matériels</h3>
                     <p>
                         Tout d'abord, nous aurons besoin d'un serveur pour communiquer avec une base de données. En effet, nous ne voulons pas stocker les données sur le côté client afin de ne pas demander trop d'espace. 
-                        Il faudra donc un serveur qui établira le lien de communication entre notre base de données et notre application.
+                        Il faudra donc un serveur qui établira le lien de communication entre notre base de données sur le cloud et notre application.
                     </p>
                 </div>
 
@@ -1671,7 +1625,7 @@
                     <h3 class="subsection-title">Solution d'intégration</h3>
 
                     <p>
-                        <em>Description de votre solution d'intégration...</em>
+                        Pour s'assurer que les données soient le même format partout, donc cohérentes, nous allons utiliser des formats standards. 
                     </p>
                 </div>
             </section>
@@ -1686,10 +1640,10 @@
                             Compte résident:
                             <ul>
                                 <li>
-                                    Email: test1@email.com
+                                    Email: test_resident@gmail.com
                                 </li>
                                 <li>
-                                    Mot de passe: test123
+                                    Mot de passe: qwerty
                                 </li>
                             </ul>
                         </li>
@@ -1697,10 +1651,10 @@
                             Compte intervenant:
                             <ul>
                                 <li>
-                                    Email: test2@email.com
+                                    Email: test_intervenant@gmail.com
                                 </li>
                                 <li>
-                                    Mot de passe: test123
+                                    Mot de passe: qwerty
                                 </li>
                             </ul>
                         </li>

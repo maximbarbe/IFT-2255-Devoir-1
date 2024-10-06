@@ -22,7 +22,8 @@ class MaVille {
                         if (!success) {
                             continue;
                         }
-                        break;
+                        continue;
+                        
                     case 2:
                         user = controller.loginUser();
                         if (user.equals(null)) {
@@ -36,10 +37,9 @@ class MaVille {
             while (true) {
                 // Menu principal résident
                 if (user instanceof Resident) {
-                    
-
+                    controller.showMenuPrincipalResident();
                 } else {
-
+                    controller.showMenuPrincipalIntervenant();
                 }
             }
 

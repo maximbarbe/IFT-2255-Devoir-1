@@ -124,18 +124,20 @@ public class Controller {
             switch (res) {
                 case "1":
                     if (registerResident()) {
-                        System.out.println("Le compte a été créé avec succès!");
+                        System.out.println("Compte créé avec succès!");
                         System.out.println("Appuyez sur n'importe quelle touche pour continuer.");
                         reader.nextLine();
+                        clearConsole();
                         return true;
                     }
                     return false;
                     
                 case "2":
                     if (registerIntervenant()) {
-                        System.out.println("Le compte a été créé avec succès!");
+                        System.out.println("Compte créé avec succès!");
                         System.out.println("Appuyez sur n'importe quelle touche pour continuer.");
                         reader.nextLine();
+                        clearConsole();
                         return true;
                     }
                     return false;
@@ -145,6 +147,10 @@ public class Controller {
         }
 
         
+    }
+
+    private void clearConsole() {
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
     /**
@@ -160,7 +166,8 @@ public class Controller {
             if (users.containsKey(email) && users.get(email).getPassword().equals(password)) {
                 return users.get(email);
             } else {
-                System.out.println("Erreur lors de l'authentification!");
+                
+                System.out.println("\nErreur! Mauvais email ou mauvais mot de passe.\n");
                 System.out.print("1) Réessayer; 2) Revenir > ");
                 switch (reader.nextLine()) {
                     case "1":
@@ -177,11 +184,56 @@ public class Controller {
     }
 
     public void showMenuPrincipalResident() {
+        clearConsole();
         System.out.println("1) Travaux");
-        System.out.println("2) Permettre une planification");
-        System.out.println("3) ");
-    }
+        System.out.println("2) Profil");
+        System.out.println("3) Notifications");
+        System.out.println("4) Signaler un problème");
+        System.out.println("5) Quitter");
+        System.out.print("Votre choix > ");
+        String res = reader.nextLine();
+        switch (res) {
+            case "1":
+                // Do something
+                break;
+            case "2":
+                // Do something
+                break;
+            case "3":
+                // Do something
+            case "4":
+                // Do something
+            case "5":
+                System.exit(0);
+            default:
+                System.out.println("Mauvais choix, veuillez réessayer");
+        }
+    };
 
+    public void showMenuPrincipalIntervenant() {
+        System.out.println("Menu Principal");
+        System.out.println("1) Soumettre un nouveau projet de travail.");
+        System.out.println("2) Consulter les requêtes de travail");
+        System.out.println("3) Mettre à jour les informations sur un chantier");
+        System.out.println("4) Profil");
+        System.out.println("5) Quitter");
+        while (true) {
+            String code = reader.nextLine();
+            switch (code) {
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                    continue;
+                case "5":
+                    System.exit(0);
+                default:
+                    System.out.println("Mauvais choix, veuillez réessayer!");
+                    return;
+            }
+        }
+
+    };
 
 
     /**
