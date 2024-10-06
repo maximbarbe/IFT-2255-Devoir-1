@@ -715,7 +715,7 @@
 
                 <h3 class="subsection-title">Hypothèses (optionnel)</h3>
                 <p>
-                    Aucune hypothèse n'a été posée.
+                    On assume que les travaux peuvent être uniquement identifiés avec l'aide d'un id.
                 </p>
             </section>
 
@@ -826,7 +826,7 @@
                             <strong>CU:</strong> Consulter les travaux en cours ou futurs
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> 
+                            <strong>Objectif:</strong> Un résident souhaite voir quels sont les travaux qui se déroulent en ce moment ou qui sont planifiés pour le futur.
                         </p>
                         
                         <hr>
@@ -855,29 +855,18 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe) </li>
-                            <li class="scenario-main-step">Le systeme verifie si les informations sont correctes .</li>
-                            <li class="scenario-main-step">Le systeme affiche le menu </li>
-                            <li class="scenario-main-step">Le client choisis l'onglet travaux</li>
-                            <li class="scenario-main-step"> Le systeme affiche les sous menu de l'onglet travaux</li>
-                            <li class="scenario-main-step">Le client choisit le sous menu consulter les travaux en cours</li>
-                            <li class="scenario-main-step">Le client choisis l'annonce des travaux le plus recent pres de chez lui </li>
-                            <li class="scenario-main-step">Le systeme indique les informations detailles de ce dernier (date de debut et fin, type de travaux ...)</li>
-                            <li class="scenario-main-step">Le client appuie sur retourne et termine sa recherche</li>
+                            <li class="scenario-main-step">Le système affiche le menu principal.</li>
+                            <li class="scenario-main-step">Le résident ouvre la page des travaux.</li>
+                            <li class="scenario-main-step">Le système affiche le sous-menu de la page des travaux.</li>
+                            <li class="scenario-main-step">Le résident choisit l'option <em>Consulter les travaux en cours ou futur.</em></li>
+                            <li class="scenario-main-step">Le système affiche la liste des travaux en cours ou futurs.</li>
+                            <li class="scenario-main-step">Le résident choisit l'annonce du travail le plus récent près de chez lui.</li>
+                            <li class="scenario-main-step">Le système affiche les informations détaillés de ce dernier (date de debut et fin, type de travaux ...)</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="2">
-                                    L'e-mail ou mot de passe est incorrect
 
-                                    <ol class="bare-list">
-                                        <li value="2">Le systeme indique au client que le champs e-mail ou mot de passe est incorrect.</li>
-                                        <li value="2"> Le systeme lui donne la possibilite apres 3 essai de changer son mot de passe ou de creer un compte.</li>
-                                    </ol>
-                                </li>
-                            </ol>
                         
                         </div>
                     </div> 
