@@ -859,14 +859,31 @@
                             <li class="scenario-main-step">Le résident ouvre la page des travaux.</li>
                             <li class="scenario-main-step">Le système affiche le sous-menu de la page des travaux.</li>
                             <li class="scenario-main-step">Le résident choisit l'option <em>Consulter les travaux en cours ou futur.</em></li>
-                            <li class="scenario-main-step">Le système affiche la liste des travaux en cours ou futurs.</li>
+                            <li class="scenario-main-step">Le système affiche la liste des travaux en cours ou futurs appropriés.</li>
                             <li class="scenario-main-step">Le résident choisit l'annonce du travail le plus récent près de chez lui.</li>
                             <li class="scenario-main-step">Le système affiche les informations détaillés de ce dernier (date de debut et fin, type de travaux ...)</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-
+                            <ol class="bare-list scenario-alt-steps">
+                                <li class="scenario-alt-step" value="5">
+                                    Le résident applique des filtres.
+                                    <ol class="bare-list">
+                                        <li value="5">Le résident applique les filtres appropriés.</li>
+                                        <li value="5">Le système affiche la liste des travaux filtrés.</li>
+                                        <li value="5">Le scénario reprend à l'étape 5.</li>
+                                    </ol>
+                                </li>
+                                <li class="scenario-alt-step" value="5">
+                                    Le résident veut rechercher un travail.
+                                    <ol class="bare-list">
+                                        <li value="5">Le résident remplit les champs de la barre de recherche.</li>
+                                        <li value="5">Le système affiche la liste des travaux filtrés.</li>
+                                        <li value="5">Le scénario reprend à l'étape 5.</li>
+                                    </ol>
+                                </li>
+                            </ol>                                
                         
                         </div>
                     </div> 
@@ -874,10 +891,10 @@
                 <div class="scenario" id="cu-3">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> Signaler un probleme a la ville
+                            <strong>CU:</strong> Signaler un problème à la ville
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> 
+                            <strong>Objectif:</strong> Un résident souhaite envoyer un message à la ville concernant un problème.
                         </p>
                         
                         <hr>
@@ -885,14 +902,14 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Resident (Principal)</li>
+                                <li class="cu-actor">Résident (Principal)</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le client doit au prealable etre connecté</li>
+                                <li class="dash">Le résident doit au préalable être connecté.</li>
                             </ul>
                         </div>
                         
@@ -902,46 +919,35 @@
                                 <li class="dash">Aucun</li>
                             </ul>
                         </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">Notes additionnelles et hypothèses</p>
-                        </div>
+        
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le systeme affiche le menu principal</li>
-                            <li class="scenario-main-step">Le client choisis l'onglet signaler un probleme</li>
-                            <li class="scenario-main-step">Le systeme affiche le formulaire a remplir</li>
-                            <li class="scenario-main-step">Le client remplit le formulaire en entrant les informations telles que son nom, adresse courriel, adresse de residence etc</li>
-                            <li class="scenario-main-step">Le client choisit le projet  qu'il aimerait signaler</li>
-                            <li class="scenario-main-step">Le client donne la description du probleme</li>
-                            <li class="scenario-main-step">Le systeme verifie si les champs sont dument remplis et correct</li>
-                            <li class="scenario-main-step">Le client soumet le formulaire</li>
-                            <li class="scenario-main-step">Le systeme lui indique que le formulaire a ete envoye avec succes</li>
+                            <li class="scenario-main-step">Le système affiche le menu principal.</li>
+                            <li class="scenario-main-step">Le résident choisit l'onglet <em>Signaler un problème</em>.</li>
+                            <li class="scenario-main-step">Le système affiche le formulaire à remplir.</li>
+                            <li class="scenario-main-step">Le résident remplit le formulaire en entrant ses informations personnelles, ainsi que les informations concernant le problème.</li>
+                            <li class="scenario-main-step">Le résident soumet le formulaire.</li>
+                            <li class="scenario-main-step">Le système vérifie que les champs sont dûment remplis et corrects.</li>
+                            <li class="scenario-main-step">Le système indique au résident que le formulaire a été envoyé avec succès.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="5">
-                                    Le projet de travaux rentrer par le client n'est plus valide et est termine </li>
+                                <li class="scenario-alt-step" value="6">
+                                    Pas tous les champs sont complétés.
                                     <ol class="bare-list">
-                                        <li value="5">Le systeme indique que le projet n'est plus valide </li>
-                                        <li value="5">Le client retourne au menu</li>
-
-                                    </ol>
-                                <li class="scenario-alt-step" value="7">
-                                    Les informations ne sont pas correcte ou ne correspondent pas au profil du client
-                                    <ol class="bare-list">
-                                        <li value="7">Le systeme lui demande de remplir les informations correctement </li>
-                                        <li value="7">Apres trois tentative si les information personnels sont toujours incorrectes le systeme ferme le formulaire.</li>
+                                        <li value="6">Le système demande au résident de remplir les informations correctement.</li>
+                                        <li value="6">Le scénario reprend à l'étape 4.</li>
                                     </ol>
                                 </li>
-                                <li class="scenario-alt-step" value="8"> Le client ne soumet pas le formulaire
-                                    <ol class="bare-list">  
-                                        <li value="8">Au bout de 30 seconde le systeme annule l'envoie du formulaire, les informations memorise par ce derniers sont defaites</li>
+                                <li class="scenario-alt-step" value="7">
+                                    Le système ne parvient pas à envoyer formulaire.
+                                    <ol class="bare-list">
+                                        <li value="7">Le système affiche <em>Erreur lors de la soumission, veuillez réessayer.</em></li>
+                                        <li value="7">Le scénario reprend à l'étape 5.</li>
                                     </ol>
                                 </li>
 
@@ -957,7 +963,7 @@
                             <strong>CU:</strong> Soumettre une requête de travail
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong>
+                            <strong>Objectif:</strong> Un résident souhaite soumettre une requête de travail.
                         </p>
                         
                         <hr>
@@ -972,45 +978,46 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le resident doit etre connecte</li>
+                                <li class="dash">Le résident doit être connecté.</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">La requete de travail est enregistrer dans la base de donnee et s'affiche sur la page des intervenants.</li>
+                                <li class="dash">La requête de travail est enregistrée dans la base de données et s'affiche sur la page des intervenants.</li>
                             </ul>
-                        </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes"></p>
                         </div>
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le systeme affiche le menu principal </li>
-                            <li class="scenario-main-step">Le client choisis l'onglet travaux</li>
-                            <li class="scenario-main-step"> Le systeme affiche les sous menu de l'onglet travaux</li>
-                            <li class="scenario-main-step">Le client choisit le sous menu soumettre une requete de travail</li>
-                            <li class="scenario-main-step">Le systeme affiche le formulaire a remplir</li>
-                            <li class="scenario-main-step">e client indique ses informations personnels, le type de travaux et la date de debut esperée.</li>
-                            <li class="scenario-main-step">le systeme verifie si les champs sont remplis </li>
-                            <li class="scenario-main-step">Le client soumet le formulaire.</li>
-                            <li class="scenario-main-step">Le systeme lui indique que le formulaire  ete envoye avec success et lui donne un lien pour le suivi</li>
+                            <li class="scenario-main-step">Le système affiche le menu principal.</li>
+                            <li class="scenario-main-step">Le résident choisit l'onglet <em>Travail</em>.</li>
+                            <li class="scenario-main-step"> Le système affiche le sous-menu de l'onglet <em>Travail</em>.</li>
+                            <li class="scenario-main-step">Le résident choisit l'option <em>Soumettre une requête de travail</em>.</li>
+                            <li class="scenario-main-step">Le système affiche le formulaire à remplir.</li>
+                            <li class="scenario-main-step">Le résident remplit tous les champs du formulaire.</li>
+                            <li class="scenario-main-step">Le résident soumet le formulaire.</li>
+                            <li class="scenario-main-step">Le système vérifie que tous les champs sont remplis.</li>
+                            <li class="scenario-main-step">Le systeme indique au résident que le formulaire a été envoyé avec succès et envoie une notification confirmant l'envoi.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="9">
-                                    Le client ne recoit pas de candidature
-
+                                <li class="scenario-alt-step" value="8">
+                                    Pas tous les champs sont remplis.
                                     <ol class="bare-list">
-                                        <li value="9">Le client a entre temps annule la requete </li>
-                                        <li value="9">Aucun intervenant n'a postule.</li>
+                                        <li value="8">Le système demande au résident de bien remplir tous les champs.</li>
+                                        <li value="8">Le scénario reprend à l'étape 6.</li>
+                                    </ol>
+                                </li>
+                                <li class="scenario-alt-step" value="9">
+                                    Le système n'a pas réussi à soumettre la requête.
+                                    <ol class="bare-list">
+                                        <li value="8">Le système affiche <em>Erreur lors de la soumission, veuillez réessayer.</em></li>
+                                        <li value="8">Le scénario reprend à l'étape 7.</li>
                                     </ol>
                                 </li>
                             </ol>
