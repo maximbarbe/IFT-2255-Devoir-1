@@ -210,20 +210,116 @@ public class Controller {
         }
     };
 
-    public void showMenuPrincipalIntervenant() {
-        System.out.println("Menu Principal");
-        System.out.println("1) Soumettre un nouveau projet de travail.");
-        System.out.println("2) Consulter les requêtes de travail");
-        System.out.println("3) Mettre à jour les informations sur un chantier");
-        System.out.println("4) Profil");
-        System.out.println("5) Quitter");
+
+    private void consulterRequetes() {
+        System.out.println("Voici les requêtes de travail: ");
+        System.out.println("Lorem Ipsum/Déposé par User1");
+        System.out.println("FooBar/Déposé par User2");
+        System.out.println("");
         while (true) {
+            System.out.println("1) Soumettre sa candidature; 2) Revenir");
+            String res = reader.nextLine();
+            switch (res) {
+                case "1":
+                    System.out.println("Affichage de la page pour soumettre sa candidature...");    
+                    continue;
+                case "2":
+                    return;
+                default:
+                    System.out.println("Mauvais choix, veuillez réessayer.");
+            }
+        }
+        
+
+    }
+    private void soumettreNouveauTravail() {
+        System.out.println("Veuillez remplir le formulaire suivant pour soumettre un nouveau projet de travail: ");
+        System.out.println("Titre: ");
+        reader.nextLine();
+        System.out.println("Description du projet: ");
+        reader.nextLine();
+        System.out.println("Quartiers affectés: ");
+        reader.nextLine();
+        System.out.println("Rues affectées: ");
+        reader.nextLine();
+        System.out.println("Date de début (YYYY/MM/DD): ");
+        reader.nextLine();
+        System.out.println("Date de fin (YYYY/MM/DD): ");
+        reader.nextLine();
+        System.out.println("Horaire des travaux: ");
+        reader.nextLine();
+        while (true) {
+            System.out.println("1) Consulter les préférences; 2) Confirmer; 3) Annuler");
+            String res = reader.nextLine();
+            switch (res) {
+                case "1":
+                    System.out.println("Consultation des préférences");
+                    continue;
+                case "2":
+                    System.out.println("Formulaire soumis avec succès");
+                    return;
+                case "3":
+                    System.out.println("Annulation du formulaire");
+                    return;
+                default:
+                    break;
+            }
+        }
+
+
+
+    }
+
+    private void afficherProfil(User user) {
+        System.out.println("Profil: ");
+        if (user instanceof Intervenant) {
+            System.out.println("Compte: Intervenant");
+        } else {
+            Resident temp = (Resident)user;
+            System.out.println("Compte: Résident");
+            System.out.println("Adresse résidentielle: "+temp.getAdresse());
+        }
+        System.out.println("Nom: "+user.getName());
+        System.out.println("Email: "+user.getEmail());
+        while (true) {
+            System.out.println("1) Modifier le profil; 2) Revenir");
+            String res = reader.nextLine();
+            switch (res) {
+                case "1":
+                    System.out.println("Affichage de la page de modification du profil...");
+                    continue;
+                case "2":
+                    return;
+            
+                default:
+                    System.out.println("Mauvais choix, veuillez réessayer.");
+                    continue;
+            }
+        }
+        
+    }
+    public void showMenuPrincipalIntervenant(User user) {
+
+        while (true) {
+            System.out.println("Menu Principal");
+            System.out.println("1) Soumettre un nouveau projet de travail.");
+            System.out.println("2) Consulter les requêtes de travail");
+            System.out.println("3) Mettre à jour les informations sur un chantier");
+            System.out.println("4) Profil");
+            System.out.println("5) Quitter");
             String code = reader.nextLine();
             switch (code) {
                 case "1":
+                    soumettreNouveauTravail();
+                    continue;
                 case "2":
+                    consulterRequetes();
+                    continue;
                 case "3":
+                    System.out.println("Affichage de la page pour mettre à jour les informations sur un chantier.");
+                    continue;
                 case "4":
+                    afficherProfil(user);
                     continue;
                 case "5":
                     System.exit(0);
