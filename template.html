@@ -430,8 +430,8 @@
             display: block;
             height: 100%;
             width: auto;
-            min-height: 800px;
-            min-width: 600px;
+            min-height: 500px;
+            min-width: 400px;
             border-radius: 4px;
             background-color: #d5d5d5;
         }
@@ -747,7 +747,7 @@
              
                 <h3 class="subsection-title">Cas d'utilisation</h3>
                 <div class="use-case">
-                    <img class="use-case-diagram" src="image/Diagramme CU.png" alt="Diagramme de cas d'utilisation">
+                    <img class="use-case-diagram" src="image/Use Case Diagram1.svg" alt="Diagramme de cas d'utilisation">
                     <p class="use-case-notes">
                         <em>
                             Notes à propos du diagramme <br>
@@ -883,17 +883,16 @@
                         <hr>
 
                         <div class="cu-part">
-                            <h5 class="cu-part-title">Resident</h5>
+                            <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Agent (Principal)</li>
+                                <li class="cu-actor">Resident (Principal)</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le client doit au prealable se creer un compte</li>
-                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
+                                <li class="dash">Le client doit au prealable etre connecté</li>
                             </ul>
                         </div>
                         
@@ -912,9 +911,7 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe)</li>
-                            <li class="scenario-main-step">Le systeme verifie si les informations sont correctes .</li>
-                            <li class="scenario-main-step">Le systeme affiche le menu</li>
+                            <li class="scenario-main-step">Le systeme affiche le menu principal</li>
                             <li class="scenario-main-step">Le client choisis l'onglet signaler un probleme</li>
                             <li class="scenario-main-step">Le systeme affiche le formulaire a remplir</li>
                             <li class="scenario-main-step">Le client remplit le formulaire en entrant les informations telles que son nom, adresse courriel, adresse de residence etc</li>
@@ -928,22 +925,23 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="7">
+                                <li class="scenario-alt-step" value="5">
                                     Le projet de travaux rentrer par le client n'est plus valide et est termine </li>
                                     <ol class="bare-list">
-                                        <li value="7">Le systeme indique que le projet n'est plus valide </li>
-                                        <li value="7">Le client retourne au menu</li>
+                                        <li value="5">Le systeme indique que le projet n'est plus valide </li>
+                                        <li value="5">Le client retourne au menu</li>
 
                                     </ol>
-                                <li class="scenario-alt-step" value="11">Les informations ne sont pas correcte ou ne correspondent pas au profil du client
+                                <li class="scenario-alt-step" value="7">
+                                    Les informations ne sont pas correcte ou ne correspondent pas au profil du client
                                     <ol class="bare-list">
-                                        <li value="11">Le systeme lui demande de remplir les informations correctement </li>
-                                        <li value="11">Apres trois tentative si les information personnels sont toujours incorrectes le systeme ferme le formulaire.</li>
+                                        <li value="7">Le systeme lui demande de remplir les informations correctement </li>
+                                        <li value="7">Apres trois tentative si les information personnels sont toujours incorrectes le systeme ferme le formulaire.</li>
                                     </ol>
                                 </li>
-                                <li class="scenario-alt-step" value="12"> Le client ne soumet pas le formulaire
+                                <li class="scenario-alt-step" value="8"> Le client ne soumet pas le formulaire
                                     <ol class="bare-list">  
-                                        <li value="12">Au bout de 30 seconde le systeme annule l'envoie du formulaire, les informations memorise par ce derniers sont defaites</li>
+                                        <li value="8">Au bout de 30 seconde le systeme annule l'envoie du formulaire, les informations memorise par ce derniers sont defaites</li>
                                     </ol>
                                 </li>
 
@@ -974,8 +972,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le resident doit avoir un compte</li>
-                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
+                                <li class="dash">Le resident doit etre connecte</li>
                             </ul>
                         </div>
                         
@@ -994,9 +991,7 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe).</li>
-                            <li class="scenario-main-step">Le systeme verifie si les informations sont correctes .</li>
-                            <li class="scenario-main-step">Le systeme affiche le menu </li>
+                            <li class="scenario-main-step">Le systeme affiche le menu principal </li>
                             <li class="scenario-main-step">Le client choisis l'onglet travaux</li>
                             <li class="scenario-main-step"> Le systeme affiche les sous menu de l'onglet travaux</li>
                             <li class="scenario-main-step">Le client choisit le sous menu soumettre une requete de travail</li>
@@ -1010,12 +1005,12 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="11">
+                                <li class="scenario-alt-step" value="9">
                                     Le client ne recoit pas de candidature
 
                                     <ol class="bare-list">
-                                        <li value="11">Le client a entre temps annule la requete </li>
-                                        <li value="11">Aucun intervenant n'a postule.</li>
+                                        <li value="9">Le client a entre temps annule la requete </li>
+                                        <li value="9">Aucun intervenant n'a postule.</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -1046,8 +1041,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le resident doit avoir un compte</li>
-                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
+                                <li class="dash">Le resident doit etre connecté</li>
                             </ul>
                         </div>
                         
@@ -1066,8 +1060,7 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe).</li>
-                            <li class="scenario-main-step">Le système affiche la page d'acceuil avec le menu.</li>
+                            <li class="scenario-main-step">Le système affiche le menu principal.</li>
                             <li class="scenario-main-step">Le client appuie sur l'onglet notifications</li>
                             <li class="scenario-main-step">Le système affiche toutes les notification recus.</li>
                             <li class="scenario-main-step">Le client retourne a la page d'acceuil .</li>
@@ -1076,7 +1069,7 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="4">
+                                <li class="scenario-alt-step" value="3">
                                     Le client consulte une candidature
                                     <ol class="bare-list">
                                         <li value="3">Il accepte la canditature</li>
@@ -1110,8 +1103,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le client doit avoir un compte</li>
-                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
+                                <li class="dash">L'utilisateur doit etre connecté</li>
                             </ul>
                         </div>
                         
@@ -1130,8 +1122,7 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe) .</li>
-                            <li class="scenario-main-step">Le système affiche la page d'acceuil avec le menu.</li>
+                            <li class="scenario-main-step">Le système affiche le menu principal.</li>
                             <li class="scenario-main-step">Le client appuie sur l'onglet nouveau projet .</li>
                             <li class="scenario-main-step">Le système affiche un formulaire a remplir.</li>
                             <li class="scenario-main-step">Le client rentre les informations tel que la description, le type de travaux, les rues affectes, date debut et fin etc.</li>
@@ -1145,11 +1136,11 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="6">
+                                <li class="scenario-alt-step" value="5">
                                     Les preferences des residents indique que la date de debut prevu n'est pas adequat
 
                                     <ol class="bare-list">
-                                        <li value="6">Le client met a jour la date de debut afin qu'elle reponde a la preference des residents.</li>
+                                        <li value="5">Le client met a jour la date de debut afin qu'elle reponde a la preference des residents.</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -1179,8 +1170,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le client doit avoir un compte</li>
-                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
+                                <li class="dash">L'utilisateurs doit etre connecté</li>
                             </ul>
                         </div>
                         
@@ -1199,8 +1189,7 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe).</li>
-                            <li class="scenario-main-step">Le système affiche la page d'acceuil avec le menu.</li>
+                            <li class="scenario-main-step">Le système affiche le menu principal.</li>
                             <li class="scenario-main-step">Le client appuie sur l'onglet Mis a jour.</li>
                             <li class="scenario-main-step">Le systeme lui affiche la liste des travaux prevu ou en cours.</li>
                             <li class="scenario-main-step">Le client accede au projet qu'il souhaite mettre a jour.</li>
@@ -1213,21 +1202,21 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="7">
+                                <li class="scenario-alt-step" value="6">
                                     Le client change le statut du projet
                                     <ol class="bare-list">
-                                        <li value="7">Il change le statut en mettant suspendu, termine ou en cours</li>
+                                        <li value="6">Il change le statut en mettant suspendu, termine ou en cours</li>
                                     </ol>
                                 </li>
                             </ol>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="8">
+                                <li class="scenario-alt-step" value="7">
                                     Le client n'enregistre pas les modifications effectuees
                                     <ol class="bare-list">
-                                        <li value="8">Le systeme ne met pas a jour les information du chantier dont le modifications ont ete fait</li>
+                                        <li value="7">Le systeme ne met pas a jour les information du chantier dont le modifications ont ete fait</li>
                                     </ol>
                                 </li>
-                                <li class="scenario-alt-step" value="8">Le client annule les modifications faits</li>
+                                <li class="scenario-alt-step" value="7">Le client annule les modifications faits</li>
                             </ol>
                         </div>
                     </div>
@@ -1254,8 +1243,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le client doit avoir un compte</li>
-                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
+                                <li class="dash">L'utilisateur doit etre connecté</li>
                             </ul>
                         </div>
                         
@@ -1274,8 +1262,7 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe).</li>
-                            <li class="scenario-main-step">Le systeme affiche la page d'acceuil avec le menu</li>
+                            <li class="scenario-main-step">Le systeme affiche le menu ptincipale </li>
                             <li class="scenario-main-step">Le client appuis sur l'onglet des requetes de travail.</li>
                             <li class="scenario-main-step">Le systeme affiche la liste des requete existant.</li>
                             <li class="scenario-main-step">Le client cherche et applique sur une requete interessante pour lui.</li>
@@ -1286,19 +1273,19 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="5">
+                                <li class="scenario-alt-step" value="4">
                                     Le client ne peut pas appliquer sur ce projet car il y a deja une candidature.
                                     <ol class="bare-list">
-                                        <li value="5">Le client cherche d'autre requete de travail.</li>
-                                        <li value="5">Le client annule sa recherche de requete de travail.</li>
+                                        <li value="4">Le client cherche d'autre requete de travail.</li>
+                                        <li value="4">Le client annule sa recherche de requete de travail.</li>
                                     </ol>
                                 </li>
                             </ol>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="5">
+                                <li class="scenario-alt-step" value="4">
                                     Le client n'a pas soumis son application
                                     <ol class="bare-list">
-                                        <li value="5">Le systeme n'envoit pas la candidature du client .</li>
+                                        <li value="4">Le systeme n'envoit pas la candidature du client .</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -1328,8 +1315,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le client doit avoir un compte</li>
-                                <li class="dash">Les informations rentrees par le client doivent etre correctes a l'authentification</li>
+                                <li class="dash">L'utilisateur doit etre connecte</li>
                             </ul>
                         </div>
                         
@@ -1348,8 +1334,7 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe).</li>
-                            <li class="scenario-main-step">Le systeme affiche la page d'acceuil avec le menu.</li>
+                            <li class="scenario-main-step">Le systeme affiche  le menu principal.</li>
                             <li class="scenario-main-step">Le client appuie sur l'onglet profil.</li>
                             <li class="scenario-main-step">Le système affiche les donne personnels du client.</li>
                             <li class="scenario-main-step">Le client fait la modification de son profil (changer adresse, mot de passe ..,).</li>
@@ -1362,19 +1347,19 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="6">
+                                <li class="scenario-alt-step" value="5">
                                     Le client n'a pas appuyer sur enregistrer
                                     <ol class="bare-list">
-                                        <li value="3">Le système n'enregistre pas les nouvelles modifications.</li>
+                                        <li value="5">Le système n'enregistre pas les nouvelles modifications.</li>
                                     </ol>
                                 </li>
                             </ol>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="7">
+                                <li class="scenario-alt-step" value="6">
                                     Les informations ne sont pas exacte ou contiennent des erreurs
                                     <ol class="bare-list">
-                                        <li value="7">Le client a trois tentatives pour les corriger.</li>
-                                        <li value="7">Le système ferme les champs et aucune modification n'est faite.</li>
+                                        <li value="6">Le client a trois tentatives pour les corriger.</li>
+                                        <li value="6">Le système ferme les champs et aucune modification n'est faite.</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -1403,8 +1388,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le resident doit avoir un compte</li>
-                                <li class="dash">Les informations rentrees par le client doivent etre correctes</li>
+                                <li class="dash">Le resident doit etre connecte</li>
 
                             </ul>
                         </div>
@@ -1424,9 +1408,7 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le client s'authentifie sur la page de connexion(e-mail et mot de passe).</li>
-                            <li class="scenario-main-step">Le systeme affiche la page d'acceuil avec le menu.</li>
-                            <li class="scenario-main-step">Le systeme affiche le menu </li>
+                            <li class="scenario-main-step">Le systeme affiche le menu principal </li>
                             <li class="scenario-main-step">Le client choisis l'onglet travaux</li>
                             <li class="scenario-main-step"> Le systeme affiche les sous menu de l'onglet travaux</li>
                             <li class="scenario-main-step">Le client choisit le sous menu Donner un avis/preference</li>
@@ -1440,12 +1422,12 @@
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="8">
+                                <li class="scenario-alt-step" value="7">
                                     Le client verifie d'abord les preferences des autres residents.
                                     <ol class="bare-list">
-                                        <li value="8">Le client ne choisit pas car les plages horaires selectionnees par les autres residents lui vont.</li>
-                                        <li value="8">Le client ne soumet pas le formulaire.</li>
-                                        <li value="8">Le systeme ne fait aucun ajout et n'envoie pas le formulaire</li>
+                                        <li value="7">Le client ne choisit pas car les plages horaires selectionnees par les autres residents lui vont.</li>
+                                        <li value="7">Le client ne soumet pas le formulaire.</li>
+                                        <li value="7">Le systeme ne fait aucun ajout et n'envoie pas le formulaire</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -1453,9 +1435,9 @@
                                     <li class="scenario-alt-step" value="7">
                                         Le client donne son avis sur un projet
                                         <ol class="bare-list">
-                                            <li value="8">Le systeme lui indique qu'il ne peut donner un avis que sur les projet termine.</li>
-                                            <li value="8">Le client remplis le formulaire et le soumet .</li>
-                                            <li value="8">Le scenario continu a l'etape 10</li>
+                                            <li value="7">Le systeme lui indique qu'il ne peut donner un avis que sur les projet termine.</li>
+                                            <li value="7">Le client remplis le formulaire et le soumet .</li>
+                                            <li value="7">Le scenario continu a l'etape 10</li>
                                         </ol>
                                     </li>
                                 </ol>
