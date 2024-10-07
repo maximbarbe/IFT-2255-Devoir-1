@@ -943,6 +943,8 @@
                                         <li value="6">Le scénario reprend à l'étape 4.</li>
                                     </ol>
                                 </li>
+                            </ol>
+                            <ol class="bare-list scenario-alt-steps">
                                 <li class="scenario-alt-step" value="7">
                                     Le système ne parvient pas à envoyer formulaire.
                                     <ol class="bare-list">
@@ -1013,11 +1015,13 @@
                                         <li value="8">Le scénario reprend à l'étape 6.</li>
                                     </ol>
                                 </li>
+                            </ol>   
+                            <ol class="bare-list scenario-alt-steps">
                                 <li class="scenario-alt-step" value="9">
                                     Le système n'a pas réussi à soumettre la requête.
                                     <ol class="bare-list">
-                                        <li value="8">Le système affiche <em>Erreur lors de la soumission, veuillez réessayer.</em></li>
-                                        <li value="8">Le scénario reprend à l'étape 7.</li>
+                                        <li value="9">Le système affiche <em>Erreur lors de la soumission, veuillez réessayer.</em></li>
+                                        <li value="9">Le scénario reprend à l'étape 7.</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -1029,11 +1033,11 @@
                 <div class="scenario" id="cu-5">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> Consulter les notifications personnalisées
+                            <strong>CU:</strong> Consulter les notifications
 
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> 
+                            <strong>Objectif: </strong>Un résident souhaite consulter les notifications qu'il a recu.
                         </p>
                         
                         <hr>
@@ -1048,54 +1052,36 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le resident doit etre connecté</li>
+                                <li class="dash">Le résident doit etre connecté</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash"></li>
+                                <li class="dash">Aucun</li>
                             </ul>
                         </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes"></p>
-                        </div>
+                    
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
                             <li class="scenario-main-step">Le système affiche le menu principal.</li>
-                            <li class="scenario-main-step">Le client appuie sur l'onglet notifications</li>
-                            <li class="scenario-main-step">Le système affiche toutes les notification recus.</li>
-                            <li class="scenario-main-step">Le client retourne a la page d'acceuil .</li>
+                            <li class="scenario-main-step">Le résident choisit l'onglet <em>Notifications</em>.</li>
+                            <li class="scenario-main-step">Le système affiche toutes les notifications recues.</li>
                         </ol>
 
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="3">
-                                    Le client consulte une candidature
-                                    <ol class="bare-list">
-                                        <li value="3">Il accepte la canditature</li>
-                                        <li value="3">Il refuse la canditature</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                           
-                        </div>
                     </div>
                 </div>
 
                 <div class="scenario" id="cu-6">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> Soumettre un nouveau projet de travaux
+                            <strong>CU:</strong> Soumettre un nouveau projet de travail
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> 
+                            <strong>Objectif:</strong> Un intervenant souhaite soumettre un nouveau projet de travail qu'il va entreprendre.
                         </p>
                         
                         <hr>
@@ -1110,33 +1096,30 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">L'utilisateur doit etre connecté</li>
+                                <li class="dash">L'intervenant doit etre connecté</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun.</li>
+                                <li class="dash">La soumission sera ajoutée à la base de données des travaux et apparaîtra sur la page des résidents.</li>
                             </ul>
                         </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes"></p>
-                        </div>
+        
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
                             <li class="scenario-main-step">Le système affiche le menu principal.</li>
-                            <li class="scenario-main-step">Le client appuie sur l'onglet nouveau projet .</li>
-                            <li class="scenario-main-step">Le système affiche un formulaire a remplir.</li>
-                            <li class="scenario-main-step">Le client rentre les informations tel que la description, le type de travaux, les rues affectes, date debut et fin etc.</li>
-                            <li class="scenario-main-step"> Il verifie les preferences des residents  .</li>
-                            <li class="scenario-main-step">Il soumet le projet </li>
+                            <li class="scenario-main-step">L'intervenant appuie sur l'onglet <em>Soumettre un nouveau projet</em>.</li>
+                            <li class="scenario-main-step">Le système affiche le formulaire à remplir.</li>
+                            <li class="scenario-main-step">L'intervenant entre les informations tel que la description, le type de travaux, les rues affectes, date debut et fin etc.</li>
+                            <li class="scenario-main-step">L'intervenant soumet le projet.</li>
+                            <li class="scenario-main-step">Le système informe l'intervenant de tous les conflits avec les préférences des résidents.</li>
+                            <li class="scenario-main-step">L'intervenant confirme qu'il veut continuer.</li>
                             <li class="scenario-main-step">Le système lui indique que le projet a été soumis avec succes</li>
-                            <li class="scenario-main-step">Apres cela le système met a jour et donne le statut de "Prevu" au projet</li>
+                            <li class="scenario-main-step">Le système ajoute le nouveau projet de travail et y donne le statut de <em>Prévu</em>.</li>
 
                         </ol>
 
@@ -1144,12 +1127,35 @@
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
                                 <li class="scenario-alt-step" value="5">
-                                    Les preferences des residents indique que la date de debut prevu n'est pas adequat
+                                    L'intervenant consulte les préférences des résidents.
 
                                     <ol class="bare-list">
-                                        <li value="5">Le client met a jour la date de debut afin qu'elle reponde a la preference des residents.</li>
+                                        <li value="5">L'intervenant appuie sur <em>Préférences</em>.</li>
+                                        <li value="5">Le système affiche la liste des préférences des résidents du quartier.</li>
+                                        <li value="5">L'intervenant retourne au formulaire.</li>
+                                        <li value="5">L'intervenant soumet le formulaire.</li>
+                                        <li value="5">Le scénario reprend à l'étape 6.</li>
                                     </ol>
                                 </li>
+                            </ol>
+                            <ol class="bare-list scenario-alt-steps">
+                                <li class="scenario-alt-step" value="7">
+                                    L'intervenant ne veut pas continuer.
+                                    <ol class="bare-list">
+                                        <li value="7">L'intervenant confirme qu'il ne souhaite pas continuer.</li>
+                                        <li value="7">Le scénario reprend à l'étape 3.</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                            <ol class="bare-list scenario-alt-steps">
+                                <li class="scenario-alt-step" value="8">
+                                    Le système n'a pas réussi à soumettre.
+                                    <ol class="bare-list">
+                                        <li value="8">Le système affiche <em>Erreur lors de la soumission, veuillez réessayer</em>.</li>
+                                        <li value="8">Le scénario reprend à l'étape 5.</li>
+                                    </ol>
+                                </li>
+
                             </ol>
                            
                         </div>
@@ -1162,7 +1168,7 @@
                             <strong>CU:</strong> Mettre à jour les informations d'un chantier
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> 
+                            <strong>Objectif:</strong> L'intervenant souhaite modifier certaines informations concernant un chantier.
                         </p>
                         
                         <hr>
@@ -1177,53 +1183,48 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">L'utilisateurs doit etre connecté</li>
+                                <li class="dash">L'intervenant doit etre connecté</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Les informations sur un chantier sont stockées dans la base de données de l'application.</li>
+                                <li class="dash">Les informations sur le chantier sont modifiées dans la base de données de l'application.</li>
                             </ul>
-                        </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">Aucun.</p>
                         </div>
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
                             <li class="scenario-main-step">Le système affiche le menu principal.</li>
-                            <li class="scenario-main-step">Le client appuie sur l'onglet Mis a jour.</li>
-                            <li class="scenario-main-step">Le systeme lui affiche la liste des travaux prevu ou en cours.</li>
-                            <li class="scenario-main-step">Le client accede au projet qu'il souhaite mettre a jour.</li>
-                            <li class="scenario-main-step">Le systeme lui affiche les informations detaille du projet</li>
-                            <li class="scenario-main-step">Le client fait les modification necessaires </li>
-                            <li class="scenario-main-step">Le client enregistre les modification</li>
-                            <li class="scenario-main-step">Le système envoie une notification a chaque resident qui avait fait la demande</li>
+                            <li class="scenario-main-step">L'intervenant appuie sur l'onglet <em>Mettre à jour les informations sur un chantier</em>.</li>
+                            <li class="scenario-main-step">Le système lui affiche la liste des travaux prévus ou en cours.</li>
+                            <li class="scenario-main-step">L'intervenant accède au projet qu'il souhaite mettre à jour.</li>
+                            <li class="scenario-main-step">Le système lui affiche les informations détaillés du projet.</li>
+                            <li class="scenario-main-step">L'intervenant fait les modifications nécessaires.</li>
+                            <li class="scenario-main-step">L'intervenant confirme les modifications.</li>
+                            <li class="scenario-main-step">Le système enregistre les modifications.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="6">
-                                    Le client change le statut du projet
+                                <li class="scenario-alt-step" value="7">
+                                    L'intervenant ne confirme pas les modifications.
                                     <ol class="bare-list">
-                                        <li value="6">Il change le statut en mettant suspendu, termine ou en cours</li>
+                                        <li value="7">Le scénario reprend à l'étape 6</li>
                                     </ol>
                                 </li>
                             </ol>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="7">
-                                    Le client n'enregistre pas les modifications effectuees
+                                <li class="scenario-alt-step" value="8">
+                                    Le système ne réussit pas à mettre à jour les informations.
                                     <ol class="bare-list">
-                                        <li value="7">Le systeme ne met pas a jour les information du chantier dont le modifications ont ete fait</li>
+                                        <li value="8">Le système affiche <em>Erreur lors de la mise à jour, veuillez réessayer.</em></li>
+                                        <li value="8">Le scénario reprend à l'étape 6.</li>
                                     </ol>
                                 </li>
-                                <li class="scenario-alt-step" value="7">Le client annule les modifications faits</li>
                             </ol>
                         </div>
                     </div>
@@ -1235,7 +1236,7 @@
                             <strong>CU:</strong> Consulter la liste des requêtes de travail
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> 
+                            <strong>Objectif:</strong> Un intervenant souhaite voir la liste des requêtes de travail.
                         </p>
                         
                         <hr>
@@ -1250,7 +1251,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">L'utilisateur doit etre connecté</li>
+                                <li class="dash">L'intervenant doit être connecté</li>
                             </ul>
                         </div>
                         
@@ -1260,39 +1261,68 @@
                                 <li class="dash">Aucun</li>
                             </ul>
                         </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes"></p>
-                        </div>
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le systeme affiche le menu ptincipale </li>
-                            <li class="scenario-main-step">Le client appuis sur l'onglet des requetes de travail.</li>
-                            <li class="scenario-main-step">Le systeme affiche la liste des requete existant.</li>
-                            <li class="scenario-main-step">Le client cherche et applique sur une requete interessante pour lui.</li>
-                            <li class="scenario-main-step">Le systeme indique que la candidature a ete envoye.</li>
-                            <li class="scenario-main-step">Le systeme lui indique qu'il recevra une notification si une decision a ete prise</li>
+                            <li class="scenario-main-step">Le système affiche le menu principale.</li>
+                            <li class="scenario-main-step">L'intervenant appuie sur l'onglet <em>Requêtes de travail</em>.</li>
+                            <li class="scenario-main-step">Le système affiche la liste des requêtes existantes.</li>
+                        </ol>
+
+                    </div>
+                </div>
+                <div class="scenario" id="cu-9">
+                    <div class="scenario-meta">
+                        <h4 class="cu-name">
+                            <strong>CU:</strong> Soumettre sa candidature
+                        </h4>
+                        <p class="cu-goal">
+                            <strong>Objectif:</strong> Un intervenant souhaite soumettre sa candidature à une requête de travail.
+                        </p>
+                        
+                        <hr>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Acteurs</h5>
+                            <ul class="bare-list cu-actors">
+                                <li class="cu-actor">Intervenant (Principal)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Préconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">L'intervenant doit être connecté.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Postconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Aucune</li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    <div class="scenario-main">
+                        <h5 class="scenario-main-title">Scénario principal</h5>
+                        <ol class="scenario-main-steps">
+                            <li class="scenario-main-step">Appel au cas <em><a href="#cu-8">Consulter la liste des requêtes de travail</a></em></li>
+                            <li class="scenario-main-step">L'intervenant choisit la requête qui l'intéresse.</li>
+                            <li class="scenario-main-step">Le système affiche les détails de la requête.</li>
+                            <li class="scenario-main-step">L'intervenant appuie sur <em>Envoyer la candidature</em>.</li>
+                            <li class="scenario-main-step">Le système affiche <em>Votre candidature a été soumise.</em>.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="4">
-                                    Le client ne peut pas appliquer sur ce projet car il y a deja une candidature.
+                                <li class="scenario-alt-step" value="5">
+                                    L'intervenant a déjà soumis une candidature.
                                     <ol class="bare-list">
-                                        <li value="4">Le client cherche d'autre requete de travail.</li>
-                                        <li value="4">Le client annule sa recherche de requete de travail.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="4">
-                                    Le client n'a pas soumis son application
-                                    <ol class="bare-list">
-                                        <li value="4">Le systeme n'envoit pas la candidature du client .</li>
+                                        <li value="5">Le système affiche <em>Vous avez déjà envoyé une candidature</em>.</li>
+                                        <li value="5">Le scénario se termine.</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -1300,13 +1330,13 @@
                     </div>
                 </div>
 
-                <div class="scenario" id="cu-9">
+                <div class="scenario" id="cu-10">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
                             <strong>CU:</strong> Modifier un profil
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> 
+                            <strong>Objectif:</strong> Un utilisateur souhaite modifier certaines données de son profil.
                         </p>
                         
                         <hr>
@@ -1322,65 +1352,61 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">L'utilisateur doit etre connecte</li>
+                                <li class="dash">L'utilisateur doit être connecté.</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Les modifications effectuees sont stocké dans la base de données de l'application.</li>
+                                <li class="dash">Les modifications effectuées sont stockées dans la base de données de l'application.</li>
                             </ul>
                         </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes"></p>
-                        </div>
+                    
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le systeme affiche  le menu principal.</li>
-                            <li class="scenario-main-step">Le client appuie sur l'onglet profil.</li>
-                            <li class="scenario-main-step">Le système affiche les donne personnels du client.</li>
-                            <li class="scenario-main-step">Le client fait la modification de son profil (changer adresse, mot de passe ..,).</li>
-                            <li class="scenario-main-step">Le client appuie sur enregistrer.</li>
-                            <li class="scenario-main-step">Le système verifie si les donnes rentrees sont exactes</li>
+                            <li class="scenario-main-step">Le système affiche le menu principal.</li>
+                            <li class="scenario-main-step">L'utilisateur appuie sur l'onglet <em>Profil</em>.</li>
+                            <li class="scenario-main-step">Le système affiche les données personnelles du client.</li>
+                            <li class="scenario-main-step">L'utilisateur appuie sur <em>Modifier profil</em>.</li>
+                            <li class="scenario-main-step">L'utilisateur entre les nouvelles données dans les champs à modifier.</li>
+                            <li class="scenario-main-step">L'utilisateur confirme l'enregistrement.</li>
                             <li class="scenario-main-step">Le système enregistre les nouvelles modifications</li>
-                            <li class="scenario-main-step">Le client voit que le profil a été mis a jour</li>
+                            <li class="scenario-main-step">Le système affiche le nouveau profil modifié.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="5">
-                                    Le client n'a pas appuyer sur enregistrer
+                                <li class="scenario-alt-step" value="6">
+                                    L'utilisateur a quitté sans enregistrer.
                                     <ol class="bare-list">
-                                        <li value="5">Le système n'enregistre pas les nouvelles modifications.</li>
+                                        <li value="6">Le système n'enregistre pas les nouvelles modifications.</li>
+                                        <li value="6">Le scénario se termine.</li>
                                     </ol>
                                 </li>
                             </ol>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="6">
-                                    Les informations ne sont pas exacte ou contiennent des erreurs
+                                <li class="scenario-alt-step" value="7">
+                                    Le système n'a pas réussi à enregistrer les changements.
                                     <ol class="bare-list">
-                                        <li value="6">Le client a trois tentatives pour les corriger.</li>
-                                        <li value="6">Le système ferme les champs et aucune modification n'est faite.</li>
+                                        <li value="7">Le système affiche <em>Erreur lors de l'enregistrement, veuillez réessayer.</em></li>
+                                        <li value="7">Le scénario reprend à l'étape 6.</li>
                                     </ol>
                                 </li>
                             </ol>
                         </div>
                     </div>
                 </div>
-                
-                <div class="scenario" id="cu-10">
+                <div class="scenario" id="cu-11">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
-                            <strong>CU:</strong> Donner un avis/preference sur un projet 
+                            <strong>CU:</strong> Faire le suivi d'une requête de travail.
                         </h4>
                         <p class="cu-goal">
-                            <strong>Objectif:</strong> 
+                            <strong>Objectif:</strong> Un résident souhaite faire le suivi d'une requête de travail qu'il a soumis.
                         </p>
                         
                         <hr>
@@ -1395,66 +1421,223 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le resident doit etre connecte</li>
-
+                                <li class="dash">Le résident doit être connecté.</li>
                             </ul>
                         </div>
                         
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Les avis sont enregistres dans la base de donnees et est visible pour les intervenants.</li>
+                                <li class="dash">Aucune</li>
                             </ul>
                         </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes"></p>
-                        </div>
+                    
                     </div>
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le systeme affiche le menu principal </li>
-                            <li class="scenario-main-step">Le client choisis l'onglet travaux</li>
-                            <li class="scenario-main-step"> Le systeme affiche les sous menu de l'onglet travaux</li>
-                            <li class="scenario-main-step">Le client choisit le sous menu Donner un avis/preference</li>
-                            <li class="scenario-main-step">Le système affiche le formulaire.</li>
-                            <li class="scenario-main-step">Le client remplis les case requis</li>
-                            <li class="scenario-main-step">Le client choisit le projet dont il souhaiterait donner une plage horaire</li>
-                            <li class="scenario-main-step">Il soumet le formulaire</li>
-                            <li class="scenario-main-step">Le systeme lui indique que les informations ont ete enregistrees et que le formulaire est soumis</li>
+                            <li class="scenario-main-step">Appel au CU <em><a href="#cu-5">Consulter les notifications</a></em></li>
+                            <li class="scenario-main-step">Le résident appuie sur la notification de sa requête de travail.</li>
+                            <li class="scenario-main-step">Le système affiche les détails concernant la requête de travail.</li>
+                        </ol>
+
+                        <div class="scenario-alt">
+                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
+                            <ol class="bare-list scenario-alt-steps">
+                                <li class="scenario-alt-step" value="3">
+                                    Un intervenant a soumis sa candidature
+                                    <ol class="bare-list">
+                                        <li value="3">L'utilisateur accepte ou refuse la candidature de l'intervenant.</li>
+                                        <li value="3">Le scénario se termine.</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="scenario" id="cu-12">
+                    <div class="scenario-meta">
+                        <h4 class="cu-name">
+                            <strong>CU:</strong> Donner un avis sur un travail et/ou sur l'intervenant responsable.
+                        </h4>
+                        <p class="cu-goal">
+                            <strong>Objectif:</strong> Un résident souhaite donner son avis sur un travail fini et/ou sur l'intervenant responsable.
+                        </p>
+                        
+                        <hr>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Acteurs</h5>
+                            <ul class="bare-list cu-actors">
+                                <li class="cu-actor">Résident (Principal)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Préconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Le résident doit être connecté.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Postconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Aucune</li>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                    <div class="scenario-main">
+                        <h5 class="scenario-main-title">Scénario principal</h5>
+                        <ol class="scenario-main-steps">
+                            <li class="scenario-main-step">Appel au CU <em><a href="#cu-5">Consulter les notifications</a></em></li>
+                            <li class="scenario-main-step">Le résident appuie sur la notification du travail terminé.</li>
+                            <li class="scenario-main-step">Le système affiche les détails sur le travail, ainsi que l'option pour donner du feedback.</li>
+                            <li class="scenario-main-step">Le résident appuie sur l'option pour donner du feedback.</li>
+                            <li class="scenario-main-step">Le système affiche le formulaire de feedback.</li>
+                            <li class="scenario-main-step">Le résident remplit le formulaire.</li>
+                            <li class="scenario-main-step">Le résident confirme et soumet le formulaire.</li>
+                            <li class="scenario-main-step">Le système affiche <em>Envoi avec succès. Merci pour le feedback.</em> et envoie le message à l'intervenant concerné.</li>
+                        </ol>
+
+                        <div class="scenario-alt">
+                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
+                            <ol class="bare-list scenario-alt-steps">
+                                <li class="scenario-alt-step" value="8">
+                                    Une erreur s'est déroulée lors de l'envoi.
+                                    <ol class="bare-list">
+                                        <li value="8">Le système affiche <em>Erreur lors de la soumission, veuillez réessayer.</em>.</li>
+                                        <li value="8">Le scénario reprend à l'étape 7.</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="scenario" id="cu-13">
+                    <div class="scenario-meta">
+                        <h4 class="cu-name">
+                            <strong>CU:</strong> Modifier les notifications
+                        </h4>
+                        <p class="cu-goal">
+                            <strong>Objectif:</strong> Un résident souhaite s'abonner ou se désabonner des notifications d'une rue ou quartier.
+                        </p>
+                        
+                        <hr>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Acteurs</h5>
+                            <ul class="bare-list cu-actors">
+                                <li class="cu-actor">Résident (Principal)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Préconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Le résident doit être connecté.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Postconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Aucune</li>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                    <div class="scenario-main">
+                        <h5 class="scenario-main-title">Scénario principal</h5>
+                        <ol class="scenario-main-steps">
+                            <li class="scenario-main-step">Appel au CU <em><a href="#cu-5">Consulter les notifications</a></em></li>
+                            <li class="scenario-main-step">Le résident appuie sur <em>Modifier notifications</em>.</li>
+                            <li class="scenario-main-step">Le système affiche les quartiers et les rues auxquelles le résident est abonné.</li>
+                            <li class="scenario-main-step">Le résident recherche le quartier ou la rue à modifier.</li>
+                            <li class="scenario-main-step">Le système affiche les options de s'abonner ou de se désabonner.</li>
+                            <li class="scenario-main-step">Le résident choisit l'option approprié et confirme.</li>
+                            <li class="scenario-main-step">Le système affiche <em>Modifications sauvegardées</em> et enregistre les changements.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
                                 <li class="scenario-alt-step" value="7">
-                                    Le client verifie d'abord les preferences des autres residents.
+                                    Une erreur s'est déroulée lors de l'enregistrement.
                                     <ol class="bare-list">
-                                        <li value="7">Le client ne choisit pas car les plages horaires selectionnees par les autres residents lui vont.</li>
-                                        <li value="7">Le client ne soumet pas le formulaire.</li>
-                                        <li value="7">Le systeme ne fait aucun ajout et n'envoie pas le formulaire</li>
+                                        <li value="7">Le système affiche <em>Erreur lors de l'enregistrement, veuillez réessayer.</em>.</li>
+                                        <li value="7">Le scénario reprend à l'étape 6.</li>
                                     </ol>
                                 </li>
                             </ol>
-                             <ol class="bare-list scenario-alt-steps">
-                                    <li class="scenario-alt-step" value="7">
-                                        Le client donne son avis sur un projet
-                                        <ol class="bare-list">
-                                            <li value="7">Le systeme lui indique qu'il ne peut donner un avis que sur les projet termine.</li>
-                                            <li value="7">Le client remplis le formulaire et le soumet .</li>
-                                            <li value="7">Le scenario continu a l'etape 10</li>
-                                        </ol>
-                                    </li>
-                                </ol>
-            
+                        </div>
+                    </div>
+                </div>
+                <div class="scenario" id="cu-14">
+                    <div class="scenario-meta">
+                        <h4 class="cu-name">
+                            <strong>CU:</strong> Fournir des plages horaires
+                        </h4>
+                        <p class="cu-goal">
+                            <strong>Objectif:</strong> Un résident souhaite fournir des plages de disponibilité.
+                        </p>
+                        
+                        <hr>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Acteurs</h5>
+                            <ul class="bare-list cu-actors">
+                                <li class="cu-actor">Résident (Principal)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Préconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Le résident doit être connecté.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Postconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Aucune</li>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                    <div class="scenario-main">
+                        <h5 class="scenario-main-title">Scénario principal</h5>
+                        <ol class="scenario-main-steps">
+                            <li class="scenario-main-step">Le système affiche le menu principal.</li>
+                            <li class="scenario-main-step">Le résident choisit l'onglet <em>Travaux</em>.</li>
+                            <li class="scenario-main-step">Le système affiche le sous-menu de l'onglet <em>Travaux</em>.</li>
+                            <li class="scenario-main-step">Le résident choisit l'onglet <em>Plages horaires</em>.</li>
+                            <li class="scenario-main-step">Le système affiche la plage horaire du résident.</li>
+                            <li class="scenario-main-step">Le résident appuie sur <em>Modifier</em>.</li>
+                            <li class="scenario-main-step">Le résident effectue les modifications à sa plage horaire.</li>
+                            <li class="scenario-main-step">Le résident enregistre les changements.</li>
+                            <li class="scenario-main-step">Le système affiche <em>Changements enregistrés</em> et affiche la nouvelle plage horaire modifiée.</li>
+                        </ol>
+
+                        <div class="scenario-alt">
+                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
+                            <ol class="bare-list scenario-alt-steps">
+                                <li class="scenario-alt-step" value="9">
+                                    Une erreur s'est déroulée lors de l'enregistrement.
+                                    <ol class="bare-list">
+                                        <li value="9">Le système affiche <em>Erreur lors de l'enregistrement, veuillez réessayer.</em>.</li>
+                                        <li value="9">Le scénario reprend à l'étape 7.</li>
+                                    </ol>
+                                </li>
+                            </ol>
                         </div>
                     </div>
                 </div>
 
-                
-                
+
+            
                 
                   
                 <h3 class="subsection-title">Diagramme d'activités</h3>
