@@ -1762,14 +1762,8 @@
                 <div>
                     <h3 class="subsection-title">Solution de stockage</h3>
                     <p>
-                        Pour stocker nos données, nous allons utiliser une base de données relationnelle sur le cloud. Nous choisissons une base de données relationelle puisqu'il existe des liens que nous devons maintenir
-                        entre les différents éléments qui seront stockés dans la base de données. Par exemple, une requête de travail pourrait être stockée dans notre base de données et il faut maintenir le lien
-                        entre la requête et le résident qui l'a écrit afin de pouvoir la récupérer lorsque l'utilisateur veut voir sa requête. En tenant compte des besoins non-fonctionnels énumérés plus haut, nous pensons également qu'une architecture cloud est le choix adéquat pour l'application.
-                        Supposons que nous utilisons un service tel que AWS ou Google Cloud pour héberger notre base de données, il est alors beaucoup plus facile de 'scaler' puisqu'on a qu'à payer des frais additionnels à la place de devoir tout mettre en place par nous-même.
-                        De plus, en termes de sécurité, il est tout à fait raisonnable d'assumer que des titans de l'industrie tels que Amazon et Google ont des meilleurs mesures de sécurité que celles que nous pouvons implémenter par nous-même.
-                        Finalement, le cloud est extrêmement robuste et nous permettra d'assurer que notre application sera presque tout le temps disponible.
-
-
+                        Pour stocker nos données, nous envisageons utiliser des fichiers JSON. En effet, le format JSON nous permettra de garder une certaine structure dans les données qui ne serait pas nécessairement disponible avec les fichiers CSV.
+                        <em style="color:red"><b>To finish</b></em>
                     </p>
                 </div>
 
@@ -1778,7 +1772,7 @@
 
                     <p>
                         Nous envisageons que <em>MaVille</em> fonctionnera avec le service <em>Info entraves et travaux</em> afin d'offrir un portrait plus complet de l'entièreté des travaux et parce que le service <em>Info entraves et travaux</em> offre
-                        des fonctionnalités qui ne sont pas disponibles sur <em>MaVille</em> comme la possibilité de voir les travaux sur une carte. Il y aura donc des échanges bi-directionnels. D'une part, si des travaux sont ajoutés sur l'application <em>MaVille</em>, alors
+                        des fonctionnalités qui ne sont pas disponibles sur <em>MaVille</em> comme la possibilité de voir les travaux sur une carte. On peut donc faire des échanges bi-directionnels via un API. D'une part, si des travaux sont ajoutés sur l'application <em>MaVille</em>, alors
                         ceux-ci seront envoyés au service <em>Info entraves et travaux</em> pour qu'ils soient affichés. D'autre part, si des travaux sont ajoutés au service <em>Info entraves et travaux</em>, alors ils apparaîtront sur <em>MaVille</em>. Afin d'assurer des échanges sans entrave, nous devrons donc nous assurer
                         que les deux applications aillent des formats de données cohérents. Nous devons donc nous assurer que certaines données dont les formats peuvent être différents, comme les dates, soit dans le même format pour les deux applications. Toutefois, il faut également s'assurer qu'un bris de cette ligne de communication
                         ne cause pas de problèmes pour les applications de leur côté. Pour faire cela, nous pouvons créer un pipeline dans lequel chaque bloc d'information sur un projet sera ajouté et l'échange sera fait lorsque la ligne de communication fonctionne. Lors d'une panne, les informations seront donc en attente du rétablissement de la ligne de communication
