@@ -256,6 +256,7 @@ public class Controller {
                     System.out.println("Consultation des préférences");
                     continue;
                 case "2":
+                    System.out.println("Vous n'avez aucun conflit avec les préférences des résidents.");
                     System.out.println("Formulaire soumis avec succès");
                     return;
                 case "3":
