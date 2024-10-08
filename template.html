@@ -1698,27 +1698,25 @@
                             <b>Présence d'utilisateurs malintentionnés:</b>
                             <ul>
                                 <li><b>Justification: </b> Comme toute application sur l'Internet, il y a toujours la possibilité qu'il y aille des utilisateurs qui veulent causer du trouble et nuire à l'expérience de l'utilisation de l'application. On peut penser, par exemple, qu'il se peut
-                                    que certains utilisateurs "spamment" des requêtes de travail absurdes ou des signalements à la ville. Cela nuit au bon fonctionnement de l'application puisque les intervenants vont d'abord devoir voir s'il s'agit d'une requête avant de faire quoi que ce soit.</span></li>
+                                    que certains utilisateurs "spamment" des requêtes de travail absurdes ou des signalements à la ville. Cela nuit au bon fonctionnement de l'application puisque les intervenants vont d'abord devoir voir s'il s'agit d'une requête légitime avant de faire quoi que ce soit.</span></li>
                                 <li><b>Solution: </b>Le solution proposée est la possibilité de "Report" des utilisateurs qui causent du trouble et que ce "report" soit ensuite envoyé à la ville. La ville pourra ensuite analyser la situation et décider de la punition appropriée, par exemple "mute" ou bannir l'utilisateur.</li>
                             </ul>
                         </li>
                         <li>
-                            <b>Panne internet:</b>
+                            <b>Panne du site:</b>
                             <ul>
-                                <li><b>Justification: </b> Il est possible qu’il y ait des pannes internet ce qui rendrait la plateforme hors-service. Si la plateforme est
-                                     souvent hors-service, les gens ne vont plus y faire confiance et vont arrêter de l’utiliser. De plus, les informations ne seront
-                                      pas à jour s'il arrive souvent que les intervenants essaient de mettre à jour les travaux mais la plateforme n’est pas disponible.</li>
-                                <li><b>Solution: </b>Avoir un serveur de backup lorsqu’un tombe en panne, l’autre prend la relève.</li>
+                                <li><b>Justification: </b> <span style="color:red">À compléter</span></li>
+                                <li><b>Solution: </b>La solution suggérée est d'acheter plus qu'un serveur. Dans le cas qu'un des serveurs tombe en panne, alors ceux en backup pourront prendre la relève et assurer que l'application reste fonctionnelle.</li>
                             </ul>
                         </li>
                         <li>
-                            <b>Les travaux ne sont pas mis à jour après publication:</b>
+                            <b>Attaques contre le site:</b>
                             <ul>
-                                <li><b>Justification:</b> Il peut arriver que les travaux ne soient pas mis à jour à cause d’un bug. Alors, un intervenant peut avoir essayé de publier un travail mais 
-                                    celui-ci n'est pas enregistré dans la base de donnée.
+                                <li><b>Justification:</b> Comme l'application est opérée par la ville et que plusieurs grandes entreprises y participent, l'application peut être la cible de divers cyberattaques (i.e. DDOS).
+                                    Ces cyberattaques peuvent mettre en danger les données sensibles des utilisateurs, ainsi que bloquer l'accès au site pendant de longues durées de temps. S'il y a une fuite de données, alors les utilisateurs
+                                    seront alors plus hésitants à utiliser le site et l'utiliseront moins. 
                                 </li>
-                                <li><b>Solution:</b> S’assurer qu’après la publication d’un travail, il est bien sauvegardé et il apparaît pour les autres usagers.
-                                     On peut envoyer un courriel aux intervenants pour leur confirmer que leur publication est publiée.
+                                <li><b>Solution:</b> Afin de contrer les attaques contre le site, nous proposons comme solution que, avant même le déploiement de l'application, la ville entre en contact et engagent des experts en cybersécurité qui sauront les étapes à entreprendre si une attaque survient.
                                 </li>
                             </ul>
                         </li>
@@ -1730,18 +1728,17 @@
                     <ol class="nf-requirements">
                         <li><b>Sécurité:</b> Le premier besoin non fonctionnel nécessaire est un besoin de sécurité puisque l'application va 
                         manipuler des données sensibles comme les emails/mots de passe des résidents, ainsi que des intervenants. On veut vraiment
-                        empêcher des fuites de données, donc il est nécessaire de faire les actions nécessaires pour assurer une bonne sécurité des données.<span style="color:red">(Maxim Barbe)</span></li>
+                        empêcher des fuites de données, donc il est nécessaire de faire les actions nécessaires pour assurer une bonne sécurité des données.</li>
                         <li><b>Interface facile à utiliser:</b> Le deuxième besoin non fonctionnel nécessaire est une interface utilisable puisque l'application
                         sera utilisée par le grand public. Il y aura toutes sortes de personnes qui utiliseront l'application comme des personnes âgées, des jeunes, des personnes avec certains handicaps, etc.
-                        Il faut que l'application soit facile à utiliser pour chacun de ces groupes afin qu'ils puissent en profiter au maximum.<span style="color:red">(Maxim Barbe)</span></li>
+                        Il faut que l'application soit facile à utiliser pour chacun de ces groupes afin qu'ils puissent en profiter au maximum.</li>
                         <li><b>Supporter les différentes langues:</b> Le troisième besoin non fonctionnel nécessaire est le support pour les différentes langues. 
                         Comme on sait bien, Montréal est une ville très multi-culturelle avec une population qui parle différentes langues. Sachant cela, lorsqu'on développe une application
-                        pour une telle population cible, on ne veut pas forcer tout le monde à utiliser l'application dans un ou deux langages puisque cela pourrait nuire à leur expérience.</li> 
+                        pour une telle population cible, on ne veut pas forcer tout le monde à utiliser l'application dans un ou deux langages puisque cela pourrait nuire à leur expérience.
+                        </li> 
 
-                        <li><b>Disponibilité</b> l’application doit pouvoir marcher sans internet. Elle 
-                            va mémoriser le dernier état des travaux selon la dernière connexion internet. Comme ça, 
-                            les résidents qui n’ont pas toujours accès à internet pourront savoir quelles routes sont 
-                            en construction. <span style="color:blue">(Riste Popov)</span></li>
+                        <li><b>Disponibilité</b>: On veut que l'application soit disponible le plus possible (presque en permanence) afin que les utilisateurs puissent accéder aux informations n'importe quand. Si l'application a un problème de disponibilité, alors les utilisateurs vont
+                        chercher des sources alternatives pour obtenir leurs informations. Cela causera alors une diminution de la participation à l'application puisque les utilisateurs préféreront aller vers une source d'information où ils sauront qu'ils pourront obtenir l'information désirée.</li>
                         <li><b>Efficacité: </b> On peut facilement s'imaginer que certains résidents vont vouloir utiliser l'application avant de partir pour voir s'il y a des nouveaux projets de construction sur le chemin qu'ils prennent pour se rendre au travail.
                         Ces utilisateurs ne veulent pas passer beaucoup de temps à traverser plusieurs pages sur l'application, il faut alors que les informations nécessaires soient facilement et rapidement accessibles.</li>
                     </ol>
@@ -1750,8 +1747,8 @@
                 <div>
                     <h3 class="subsection-title">Besoins matériels</h3>
                     <p>
-                        Tout d'abord, nous aurons besoin d'un serveur pour communiquer avec une base de données. En effet, comme énoncé dans notre solution de stockage, nous ne voulons pas stocker les données sur le côté client afin de ne pas demander trop d'espace.
-                        Nous préférons opter pour une base de données sur le cloud. Il faudra donc un serveur qui établira le lien de communication et d'échange entre notre base de données sur le cloud et notre application. 
+                        Tout d'abord, nous avons besoin d'acheter au moins 2 serveurs pour assurer le bon déroulement de l'application. Le premier sera utilisé pour host notre site web, alors que les autres seront utilisés comme backup dans le cas où le premier tombe en panne.
+                        Cela nous permettra de nous assurer que l'application fonctionnera presque en tout temps et qu'il n'y a pas de panne qui cause l'arrêt complet du fonctionnement de l'application.
                         De plus, comme il s'agit de la ville qui demande aux entreprises de participer à l'application, alors nous suggèrons à la ville de fournir du matériel aux participants/intervenants afin qu'ils ne doivent pas dépenser leur propre argent.
                         Afin de réduire les coûts au maximum, notre suggestion est de tout simplement fournir des petits téléphones/appareils intelligents préconfigurés qui pourront uniquement lancer l'application. Ces appareils n'ont pas besoin d'un processeur extrêmement puissant
                         ou de grande mémoire de stockage, il est uniquement nécessaire qu'ils puissent utiliser le système d'une manière fluide.
@@ -1762,8 +1759,11 @@
                 <div>
                     <h3 class="subsection-title">Solution de stockage</h3>
                     <p>
-                        Pour stocker nos données, nous envisageons utiliser des fichiers JSON. En effet, le format JSON nous permettra de garder une certaine structure dans les données qui ne serait pas nécessairement disponible avec les fichiers CSV.
-                        <em style="color:red"><b>To finish</b></em>
+                        Pour stocker nos données, nous envisageons utiliser des fichiers JSON. Nous pensons qu'il s'agit d'un meilleur choix que les fichiers CSV puisqu'il y a une certaine structure/organisation dans les fichiers JSON que l'on ne retrouve pas dans les fichiers CSV.
+                        Avec les fichiers JSON, on peut stocker les attributs des objets du programme d'une manière intuitive et qui est facilement accessible. Dans les fichiers JSON, puisqu'on peut accéder les éléments par clé, la tâche de parsing/récupération des données sera plus facile et causera moins d'erreurs.
+                        Cela entraîne donc une meilleure intégrité des données, un facteur important lors du choix de la solution de stockage.
+                        De plus, cela facilite également la création des objets lorsqu'on lance le programme puisque la structure est gardée dans le fichier. Finalement, afin d'assurer la sécurité des données, nous devrons implémenter ou utiliser
+                        des mécanismes d'encryption/hashing afin de sécuriser nos données sensibles.   
                     </p>
                 </div>
 
