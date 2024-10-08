@@ -9,4 +9,8 @@ public class Resident extends User{
         this.adresse =adresse;
     }
     
+    public String getAdresse() {
+        return this.adresse;
+    }
+
 }

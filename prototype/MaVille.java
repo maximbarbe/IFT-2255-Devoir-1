@@ -39,7 +39,7 @@ class MaVille {
                 if (user instanceof Resident) {
                     controller.showMenuPrincipalResident();
                 } else {
-                    controller.showMenuPrincipalIntervenant();
+                    controller.showMenuPrincipalIntervenant(user);
                 }
             }
 
