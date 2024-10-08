@@ -582,9 +582,9 @@
             <div>
                 <h1 class="report-title">Rapport du livrable X</h1>
                 <p class="report-summary">
-                    <em>Court résumé du rapport</em> &ndash; Ce livrable se concentre sur... 
-                    lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia distinctio tempora quam nulla quod enim. 
-                    Odit eius dolores repellendus incidunt doloribus delectus at ex sunt error, iste dicta, maiores blanditiis.
+                    <em>Court résumé du rapport</em> &ndash; Ce livrable se concentre sur les flux d'exigences et d'analyse que l'on retrouve lors de l'utilisation du modèle itératif et incrémental, plus communément connu comme le processus unifié.
+                    En effet, en abordant le processus de conception du logiciel <em>MaVille</em>, on explorera les différentes tâches, les différentes questions, ainsi que les différents diagrammes qu'un concepteur de logiciel
+                    peut utiliser lors de ces flux.
                 </p>
             </div>
 
@@ -1675,19 +1675,19 @@
                     <ol class="risks">
                         <li><b>Informations pas mises à jour ou inexactes</b>:
                         <ul>
-                            <li><b>Justification:</b>La présence d'informations pas mises à jours ou inexactes peut causer des pertes de temps et du trouble pour les utilisateurs. Par exemple, un utilisateur voit, sur l'application,
+                            <li><b>Justification:</b> La présence d'informations pas mises à jours ou inexactes peut causer des pertes de temps et du trouble pour les utilisateurs. Par exemple, un utilisateur voit, sur l'application,
                             une information erronée qui dit qu'il y a de la construction sur une certaine rue qu'il prend pour aller au travail. Cet utilisateur devra alors perdre du temps et de l'énergie à trouver une alternative qui rallonge probablement le temps qu'il dépense pour aller au travail.</li>
-                            <li><b>Solution:</b> La solution proposée est d'envoyer quotidiennement des notifications aux intervenants des travaux en cours leur rappelant
+                            <li><b>Solution:</b> La solution proposée est d'envoyer quotidiennement des notifications aux intervenants des travaux qu'ils entreprennent leur rappelant
                             d'updater les informations concernant le chantier si certaines informations ont changé. Puisque les intervenants seront rappelés à tous les jours, il y aura alors moins de risque d'oubli qui cause la présence d'informations inexactes.</li>
                         </ul>
                         </li>
                         <li>
-                            <b>Faible participation des entreprises privées et des particuliers:</b>
+                            <b>Faible participation:</b>
                             <ul>
-                                <li><b>Justification: </b>Le bon fonctionnement de l'application dépend de la participation des entreprises, du public et des particuliers puisqu'on compte sur eux pour afficher des nouveaux projets de construction sur l'application.
-                                S'ils ne participent pas, alors on se retrouve avec le problème initial et l'application ne sert à rien.</li>
-                                <li><b>Solution: </b>La ville devrait obliger les entreprises à utiliser l'application et donner des amendes aux entreprises qui ne participent pas. Cela assurerait alors une forte participation et les résidents pourront en profiter.
-                                Aussi, faire des campagnes de publicités de l'application permettera au résident de prendre connaissance de celle-ci.</li>
+                                <li><b>Justification: </b>Le bon fonctionnement de l'application dépend de la participation des responsables des projets de construction et des résidents. On compte sur les responsables pour afficher des nouveaux projets de construction sur l'application et de les mettre à jour.
+                                S'ils ne participent pas, alors on est dans la même situation que la situation initiale où les résidents seront surpris par l'apparition de nouveaux chantiers de construction et l'application ne servira à rien. Si les résidents ne participent pas, alors les responsables ne pourront pas faire des choix informés sur les plages horaires de construction.</li>
+                                <li><b>Solution: </b>La ville devrait obliger les entreprises à utiliser l'application s'ils veulent obtenir des projets de construction à Montréal et donner des amendes aux entreprises qui commencent des projets sans faire les efforts pour les ajouter sur l'application. Cela assurerait alors une forte participation et les résidents pourront en profiter.
+                                Pour les résidents, nous suggérons de lancer une campagne de publicité afin de rendre l'application connue pour augmenter le taux de participation. </li>
                             </ul>
                         </li>
                         <li>
@@ -1746,8 +1746,12 @@
                 <div>
                     <h3 class="subsection-title">Besoins matériels</h3>
                     <p>
-                        Tout d'abord, nous aurons besoin d'un serveur pour communiquer avec une base de données. En effet, nous ne voulons pas stocker les données sur le côté client afin de ne pas demander trop d'espace. 
-                        Il faudra donc un serveur qui établira le lien de communication entre notre base de données sur le cloud et notre application.
+                        Tout d'abord, nous aurons besoin d'un serveur pour communiquer avec une base de données. En effet, comme énoncé dans notre solution de stockage, nous ne voulons pas stocker les données sur le côté client afin de ne pas demander trop d'espace.
+                        Nous préférons opter pour une base de données sur le cloud. Il faudra donc un serveur qui établira le lien de communication et d'échange entre notre base de données sur le cloud et notre application. 
+                        De plus, comme il s'agit de la ville qui demande aux entreprises de participer à l'application, alors nous suggèrons à la ville de fournir du matériel aux participants/intervenants afin qu'ils ne doivent pas dépenser leur propre argent.
+                        Afin de réduire les coûts au maximum, notre suggestion est de tout simplement fournir des petits téléphones/appareils intelligents préconfigurés qui pourront uniquement lancer l'application. Ces appareils n'ont pas besoin d'un processeur extrêmement puissant
+                        ou de grande mémoire de stockage, il est uniquement nécessaire qu'ils puissent utiliser le système d'une manière fluide.
+
                     </p>
                 </div>
 
@@ -1769,10 +1773,12 @@
                     <h3 class="subsection-title">Solution d'intégration</h3>
 
                     <p>
-                        Pour s'assurer que les données soient le même format partout, donc cohérentes, nous allons utiliser des formats standards.
-                        Aussi, nous allons nous connecter en utilisant le API offert par la ville afin de combler les informations manquantes
-                        des intervenants qui ne sont pas encore inscrit. De cette façon, l'application contiendra tout les travaux dès le jour de son lancement.
-                        Plus il y aura d'intervenants qui utilise l'application pour mettre à jour les travaux, moins le API sera nécessaire.
+                        Nous envisageons que <em>MaVille</em> fonctionnera avec le service <em>Info entraves et travaux</em> afin d'offrir un portrait plus complet de l'entièreté des travaux et parce que le service <em>Info entraves et travaux</em> offre
+                        des fonctionnalités qui ne sont pas disponibles sur <em>MaVille</em> comme la possibilité de voir les travaux sur une carte. Il y aura donc des échanges bi-directionnels. D'une part, si des travaux sont ajoutés sur l'application <em>MaVille</em>, alors
+                        ceux-ci seront envoyés au service <em>Info entraves et travaux</em> pour qu'ils soient affichés. D'autre part, si des travaux sont ajoutés au service <em>Info entraves et travaux</em>, alors ils apparaîtront sur <em>MaVille</em>. Afin d'assurer des échanges sans entrave, nous devrons donc nous assurer
+                        que les deux applications aillent des formats de données cohérents. Nous devons donc nous assurer que certaines données dont les formats peuvent être différents, comme les dates, soit dans le même format pour les deux applications. Toutefois, il faut également s'assurer qu'un bris de cette ligne de communication
+                        ne cause pas de problèmes pour les applications de leur côté. Pour faire cela, nous pouvons créer un pipeline dans lequel chaque bloc d'information sur un projet sera ajouté et l'échange sera fait lorsque la ligne de communication fonctionne. Lors d'une panne, les informations seront donc en attente du rétablissement de la ligne de communication
+                        et il n'y aura pas d'erreur de chaque côté.
                     </p>
                 </div>
             </section>
