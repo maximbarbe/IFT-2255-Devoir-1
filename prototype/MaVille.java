@@ -1,4 +1,3 @@
-import java.util.HashMap;
 /**
  * Classe principale de l'application MaVille.
 **/
@@ -14,6 +13,7 @@ class MaVille {
             // Main loop
             while(true) {
                 // Affichage de l'écran d'ouverture
+                Controller.clearConsole();
                 int res = controller.showOpeningScreen();
                 switch (res) {
                     case 1:
@@ -26,7 +26,7 @@ class MaVille {
                         
                     case 2:
                         user = controller.loginUser();
-                        if (user.equals(null)) {
+                        if (user == null) {
                             continue;
                         }
                         break;
@@ -37,14 +37,12 @@ class MaVille {
             while (true) {
                 // Menu principal résident
                 if (user instanceof Resident) {
-                    controller.showMenuPrincipalResident();
+                    controller.showMenuPrincipalResident(user);
                 } else {
+                // Menu principal intervenant
                     controller.showMenuPrincipalIntervenant(user);
                 }
             }
-
-                
-            //!affichage page principale
                 
             }
         // Gére toutes erreurs reliées avec l'IO.
