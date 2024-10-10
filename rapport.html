@@ -601,7 +601,6 @@
             <h2 class="team-title">Équipe 26</h2>
             <ul class="bare-list members">
                 <li class="member">
-                    <img class="member-pic" src="" alt="" >
                     <div class="member-identification">
                         <span class="member-name">Maxim Barbe</span>
                         <span class="member-id">2014069</span>
@@ -610,7 +609,6 @@
                     <a href="mailto:maxim.barbe@umontreal.ca">maxim.barbe@umontreal.ca</a>
                 </li>
                 <li class="member">
-                    <img class="member-pic" src="" alt="" >
                     <div class="member-identification">
                         <span class="member-name">Aïssatou Ndiaye</span>
                         <span class="member-id">20175732</span>
@@ -619,7 +617,6 @@
                     <a href="mailto:aissatou.ndiaye.2@umontreal.ca">aissatou.ndiaye.2@umontreal.ca</a>
                 </li>
                 <li class="member">
-                    <img class="member-pic" src="" alt="" >
                     <div class="member-identification">
                         <span class="member-name">Riste Popov</span>
                         <span class="member-id">20241764</span>
@@ -673,7 +670,6 @@
                 <h2 id="plan" class="section-title">Cadre du projet</h2>
                 <h3 class="subsection-title">Introduction</h3>
                 <p>
-                    <em>
                         Il y a beaucoup de travaux qui se font tous les jours dans la ville de Montréal, soit 
                         par le public ou le privé ce qui nuit aux citoyens et à leur capacité à se déplacer 
                         rapidement. Les citoyens sont souvent mal informés et surpris par des travaux qui les 
@@ -685,24 +681,29 @@
                         pour quelle dates sont plus convenables). En créant cette plateforme nous pourrons 
                         permettre à la ville et au constructeurs privés de mieux considérer les besoins des 
                         citoyens et prendre les meilleures décisions qui limiteront les frustrations. 
-                    </em>   
                 </p>
                 <h3 class="subsection-title">Échéancier</h3>
                 <p>
                     <ul>
-                        <li><em>Glossaire (Prenom Nom): ..h</em></li>
-                        <li><em>Besoins non fonctionnels (Prenom Nom): ...h</em></li>
-                        <li><em>Risques (Prenom Nom): ...h</em></li>
-                        <li><em>Besoins materiels (Prenom Nom): ...h</em></li>
-                        <li><em>Solution de stockage (Prenom Nom): ...h</em></li>
-                        <li><em>Prototype (Prenom Nom): ...h</em></li>
-                        <li> <em>Besoins non fonctionnels (Prenom Nom): ...h</em></li>
-                        <li><em>Risques (Prenom Nom): ...h</em></li>
-                        <li><em>Besoins materiels (Prenom Nom): ...h</em></li>
-                        <li><em>Solution de stockage (Prenom Nom): ...h</em></li>
-                        <li><em>Prototype (Prenom Nom): ...h</em></li>
-                        <li><em>Diagrame CU et besoins fonctionnels (Prenom Nom): ..h</em></li>
-                        <li><em>Scenario de chaque CU (Prenom Nom): ...h</em></li>
+                        <li><b>Activité/Tâche; Participants; Nombre d'heures passées; Date limite</b></li>
+                        <br />
+                        <li><b>Exigences:</b></li>
+                        <li>Glossaire (Prenom Nom): ..h</li>
+                        <li>Diagrammes CU(Prenom Nom): ..h</li>
+                        <li>Scenarios (Prenom Nom): ...h</li>
+                        <br />
+                        <li><b>Analyse:</b></li>
+                        <li>Risques / Besoins non-fonctionnels(Prenom Nom): ...h</li>
+                        <li>Besoins materiels / Solution de stockage / Solution d'intégration (Prenom Nom): ...h</li>
+                        <br />
+                        <li>Prototype MB: 5h</li>
+                        <br />
+                        <li><b>À venir:</b></li>
+                        <li>Conception</li>
+                        <li>Implémentation (Prenom Nom): ...h</li>
+                        <li>Tests (Prenom Nom): ...h</li>
+                        <li>Documentation; (Prenom Nom); NA; ...</li>
+
                     </ul>
                     
                 </p>
@@ -734,10 +735,12 @@
                     <dd class="glossary-def">Désigne les acteurs et organisations qui ne relèvent pas du secteur public, mais qui sont impliqués dans la réalisation de travaux ou de projets affectant la ville.</dd>
                     <dt class="glossary-term">Planification participative</dt>
                     <dd class="glossary-def"> La contribution des residents a la planification des travaux en soumettant l'heure a laquelle ils aimeraient que les travaux debutent ou meme donner leur avis sur ces derniers.</dd>
-                    <dt class="glossary-term">Perturbation</dt>
+                    <dt class="glossary-term">Perturbation/Entrave</dt>
                     <dd class="glossary-def"> Une interruption ou modification des conditions normales de circulation, de mobilité ou d'accès aux services due aux travaux publics ou privés.</dd>
                     <dt class="glossary-term">Intervention</dt>
                     <dd class="glossary-def"> Désigne toute action ou travail réalisé par un intervenant, qu'il soit public ou privé, dans le cadre de la gestion ou de la maintenance de la ville.</dd>
+                    <dt class="glossary-term">Particuliers</dt>
+                    <dd class="glossary-def"> Les individus entreprenant des projets de construction ne provenant pas des secteurs publics et privés.</dd>
                 </dl>
 
              
@@ -1813,10 +1816,11 @@
 
                 </p>
                 <p>
-                    Voici les commandes à éxécuter pour lancer le prototype:
+                    Afin d'éxécuter le code, il faut run les commandes suivantes:
+                    
                     <ul>
-
-                        <li><code>javac maVille.java</code></li>
+                        <li><code>cd ./protoype</code> si on est pas dans le répertoire <em><b>/prototype</b></em>.</li>
+                        <li><code>java -jar maVille.jar</code> pour éxécuter le fichier éxécutable.</li>
                     </ul>
                 </p>
             </section>
@@ -1827,11 +1831,6 @@
             Devoir 1 &ndash; Analyse des exigences<br>
             IFT2255 (Génie logiciel) <br>
             Automne 2024
-        </p>
-        <p>
-            <em>
-                Ajoutez tous les liens additionnels nécessaires à la compréhension du rapport ici
-            </em>
         </p>
     </footer>
 </body>
