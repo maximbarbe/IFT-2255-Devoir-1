@@ -608,7 +608,6 @@
                     </div> 
                     <span>Discord: @maxbarbe</span>
                     <a href="mailto:maxim.barbe@umontreal.ca">maxim.barbe@umontreal.ca</a>
-                    <span class="member-role">Chargé de...</span>
                 </li>
                 <li class="member">
                     <img class="member-pic" src="" alt="" >
@@ -618,7 +617,6 @@
                     </div> 
                     <span>Discord: @aissatound</span>
                     <a href="mailto:aissatou.ndiaye.2@umontreal.ca">aissatou.ndiaye.2@umontreal.ca</a>
-                    <span class="member-role">Etudiante</span>
                 </li>
                 <li class="member">
                     <img class="member-pic" src="" alt="" >
@@ -628,7 +626,6 @@
                     </div> 
                     <span>Discord: @golden321</span>
                     <a href="mailto:riste.popov@umontreal.ca">riste.popov@umontreal.ca</a>
-                    <span class="member-role">Chargé de...</span>
                 </li>
             </ul>
         </div>
@@ -747,7 +744,7 @@
              
                 <h3 class="subsection-title">Cas d'utilisation</h3>
                 <div class="use-case">
-                    <img class="use-case-diagram" src="image/Use Case Diagram1.svg" alt="Diagramme de cas d'utilisation">
+                    <img class="use-case-diagram" src="diagrammes/Use Case Diagram1.svg" alt="Diagramme de cas d'utilisation">
                     <p class="use-case-notes">
                         <em>
                             Notes à propos du diagramme <br>
@@ -1643,31 +1640,31 @@
                 <h3 class="subsection-title">Diagramme d'activités</h3>
                 <div class="activity">
                     <h4>Diagramme Principal Resident</h4>
-                    <img class="activity-diagram" src="image/DiagrammePrincipal.svg" alt="Diagramme d'activités">
+                    <img class="activity-diagram" src="diagrammes/DiagrammePrincipal.svg" alt="Diagramme d'activités">
                 </div>
                 <div class="activity">
                     <h4>Consulter les travaux en cours</h4>
-                    <img class="activity-diagram" src="image/ConsultationTravaux.svg" alt="Diagramme d'activités">
+                    <img class="activity-diagram" src="diagrammes/ConsultationTravaux.svg" alt="Diagramme d'activités">
                 </div>
                 <div class="activity">
                     <h4>Signaler un probleme a la ville</h4>
-                    <img class="activity-diagram" src="image/SignalerUnProbleme.svg" alt="Diagramme d'activités">
+                    <img class="activity-diagram" src="diagrammes/SignalerUnProbleme.svg" alt="Diagramme d'activités">
                 </div>
                 <div class="activity">
                     <h4>Soumettre une requete de travail</h4>
-                    <img class="activity-diagram" src="image/SoumettreRequete.svg" alt="Diagramme d'activités">
+                    <img class="activity-diagram" src="diagrammes/SoumettreRequete.svg" alt="Diagramme d'activités">
                 </div>
                 <div class="activity">
                     <h4>Profil</h4>
-                    <img class="activity-diagram" src="image/Diagramme_profil.svg" alt="Diagramme d'activités">
+                    <img class="activity-diagram" src="diagrammes/Diagramme_profil.svg" alt="Diagramme d'activités">
                 </div>
                 <div class="activity">
                     <h4>Notifications personnalisées</h4>
-                    <img class="activity-diagram" src="image/Diagramme_notifications.svg" alt="Diagramme d'activités">
+                    <img class="activity-diagram" src="diagrammes/Diagramme_notifications.svg" alt="Diagramme d'activités">
                 </div>
                 <div class="activity">
                     <h4>Fournir Plage Horaire </h4>
-                    <img class="activity-diagram" src="image/FournirPlageHoraire.svg" alt="Diagramme d'activités">
+                    <img class="activity-diagram" src="diagrammes/FournirPlageHoraire.svg" alt="Diagramme d'activités">
                 </div>
             </section>
 
@@ -1773,12 +1770,14 @@
                     <h3 class="subsection-title">Solution d'intégration</h3>
 
                     <p>
-                        Nous envisageons que <em>MaVille</em> fonctionnera avec le service <em>Info entraves et travaux</em> afin d'offrir un portrait plus complet de l'entièreté des travaux et parce que le service <em>Info entraves et travaux</em> offre
-                        des fonctionnalités qui ne sont pas disponibles sur <em>MaVille</em> comme la possibilité de voir les travaux sur une carte. On peut donc faire des échanges bi-directionnels via un API. D'une part, si des travaux sont ajoutés sur l'application <em>MaVille</em>, alors
-                        ceux-ci seront envoyés au service <em>Info entraves et travaux</em> pour qu'ils soient affichés. D'autre part, si des travaux sont ajoutés au service <em>Info entraves et travaux</em>, alors ils apparaîtront sur <em>MaVille</em>. Afin d'assurer des échanges sans entrave, nous devrons donc nous assurer
-                        que les deux applications aillent des formats de données cohérents. Nous devons donc nous assurer que certaines données dont les formats peuvent être différents, comme les dates, soit dans le même format pour les deux applications. Toutefois, il faut également s'assurer qu'un bris de cette ligne de communication
-                        ne cause pas de problèmes pour les applications de leur côté. Pour faire cela, nous pouvons créer un pipeline dans lequel chaque bloc d'information sur un projet sera ajouté et l'échange sera fait lorsque la ligne de communication fonctionne. Lors d'une panne, les informations seront donc en attente du rétablissement de la ligne de communication
-                        et il n'y aura pas d'erreur de chaque côté.
+                        Il y a plusieurs intégrations possibles que l'on peut faire avec notre application. La première possible est que, s'il existe déjà des applications opérées par la ville qui nécessitent l'authentification, alors on peut laisser l'utilisateur se connecter
+                        en utilisant le même compte que sur ces applications à la place de le forcer à se créer un nouveau compte spécifiquement pour <em>MaVille</em>. Un bon exemple de ce type de comportement est <em>Google</em> où on peut se connecter à plusieurs applications (Gmail, Drive, etc.) avec le même compte.
+                        Pour faire cela fonctionner, il faudrait qu'à la création de compte, l'utilisateur indique qu'il utilise un compte de la ville et que cela redirige vers un service d'authentification indépendant. Toutefois, dans le cas où ce service ne fonctionne pas, notre application doit quand même permettre aux utilisateurs qui utilisent leur compte de la ville de se connecter.
+                        Lors de la création de compte, <em>MaVille</em> devra donc stocker les données du compte de la ville de l'utilisateur dans sa propre base de données afin de permettre la connection si le service externe ne fonctionne pas.
+                        La deuxième intégration possible est avec le service existant <em>Info entraves et travaux</em>. Le service <em>Info entraves et travaux</em> offre des fonctionnalités qui ne sont pas disponibles sur <em>MaVille</em> telle que
+                        pouvoir visualiser l'emplacement des travaux sur une carte. On pourrait donc, via un API, aller chercher ces données de la carte et les afficher sur notre application. Toutefois, pour faire cela, il faut que <em>MaVille</em> utilise la même facon d'identifier les travaux d'une manière unique que le service <em>Info entraves et travaux</em> afin de pouvoir accéder à ces données.
+                        Afin de ne pas briser le flux d'informations, on veut afficher ces données que si l'API nous réponse positive rapidement.
+                        
                     </p>
                 </div>
             </section>
