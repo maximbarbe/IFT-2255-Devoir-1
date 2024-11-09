@@ -14,7 +14,7 @@ public class UnauthenticatedView extends View{
 
 
 
-    private void pageAccueil() {
+    public void pageAccueil() {
         while (true) {
             clearConsole();
             println("MaVille");
@@ -40,7 +40,7 @@ public class UnauthenticatedView extends View{
 
     }
 
-    private void pageInscription(){
+    public void pageInscription(){
         while (true) {
             clearConsole();
             println("1) Résident");
@@ -80,7 +80,7 @@ public class UnauthenticatedView extends View{
     };
 
 
-    private boolean inscriptionResident() {
+    public boolean inscriptionResident() {
         while (true) {
             clearConsole();
             println("Formulaire d'inscription pour résident:");
@@ -112,7 +112,7 @@ public class UnauthenticatedView extends View{
         }    };
 
 
-    private boolean inscriptionIntervenant() {
+    public boolean inscriptionIntervenant() {
         while (true) {
             clearConsole();
             println("Formulaire d'inscription pour intervenant.");
@@ -165,7 +165,7 @@ public class UnauthenticatedView extends View{
     };
 
 
-    private void pageConnexion(){
+    public void pageConnexion(){
         while (true) {
             clearConsole();
             print("Adresse courielle > ");
