@@ -1,4 +1,4 @@
-package org.example;
+package org.prototype;
 
 import io.javalin.Javalin;
 import io.javalin.apibuilder.ApiBuilder;

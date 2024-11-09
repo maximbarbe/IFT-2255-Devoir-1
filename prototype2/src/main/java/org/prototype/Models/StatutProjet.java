@@ -1,4 +1,4 @@
-package org.example.Models;
+package org.prototype.Models;
 
 /**
  * Énumère les différents statuts qu'un projet peut prendre

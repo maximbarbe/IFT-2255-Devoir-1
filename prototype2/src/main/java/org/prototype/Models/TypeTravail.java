@@ -1,4 +1,4 @@
-package org.example.Models;
+package org.prototype.Models;
 
 /**
  * Énumère les différents types de travaux que l'on peut retrouver dans l'application.

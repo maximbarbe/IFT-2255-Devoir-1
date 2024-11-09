@@ -1,4 +1,4 @@
-package org.example.Models;
+package org.prototype.Models;
 
 public class Intervenant extends Utilisateur{
 

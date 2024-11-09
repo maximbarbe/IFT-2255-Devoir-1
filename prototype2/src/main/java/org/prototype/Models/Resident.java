@@ -1,4 +1,4 @@
-package org.example.Models;
+package org.prototype.Models;
 
 
 import java.util.ArrayList;
@@ -8,14 +8,6 @@ public class Resident extends Utilisateur{
     private String numTelephone;
     private String adresseResidentielle;
 
-    private static ArrayList<Resident> residents = new ArrayList<>();
-    public static ArrayList<Resident> getResidents() {
-        return residents;
-    }
-
-    public static void addResident(Resident r) {
-        residents.add(r);
-    }
 
     public Resident(String nomComplet, String adresseCourriel, String motDePasse, String dateDeNaissance, String numTelephone, String adresseResidentielle) {
         super(nomComplet, adresseCourriel, motDePasse);

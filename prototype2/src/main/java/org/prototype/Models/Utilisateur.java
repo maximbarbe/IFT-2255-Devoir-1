@@ -1,4 +1,4 @@
-package org.example.Models;
+package org.prototype.Models;
 
 import java.util.ArrayList;
 
@@ -7,17 +7,8 @@ public abstract class Utilisateur {
     private String adresseCourriel;
     private String motDePasse;
 
-    private static Utilisateur curUser;
+    
 
-
-
-    public static void setCurUser(Utilisateur u) {
-        curUser = u;
-    }
-
-    public static Utilisateur getCurUser(Utilisateur u) {
-        return curUser;
-    }
 
     public Utilisateur(String nomComplet, String adresseCourriel, String motDePasse) {
         this.nomComplet = nomComplet;
