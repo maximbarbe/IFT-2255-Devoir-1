@@ -205,7 +205,8 @@ public class ResidentView extends View implements ConnectedView{
                 println("1) Confirmer; 2) Modifier; 3) Revenir au menu");
                 switch (reader.nextLine()) {
                     case "1":
-                        if (RequeteController.creerRequete(titre, desc, type, date, MaVille.getCurUser().getAdresseCourriel())) {
+                        Resident r = (Resident) MaVille.getCurUser();
+                        if (RequeteController.creerRequete(titre, desc, type, date, r.getAdresseCourriel(), r.getQuartier())) {
                             println("Requête envoyée avec succès!");
                             println("Appuyez sur n'importe quelle touche pour continuer");
                             reader.nextLine();

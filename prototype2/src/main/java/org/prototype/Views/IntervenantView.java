@@ -1,5 +1,11 @@
 package org.prototype.Views;
 
+import org.prototype.Controllers.RequeteController;
+import org.prototype.MaVille;
+import org.prototype.Models.*;
+
+import java.util.ArrayList;
+
 public class IntervenantView extends View implements ConnectedView{
 
     @Override
@@ -38,6 +44,119 @@ public class IntervenantView extends View implements ConnectedView{
 
 
     public void consulterRequetes() {
+        clearConsole();
+        println("Requêtes: ");
+        for (Requete r: RequeteController.getRequetes()) {
+            if (r.getStatut().equals(RequeteStatut.OUVERTE)) {
+                println("ID: "+r.getRequeteId());
+                println("Titre: "+r.getTitre());
+                println("Description: "+r.getDescription());
+                println("Type de travail: " + r.getType().toString());
+                println("Date de début espéré: " + r.getDateDebutEspere());
+                println("Quartier: "+r.getQuartier());
+                println("Déposé par: " + r.getUserID());
+                for (int i = 0; i < 60;i++) {
+                    print("=");
+                }
+                println("");
+            }
+        }
+        println("");
+        while (true) {
+            println("1) Filtrer; 2) Soumettre sa candidature; 3) Revenir");
+            String res = reader.nextLine();
+            switch (res) {
+                case "1":
+                    println("Filtrer par 1) Type; 2) Quartier; 3) Date de debut; 4) Revenir");
+                    String choice = reader.nextLine();
+                    switch (choice) {
+                        case "1":
+                            clearConsole();
+                            for (int i = 0; i < TypeTravail.values().length; i++) {
+                                println((i+1) + ") " + TypeTravail.values()[i].toString());
+                            }
+                            print("Entrez l'index du type de travail désiré > ");
+                            try {
+                                int index = Integer.parseInt(reader.nextLine());
+                                TypeTravail s =TypeTravail.values()[index - 1];
+                                ArrayList<Requete> requetesFiltresByType = RequeteController.getRequeteByType(s.toString());
+                                for (Requete r:requetesFiltresByType) {
+                                    if (r.getStatut().equals(RequeteStatut.OUVERTE)) {
+                                        println("ID: "+r.getRequeteId());
+                                        println("Titre: "+r.getTitre());
+                                        println("Description: "+r.getDescription());
+                                        println("Type de travail: " + r.getType().toString());
+                                        println("Date de début espéré: " + r.getDateDebutEspere());
+                                        println("Quartier: "+r.getQuartier());
+                                        println("Déposé par: " + r.getUserID());
+                                        for (int i = 0; i < 60;i++) {
+                                            print("=");
+                                        }
+                                        println("");
+                                    }
+                                }
+                                continue;
+                            } catch (Exception e) {
+                                println("Mauvais choix, veuillez réessayer");
+                                continue;
+                            }
+                        case "2":
+                            clearConsole();
+                            print("Entrez le quartier désiré >");
+                            String quartier = reader.nextLine();
+                            ArrayList<Requete> requetesFiltresByQuartier = RequeteController.getRequeteByQuartier(quartier);
+                            for (Requete r:requetesFiltresByQuartier) {
+                                if (r.getStatut().equals(RequeteStatut.OUVERTE)) {
+                                    println("ID: "+r.getRequeteId());
+                                    println("Titre: "+r.getTitre());
+                                    println("Description: "+r.getDescription());
+                                    println("Type de travail: " + r.getType().toString());
+                                    println("Date de début espéré: " + r.getDateDebutEspere());
+                                    println("Quartier: "+r.getQuartier());
+                                    println("Déposé par: " + r.getUserID());
+                                    for (int i = 0; i < 60;i++) {
+                                        print("=");
+                                    }
+                                    println("");
+                                }
+                            }
+                            continue;
+                        case "3":
+                            clearConsole();
+                            print("Entrez la date désirée (YYYY-MM-DD) >");
+                            String date = reader.nextLine();
+                            ArrayList<Requete> requetesFiltresByDate = RequeteController.getRequeteByDate(date);
+                            for (Requete r:requetesFiltresByDate) {
+                                if (r.getStatut().equals(RequeteStatut.OUVERTE)) {
+                                    println("ID: "+r.getRequeteId());
+                                    println("Titre: "+r.getTitre());
+                                    println("Description: "+r.getDescription());
+                                    println("Type de travail: " + r.getType().toString());
+                                    println("Date de début espéré: " + r.getDateDebutEspere());
+                                    println("Quartier: "+r.getQuartier());
+                                    println("Déposé par: " + r.getUserID());
+                                    for (int i = 0; i < 60;i++) {
+                                        print("=");
+                                    }
+                                    println("");
+                                }
+                            }
+                            continue;
+                        case "4":
+                            continue;
+                        default:
+                            println("Mauvais choix");
+                            continue;
+                    }
+                case "2":
+                    println("Affichage de la page pour soumettre sa candidature...");
+                    continue;
+                case "3":
+                    return;
+                default:
+                    println("Mauvais choix, veuillez réessayer.");
+            }
+        }
 
     }
 
@@ -59,7 +178,7 @@ public class IntervenantView extends View implements ConnectedView{
                         return;
 
                     default:
-                        println("Mauvais choixm veuillez réessayer");
+                        println("Mauvais choix veuillez réessayer");
                         continue;
                 }
                 break;
@@ -140,5 +259,34 @@ public class IntervenantView extends View implements ConnectedView{
         }
     }
     @Override
-    public void afficherProfil(){};
+    public void afficherProfil(){
+        while (true) {
+            clearConsole();
+            Intervenant user = (Intervenant) MaVille.getCurUser();
+            println("Profil: ");
+            println("Compte: Intervenant");
+            println("Nom: "+user.getNomComplet());
+            println("Email: "+user.getAdresseCourriel());
+            println("Type: "+user.getType());
+            while (true) {
+                println("1) Modifier le profil; 2) Revenir");
+                String res = reader.nextLine();
+                switch (res) {
+                    case "1":
+                        println("Affichage de la page de modification du profil...");
+                        println("Appuyez sur n'importe quelle touche pour continuer.");
+                        reader.nextLine();
+                        break;
+                    case "2":
+                        return;
+
+                    default:
+                        println("Mauvais choix, veuillez réessayer.");
+                        continue;
+                }
+                break;
+            }
+
+        }
+    };
 }

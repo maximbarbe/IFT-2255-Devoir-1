@@ -9,20 +9,25 @@ public class Requete {
 
     private String dateDebutEspere;
 
+    private String quartier;
     private RequeteStatut statut = RequeteStatut.OUVERTE;
 
     private final String userID;
-    public Requete(int requeteId, String titre, String description, TypeTravail type, String dateDebutEspere, String userID) {
+    public Requete(int requeteId, String titre, String description, TypeTravail type, String dateDebutEspere, String userID, String quartier) {
         this.requeteId = requeteId;
         this.titre = titre;
         this.description = description;
         this.type = type;
         this.dateDebutEspere = dateDebutEspere;
         this.userID = userID;
+        this.quartier = quartier;
 
     }
 
 
+    public String getQuartier() {
+        return quartier;
+    }
     public int getRequeteId() {
         return requeteId;
     }
