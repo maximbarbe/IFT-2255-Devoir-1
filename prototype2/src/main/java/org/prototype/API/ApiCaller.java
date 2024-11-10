@@ -1,4 +1,4 @@
-package org.prototype;
+package org.prototype.API;
 
 import java.net.http.*;
 import java.net.URI;

@@ -180,6 +180,7 @@ public class UnauthenticatedView extends View{
                 println("Erreur lors de la connexion au fichiers de données. Veuillez réessayer");
                 println("Appuyez sur n'importe quelle touche pour continuer");
                 reader.nextLine();
+                System.exit(1);
             }
             if (connectedUser == null) {
                 println("Mauvais email ou password");

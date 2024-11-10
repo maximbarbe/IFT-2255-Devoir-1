@@ -1,35 +1,212 @@
 package org.prototype.Controllers;
 
-import io.javalin.http.Context;
-import org.prototype.ApiCaller;
+import org.prototype.API.ApiCaller;
+import org.prototype.Models.StatutProjet;
 import org.prototype.Models.Travail;
 import org.json.*;
 import org.prototype.Models.TypeTravail;
 
-import java.lang.reflect.Array;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.time.LocalDate;
+import java.util.HashMap;
 
 public class TravailController {
 
 
+    private static HashMap<String, TypeTravail> constructionTypeMapper = null;
 
-    private static ArrayList<Travail> parseApiCall(String response) {
+
+    private static void initHashMap(){
+        if (constructionTypeMapper != null) {
+            return;
+        }
+        constructionTypeMapper = new HashMap<>();
+        constructionTypeMapper.put("Construction/rénovation sans excavation", TypeTravail.CONSTRUCTION_OU_RENOVATION);
+        constructionTypeMapper.put("Autre", TypeTravail.AUTRE);
+        constructionTypeMapper.put("S-3 Infrastructure souterraine majeure - Massifs et conduits", TypeTravail.SOUTERRAINS);
+        constructionTypeMapper.put("Construction/rénovation avec excavation", TypeTravail.CONSTRUCTION_OU_RENOVATION);
+        constructionTypeMapper.put("Égouts et aqueducs - Excavation", TypeTravail.SOUTERRAINS);
+        constructionTypeMapper.put("Égouts et aqueducs - Réhabilitation", TypeTravail.ENTRETIEN_URBAIN);
+        constructionTypeMapper.put("Entretien", TypeTravail.ENTRETIEN_URBAIN);
+        constructionTypeMapper.put("S-3 Infrastructure souterraine majeure - Puits d'accès", TypeTravail.SOUTERRAINS);
+        constructionTypeMapper.put("Égouts et aqueducs - Inspection et nettoyage", TypeTravail.ENTRETIEN_URBAIN);
+        constructionTypeMapper.put("AS-2 Réseau aérosouterrain existant", TypeTravail.ENTRETIEN_DES_RESEAUX_DE_TELECOMMUNICATION);
+        constructionTypeMapper.put("Réseaux routier - Réfection et travaux corrélatifs", TypeTravail.ROUTIERS);
+        constructionTypeMapper.put("S-2 Infrastructure souterraine mineure ou équipement hors-sol - Réseaux électriques, télécommunications ou câbles des distributions ", TypeTravail.SOUTERRAINS);
+        constructionTypeMapper.put("S-4 Déblocage de conduits souterrains", TypeTravail.SOUTERRAINS);
+
+
+    }
+
+    private static StatutProjet determineProjectStatus(String date1, String date2) {
+        LocalDate cur = LocalDate.now();
+        LocalDate d1 = LocalDate.parse(date1);
+        LocalDate d2 = LocalDate.parse(date2);
+        if (d2.isBefore(cur)) {
+            return StatutProjet.TERMINE;
+        } else if (d1.isAfter(cur)) {
+            return StatutProjet.PREVU;
+        } else {
+            return StatutProjet.EN_COURS;
+        }
+    }
+
+    private static ArrayList<Travail> parseTravailApiCall(String response) {
+        initHashMap();
         ArrayList<Travail> apiTravaux = new ArrayList<>();
         JSONObject res = new JSONObject(response);
         JSONArray travaux = res.getJSONObject("result").getJSONArray("records");
         for (int i =0; i< travaux.length();i ++) {
             JSONObject travail = travaux.getJSONObject(i);
             ArrayList<String> quartiers = new ArrayList<>();
-            quartiers.add(travail.getString("boroughid"));
-            apiTravaux.add(new Travail(travail.getString("id"), travail.getString("reason_category"), travail.getString("occupancy_name"), quartiers, null, travail.getString("duration_start_date").split("T")[0], travail.getString("duration_end_date").split("T")[0], travail.get("organizationname").toString()));
+            quartiers.add(travail.getString("boroughid").toLowerCase());
+            Travail cur = new Travail(travail.getString("id"), travail.getString("reason_category"), travail.getString("occupancy_name"), quartiers, null, travail.getString("duration_start_date").split("T")[0], travail.getString("duration_end_date").split("T")[0], travail.get("organizationname").toString(), constructionTypeMapper.putIfAbsent(travail.getString("reason_category"), TypeTravail.AUTRE));
+            cur.setStatus(determineProjectStatus(cur.getDateDebut(), cur.getDateFin()));
+            apiTravaux.add(cur);
         }
         return apiTravaux;
     }
-    public static void getTravaux(Context ctx) {
+
+    private static ArrayList<Travail> getTravauxFromFile() {
+        ArrayList<Travail> travaux =  new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/travaux.csv"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                String id = data[0];
+                String titre = data[1];
+                String desc = data[2];
+                String[] quartiers = data[3].split(";");
+                String[] ruesAffectees = data[4].split(";");
+                String dateDebut = data[5];
+                String dateFin = data[6];
+                String status = data[7];
+                String intervenant = data[8];
+                String type = data[9];
+                StatutProjet statusProjet = null;
+                TypeTravail typeTravail = null;
+                for (TypeTravail typeT:TypeTravail.values()) {
+                    if (type.equals(typeT.toString())) {
+                        typeTravail = typeT;
+                        break;
+                    }
+                }
+                for (StatutProjet s:StatutProjet.values()) {
+                    if (status.equals(s.toString())) {
+                        statusProjet = s;
+                    }
+                }
+                ArrayList<String> quartiersAffectes = new ArrayList<>();
+                for (String s:quartiers) {
+                    quartiersAffectes.add(s);
+                }
+                ArrayList<String> rues = new ArrayList<>();
+                for (String s:ruesAffectees) {
+                    rues.add(s);
+                }
+            Travail travail = new Travail(id, titre, desc, quartiersAffectes, rues, dateDebut, dateFin, intervenant,typeTravail);
+            travail.setStatus(statusProjet);
+
+            travaux.add(travail);
+            }
+            return travaux;
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+    }
+
+    private static boolean startsInNextThreeMonths(String date) {
+        LocalDate d = LocalDate.parse(date);
+        LocalDate now = LocalDate.now();
+        if (now.until(d, ChronoUnit.MONTHS) <= 3) {
+            return true;
+        }
+        return false;
+    }
+
+    public static ArrayList<Travail> getTravaux() {
         String apiRes = ApiCaller.get("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
-        ArrayList<Travail> travaux = parseApiCall(apiRes);
-        ctx.json(travaux);
+        ArrayList<Travail> travaux = parseTravailApiCall(apiRes);
+        ArrayList<Travail> filtered = new ArrayList<>();
+        travaux.addAll(getTravauxFromFile());
+        for (Travail t:travaux) {
+            if (t.getStatus().equals(StatutProjet.EN_COURS)) {
+                filtered.add(t);
+            } else if (t.getStatus().equals(StatutProjet.PREVU) && startsInNextThreeMonths(t.getDateDebut())) {
+                filtered.add(t);
+            }
+
+        }
+        return filtered;
+    }
+
+
+    public static ArrayList<Travail> getTravauxByType(String type) {
+        TypeTravail t = null;
+        switch (type.toLowerCase()) {
+            case "routiers":
+                t = TypeTravail.ROUTIERS;
+                break;
+            case "gaz_ou_electricite":
+                t = TypeTravail.GAZ_OU_ELECTRICITE;
+                break;
+            case "construction_ou_renovation":
+                t = TypeTravail.CONSTRUCTION_OU_RENOVATION;
+                break;
+            case "entretien_paysager":
+                t = TypeTravail.ENTRETIEN_PAYSAGER;
+                break;
+            case "transports_en_commun":
+                t = TypeTravail.TRANSPORTS_EN_COMMUN;
+                break;
+            case "signalisation_et_eclairage":
+                t = TypeTravail.SIGNALISATION_ET_ECLAIRAGE;
+                break;
+            case "souterrains":
+                t = TypeTravail.SOUTERRAINS;
+                break;
+            case "residentiels":
+                t = TypeTravail.RESIDENTIELS;
+                break;
+            case "entretien_urbain":
+                t = TypeTravail.ENTRETIEN_URBAIN;
+                break;
+            case "entretien_des_reseaux_de_telecommunication":
+                t = TypeTravail.ENTRETIEN_DES_RESEAUX_DE_TELECOMMUNICATION;
+                break;
+            case "autre":
+                t = TypeTravail.AUTRE;
+                break;
+            default:
+                t = null;
+                break;
+        }
+        ArrayList<Travail> travaux = getTravaux();
+        ArrayList<Travail> filtered = new ArrayList<>();
+        for (Travail tr:travaux) {
+            if (tr.getType().equals(t)) {
+                filtered.add(tr);
+            }
+        }
+        return filtered;
+    }
+
+    public static ArrayList<Travail> getTravauxByQuartier(String quartier) {
+        ArrayList<Travail> travaux = getTravaux();
+        ArrayList<Travail> filtered = new ArrayList<>();
+
+        for (Travail t:travaux) {
+            if (t.getQuartiers().contains(quartier.toLowerCase())) {
+                filtered.add(t);
+            }
+        }
+        return filtered;
     }
 
 

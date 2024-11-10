@@ -6,5 +6,6 @@ package org.prototype.Models;
 public enum TypeIntervenant {
     ENTREPRISE_PUBLIQUE,
     ENTREPRENEUR_PRIVE,
-    PARTICULIER
+    PARTICULIER,
+    AUTRE
 }

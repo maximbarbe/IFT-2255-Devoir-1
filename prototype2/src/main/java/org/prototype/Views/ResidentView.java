@@ -1,5 +1,15 @@
 package org.prototype.Views;
 
+import org.prototype.Controllers.EntraveController;
+import org.prototype.Controllers.TravailController;
+import org.prototype.Models.Entrave;
+import org.prototype.Models.StatutProjet;
+import org.prototype.Models.Travail;
+import org.prototype.Models.TypeTravail;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class ResidentView extends View implements ConnectedView{
 
     @Override
@@ -48,6 +58,7 @@ public class ResidentView extends View implements ConnectedView{
                         consulterTravaux();
                         break;
                     case "2":
+                        consulterEntraves();
                         break;
                     case "3":
                         soumettreRequeteTravail();
@@ -68,8 +79,118 @@ public class ResidentView extends View implements ConnectedView{
         }
     }
 
+    public void consulterEntraves() {
+     while (true) {
+         clearConsole();
+         println("Entraves causées par les travaux en cours: \n\n");
+         ArrayList<Entrave> entraves = EntraveController.getEntraves();
+         for (Entrave e:entraves) {
+             println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
+         }
+         while (true) {
+             println("1) Rechercher par rue; 2) Rechercher par travail; 3) Revenir");
+             print("Votre choix > ");
+             switch (reader.nextLine()) {
+                 case "2":
+                     print("Entrez l'ID du travail > ");
+                     String id = reader.nextLine();
+                     clearConsole();
+                     ArrayList<Entrave> entravesFiltrees = EntraveController.getEntravesByID(id);
+                     for (Entrave e:entravesFiltrees) {
+                        println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
+                     }
 
-    public void consulterTravaux(){};
+                     continue;
+                 case "1":
+                     print("Entrez la rue désirée (ex: rue jean-brillant) > ");
+                     String rue = reader.nextLine();
+                     clearConsole();
+                     ArrayList<Entrave> entravesFiltreesByStreet = EntraveController.getEntravesByStreet(rue);
+                     for (Entrave e:entravesFiltreesByStreet) {
+                         println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
+                     }
+                     continue;
+                 case "3":
+                     return;
+                 default:
+                     println("Mauvais choix, veuillez réessayer");
+                     break;
+             }
+         }
+     }
+    }
+
+    public void consulterTravaux(){
+        while (true) {
+            clearConsole();
+            println("Travaux en cours ou futurs: \n\n");
+            ArrayList<Travail> travaux = TravailController.getTravaux();
+            for (Travail t:travaux) {
+                println("ID: "+t.getId() + "Titre: "+t.getTitre() + "; Intervenant: "+t.getIdentifiantIntervenant() + "; Quartiers affectés: "+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + "; Status: "+t.getStatus());
+            }
+
+            while (true) {
+                println("1) Rechercher; 2) Filtrer; 3) Revenir");
+                print("Votre choix > ");
+                String res = reader.nextLine();
+                switch (res) {
+                    case "1":
+                        println("Affichage de la barre de recherche...");
+                        println("Appuyer sur n'importe quelle touche pour continuer");
+                        reader.nextLine();
+                        break;
+                    case "2":
+                        while (true) {
+                            println("Filtrer par 1) Quartier; 2) Type de travail; 3) Annuler");
+                            print("Votre choix > ");
+                            switch (reader.nextLine()) {
+                                case "1":
+                                    clearConsole();
+                                    print("Entrez le quartier désiré > ");
+                                    ArrayList<Travail> travauxFiltres = TravailController.getTravauxByQuartier(reader.nextLine());
+
+                                    for (Travail t:travauxFiltres) {
+                                        println("ID: "+t.getId() + "Titre: "+t.getTitre() + "; Intervenant: "+t.getIdentifiantIntervenant() + "; Quartiers affectés: "+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + "; Status: "+t.getStatus());
+                                    }
+                                    continue;
+                                case "2":
+                                    clearConsole();
+                                    for (int i = 0; i < TypeTravail.values().length; i++) {
+                                        println((i+1) + ") " + TypeTravail.values()[i].toString());
+                                    }
+                                    print("Entrez l'index du type de travail désiré > ");
+                                    try {
+                                        int index = Integer.parseInt(reader.nextLine());
+                                        TypeTravail s =TypeTravail.values()[index - 1];
+                                        ArrayList<Travail> travauxFiltresByType = TravailController.getTravauxByType(s.toString());
+                                        for (Travail t:travauxFiltresByType) {
+                                            println("ID: "+t.getId() + "Titre: "+t.getTitre() + "; Intervenant: "+t.getIdentifiantIntervenant() + "; Quartiers affectés: "+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + "; Status: "+t.getStatus());
+                                        }
+                                        continue;
+                                    } catch (Exception e) {
+                                        println("Mauvais choix, veuillez réessayer");
+                                        continue;
+                                    }
+
+                                default:
+                                    break;
+
+                            }
+                            break;
+                        }
+                    break;
+
+                    case "3":
+                        return;
+                    default:
+                        println("Mauvais choix, veuillez réessayer");
+                        continue;
+                }
+                break;
+            }
+
+        }
+    };
 
     public void soumettreRequeteTravail(){};
 

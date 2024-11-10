@@ -17,7 +17,8 @@ public class Travail {
 
     private String identifiantIntervenant;
 
-    public Travail(String id, String titre, String description, ArrayList<String> quartiers, ArrayList<String> ruesAffectees, String dateDebut, String dateFin, String identifiantIntervenant) {
+    private TypeTravail type;
+    public Travail(String id, String titre, String description, ArrayList<String> quartiers, ArrayList<String> ruesAffectees, String dateDebut, String dateFin, String identifiantIntervenant, TypeTravail type) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -26,10 +27,19 @@ public class Travail {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.identifiantIntervenant = identifiantIntervenant;
+        this.type = type;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setType(TypeTravail type) {
+        this.type = type;
+    }
+
+    public TypeTravail getType() {
+        return type;
     }
 
     public void setTitre(String titre) {
@@ -91,9 +101,7 @@ public class Travail {
     public StatutProjet getStatus() {
         return status;
     }
-    public String getStatusAsString() {
-        return status.toString();
-    }
+
 
     public ArrayList<String> getQuartiers() {
         return quartiers;
