@@ -895,78 +895,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="scenario" id="cu-3">
-                    <div class="scenario-meta">
-                        <h4 class="cu-name">
-                            <strong>CU:</strong> Signaler un problème à la ville
-                        </h4>
-                        <p class="cu-goal">
-                            <strong>Objectif:</strong> Un résident souhaite envoyer un message à la ville concernant un problème.
-                        </p>
-                        
-                        <hr>
-
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Acteurs</h5>
-                            <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Résident (Principal)</li>
-                                <li class="cu-actor">Service suivi de la ville (Secondaire)</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Préconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Le résident doit au préalable être connecté.</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Postconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
-                            </ul>
-                        </div>
-        
-                    </div>
-                    <div class="scenario-main">
-                        <h5 class="scenario-main-title">Scénario principal</h5>
-                        <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le système affiche le menu principal.</li>
-                            <li class="scenario-main-step">Le résident choisit l'onglet <em>Signaler un problème</em>.</li>
-                            <li class="scenario-main-step">Le système affiche le formulaire à remplir.</li>
-                            <li class="scenario-main-step">Le résident remplit le formulaire en entrant ses informations personnelles, ainsi que les informations concernant le problème.</li>
-                            <li class="scenario-main-step">Le résident soumet le formulaire.</li>
-                            <li class="scenario-main-step">Le système vérifie que les champs sont dûment remplis et corrects.</li>
-                            <li class="scenario-main-step">Le système indique au résident que le formulaire a été envoyé avec succès.</li>
-                            <li class="scenario-main-step">Le service suivi de la ville envoie une confirmation par courriel.</li>
-                        </ol>
-
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="6">
-                                    Pas tous les champs sont complétés.
-                                    <ol class="bare-list">
-                                        <li value="6">Le système demande au résident de remplir les informations correctement.</li>
-                                        <li value="6">Le scénario reprend à l'étape 4.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="7">
-                                    Le système ne parvient pas à envoyer formulaire.
-                                    <ol class="bare-list">
-                                        <li value="7">Le système affiche <em>Erreur lors de la soumission, veuillez réessayer.</em></li>
-                                        <li value="7">Le scénario reprend à l'étape 5.</li>
-                                    </ol>
-                                </li>
-
-                            </ol>
-                        
-                        </div>
-                    </div> 
-                </div>
+                
 
                 <div class="scenario" id="cu-4">
                     <div class="scenario-meta">
@@ -1464,66 +1393,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="scenario" id="cu-12">
-                    <div class="scenario-meta">
-                        <h4 class="cu-name">
-                            <strong>CU:</strong> Donner un avis sur un travail et/ou sur l'intervenant responsable.
-                        </h4>
-                        <p class="cu-goal">
-                            <strong>Objectif:</strong> Un résident souhaite donner son avis sur un travail fini et/ou sur l'intervenant responsable.
-                        </p>
-                        
-                        <hr>
-
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Acteurs</h5>
-                            <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Résident (Principal)</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Préconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Le résident doit être connecté.</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Postconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucune</li>
-                            </ul>
-                        </div>
-                    
-                    </div>
-                    <div class="scenario-main">
-                        <h5 class="scenario-main-title">Scénario principal</h5>
-                        <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Appel au CU <em><a href="#cu-5">Consulter les notifications</a></em></li>
-                            <li class="scenario-main-step">Le résident appuie sur la notification du travail terminé.</li>
-                            <li class="scenario-main-step">Le système affiche les détails sur le travail, ainsi que l'option pour donner du feedback.</li>
-                            <li class="scenario-main-step">Le résident appuie sur l'option pour donner du feedback.</li>
-                            <li class="scenario-main-step">Le système affiche le formulaire de feedback.</li>
-                            <li class="scenario-main-step">Le résident remplit le formulaire.</li>
-                            <li class="scenario-main-step">Le résident confirme et soumet le formulaire.</li>
-                            <li class="scenario-main-step">Le système affiche <em>Envoi avec succès. Merci pour le feedback.</em> et envoie le message à l'intervenant concerné.</li>
-                        </ol>
-
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="8">
-                                    Une erreur s'est déroulée lors de l'envoi.
-                                    <ol class="bare-list">
-                                        <li value="8">Le système affiche <em>Erreur lors de la soumission, veuillez réessayer.</em>.</li>
-                                        <li value="8">Le scénario reprend à l'étape 7.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="scenario" id="cu-13">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
