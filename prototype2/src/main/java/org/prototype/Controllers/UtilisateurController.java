@@ -17,9 +17,9 @@ public class UtilisateurController {
         String line;
         while ((line = reader.readLine())!=null) {
             String[] data = line.split(",");
-            users.add(new Resident(data[0], data[1], data[2], data[3], data[4], data[5]));
+            users.add(new Resident(data[0], data[1], data[2], data[3], data[4], data[5], data[6]));
         }
-
+        reader.close();
         reader = new BufferedReader(new FileReader("src/intervenants.csv"));
         while ((line = reader.readLine())!=null) {
             TypeIntervenant type = null;
@@ -37,6 +37,7 @@ public class UtilisateurController {
             }
             users.add(new Intervenant(data[0], data[1], data[2], type, data[4]));
         }
+        reader.close();
         return users;
     }
 

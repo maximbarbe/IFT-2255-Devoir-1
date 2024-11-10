@@ -1,6 +1,7 @@
 package org.prototype.Models;
 
 public class Requete {
+    private final int requeteId;
     private String titre;
     private String description;
 
@@ -10,12 +11,23 @@ public class Requete {
 
     private RequeteStatut statut = RequeteStatut.OUVERTE;
 
-    public Requete(String titre, String description, TypeTravail type, String dateDebutEspere) {
+    private final String userID;
+    public Requete(int requeteId, String titre, String description, TypeTravail type, String dateDebutEspere, String userID) {
+        this.requeteId = requeteId;
         this.titre = titre;
         this.description = description;
         this.type = type;
         this.dateDebutEspere = dateDebutEspere;
+        this.userID = userID;
 
+    }
+
+
+    public int getRequeteId() {
+        return requeteId;
+    }
+    public String getUserID() {
+        return userID;
     }
 
     public String getDescription() {
@@ -52,5 +64,9 @@ public class Requete {
 
     public void setStatut(RequeteStatut statut) {
         this.statut = statut;
+    }
+
+    public RequeteStatut getStatut() {
+        return statut;
     }
 }

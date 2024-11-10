@@ -37,6 +37,7 @@ public class EntraveController {
         return filtered;
     }
 
+
     public static ArrayList<Entrave> getEntravesByStreet(String street) {
         ArrayList<Entrave> entraves= getEntraves();
         ArrayList<Entrave> filtered = new ArrayList<>();

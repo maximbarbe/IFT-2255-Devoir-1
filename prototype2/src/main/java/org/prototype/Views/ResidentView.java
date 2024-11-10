@@ -1,13 +1,10 @@
 package org.prototype.Views;
 
 import org.prototype.Controllers.EntraveController;
+import org.prototype.Controllers.RequeteController;
 import org.prototype.Controllers.TravailController;
-import org.prototype.Models.Entrave;
-import org.prototype.Models.StatutProjet;
-import org.prototype.Models.Travail;
-import org.prototype.Models.TypeTravail;
-
-import java.lang.reflect.Array;
+import org.prototype.MaVille;
+import org.prototype.Models.*;
 import java.util.ArrayList;
 
 public class ResidentView extends View implements ConnectedView{
@@ -192,10 +189,176 @@ public class ResidentView extends View implements ConnectedView{
         }
     };
 
-    public void soumettreRequeteTravail(){};
+    public void soumettreRequeteTravail(){
+        while (true) {
+            clearConsole();
+            println("Soumettre une nouvelle requête de travail:\n\n");
+            print("Titre du travail à réaliser: ");
+            String titre = reader.nextLine();
+            println("Description détaillée: ");
+            String desc = reader.nextLine();
+            String type = "RESIDENTIELS";
 
-    public void plagesHoraires(){};
-    public void pageNotifications(){};
+            print("Date de début espéré (YYYY-MM-DD): ");
+            String date = reader.nextLine();
+            while (true) {
+                println("1) Confirmer; 2) Modifier; 3) Revenir au menu");
+                switch (reader.nextLine()) {
+                    case "1":
+                        if (RequeteController.creerRequete(titre, desc, type, date, MaVille.getCurUser().getAdresseCourriel())) {
+                            println("Requête envoyée avec succès!");
+                            println("Appuyez sur n'importe quelle touche pour continuer");
+                            reader.nextLine();
+                        } else {
+                            println("Il y a eu un problème lors de l'envoi de la requête.");
+                            println("Appuyez sur n'importe quelle touche pour continuer");
+                            reader.nextLine();
+                        };
+                        return;
+                    case "2":
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        println("Mauvais choix, veuillez réessayer");
+                        continue;
+                }
+                break;
+            }
+        }
+    };
+
+    public void plagesHoraires(){
+        while (true) {
+            clearConsole();
+            println("Voici votre plage horaire:\n");
+            println("Lundi: 8:00-12:00");
+            println("Mardi: 15:00-17:00");
+            println("Mercredi: 12:00-15:00");
+            println("Jeudi: Aucune");
+            println("Vendredi: 16:00-18:00");
+            println("Samedi: Aucune");
+            println("Dimanche: Aucune");
+            println("\n");
+            while (true) {
+                println("1) Modifier la plage horaire; 2) Voir les plages horaires des autres résidents du quartier; 3) Revenir");
+                print("Votre choix > ");
+                switch (reader.nextLine()) {
+                    case "1":
+                        println("Affichage de la page de modification des plages horaires...");
+                        println("Appuyez sur n'importe quelle touche");
+                        reader.nextLine();
+                        break;
+                    case "2":
+                        println("Affichage de la page pour voir les plages horaires...");
+                        println("Appuyez sur n'importe quelle touche");
+                        reader.nextLine();
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        println("Mauvais choix, veuillez réessayer");
+                        continue;
+                }
+                break;
+            }
+
+
+        }
+    };
+    public void pageNotifications(){
+        while (true) {
+            clearConsole();
+            println("Notifications: ");
+            println("\t-Projet `Construction sur le pont Jacques-Cartier` a commencé dans votre quartier (ID:0000).");
+            println("\t-Modification des détails du projet `Construction au pavillon Roger-Gaudry` (ID:0001).");
+            println("\t-Projet `Rénovation au pavillon André-Aisenstadt` est terminé (ID:0002).");
+            println("\t-Retour sur votre requête de travail `Besoin de rénovation au HEC.`");
+            println("\n");
+            while (true) {
+                println("1) Modifier les abonnements aux notifications.");
+                println("2) Afficher les requêtes de travail");
+                println("3) Revenir");
+                print("Votre choix > ");
+                String res = reader.nextLine();
+                switch (res) {
+                    case "1":
+                        println("Affichage page pour modifier les notifications...");
+                        println("Appuyez sur n'importe quelle touche pour continuer");
+                        reader.nextLine();
+                        break;
+                    case "2":
+                        afficherRequetes();
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        println("Mauvais choix, veuillez réessayer.\n");
+                }
+                break;
+            }
+
+
+        }
+    };
+
+    public void afficherRequetes() {
+        while (true) {
+            clearConsole();
+            println("Notifications de requêtes: ");
+            println("\n");
+            println("ID: 1 - Retour sur votre requête de travail `Besoin de rénovation au HEC.`");
+            while (true) {
+                println("1) Prendre une décision sur une requête; 2) Revenir");
+                switch (reader.nextLine()) {
+                    case "1":
+                        println("Affichage de page pour accepter requête...");
+                        println("Appuyer sur n'importe quelle touche pour continuer");
+                        reader.nextLine();
+                        break;
+
+                    case "2":
+                        return;
+                    default:
+                        println("Mauvais choix, veuillez réessayer.");
+                        continue;
+                }
+                break;
+            }
+
+        }
+    }
     @Override
-    public void afficherProfil(){};
+    public void afficherProfil(){
+        while (true) {
+            Resident curUser = (Resident) MaVille.getCurUser();
+            clearConsole();
+            println("Profil: ");
+            println("Compte: Résident");
+            println("Adresse résidentielle: " + curUser.getAdresseResidentielle());
+            println("Nom: "+curUser.getNomComplet());
+            println("Email: "+curUser.getAdresseCourriel());
+            println("Numéro de téléphone: " + curUser.getNumTelephone());
+            println("Date de naissance: " + curUser.getDateDeNaissance());
+            while (true) {
+                println("1) Modifier le profil; 2) Revenir");
+                String res = reader.nextLine();
+                switch (res) {
+                    case "1":
+                        println("Affichage de la page de modification du profil...");
+                        println("Appuyez sur n'importe quelle touche pour continuer.");
+                        reader.nextLine();
+                        break;
+                    case "2":
+                        return;
+
+                    default:
+                        println("Mauvais choix, veuillez réessayer.");
+                        continue;
+                }
+                break;
+            }
+
+        }
+    };
 }
