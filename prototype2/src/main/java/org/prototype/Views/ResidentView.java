@@ -17,7 +17,8 @@ public class ResidentView extends View implements ConnectedView{
             println("1) Travaux");
             println("2) Profil");
             println("3) Notifications");
-            println("4) Quitter");
+            println("4) Requetes");
+            println("5) Quitter");
             print("Votre choix > ");
             String res = reader.nextLine();
             switch (res) {
@@ -31,6 +32,9 @@ public class ResidentView extends View implements ConnectedView{
                     pageNotifications();
                     continue;
                 case "4":
+                    pageRequeteTravail();
+                    continue;
+                case "5":
                     System.exit(0);
                 default:
                     println("Mauvais choix, veuillez réessayer");
@@ -45,9 +49,8 @@ public class ResidentView extends View implements ConnectedView{
             clearConsole();
             println("1) Consulter les travaux en cours ou à venir");
             println("2) Consulter les entraves routières");
-            println("3) Soumettre une requête de travail");
-            println("4) Plages horaires");
-            println("5) Revenir");
+            println("3) Plages horaires");
+            println("4) Revenir");
             print("Votre choix > ");
             while (true) {
                 switch (reader.nextLine()) {
@@ -58,12 +61,9 @@ public class ResidentView extends View implements ConnectedView{
                         consulterEntraves();
                         break;
                     case "3":
-                        soumettreRequeteTravail();
-                        break;
-                    case "4":
                         plagesHoraires();
                         break;
-                    case "5":
+                    case "4":
                         return;
                     default:
                         println("Mauvais choix, veuillez réessayer");
@@ -123,7 +123,7 @@ public class ResidentView extends View implements ConnectedView{
             println("Travaux en cours ou futurs: \n\n");
             ArrayList<Travail> travaux = TravailController.getTravaux();
             for (Travail t:travaux) {
-                println("ID: "+t.getId() + "Titre: "+t.getTitre() + "; Intervenant: "+t.getIdentifiantIntervenant() + "; Quartiers affectés: "+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + "; Status: "+t.getStatus());
+                println("ID: "+t.getId() + "; Titre: "+t.getTitre() + "; Intervenant: "+t.getIdentifiantIntervenant() + "; Quartiers affectés: "+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + "; Status: "+t.getStatus());
             }
 
             while (true) {
@@ -188,6 +188,82 @@ public class ResidentView extends View implements ConnectedView{
 
         }
     };
+
+    public void pageRequeteTravail() {
+        while (true) {
+            clearConsole();
+            while (true) {
+                println("1) Soumettre une requête de travail");
+                println("2) Faire le suivi de vos requêtes de travail");
+                println("3) Revenir");
+                print("Votre choix > ");
+                switch (reader.nextLine()) {
+                    case "1":
+                        soumettreRequeteTravail();
+                        break;
+                    case "2":
+                        suiviRequetes();
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        println("Mauvais choix, veuillez réessayer");
+                        break;
+
+                }
+            }
+
+        }
+
+    }
+
+
+    public void suiviRequetes() {
+        while (true) {
+            clearConsole();
+            println("Mes requêtes: ");
+            for (Requete r:RequeteController.getRequetes()) {
+                if (r.getUserID().equals(MaVille.getCurUser().getAdresseCourriel())) {
+                    println("ID: "+r.getRequeteId());
+                    println("Titre: "+r.getTitre());
+                    println("Description: "+r.getDescription());
+                    println("Type de travail: " + r.getType().toString());
+                    println("Date de début espéré: " + r.getDateDebutEspere());
+                    println("Quartier: "+r.getQuartier());
+                    println("Statut: Aucune candidature soumise");
+                    for (int i = 0; i < 60;i++) {
+                        print("=");
+                    }
+                    println("");
+                }
+            }
+
+            while (true) {
+                println("1) Voir candidatures");
+                println("2) Fermer requête");
+                println("3) Revenir");
+                print("Votre choix > ");
+                switch (reader.nextLine()) {
+                    case "1":
+                        println("Affichage de page pour voir les candidatures");
+                        println("Appuyez sur n'importe quelle touche pour continuer");
+                        reader.nextLine();
+                        break;
+                    case "2":
+                        println("Affichage de page pour fermer candidature");
+                        println("Appuyez sur n'importe quelle touche pour continuer");
+                        reader.nextLine();
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        println("Mauvais choix, veuillez réessayer");
+                        continue;
+                }
+                break;
+            }
+        }
+    }
 
     public void soumettreRequeteTravail(){
         while (true) {
@@ -278,8 +354,7 @@ public class ResidentView extends View implements ConnectedView{
             println("\n");
             while (true) {
                 println("1) Modifier les abonnements aux notifications.");
-                println("2) Afficher les requêtes de travail");
-                println("3) Revenir");
+                println("2) Revenir");
                 print("Votre choix > ");
                 String res = reader.nextLine();
                 switch (res) {
@@ -289,9 +364,6 @@ public class ResidentView extends View implements ConnectedView{
                         reader.nextLine();
                         break;
                     case "2":
-                        afficherRequetes();
-                        break;
-                    case "3":
                         return;
                     default:
                         println("Mauvais choix, veuillez réessayer.\n");

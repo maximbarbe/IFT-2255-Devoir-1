@@ -43,14 +43,8 @@ public class RequeteController {
 
     public static boolean creerRequete(String titre, String description, String typeRequete, String dateDebutEspere, String userID, String quartier){
 
-        TypeTravail type = null;
-        for (TypeTravail t:TypeTravail.values()) {
-            if (typeRequete.equals(t.toString())) {
-                type = t;
-                break;
-            }
-        }
-        if (type == null || !isDateValid(dateDebutEspere)) {
+        String type = typeRequete;
+        if (!isDateValid(dateDebutEspere)) {
             return false;
 
         } else {
@@ -81,13 +75,7 @@ public class RequeteController {
                 int id = Integer.parseInt(data[0]);
                 String titre = data[1];
                 String description = data[2];
-                TypeTravail type = null;
-                for (TypeTravail t:TypeTravail.values()) {
-                    if (data[3].equals(t.toString())) {
-                        type = t;
-                        break;
-                    }
-                }
+                String type = data[3];
                 String dateDebutEspere = data[4];
                 RequeteStatut statut = data[5].equals(RequeteStatut.OUVERTE.toString())?RequeteStatut.OUVERTE:RequeteStatut.FERMEE;
                 String userID = data[6];

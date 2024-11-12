@@ -5,7 +5,7 @@ public class Requete {
     private String titre;
     private String description;
 
-    private TypeTravail type;
+    private String type;
 
     private String dateDebutEspere;
 
@@ -13,7 +13,7 @@ public class Requete {
     private RequeteStatut statut = RequeteStatut.OUVERTE;
 
     private final String userID;
-    public Requete(int requeteId, String titre, String description, TypeTravail type, String dateDebutEspere, String userID, String quartier) {
+    public Requete(int requeteId, String titre, String description, String type, String dateDebutEspere, String userID, String quartier) {
         this.requeteId = requeteId;
         this.titre = titre;
         this.description = description;
@@ -39,7 +39,7 @@ public class Requete {
         return description;
     }
 
-    public TypeTravail getType() {
+    public String getType() {
         return type;
     }
 
@@ -55,7 +55,7 @@ public class Requete {
         this.description = description;
     }
 
-    public void setType(TypeTravail type) {
+    public void setType(String type) {
         this.type = type;
     }
 
