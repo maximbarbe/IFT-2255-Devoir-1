@@ -15,12 +15,19 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+
+/**
+ * Classe qui gère toutes les opérations reliées aux travaux.
+ */
 public class TravailController {
 
 
+    // Mapper qui servira de transformer la réponse de l'API en type de travail que notre programme peut reconnaître 
     private static HashMap<String, TypeTravail> constructionTypeMapper = null;
 
-
+    /**
+     * Initialise notre mapper.
+     */
     private static void initHashMap(){
         if (constructionTypeMapper != null) {
             return;
@@ -43,6 +50,13 @@ public class TravailController {
 
     }
 
+    /**
+     * Détermine le status du projet, dépend de la date. Si la date de fin est avant la date courante, alors le projet est terminé.
+     * Si la date de début est après la date courante, alors le projet est prévu. Dans les autres cas, le projet est en cours.
+     * @param date1 - La date du début du projet
+     * @param date2 - La date de fin du projet
+     * @return - Le statut du projet
+     */
     private static StatutProjet determineProjectStatus(String date1, String date2) {
         LocalDate cur = LocalDate.now();
         LocalDate d1 = LocalDate.parse(date1);
@@ -56,7 +70,15 @@ public class TravailController {
         }
     }
 
+    /**
+     * Parse la réponse obtenue à l'appel au service de la ville de Montréal
+     * @param response - La réponse sous format de String
+     * @return - La liste des travaux extraits
+     */
     private static ArrayList<Travail> parseTravailApiCall(String response) {
+        // La procédure du parsing de JSON est basé sur:
+        // Source: obataku. (2012, 9 août). See my comment. You need to include the full org.json library when running as android.jar only contains stubs to compile [Commentaire sur le post de forum en ligne Parsing JSON string in Java.]. StackOverflow. https://stackoverflow.com/a/11875002.
+        // Ce commentaire a essentiellement été utilisé juste pour apprendre comment utiliser la librairie en pratique.
         initHashMap();
         ArrayList<Travail> apiTravaux = new ArrayList<>();
         JSONObject res = new JSONObject(response);
@@ -72,6 +94,10 @@ public class TravailController {
         return apiTravaux;
     }
 
+    /**
+     * Va chercher la liste des travaux qui sont stockés localement dans un fichier
+     * @return - La liste des travaux
+     */
     private static ArrayList<Travail> getTravauxFromFile() {
         ArrayList<Travail> travaux =  new ArrayList<>();
         try {
@@ -121,18 +147,30 @@ public class TravailController {
         }
     }
 
+    /**
+     * Vérifie si une date de donnée se situe dans les prochains 90 jours.
+     * @param date - La date sous format de String
+     * @return <code>true</code> si la date est dans les prochains 90 jours, <code>false</code> sinon
+     */
     private static boolean startsInNextThreeMonths(String date) {
         LocalDate d = LocalDate.parse(date);
         LocalDate now = LocalDate.now();
-        if (now.until(d, ChronoUnit.MONTHS) <= 3) {
+        if (now.until(d, ChronoUnit.DAYS) <= 90) {
             return true;
         }
         return false;
     }
 
+    /**
+     * Fetch la liste des travaux, ceci sera composée des travaux obtenus à partir de l'API et de ceux créés en utilisant l'application
+     * @return - La liste des travaux brute, non filtrée
+     */
     public static ArrayList<Travail> getTravaux() {
         String apiRes = ApiCaller.get("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
-        ArrayList<Travail> travaux = parseTravailApiCall(apiRes);
+        ArrayList<Travail> travaux = new ArrayList<>();
+        if (apiRes != null) {
+            travaux = parseTravailApiCall(apiRes);
+        }
         ArrayList<Travail> filtered = new ArrayList<>();
         travaux.addAll(getTravauxFromFile());
         for (Travail t:travaux) {
@@ -147,6 +185,11 @@ public class TravailController {
     }
 
 
+    /**
+     * Fetch la liste des travaux qui possèdent un certain type donné
+     * @param type - Le type par lequel filtrer les travaux
+     * @return - La liste de travaux filtrée
+     */
     public static ArrayList<Travail> getTravauxByType(String type) {
         TypeTravail t = null;
         switch (type.toLowerCase()) {
@@ -197,6 +240,11 @@ public class TravailController {
         return filtered;
     }
 
+    /**
+     * Fetch les travaux qui se passent dans un quartier en particulier
+     * @param quartier - Le quartier par lequel filtrer
+     * @return - La liste des travaux filtrée
+     */
     public static ArrayList<Travail> getTravauxByQuartier(String quartier) {
         ArrayList<Travail> travaux = getTravaux();
         ArrayList<Travail> filtered = new ArrayList<>();

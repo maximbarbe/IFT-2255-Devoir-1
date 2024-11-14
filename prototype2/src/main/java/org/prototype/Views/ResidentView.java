@@ -7,6 +7,10 @@ import org.prototype.MaVille;
 import org.prototype.Models.*;
 import java.util.ArrayList;
 
+
+/**
+ * Classe qui s'occupe de la vue des résidents, contient tous les menus des résidents et permet d'accéder aux fonctionnalités des résidents.
+ */
 public class ResidentView extends View implements ConnectedView{
 
     @Override
@@ -76,47 +80,56 @@ public class ResidentView extends View implements ConnectedView{
         }
     }
 
+    /**
+     * Permet aux utilisateurs de consulter les entraves causés par les travaux. Cet utilisateur peut choisir de les filtrer ou les avoir de manière brute.
+     */
     public void consulterEntraves() {
-     while (true) {
-         clearConsole();
-         println("Entraves causées par les travaux en cours: \n\n");
-         ArrayList<Entrave> entraves = EntraveController.getEntraves();
-         for (Entrave e:entraves) {
-             println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
-         }
-         while (true) {
-             println("1) Rechercher par rue; 2) Rechercher par travail; 3) Revenir");
-             print("Votre choix > ");
-             switch (reader.nextLine()) {
-                 case "2":
-                     print("Entrez l'ID du travail > ");
-                     String id = reader.nextLine();
-                     clearConsole();
-                     ArrayList<Entrave> entravesFiltrees = EntraveController.getEntravesByID(id);
-                     for (Entrave e:entravesFiltrees) {
-                        println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
-                     }
+        while (true) {
+            clearConsole();
+            println("Entraves causées par les travaux en cours: \n\n");
+            ArrayList<Entrave> entraves = EntraveController.getEntraves();
+            for (Entrave e:entraves) {
+                println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
+            }
+            while (true) {
+                println("1) Rechercher par rue; 2) Rechercher par travail; 3) Revenir");
+                print("Votre choix > ");
 
-                     continue;
-                 case "1":
-                     print("Entrez la rue désirée (ex: rue jean-brillant) > ");
-                     String rue = reader.nextLine();
-                     clearConsole();
-                     ArrayList<Entrave> entravesFiltreesByStreet = EntraveController.getEntravesByStreet(rue);
-                     for (Entrave e:entravesFiltreesByStreet) {
-                         println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
-                     }
-                     continue;
-                 case "3":
-                     return;
-                 default:
-                     println("Mauvais choix, veuillez réessayer");
-                     break;
-             }
-         }
-     }
+                // Filtre les entraves par travail via les ID.
+                switch (reader.nextLine()) {
+                    case "2":
+                        print("Entrez l'ID du travail > ");
+                        String id = reader.nextLine();
+                        clearConsole();
+                        ArrayList<Entrave> entravesFiltrees = EntraveController.getEntravesByID(id);
+                        for (Entrave e:entravesFiltrees) {
+                            println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
+                        }
+
+                        continue;
+                // Filtre les entraves par travail via les rues.         
+                    case "1":
+                        print("Entrez la rue désirée (ex: rue jean-brillant) > ");
+                        String rue = reader.nextLine();
+                        clearConsole();
+                        ArrayList<Entrave> entravesFiltreesByStreet = EntraveController.getEntravesByStreet(rue);
+                        for (Entrave e:entravesFiltreesByStreet) {
+                            println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
+                        }
+                        continue;
+                    case "3":
+                        return;
+                    default:
+                        println("Mauvais choix, veuillez réessayer");
+                        break;
+                }
+            }
+        }
     }
 
+    /**
+     * Permet aux résidents de consulter les travaux, il peut les filtrer par quartier ou type de travail s'il le veut.
+     */
     public void consulterTravaux(){
         while (true) {
             clearConsole();
@@ -140,6 +153,7 @@ public class ResidentView extends View implements ConnectedView{
                         while (true) {
                             println("Filtrer par 1) Quartier; 2) Type de travail; 3) Annuler");
                             print("Votre choix > ");
+                            // Filtrer les travaux par quartier
                             switch (reader.nextLine()) {
                                 case "1":
                                     clearConsole();
@@ -150,6 +164,7 @@ public class ResidentView extends View implements ConnectedView{
                                         println("ID: "+t.getId() + "Titre: "+t.getTitre() + "; Intervenant: "+t.getIdentifiantIntervenant() + "; Quartiers affectés: "+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + "; Status: "+t.getStatus());
                                     }
                                     continue;
+                                // Filtrer les travaux par type.    
                                 case "2":
                                     clearConsole();
                                     for (int i = 0; i < TypeTravail.values().length; i++) {
@@ -189,6 +204,9 @@ public class ResidentView extends View implements ConnectedView{
         }
     };
 
+    /**
+     * Affiche les options quant aux requêtes de travail, c'est à partir de cette page que l'utilisateur pourra accéder à la soumission de requête et au suivi de requêtes
+     */
     public void pageRequeteTravail() {
         while (true) {
             clearConsole();
@@ -218,6 +236,9 @@ public class ResidentView extends View implements ConnectedView{
     }
 
 
+    /**
+     * Permet aux résidents de faire le suivi de leurs requêtes. Ils pourront ainsi voir les requêtes qu'ils ont envoyé, voir les candidatures qui ont été soumises, ainsi que fermer une requête.
+     */
     public void suiviRequetes() {
         while (true) {
             clearConsole();
@@ -265,6 +286,9 @@ public class ResidentView extends View implements ConnectedView{
         }
     }
 
+    /**
+     * Permet aux utilisateurs de soumettre une requête de travail aux intervenants.
+     */
     public void soumettreRequeteTravail(){
         while (true) {
             clearConsole();
@@ -305,6 +329,9 @@ public class ResidentView extends View implements ConnectedView{
         }
     };
 
+    /**
+     * Affiche la plage horaire de l'utilisateur et permet à l'utilisateur de la modifier ou de voir les plages horaires des autres résidents du quartier.
+     */
     public void plagesHoraires(){
         while (true) {
             clearConsole();
@@ -343,6 +370,9 @@ public class ResidentView extends View implements ConnectedView{
 
         }
     };
+    /**
+     * Affiche les notifications qu'un résident a recu et permet d'accéder à la fonctionnalité de modifier les abonnements aux notifications.
+     */
     public void pageNotifications(){
         while (true) {
             clearConsole();
@@ -375,32 +405,6 @@ public class ResidentView extends View implements ConnectedView{
         }
     };
 
-    public void afficherRequetes() {
-        while (true) {
-            clearConsole();
-            println("Notifications de requêtes: ");
-            println("\n");
-            println("ID: 1 - Retour sur votre requête de travail `Besoin de rénovation au HEC.`");
-            while (true) {
-                println("1) Prendre une décision sur une requête; 2) Revenir");
-                switch (reader.nextLine()) {
-                    case "1":
-                        println("Affichage de page pour accepter requête...");
-                        println("Appuyer sur n'importe quelle touche pour continuer");
-                        reader.nextLine();
-                        break;
-
-                    case "2":
-                        return;
-                    default:
-                        println("Mauvais choix, veuillez réessayer.");
-                        continue;
-                }
-                break;
-            }
-
-        }
-    }
     @Override
     public void afficherProfil(){
         while (true) {

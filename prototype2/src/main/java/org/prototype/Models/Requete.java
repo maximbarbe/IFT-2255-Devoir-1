@@ -1,5 +1,8 @@
 package org.prototype.Models;
 
+/**
+ * Classe représentant une requête de travail que les résidents peuvent envoyer aux intervenants.
+ */
 public class Requete {
     private final int requeteId;
     private String titre;

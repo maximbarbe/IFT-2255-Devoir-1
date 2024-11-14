@@ -1,5 +1,8 @@
 package org.prototype.Models;
 
+/**
+ * Classe représentant un intervenant qui utilise l'application, contient toutes les caractéristiques/méthodes propres aux intervenants.
+ */
 public class Intervenant extends Utilisateur{
 
 

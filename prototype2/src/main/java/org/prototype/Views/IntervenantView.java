@@ -6,6 +6,9 @@ import org.prototype.Models.*;
 
 import java.util.ArrayList;
 
+/**
+ * Classe avec laquelle les intervenants interagissent. Permet d'accéder aux fonctionnalités qui sont propres aux intervenants.
+ */
 public class IntervenantView extends View implements ConnectedView{
 
     @Override
@@ -42,7 +45,10 @@ public class IntervenantView extends View implements ConnectedView{
         }
     }
 
-
+    /**
+     * Permet à un intervenant de consulter les requêtes de travail déposées par les résidents, l'intervenant peut les filtrer si désiré.
+     * Permet également d'accéder à la fonctionnalité de soumettre une candidature.
+     */
     public void consulterRequetes() {
         clearConsole();
         println("Requêtes: ");
@@ -70,6 +76,7 @@ public class IntervenantView extends View implements ConnectedView{
                     println("Filtrer par 1) Type; 2) Quartier; 3) Date de debut; 4) Revenir");
                     String choice = reader.nextLine();
                     switch (choice) {
+                        // Filtrer les requetes par type
                         case "1":
                             clearConsole();
                             for (int i = 0; i < TypeTravail.values().length; i++) {
@@ -79,8 +86,10 @@ public class IntervenantView extends View implements ConnectedView{
                             try {
                                 int index = Integer.parseInt(reader.nextLine());
                                 TypeTravail s =TypeTravail.values()[index - 1];
+                            
                                 ArrayList<Requete> requetesFiltresByType = RequeteController.getRequeteByType(s.toString());
                                 for (Requete r:requetesFiltresByType) {
+                                    // On ne veut que voir les requetes ouvertes
                                     if (r.getStatut().equals(RequeteStatut.OUVERTE)) {
                                         println("ID: "+r.getRequeteId());
                                         println("Titre: "+r.getTitre());
@@ -100,6 +109,7 @@ public class IntervenantView extends View implements ConnectedView{
                                 println("Mauvais choix, veuillez réessayer");
                                 continue;
                             }
+                        // Filtrer les requêtes par quartier
                         case "2":
                             clearConsole();
                             print("Entrez le quartier désiré >");
@@ -121,6 +131,7 @@ public class IntervenantView extends View implements ConnectedView{
                                 }
                             }
                             continue;
+                        // Filtrer les requêtes par date.
                         case "3":
                             clearConsole();
                             print("Entrez la date désirée (YYYY-MM-DD) >");
@@ -160,6 +171,9 @@ public class IntervenantView extends View implements ConnectedView{
 
     }
 
+    /**
+     * Affiche les travaux entrepris par l'intervenant et permet d'accéder à la fonctionnalité de modifier les informations sur un chantier
+     */
     public void afficherChantiers() {
         while(true) {
             clearConsole();
@@ -186,6 +200,9 @@ public class IntervenantView extends View implements ConnectedView{
         }
 
     }
+    /**
+     * Permet de modifier les informations sur un chantier
+     */
     public void modifierInfosChantiers() {
         while (true) {
             clearConsole();
@@ -217,6 +234,9 @@ public class IntervenantView extends View implements ConnectedView{
 
         }
     }
+    /**
+     * Permet de soumettre un nouveau projet de travail.
+     */
     public void soumettreNouveauTravail() {
         clearConsole();
         println("Veuillez remplir le formulaire suivant pour soumettre un nouveau projet de travail: ");

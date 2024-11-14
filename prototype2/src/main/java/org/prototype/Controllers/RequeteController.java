@@ -3,7 +3,7 @@ package org.prototype.Controllers;
 
 import org.prototype.Models.Requete;
 import org.prototype.Models.RequeteStatut;
-import org.prototype.Models.TypeTravail;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,16 +13,30 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+/**
+ * Classe qui s'occupe des opérations sur les requêtes, c'est-à-dire le fetching, la création, etc.
+ */
 public class RequeteController {
 
+    /**
+     * Change le statut de la requête à <code>RequeteStatut.FERMEE</code>
+     * @param r - La requête spécifique
+     */
     public static void closeRequete(Requete r) {
         r.setStatut(RequeteStatut.FERMEE);
     }
 
+    /**
+     * Vérifie si une date
+     * @param date - la date sous format de string
+     * @return - <code>true</code> si la date est valide, sinon <code>false</code>
+     */
     private static boolean isDateValid(String date) {
         try {
+            // Si la date n'est pas du bon format, une exception sera lancée et on retournera faux.
             LocalDate dateEsperee = LocalDate.parse(date);
             LocalDate now = LocalDate.now();
+            // Si la date espérée est avant la date d'aujourd'hui, la date n'est pas valide
             if (now.until(dateEsperee, ChronoUnit.DAYS) < 0) {
                 return false;
 
@@ -33,6 +47,10 @@ public class RequeteController {
         }
     }
 
+    /**
+     * Sauvegarde une requête en l'écrivant dans un fichier requetes.csv pré-existant
+     * @param r - La requête à sauvegarder dans un fichier
+     */
     private static void saveRequete(Requete r) throws Exception{
 
         BufferedWriter writer = new BufferedWriter(new FileWriter("src/requetes.csv", true));
@@ -41,6 +59,16 @@ public class RequeteController {
 
     }
 
+    /**
+     * Crée une requête à partir des informations fournies
+     * @param titre - Le titre de la requête
+     * @param description - La description de la requête fourni par le résident
+     * @param typeRequete - Le type de requête entré par le résident
+     * @param dateDebutEspere - La date de début espéré sous format de string
+     * @param userID - L'adresse email du résident ayant soumis la requête
+     * @param quartier - Le quartier du résident ayant soumis la requête
+     * @return - <code>true</code> si la requête a été créée avec succès, <code>false</code> sinon
+     */
     public static boolean creerRequete(String titre, String description, String typeRequete, String dateDebutEspere, String userID, String quartier){
 
         String type = typeRequete;
@@ -49,6 +77,7 @@ public class RequeteController {
 
         } else {
             try {
+                // L'appel à getRequetes() est uniquement utilisé pour déterminer le ID de notre nouvelle requête
                 ArrayList<Requete> requetes = RequeteController.getRequetes();
                 if (requetes.size() == 0) {
                     saveRequete(new Requete(0, titre, description, type, dateDebutEspere, userID, quartier));
@@ -65,6 +94,10 @@ public class RequeteController {
 
 
     }
+    /**
+     * Fetch la liste des requêtes à partir d'un fichier de données prédéfini
+     * @return - La liste des requêtes
+     */
     public static ArrayList<Requete> getRequetes(){
         ArrayList<Requete> requetes = new ArrayList<>();
         try {
@@ -89,6 +122,11 @@ public class RequeteController {
         return requetes;
     }
 
+    /**
+     * Fetch les requêtes et filtre la liste par un certain type.
+     * @param type - Le type de requête par lequel filtrer
+     * @return - La liste de requêtes filtrées
+     */
     public static ArrayList<Requete> getRequeteByType(String type) {
         ArrayList<Requete> requetesFiltrees = new ArrayList<>();
         for (Requete r:getRequetes()) {
@@ -98,6 +136,11 @@ public class RequeteController {
         }
         return requetesFiltrees;
     }
+    /**
+     * Fetch les requêtes et filtre la liste par un certain quartier.
+     * @param quartier - Le quartier de la requête par lequel filtrer
+     * @return - La liste de requêtes filtrées
+     */    
     public static ArrayList<Requete> getRequeteByQuartier(String quartier) {
         ArrayList<Requete> requetesFiltrees = new ArrayList<>();
         for (Requete r:getRequetes()) {
@@ -108,6 +151,11 @@ public class RequeteController {
         return requetesFiltrees;
     }
 
+    /**
+     * Fetch les requêtes et filtre la liste par une certaine date.
+     * @param date - Le date de requête par laquelle filtrer
+     * @return - La liste de requêtes filtrées
+     */
     public static ArrayList<Requete> getRequeteByDate(String date) {
         ArrayList<Requete> requetesFiltrees = new ArrayList<>();
         for (Requete r:getRequetes()) {

@@ -1,5 +1,8 @@
 package org.prototype.Models;
 
+/**
+ * Classe représentant un résident qui utilise l'application, contient toutes les caractéristiques/méthodes propres aux résidents.
+ */
 public class Resident extends Utilisateur{
     private String dateDeNaissance;
     private String numTelephone;

@@ -1,5 +1,8 @@
 package org.prototype.Models;
 
+/**
+ * Classe représentant les entraves que les travaux causent
+ */
 public class Entrave {
     private String travailId;
     private String streetId;

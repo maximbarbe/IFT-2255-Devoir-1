@@ -2,6 +2,9 @@ package org.prototype.Models;
 
 import java.util.ArrayList;
 
+/**
+ * Classe représentant un projet de travail entrepris par les intervenants
+ */
 public class Travail {
     private String id;
     private String titre;

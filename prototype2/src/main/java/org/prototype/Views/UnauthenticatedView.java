@@ -1,19 +1,21 @@
 package org.prototype.Views;
 
-
-
-
 import org.prototype.Controllers.UtilisateurController;
 import org.prototype.MaVille;
 import org.prototype.Models.Resident;
 import org.prototype.Models.Utilisateur;
 
 import java.io.IOException;
-import java.util.Scanner;
+
+/**
+ * Classe qui s'occupe de la vue qu'un utilisateur non-connecté voit.
+ */
 public class UnauthenticatedView extends View{
 
 
-
+    /**
+     * Affiche la page d'accueil, la page que l'on obtient en ouvrnt l'application, et permet de se connecter/s'inscrire.
+     */
     public void pageAccueil() {
         while (true) {
             clearConsole();
@@ -40,6 +42,9 @@ public class UnauthenticatedView extends View{
 
     }
 
+    /**
+     * Affiche la page d'inscription et permet à l'utilisateur de choisir s'il veut s'inscrire en tant que résident ou intervenant.
+     */
     public void pageInscription(){
         while (true) {
             clearConsole();
@@ -80,6 +85,10 @@ public class UnauthenticatedView extends View{
     };
 
 
+    /**
+     * Gère l'inscription pour le résident en affichant le formulaire et en prenant les données entrées.
+     * @return - Un booléen indiquant si l'inscription a été un succès
+     */
     public boolean inscriptionResident() {
         while (true) {
             clearConsole();
@@ -111,7 +120,10 @@ public class UnauthenticatedView extends View{
             }
         }    };
 
-
+    /**
+     * Gère l'inscription pour l'intervenant en affichant le formulaire et en prenant les données entrées.
+     * @return - Un booléen indiquant si l'inscription a été un succès
+     */
     public boolean inscriptionIntervenant() {
         while (true) {
             clearConsole();
@@ -164,7 +176,9 @@ public class UnauthenticatedView extends View{
 
     };
 
-
+    /**
+     * Permet la connexion et redirige vers le menu principal correspondant au type de compte.
+     */
     public void pageConnexion(){
         while (true) {
             clearConsole();
@@ -173,17 +187,10 @@ public class UnauthenticatedView extends View{
             print("Mot de passe > ");
             String password = reader.nextLine();
             Utilisateur connectedUser = null;
-            try {
-                connectedUser = UtilisateurController.getUtilisateur(email, password);
+            connectedUser = UtilisateurController.getUtilisateur(email, password);
 
-            } catch (IOException e) {
-                println("Erreur lors de la connexion au fichiers de données. Veuillez réessayer");
-                println("Appuyez sur n'importe quelle touche pour continuer");
-                reader.nextLine();
-                System.exit(1);
-            }
             if (connectedUser == null) {
-                println("Mauvais email ou password");
+                println("Erreur lors de la connexion à votre compte.");
                 println("1) Réessayer; 2) Revenir");
                 print("Votre choix > ");
                 switch (reader.nextLine()) {
@@ -193,6 +200,7 @@ public class UnauthenticatedView extends View{
                         return;
 
                 }
+            // On redirige l'utilisateur vers la bonne vue.    
             } else if (connectedUser instanceof Resident) {
                 MaVille.setCurUser(connectedUser);
                 ResidentView view = new ResidentView();
@@ -209,7 +217,9 @@ public class UnauthenticatedView extends View{
         }
     };
 
-
+    /**
+     * Commence l'application en affichant la page d'accueil.
+     */
     public void startApplication() {
         pageAccueil();
     }
