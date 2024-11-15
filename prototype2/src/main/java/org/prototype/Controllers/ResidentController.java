@@ -11,6 +11,17 @@ import org.prototype.Models.Resident;
  */
 public class ResidentController {
 
+
+    private static String residentFile = "src/residents.csv";
+
+    public static String getResidentFile() {
+        return residentFile;
+    }
+
+    public static void setResidentFile(String file) {
+        residentFile = file;
+    }
+
     /**
      * Fetch la liste des résidents à partir d'un fichier prédéfini
      * @return - La liste des résidents
@@ -18,7 +29,7 @@ public class ResidentController {
     public static ArrayList<Resident> getResidents(){
         try {
             ArrayList<Resident> residents = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("src/residents.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(residentFile));
             String line;
             while ((line = reader.readLine())!=null) {
                 String[] data = line.split(",");

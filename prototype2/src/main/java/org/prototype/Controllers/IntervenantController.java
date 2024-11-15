@@ -12,14 +12,24 @@ import org.prototype.Models.TypeIntervenant;
  */
 public class IntervenantController {
 
+    private static String intervenantFile ="src/intervenants.csv";
     /**
      * Fetch la liste des intervenants à partir d'un fichier de données prédéfini
      * @return - La liste des intervenants
      */
+
+    public static String getIntervenantFile() {
+        return intervenantFile;
+    }
+
+
+    public static void setIntervenantFile(String file) {
+        intervenantFile = file;
+    }
     public static ArrayList<Intervenant> getIntervenants() {
         try {
             ArrayList<Intervenant> intervenants = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("src/intervenants.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(intervenantFile));
             String line;
             while ((line = reader.readLine())!=null) {
                 TypeIntervenant type = null;

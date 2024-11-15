@@ -18,6 +18,17 @@ import java.util.ArrayList;
  */
 public class RequeteController {
 
+
+    private static String requetesFile ="src/requetes.csv";
+
+    public static String getRequetesFile() {
+        return requetesFile;
+    }
+
+    public static void setRequetesFile(String file) {
+        requetesFile = file;
+    }
+
     /**
      * Change le statut de la requête à <code>RequeteStatut.FERMEE</code>
      * @param r - La requête spécifique
@@ -53,7 +64,7 @@ public class RequeteController {
      */
     private static void saveRequete(Requete r) throws Exception{
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter("src/requetes.csv", true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(requetesFile, true));
         writer.append(r.getRequeteId() + ","+r.getTitre()+","+r.getDescription()+","+r.getType().toString()+","+r.getDateDebutEspere()+","+r.getStatut().toString()+","+r.getUserID()+","+r.getQuartier()+"\n");
         writer.close();
 
@@ -101,7 +112,7 @@ public class RequeteController {
     public static ArrayList<Requete> getRequetes(){
         ArrayList<Requete> requetes = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/requetes.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(requetesFile));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");

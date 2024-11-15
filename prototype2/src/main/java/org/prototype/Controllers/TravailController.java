@@ -24,6 +24,15 @@ public class TravailController {
 
     // Mapper qui servira de transformer la réponse de l'API en type de travail que notre programme peut reconnaître 
     private static HashMap<String, TypeTravail> constructionTypeMapper = null;
+    private static String travauxFile = "src/travaux.csv";
+
+    public static String getTravauxFile() {
+        return travauxFile;
+    }
+
+    public static void setTravauxFile(String file) {
+        travauxFile = file;
+    }
 
     /**
      * Initialise notre mapper.
@@ -101,7 +110,7 @@ public class TravailController {
     private static ArrayList<Travail> getTravauxFromFile() {
         ArrayList<Travail> travaux =  new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/travaux.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(travauxFile));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
