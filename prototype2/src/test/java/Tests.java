@@ -2,11 +2,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import org.junit.jupiter.api.*;
-import org.prototype.Controllers.IntervenantController;
-import org.prototype.Controllers.RequeteController;
-import org.prototype.Controllers.ResidentController;
-import org.prototype.Controllers.TravailController;
+import org.prototype.Controllers.*;
 import org.prototype.Models.Requete;
+import org.prototype.Models.Resident;
+import org.prototype.Models.Travail;
+import org.prototype.Models.Utilisateur;
 
 import java.util.ArrayList;
 
@@ -23,8 +23,7 @@ class Tests {
 
 
     @Test
-    public void createRequeteAndSaveToFile() {
-
+    public void createRequeteAndSaveToFileTest() {
 
         RequeteController.setRequetesFile("src/test/testRequetes.csv");
         ArrayList<Requete> requetes = RequeteController.getRequetes();
@@ -51,4 +50,35 @@ class Tests {
         assertEquals(expectedRequete.getQuartier(), resultRequete.getQuartier());
     }
 
+    @Test
+    public void getResidentTest() {
+        ResidentController.setResidentFile("src/test/testResidents.csv");
+        IntervenantController.setIntervenantFile("src/test/testIntervenants.csv");
+        Resident expectedUser = new Resident("test","tester1@gmail.com","testpassword","2000-01-01","","3200 rue jean-brilliant","Mercier-Hochelaga-Maisonneuve");
+        Resident resultUser = null;
+        try {
+            resultUser = (Resident) UtilisateurController.getUtilisateur("tester1@gmail.com", "testpassword");
+        } catch (Exception e) {
+            fail("Erreur lors du casting entre utilisateur et résident");
+        }
+        if (resultUser == null) {
+            fail("Erreur lorsqu'on essaye d'aller chercher un utilisateur par son email et password");
+        }
+        assertEquals(expectedUser.getNomComplet(), resultUser.getNomComplet());
+        assertEquals(expectedUser.getQuartier(), resultUser.getQuartier());
+        assertEquals(expectedUser.getAdresseResidentielle(), resultUser.getAdresseResidentielle());
+        assertEquals(expectedUser.getDateDeNaissance(), resultUser.getDateDeNaissance());
+        assertEquals(expectedUser.getAdresseCourriel(), resultUser.getAdresseCourriel());
+        assertEquals(expectedUser.getMotDePasse(), resultUser.getMotDePasse());
+        assertEquals(expectedUser.getNumTelephone(), resultUser.getNumTelephone());
+
+    }
+
+    @Test
+    public void getTravauxByQuartierTest() {
+        for (Travail t:TravailController.getTravauxByQuartier("Mercier-Hochelaga-Maisonneuve")) {
+            assertTrue(t.getQuartiers().contains("Mercier-Hochelaga-Maisonneuve".toLowerCase()));
+        }
+
+    }
 }
