@@ -6,6 +6,16 @@ Description du projet:
 
 
 Organisation du répertoire:
-> [/prototype](/prototype/): Ce folder contient tous les fichiers .java reliés au prototype.<br/>
+> [/prototype2](/prototype2/): Ce folder contient tous les fichiers nécessaire pour éxécuter le prototype.
+>> [/src](/prototype2/src/): Ce folder contient les fichiers Java et les fichiers csv.
+>>> [/test](/prototype2/src/test/): Ce folder contient les fichiers pour les tests.<br/>
+>>>> [/java](/prototype2/src/test/java/): Ce folder contient le fichier Java pour les tests.<br/>
+
+>>> [/main/java/org/prototype](/prototype2/src/main/java/org/prototype/) Ce folder contient toutes les classes présentes dans le prototype.
+>>>> [/API](/prototype2/src/main/java/org/prototype/API/) Ce folder contient les fichiers Java nécessaires pour effectuer des requêtes HTTP. <br/>
+>>>> [/Controllers](/prototype2/src/main/java/org/prototype/Controllers/) Ce folder contient toutes les classes qui représente les Controller dans l'architecture MVC. <br/>
+>>>> [/Models](/prototype2/src/main/java/org/prototype/Models/) Ce folder contient toutes les classes qui représente les Modèles dans l'architecture MVC. <br/>
+>>>> [/Views](/prototype2/src/main/java/org/prototype/Views/) Ce folder contient toutes les classes qui représente les Vues dans l'architecture MVC. <br/>
+
 > [/diagrammes](/diagrammes/): Ce folder contient tous les diagrammes présents dans le rapport.<br/>
 > [rapport.html](/rapport.html): Ce fichier contient le rapport du devoir.

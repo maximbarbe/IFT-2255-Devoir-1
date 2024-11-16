@@ -558,6 +558,10 @@
             background-color: #d5d5d5;
         }
 
+        #class_diagram {
+            width:fit-content;
+        }
+
         .dash:before { 
             content: '-'; 
             margin-left: 4px;
@@ -580,11 +584,11 @@
     <header class="report-header">
         <div class="title-section">
             <div>
-                <h1 class="report-title">Rapport du devoir 1</h1>
+                <h1 class="report-title">Rapport du devoir 2</h1>
                 <p class="report-summary">
-                    <em>Court résumé du rapport</em> &ndash; Ce livrable se concentre sur les flux d'exigences et d'analyse que l'on retrouve lors de l'utilisation du modèle itératif et incrémental, plus communément connu comme le processus unifié.
+                    <em>Court résumé du rapport</em> &ndash; Ce livrable aborde les différents flux que l'on retrouve lors de l'utilisation du modèle itératif et incrémental, plus communément connu comme le processus unifié.
                     En effet, en abordant le processus de conception du logiciel <em>MaVille</em>, on explorera les différentes tâches, les différentes questions, ainsi que les différents diagrammes qu'un concepteur de logiciel
-                    peut utiliser lors de ces flux.
+                    peut utiliser lors de ces flux. À date, les flux d'exigences, d'analyse, de conception et le début du flux d'implémentation sont abordés.
                 </p>
             </div>
 
@@ -660,8 +664,17 @@
                         </ul>
                     </li>
                     <li class="nav-item">
+                        <h3 class="nav-item-title"><a class="nav-item-title__link" href="#conception">Conception</a></h3>
+                        <ul class="bare-list nav-item-details">
+                            <li class="dash">Architecture</li>
+                            <li class="dash">Diagramme de classes</li>
+                            <li class="dash">Diagrammes de séquences</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
                         <h3 class="nav-item-title"><a class="nav-item-title__link" href="#prototype">Prototype</a> </h3>
                     </li>
+
                 </ul>
             </nav>
         </aside>
@@ -696,19 +709,24 @@
                         <li>Scenarios (Maxim Barbe, Aissatou Ndiaye): 10h; Semaines 3-6</li>
                         <br />
                         <li><b>Analyse:</b></li>
-                        <li>Risques / Besoins non-fonctionnels(Maxim Barbe, Riste Popov): 2h; Semaines 3-6</li>
+                        <li>Risques / Besoins non-fonctionnels (Maxim Barbe, Riste Popov): 2h; Semaines 3-6</li>
                         <li>Besoins materiels / Solution de stockage / Solution d'intégration (Maxim Barbe, Aissatou Ndiaye, Riste Popov): 6h; Semaines 3-6</li>
                         <br />
 
+                        <li><b>Conception:</b></li>
+                        <li>Architecture: </li>
+                        <li>Diagramme de classes (Maxim Barbe, Aissatou Ndiaye): Semaines 11-12</li>
+                        <li>Diagrammes de séquence (Maxim Barbe, Riste Popov): Semaines 11-12</li>
+
                         <li><b>Autres:</b></li>
-                        <li>Rédaction du rapport (Juste écrire les informations, pas penser aux réponses): (Maxim Barbe, Aissatou Ndiaye, Riste Popov); 2h; Semaines 1-6</li>
-                        <li>Rédaction du README: (Maxim Barbe); 1h; Semaines 5-6</li>
-                        <li>Prototype (Maxim Barbe); 10h; Semaines 4-6</li>
+                        <li>Rédaction du rapport (Juste écrire les informations, pas penser aux réponses): (Maxim Barbe, Aissatou Ndiaye, Riste Popov); 2h; Semaines 1-13</li>
+                        <li>Rédaction du README: (Maxim Barbe); 1h; Semaines 5-6 et 11</li>
+                        <li>Prototype: (Maxim Barbe); 25h; Semaines 4-12</li>
+                        <li>Tests: (Maxim Barbe); </li>
                         <br />
 
                         <li><b>À venir:</b></li>
 
-                        <li>Conception: Semaine 6-10; </li>
                         <li>Implémentation: Semaine 10-14; </li>
                         <li>Tests: Semaine 10-14;</li>
                         <li>Documentation: Semaine 8-15; </li>
@@ -754,6 +772,37 @@
                     <dd class="glossary-def"> La situation lorsqu'un grand nombre d'auto font la file et avance lentement (autre mot pour traffic).</dd>
                     <dt class="glossary-term">Chantiers</dt>
                     <dd class="glossary-def">Emplacements où se font les travaux.</dd>
+                    <dt class="glossary-term">Application MaVille</dt>
+                    <dd class="glossary-def">L'application MaVille est l'application que nous concevons ayant pour but de réduire la distance entre les résidents et les intervenants quant aux projets de construction.</dd>
+                    <dt class="glossary-term">Identifiant de la ville</dt>
+                    <dd class="glossary-def">Code de 8 chiffres fourni par la ville que les identifiants doivent fournir lors de l'inscription</dd>
+                    <dt class="glossary-term">Notifications personnalisées</dt>
+                    <dd class="glossary-def">Un résident peut personnaliser ses notifications en s'abonnant à divers rues ou quartiers et recevoir des notifications lorsqu'il y a des changements à des projets affectant ces quartiers.</dd>
+                    <dt class="glossary-term">Info Entraves Et Travaux</dt>
+                    <dd class="glossary-def">Service de la ville qui permet d'obtenir des informations sur les travaux en cours dans la ville de Montréal et qui permet également d'obtenir des informations sur les entraves causés par ceux-ci.</dd>
+                    <dt class="glossary-term">Type de travaux</dt>
+                    <dd class="glossary-def">On catégorise les travaux en leur attribuant un type de travail.<br/>Les différents types de travaux sont les suivants:
+                    <ul>
+                        <li>Travaux routiers</li>
+                        <li>Travaux de gaz ou électricité</li>
+                        <li>Construction ou rénovation</li>
+                        <li>Entretien paysager</li>
+                        <li>Travaux liés aux transports en commun</li>
+                        <li>Travaux de signalisation et éclairage</li>
+                        <li>Travaux souterrains</li>
+                        <li>Travaux résidentiels</li>
+                        <li>Entretien urbain</li>
+                        <li>Entretien des réseaux de télécommunication</li>
+                    </ul>
+                    </dd>
+                    <dt class="glossary-term">Statut du projet</dt>
+                    <dt class="glossary-def">Un projet peut prendre différents types dépendamment de sa progression.<br/>
+                    Les statuts disponibles sont:
+                <ul>
+                    <li>En cours</li>
+                    <li>Suspendu</li>
+                    <li>Termine</li>
+                </ul></dt>
                 </dl>
 
              
@@ -1683,7 +1732,8 @@
                 
                 <div>
                     <h3 class="subsection-title">Diagramme de classe</h3>
-                    <img class="activity-diagram" src="diagrammes/Class Diagram1.svg" alt="Diagramme d'activités">
+                    <p>Note: Il va falloir zoomer pour mieux voir (ca devrait pouvoir être fait sans problèmes puisqu'il s'agit d'un format svg), désolé pour ca. J'ai fait de mon mieux pour compresser le mieux sur Visual Paradigm.</p>
+                    <img class="activity-diagram" src="diagrammes/Class Diagram1.svg" alt="Diagramme de classe">
                 </div>   
 
                 <div>
@@ -1699,12 +1749,12 @@
 
             <section class="main-section">
                 <h2 id="prototype" class="section-title">Prototype</h2>
-
+                <p>Cette version du prototype a été fait avec Maven. Pour s'assurer que ca marche bien, la version de Maven avec laquelle le projet a été fait est <b>apache-maven-3.9.6</b> et la version de java est <b>JDK-17</b>.</p>    
                 <p>
-                    Deux comptes préconfigurés sont disponibles pour tester le prototype:
+                    Trois comptes résident et intervenant sont préconfigurés pour utiliser l'application:
                     <ul>                        
                         <li>
-                            Compte résident:
+                            Comptes résidents:
                             <ul>
                                 <li>
                                     Email: test_resident@gmail.com
@@ -1733,7 +1783,7 @@
                     Afin d'éxécuter le code, il faut run les commandes suivantes:
                     
                     <ul>
-                        <li><code>cd ./prototype</code> si on est pas dans le répertoire <em><b>/prototype</b></em>.</li>
+                        <li><code>cd ./prototype2</code> si on est pas dans le répertoire <em><b>/prototype2</b></em> et s'assurer d'être dans le même répertoire que le fichier <code>pom.xml</code>.</li>
                         <li><code>java -jar maVille.jar</code> pour éxécuter le fichier éxécutable.</li>
                     </ul>
                 </p>
@@ -1742,7 +1792,7 @@
     </main>
     <footer class="report-footer">
         <p>
-            Devoir 1 &ndash; Analyse des exigences<br>
+            Devoir 2 &ndash; Conception de la solution<br>
             IFT2255 (Génie logiciel) <br>
             Automne 2024
         </p>
