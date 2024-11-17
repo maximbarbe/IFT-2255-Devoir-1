@@ -588,7 +588,7 @@
                 <p class="report-summary">
                     <em>Court résumé du rapport</em> &ndash; Ce livrable aborde les différents flux que l'on retrouve lors de l'utilisation du modèle itératif et incrémental, plus communément connu comme le processus unifié.
                     En effet, en abordant le processus de conception du logiciel <em>MaVille</em>, on explorera les différentes tâches, les différentes questions, ainsi que les différents diagrammes qu'un concepteur de logiciel
-                    peut utiliser lors de ces flux. À date, les flux d'exigences, d'analyse, de conception et le début du flux d'implémentation sont abordés.
+                    peut utiliser lors de ces flux.
                 </p>
             </div>
 
@@ -704,31 +704,28 @@
                         <br />
                         <li><b>Exigences:</b></li>
                         <li>Glossaire (Aissatou Ndiaye): 3h; Semaines 3-6</li>
-                        <li>Diagrammes CU (Maxim Barbe, Aissatou Ndiaye, Riste Popov): 6h; Semaines 3-6</li>
-                        <li>Diagrammes Activite(Aissatou Ndiaye, Riste Popov): 6h; Semaines 4-6</li>
+                        <li>Diagrammes CU (Maxim Barbe, Aissatou Ndiaye, Riste Popov): 8h; Semaines 3-6 et 11</li>
+                        <li>Diagrammes Activite (Aissatou Ndiaye, Riste Popov): 6h; Semaines 4-6 et 11</li>
                         <li>Scenarios (Maxim Barbe, Aissatou Ndiaye): 10h; Semaines 3-6</li>
                         <br />
                         <li><b>Analyse:</b></li>
                         <li>Risques / Besoins non-fonctionnels (Maxim Barbe, Riste Popov): 2h; Semaines 3-6</li>
-                        <li>Besoins materiels / Solution de stockage / Solution d'intégration (Maxim Barbe, Aissatou Ndiaye, Riste Popov): 6h; Semaines 3-6</li>
+                        <li>Besoins materiels / Solution de stockage / Solution d'intégration (Maxim Barbe, Aissatou Ndiaye, Riste Popov): 7h; Semaines 3-6 et 11</li>
                         <br />
 
                         <li><b>Conception:</b></li>
-                        <li>Architecture: </li>
-                        <li>Diagramme de classes (Maxim Barbe, Aissatou Ndiaye): Semaines 11-12</li>
-                        <li>Diagrammes de séquence (Maxim Barbe, Riste Popov): Semaines 11-12</li>
+                        <li>Architecture: (Aissatou Ndiaye)</li>
+                        <li>Diagramme de classes: (Maxim Barbe, Aissatou Ndiaye); 10h; Semaines 11-12</li>
+                        <li>Diagrammes de séquence (Maxim Barbe, Riste Popov): 6h; Semaines 11-12</li>
                         <br/>
                         <li><b>Autres:</b></li>
                         <li>Rédaction du rapport (Juste écrire les informations, pas penser aux réponses): (Maxim Barbe, Aissatou Ndiaye, Riste Popov); 2h; Semaines 1-13</li>
                         <li>Rédaction du README: (Maxim Barbe); 1h; Semaines 5-6 et 11</li>
-                        <li>Prototype: (Maxim Barbe); 25h; Semaines 4-12</li>
+                        <li>Prototype: (Maxim Barbe); 10h; Semaines 4-6</li>
+                        <li>Implémentation: (Maxim Barbe); 15h; Semaine 10-14</li>
                         <li>Tests: (Maxim Barbe, Aissatou Ndiaye, Riste Popov); 1h; Semaines 11-12</li>
-                        <br />
-
-                        <li><b>À venir:</b></li>
-
-                        <li>Implémentation: Semaine 10-14; </li>
-                        <li>Documentation: Semaine 8-15; </li>
+                        <li>Documentation: (Maxim Barbe); 3h; Semaine 10-15</li>
+                        
 
                     </ul>
                     
@@ -1680,7 +1677,7 @@
                         Cela nous permettra de nous assurer que l'application fonctionnera presque en tout temps et qu'il n'y a pas de panne qui cause l'arrêt complet du fonctionnement de l'application.
                         De plus, comme il s'agit de la ville qui demande aux entreprises de participer à l'application, alors nous suggèrons à la ville de fournir du matériel aux participants/intervenants afin qu'ils ne doivent pas dépenser leur propre argent.
                         Afin de réduire les coûts au maximum, notre suggestion est de tout simplement fournir des petits téléphones/appareils intelligents préconfigurés qui pourront uniquement lancer l'application. Ces appareils n'ont pas besoin d'un processeur extrêmement puissant
-                        ou de grande mémoire de stockage, il est uniquement nécessaire qu'ils puissent utiliser le système d'une manière fluide.
+                        ou de grande mémoire de stockage, il est uniquement nécessaire qu'ils puissent utiliser le système d'une manière fluide. Finalement, nous aurons besoin de serveurs pour que les utilisateurs puissent accéder aux données.
 
                     </p>
                 </div>
@@ -1688,11 +1685,12 @@
                 <div>
                     <h3 class="subsection-title">Solution de stockage</h3>
                     <p>
-                        Pour stocker nos données, nous envisageons utiliser des fichiers JSON. Nous pensons qu'il s'agit d'un meilleur choix que les fichiers CSV puisqu'il y a une certaine structure/organisation dans les fichiers JSON que l'on ne retrouve pas dans les fichiers CSV.
-                        Avec les fichiers JSON, on peut stocker les attributs des objets du programme d'une manière intuitive et qui est facilement accessible. Dans les fichiers JSON, puisqu'on peut accéder les éléments par clé, la tâche de parsing/récupération des données sera plus facile et causera moins d'erreurs.
-                        Cela entraîne donc une meilleure intégrité des données, un facteur important lors du choix de la solution de stockage.
-                        De plus, cela facilite également la création des objets lorsqu'on lance le programme puisque la structure est gardée dans le fichier. Finalement, afin d'assurer la sécurité des données, nous devrons implémenter ou utiliser
-                        des mécanismes d'encryption/hashing afin de sécuriser nos données sensibles.   
+                        Initialement, nous avions envisagé de stocker nos données en utilisant des fichiers JSON, mais nous avons décidé d'y aller avec des fichiers CSV.
+                        Nous avons fait ce changement puisqu'il est plus facile de manipuler les fichiers CSV que les fichiers JSON. En faisant ce changement, nous perdons la certaine structure que 
+                        le format JSON nous offrait, mais, comme énoncé plus haut, cela nous permet de manipuler plus facilement les données. Cela nous permet d'assurer une meilleure intégrité des données
+                        puisqu'il n'y aura pas de pertes de données dues à des erreurs lors du parsing. Nous pensons que ce changement mène à un net positif à cause de son effet sur l'intégrité des données. Ensuite, afin d'assurer la sécurité des données, nous devrons implémenter ou utiliser
+                        des mécanismes d'encryption/hashing afin de sécuriser nos données sensibles. Finalement, pour une version officielle déployée, nous envisagerions d'utiliser une architecture de stockage cloud afin de maximiser la scalabilité et la disponibilité des données.
+                              
                     </p>
                 </div>
 
@@ -1747,8 +1745,18 @@
             </section>
             <h3 class="subsection-title">Justification des choix du design</h3>
             <p>Afin de favoriser l'évolution et l'intégration de l'application, nous avons dû prendre des considérations lors de la conception du design.
-            Tout d'abord, le premier choix que nous avons fait est le patron d'architecture. Pour cela, nous avons choisi d'y aller avec le modèle MVC. Nous avons choisi ce patron
-            puisque nous 
+            Tout d'abord, le premier choix que nous avons fait est le patron d'architecture. Pour cela, nous avons choisi d'y aller avec le modèle MVC. Nous avons choisi l'architecture MVC
+            puisque cette architecture offre une décomposition modulaire assez intuitive, maximise la cohésion et facilite la réutilisation. En effet, en séparant la logique des données, on peut réutiliser les modèles dans d'autres applications 
+            et définir des nouveaux controllers. En créant un controller pour chaque modèle, on améliore également la cohésion puisque seules les méthodes concernant un modèle en particulier se retrouvent dans ce controller. Nous avons également choisi
+            de décomposer le frontend en trois vues différentes, une vue pour les utilisateurs non-connectés, une vue pour les résidents et une vue pour les intervenants. Selon nous, cette décomposition maximise la cohésion et minimise le couplage puisque 
+            les fonctionnalités réunies dans une vue dépendent du statut de l'utilisateur (non-connecté, résident ou intervenant), il y a donc une logique claire sur comment les fonctionnalités sont réunies,
+            et il y a très peu de communication entre les vues. Il serait donc facile d'ajouter, par exemple, une troisième vue pour un autre type d'utilisateur puisque cet ajout n'affecterait aucunement les vues de résident et d'intervenant.
+            Concernant les vues, afin de favoriser l'abstraction, nous avons défini une classe abstraite <code><i>View</i></code> et une interface <code><i>ConnectedView</i></code>. La classe <code><i>View</i></code> possède 
+            toutes les méthodes et les attributs communs à toutes les vues (connectées ou non), alors que l'interface <code><i>ConnectedView</i></code> définit les méthodes que seules les vues <i>connectées</i> doivent implémenter.
+            En faisant cela, on définit donc un certain "template" que les vues doivent respecter et assure que toutes les vues ont essentiellement la même structure.
+            
+
+
             </p>
             <section class="main-section">
                 <h2 id="prototype" class="section-title">Prototype</h2>
