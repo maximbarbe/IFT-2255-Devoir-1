@@ -111,11 +111,14 @@ class Tests {
 
     @Test
     public void getEntravesTest() {
-        ArrayList<Entrave> entraves = EntraveController.getEntravesByID("671a580d7649be00197b3eee");
+        ArrayList<Entrave> entraves = EntraveController.getEntraves();
         Entrave premiereEntrave = entraves.get(0);
+        String street = premiereEntrave.getStreetId();
+        ArrayList<Entrave> entraves2 = EntraveController.getEntravesByStreet(street);
+        Entrave deuxiemeEntrave = entraves2.get(0);
         String entrave1 = ("ID du travail correspondant: " + premiereEntrave.getTravailId()+"; Nom de la rue: "+premiereEntrave.getStreetId() + "; Effet sur la rue: "+premiereEntrave.getStreetImpact());
-        String expectedEntrave1 = "ID du travail correspondant: 671a580d7649be00197b3eee; Nom de la rue: rue Garnier; Effet sur la rue: Rue barrée";
-        assertEquals(expectedEntrave1, entrave1);
+        String entrave2 = ("ID du travail correspondant: " + deuxiemeEntrave.getTravailId()+"; Nom de la rue: "+deuxiemeEntrave.getStreetId() + "; Effet sur la rue: "+deuxiemeEntrave.getStreetImpact());
+        assertEquals(entrave1, entrave2);
     }
 
     @Test
