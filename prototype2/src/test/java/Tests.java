@@ -1,12 +1,10 @@
 import static org.junit.jupiter.api.Assertions.*;
+import static org.prototype.Models.TypeIntervenant.PARTICULIER;
 
 
 import org.junit.jupiter.api.*;
 import org.prototype.Controllers.*;
-import org.prototype.Models.Requete;
-import org.prototype.Models.Resident;
-import org.prototype.Models.Travail;
-import org.prototype.Models.Utilisateur;
+import org.prototype.Models.*;
 
 import java.util.ArrayList;
 
@@ -81,4 +79,42 @@ class Tests {
         }
 
     }
+
+    @Test
+    public void getIntervenantTest() {
+        IntervenantController.setIntervenantFile("src/test/testIntervenants.csv");
+        Intervenant expectedUser = new Intervenant("test","tester1@gmail.com","testpassword",PARTICULIER,"00000000");
+        Intervenant resultUser = null;
+        try {
+            resultUser = (Intervenant) UtilisateurController.getUtilisateur("tester1@gmail.com", "testpassword");
+        } catch (Exception e) {
+            fail("Erreur lors du casting entre utilisateur et Intervenant");
+        }
+        if (resultUser == null) {
+            fail("Erreur lorsqu'on essaye d'aller chercher un utilisateur par son email et password");
+        }
+        assertEquals(expectedUser.getNomComplet(), resultUser.getNomComplet());
+        assertEquals(expectedUser.getIdentifiantVille(), resultUser.getIdentifiantVille());
+        assertEquals(expectedUser.getAdresseCourriel(), resultUser.getAdresseCourriel());
+        assertEquals(expectedUser.getMotDePasse(), resultUser.getMotDePasse());
+    }
+
+    @Test
+    public void getEntravesTest() {
+        ArrayList<Entrave> entraves = EntraveController.getEntraves();
+        Entrave premiereEntrave = entraves.get(0);
+        String entrave1 = ("ID du travail correspondant: " + premiereEntrave.getTravailId()+"; Nom de la rue: "+premiereEntrave.getStreetId() + "; Effet sur la rue: "+premiereEntrave.getStreetImpact());
+        String expectedEntrave1 = "ID du travail correspondant: 671a580d7649be00197b3eee; Nom de la rue: rue Garnier; Effet sur la rue: Rue barrée";
+        assertEquals(expectedEntrave1, entrave1);
+    }
+
+    @Test
+    public void getRequeteTest() {
+        ArrayList<Requete> requetes = RequeteController.getRequetes();
+        Requete premiereRequete = requetes.get(0);
+        String expectedRequête = "0,test,tester,RESIDENTIELS,2025-04-01,Verdun,resident3@gmail.com";
+        String requete1 = (premiereRequete.getRequeteId() + "," + premiereRequete.getTitre() + "," + premiereRequete.getDescription() + "," + premiereRequete.getType() + "," + premiereRequete.getDateDebutEspere() + "," + premiereRequete.getQuartier() + "," + premiereRequete.getUserID());
+        assertEquals(expectedRequête, requete1);
+    }
+
 }
