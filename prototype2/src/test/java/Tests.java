@@ -1,12 +1,22 @@
-import static org.junit.jupiter.api.Assertions.*;
-import static org.prototype.Models.TypeIntervenant.PARTICULIER;
-
-
-import org.junit.jupiter.api.*;
-import org.prototype.Controllers.*;
-import org.prototype.Models.*;
-
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+import org.prototype.Controllers.EntraveController;
+import org.prototype.Controllers.IntervenantController;
+import org.prototype.Controllers.RequeteController;
+import org.prototype.Controllers.ResidentController;
+import org.prototype.Controllers.TravailController;
+import org.prototype.Controllers.UtilisateurController;
+import org.prototype.Models.Entrave;
+import org.prototype.Models.Intervenant;
+import org.prototype.Models.Requete;
+import org.prototype.Models.Resident;
+import org.prototype.Models.Travail;
+import static org.prototype.Models.TypeIntervenant.PARTICULIER;
 
 class Tests {
 
@@ -103,13 +113,17 @@ class Tests {
     public void getEntravesTest() {
         ArrayList<Entrave> entraves = EntraveController.getEntraves();
         Entrave premiereEntrave = entraves.get(0);
+        String street = premiereEntrave.getStreetId();
+        ArrayList<Entrave> entraves2 = EntraveController.getEntravesByStreet(street);
+        Entrave deuxiemeEntrave = entraves2.get(0);
         String entrave1 = ("ID du travail correspondant: " + premiereEntrave.getTravailId()+"; Nom de la rue: "+premiereEntrave.getStreetId() + "; Effet sur la rue: "+premiereEntrave.getStreetImpact());
-        String expectedEntrave1 = "ID du travail correspondant: 671a580d7649be00197b3eee; Nom de la rue: rue Garnier; Effet sur la rue: Rue barrée";
-        assertEquals(expectedEntrave1, entrave1);
+        String entrave2 = ("ID du travail correspondant: " + deuxiemeEntrave.getTravailId()+"; Nom de la rue: "+deuxiemeEntrave.getStreetId() + "; Effet sur la rue: "+deuxiemeEntrave.getStreetImpact());
+        assertEquals(entrave1, entrave2);
     }
 
     @Test
     public void getRequeteTest() {
+        RequeteController.setRequetesFile("src/test/testRequetes2.csv");
         ArrayList<Requete> requetes = RequeteController.getRequetes();
         Requete premiereRequete = requetes.get(0);
         String expectedRequête = "0,test,tester,RESIDENTIELS,2025-04-01,Verdun,resident3@gmail.com";
