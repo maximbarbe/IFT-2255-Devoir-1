@@ -1749,13 +1749,15 @@
             <p>Afin de favoriser l'évolution et l'intégration de l'application, nous avons dû prendre des considérations lors de la conception du design.
             Tout d'abord, le premier choix que nous avons fait est le patron d'architecture. Pour cela, nous avons choisi d'y aller avec le modèle MVC. Nous avons choisi l'architecture MVC
             puisque cette architecture offre une décomposition modulaire assez intuitive, maximise la cohésion et facilite la réutilisation. En effet, en séparant la logique des données, on peut réutiliser les modèles dans d'autres applications 
-            et définir des nouveaux controllers. En créant un controller pour chaque modèle, on améliore également la cohésion puisque seules les méthodes concernant un modèle en particulier se retrouvent dans ce controller. Nous avons également choisi
-            de décomposer le frontend en trois vues différentes, une vue pour les utilisateurs non-connectés, une vue pour les résidents et une vue pour les intervenants. Selon nous, cette décomposition maximise la cohésion et minimise le couplage puisque 
-            les fonctionnalités réunies dans une vue dépendent du statut de l'utilisateur (non-connecté, résident ou intervenant), il y a donc une logique claire sur comment les fonctionnalités sont réunies,
-            et il y a très peu de communication entre les vues. Il serait donc facile d'ajouter, par exemple, une troisième vue pour un autre type d'utilisateur puisque cet ajout n'affecterait aucunement les vues de résident et d'intervenant.
+            et définir des nouveaux controllers. En créant un controller pour chaque modèle, on améliore également la cohésion car chaque module ou classe est responsable d'une tâche spécifique, ce qui rend le code plus compréhensible et plus facile à maintenir. 
+            Les responsabilités sont clairement définies, évitant ainsi la confusion et les chevauchements fonctionnels. Nous avons également choisi
+            de décomposer le frontend en trois vues différentes, une vue pour les utilisateurs non-connectés, une vue pour les résidents et une vue pour les intervenants. Selon nous, cette décomposition maximise la  cohésion et minimise le couplage puisque 
+            les fonctionnalités réunies dans une vue dépendent du statut de l'utilisateur (non-connecté, résident ou intervenant) ainsi les composants peuvent être modifiés ou remplacés sans affecter les autres parties du système. 
+            et il y a très peu de communication entre les vues. Il serait donc facile d'ajouter, par exemple, une troisième vue pour un autre type d'utilisateur puisque cet ajout n'affecterait aucunement les vues de résident et d'intervenant (Modularité).
             Concernant les vues, afin de favoriser l'abstraction, nous avons défini une classe abstraite <code><i>View</i></code> et une interface <code><i>ConnectedView</i></code>. La classe <code><i>View</i></code> possède 
             toutes les méthodes et les attributs communs à toutes les vues (connectées ou non), alors que l'interface <code><i>ConnectedView</i></code> définit les méthodes que seules les vues <i>connectées</i> doivent implémenter.
-            En faisant cela, on définit donc un certain "template" que les vues doivent respecter et assure que toutes les vues ont essentiellement la même structure.
+            En faisant cela, on définit donc un certain "template" que les vues doivent respecter et assure que toutes les vues ont essentiellement la même structure. Ainsi au niveau de la flexiblite grâce à l'utilisation de principes d'abstraction et d'encapsulation, 
+            l'application peut facilement s'adapter aux nouvelles exigences ou modifications des besoins
             
 
 
