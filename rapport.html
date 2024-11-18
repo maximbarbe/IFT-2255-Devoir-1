@@ -1758,8 +1758,8 @@
             et il y a très peu de communication entre les vues. Il serait donc facile d'ajouter, par exemple, une troisième vue pour un autre type d'utilisateur puisque cet ajout n'affecterait aucunement les vues de résident et d'intervenant (Modularité).
             Concernant les vues, afin de favoriser l'abstraction, nous avons défini une classe abstraite <code><i>View</i></code> et une interface <code><i>ConnectedView</i></code>. La classe <code><i>View</i></code> possède 
             toutes les méthodes et les attributs communs à toutes les vues (connectées ou non), alors que l'interface <code><i>ConnectedView</i></code> définit les méthodes que seules les vues <i>connectées</i> doivent implémenter.
-            En faisant cela, on définit donc un certain "template" que les vues doivent respecter et assure que toutes les vues ont essentiellement la même structure. Ainsi au niveau de la flexiblite grâce à l'utilisation de principes d'abstraction et d'encapsulation, 
-            l'application peut facilement s'adapter aux nouvelles exigences ou modifications des besoins
+            En faisant cela, on définit donc un certain "template" que les vues doivent respecter et assure que toutes les vues ont essentiellement une structure générale. Ainsi au niveau de la flexiblite grâce à l'utilisation de principes d'abstraction, d'encapsulation et de cohésion, 
+            l'application peut facilement s'adapter aux nouvelles exigences ou à la modification des besoins
             
 
 
