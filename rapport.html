@@ -1677,7 +1677,7 @@
                         Cela nous permettra de nous assurer que l'application fonctionnera presque en tout temps et qu'il n'y a pas de panne qui cause l'arrêt complet du fonctionnement de l'application.
                         De plus, comme il s'agit de la ville qui demande aux entreprises de participer à l'application, alors nous suggèrons à la ville de fournir du matériel aux participants/intervenants afin qu'ils ne doivent pas dépenser leur propre argent.
                         Afin de réduire les coûts au maximum, notre suggestion est de tout simplement fournir des petits téléphones/appareils intelligents préconfigurés qui pourront uniquement lancer l'application. Ces appareils n'ont pas besoin d'un processeur extrêmement puissant
-                        ou de grande mémoire de stockage, il est uniquement nécessaire qu'ils puissent utiliser le système d'une manière fluide. Finalement, nous aurons besoin de serveurs pour que les utilisateurs puissent accéder aux données.
+                        ou de grande mémoire de stockage, il est uniquement nécessaire qu'ils puissent utiliser le système d'une manière fluide. Finalement, comme nous envisagerions d'utiliser une architecture de stockage cloud, on a pas besoin de matériel supplémentaire pour héberger les données.
 
                     </p>
                 </div>
@@ -1690,6 +1690,8 @@
                         le format JSON nous offrait, mais, comme énoncé plus haut, cela nous permet de manipuler plus facilement les données. Cela nous permet d'assurer une meilleure intégrité des données
                         puisqu'il n'y aura pas de pertes de données dues à des erreurs lors du parsing. Nous pensons que ce changement mène à un net positif à cause de son effet sur l'intégrité des données. Ensuite, afin d'assurer la sécurité des données, nous devrons implémenter ou utiliser
                         des mécanismes d'encryption/hashing afin de sécuriser nos données sensibles. Finalement, pour une version officielle déployée, nous envisagerions d'utiliser une architecture de stockage cloud afin de maximiser la scalabilité et la disponibilité des données.
+                        En effet, il est facile de "scale up" une base de données dans le Cloud puisque la plupart des fournisseurs offrent simplement la possibilité de payer pour obtenir plus d'espace. De plus, la plupart des fournisseurs de base de données sur le cloud comme Google ou Amazon sont presque toujours
+                        disponibles, donc il n'y a pas vraiment de souci quant à la disponibilité des données.
                               
                     </p>
                 </div>
