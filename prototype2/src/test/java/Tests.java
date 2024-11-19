@@ -1,7 +1,10 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
@@ -15,7 +18,10 @@ import org.prototype.Models.Entrave;
 import org.prototype.Models.Intervenant;
 import org.prototype.Models.Requete;
 import org.prototype.Models.Resident;
+import org.prototype.Models.StatutProjet;
 import org.prototype.Models.Travail;
+import org.prototype.Models.TypeTravail;
+
 import static org.prototype.Models.TypeIntervenant.PARTICULIER;
 
 class Tests {
@@ -131,4 +137,78 @@ class Tests {
         assertEquals(expectedRequête, requete1);
     }
 
+
+
+    @Test
+    public void testGetEntravesByID() {
+        // Spécifiez un ID de travail qui existe dans vos données actuelles
+        String travailIdTest = "671a580d7649be00197b3eee"; // Remplacez par un ID réel
+
+        // Appel de la méthode à tester
+        ArrayList<Entrave> result = EntraveController.getEntravesByID(travailIdTest);
+
+        // Vérification que toutes les entraves retournées ont le bon ID de travail
+        for (Entrave e : result) {
+            assertEquals(travailIdTest, e.getTravailId(), "L'entrave a un travailId incorrect.");
+        }
+
+        // Affichage des entraves pour vérification manuelle (optionnel)
+        System.out.println("Entraves pour l'ID de travail '" + travailIdTest + "':");
+        for (Entrave e : result) {
+            System.out.println("- Rue : " + e.getStreetId() + ", Impact : " + e.getStreetImpact());
+        }
+    }
+
+    @Test
+    public void testGetRequeteByQuartier() {
+        RequeteController.setRequetesFile("src/test/testRequetes.csv");
+        // Spécifiez un quartier qui existe dans vos données
+        String quartierTest = "avenue De Lorimier "; // Remplacez par un quartier réel présent dans vos données
+
+        // Appel de la méthode à tester
+        ArrayList<Requete> result = RequeteController.getRequeteByQuartier(quartierTest);
+
+        // Vérifiez que le résultat n'est pas nul
+        assertNotNull(result, "La liste des requêtes ne doit pas être nulle.");
+
+        // Vérifiez que chaque requête dans le résultat a le quartier spécifié
+        for (Requete r : result) {
+            assertEquals(quartierTest.toLowerCase(), r.getQuartier().toLowerCase(),
+                "La requête n'appartient pas au quartier spécifié.");
+        }
+
+        // Optionnel : Afficher les requêtes pour vérification manuelle
+        System.out.println("Requêtes pour le quartier '" + quartierTest + "':");
+        for (Requete r : result) {
+            System.out.println("- " + r.getTitre() + " (Quartier : " + r.getQuartier() + ")");
+        }
+    }
+    
+
+    @Test
+    public void testGetRequeteByDate() {
+        RequeteController.setRequetesFile("src/test/testRequetes.csv");
+        // Spécifiez une date qui existe dans vos données
+        String dateTest = "2025-01-01"; // Remplacez par une date réelle présente dans vos données
+
+        // Appel de la méthode à tester
+        ArrayList<Requete> result = RequeteController.getRequeteByDate(dateTest);
+
+        // Vérifiez que le résultat n'est pas nul
+        assertNotNull(result, "La liste des requêtes ne doit pas être nulle.");
+
+        // Vérifiez que chaque requête dans le résultat a la date spécifiée
+        for (Requete r : result) {
+            assertEquals(dateTest.toLowerCase(), r.getDateDebutEspere().toLowerCase(),
+                "La requête n'a pas la date spécifiée.");
+        }
+
+        // Optionnel : Afficher les requêtes pour vérification manuelle
+        System.out.println("Requêtes pour la date '" + dateTest + "':");
+        for (Requete r : result) {
+            System.out.println("- " + r.getTitre() + " (Date : " + r.getDateDebutEspere() + ")");
+        }
+    }
+        
+    
 }
