@@ -19,4 +19,3 @@ Organisation du répertoire:
 
 > [/diagrammes](/diagrammes/): Ce folder contient tous les diagrammes présents dans le rapport.<br/>
 > [rapport.html](/rapport.html): Ce fichier contient le rapport du devoir.
-test
