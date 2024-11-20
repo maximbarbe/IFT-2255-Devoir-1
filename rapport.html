@@ -703,10 +703,10 @@
 
                         <br />
                         <li><b>Exigences:</b></li>
-                        <li>Glossaire (Aissatou Ndiaye): 3h; Semaines 3-6</li>
+                        <li>Glossaire (Aissatou Ndiaye, Maxim Barbe): 3h; Semaines 3-6 et 12</li>
                         <li>Diagrammes CU (Maxim Barbe, Aissatou Ndiaye, Riste Popov): 8h; Semaines 3-6 et 11</li>
                         <li>Diagrammes Activite (Aissatou Ndiaye, Riste Popov): 6h; Semaines 4-6 et 11</li>
-                        <li>Scenarios (Maxim Barbe, Aissatou Ndiaye): 10h; Semaines 3-6</li>
+                        <li>Scenarios (Maxim Barbe, Aissatou Ndiaye): 10h; Semaines 3-6 et 12</li>
                         <br />
                         <li><b>Analyse:</b></li>
                         <li>Risques / Besoins non-fonctionnels (Maxim Barbe, Riste Popov): 2h; Semaines 3-6</li>
@@ -714,15 +714,14 @@
                         <br />
 
                         <li><b>Conception:</b></li>
-                        <li>Architecture: (Aissatou Ndiaye)</li>
+                        <li>Architecture: (Aissatou Ndiaye, Maxim Barbe); 3h; Semaines 11-12</li>
                         <li>Diagramme de classes: (Maxim Barbe, Aissatou Ndiaye); 10h; Semaines 11-12</li>
                         <li>Diagrammes de séquence (Maxim Barbe, Riste Popov): 6h; Semaines 11-12</li>
                         <br/>
                         <li><b>Autres:</b></li>
-                        <li>Rédaction du rapport (Juste écrire les informations, pas penser aux réponses): (Maxim Barbe, Aissatou Ndiaye, Riste Popov); 2h; Semaines 1-13</li>
+                        <li>Rédaction du rapport (Juste écrire les informations, pas penser aux réponses): (Maxim Barbe, Aissatou Ndiaye, Riste Popov); 3h; Semaines 1-13</li>
                         <li>Rédaction du README: (Maxim Barbe); 1h; Semaines 5-6 et 11</li>
-                        <li>Prototype: (Maxim Barbe); 10h; Semaines 4-6</li>
-                        <li>Implémentation: (Maxim Barbe); 15h; Semaine 10-14</li>
+                        <li>Implémentation: (Maxim Barbe); 25h; Semaine 4-6 et 10-15</li>
                         <li>Tests: (Maxim Barbe, Aissatou Ndiaye, Riste Popov); 1h; Semaines 11-12</li>
                         <li>Documentation: (Maxim Barbe); 3h; Semaine 10-15</li>
                         
@@ -1283,7 +1282,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucune</li>
+                                <li class="dash">La candidature est stockée en base de données et accessible par le résident qui a posé la requête de travail.</li>
                             </ul>
                         </div>
                         
@@ -1298,18 +1297,6 @@
                             <li class="scenario-main-step">Le système affiche <em>Votre candidature a été soumise.</em>.</li>
                         </ol>
 
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="4">
-                                    Une candidature a déjà été soumise par un autre intervenant.
-                                    <ol class="bare-list">
-                                        <li value="4">Le système affiche le bouton d'envoi comme étant désactivé.</li>
-                                        <li value="4">Le scénario reprend à l'étape 2.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                        </div>
                     </div>
                 </div>
 
@@ -1419,19 +1406,23 @@
                     <div class="scenario-main">
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Appel au CU <em><a href="#cu-5">Consulter les notifications</a></em></li>
-                            <li class="scenario-main-step">Le résident appuie sur la notification de sa requête de travail.</li>
+                            <li class="scenario-main-step">Le système affiche le menu principal.</li>
+                            <li class="scenario-main-step">Le résident ouvre la page Requête de travail.</li>
+                            <li class="scenario-main-step">Le système affiche le menu de la page.</li>
+                            <li class="scenario-main-step">Le résident ouvre la page Mes requêtes.</li>
+                            <li class="scenario-main-step">Le système affiche les requêtes du résident.</li>
+                            <li class="scenario-main-step">Le résident choisit une requête.</li>
                             <li class="scenario-main-step">Le système affiche les détails concernant la requête de travail.</li>
                         </ol>
 
                         <div class="scenario-alt">
                             <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
                             <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="3">
+                                <li class="scenario-alt-step" value="7">
                                     Un intervenant a soumis sa candidature
                                     <ol class="bare-list">
-                                        <li value="3">L'utilisateur accepte ou refuse la candidature de l'intervenant.</li>
-                                        <li value="3">Le scénario se termine.</li>
+                                        <li value="7">L'utilisateur accepte ou refuse la candidature de l'intervenant.</li>
+                                        <li value="7">Le scénario se termine.</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -1439,65 +1430,7 @@
                     </div>
                 </div>
                 
-                <div class="scenario" id="cu-13">
-                    <div class="scenario-meta">
-                        <h4 class="cu-name">
-                            <strong>CU:</strong> Modifier les notifications
-                        </h4>
-                        <p class="cu-goal">
-                            <strong>Objectif:</strong> Un résident souhaite s'abonner ou se désabonner des notifications d'une rue ou quartier.
-                        </p>
-                        
-                        <hr>
-
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Acteurs</h5>
-                            <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Résident (Principal)</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Préconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Le résident doit être connecté.</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Postconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucune</li>
-                            </ul>
-                        </div>
-                    
-                    </div>
-                    <div class="scenario-main">
-                        <h5 class="scenario-main-title">Scénario principal</h5>
-                        <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Appel au CU <em><a href="#cu-5">Consulter les notifications</a></em></li>
-                            <li class="scenario-main-step">Le résident appuie sur <em>Modifier notifications</em>.</li>
-                            <li class="scenario-main-step">Le système affiche les quartiers et les rues auxquelles le résident est abonné.</li>
-                            <li class="scenario-main-step">Le résident recherche le quartier ou la rue à modifier.</li>
-                            <li class="scenario-main-step">Le système affiche les options de s'abonner ou de se désabonner.</li>
-                            <li class="scenario-main-step">Le résident choisit l'option approprié et confirme.</li>
-                            <li class="scenario-main-step">Le système affiche <em>Modifications sauvegardées</em> et enregistre les changements.</li>
-                        </ol>
-
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="7">
-                                    Une erreur s'est déroulée lors de l'enregistrement.
-                                    <ol class="bare-list">
-                                        <li value="7">Le système affiche <em>Erreur lors de l'enregistrement, veuillez réessayer.</em>.</li>
-                                        <li value="7">Le scénario reprend à l'étape 6.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="scenario" id="cu-14">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
@@ -1526,7 +1459,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucune</li>
+                                <li class="dash">La plage horaire sera stockée en base de données et sera accessible aux autres résidents et aux intervenants.</li>
                             </ul>
                         </div>
                     
@@ -1557,6 +1490,118 @@
                                 </li>
                             </ol>
                         </div>
+                    </div>
+                </div>
+                <div class="scenario" id="cu-15">
+                    <div class="scenario-meta">
+                        <h4 class="cu-name">
+                            <strong>CU:</strong> S'abonner à un projet
+                        </h4>
+                        <p class="cu-goal">
+                            <strong>Objectif:</strong> Un résident souhaite s'abonner aux notifications concernant un projet de travail.
+                        </p>
+                        
+                        <hr>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Acteurs</h5>
+                            <ul class="bare-list cu-actors">
+                                <li class="cu-actor">Résident (Principal)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Préconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Le résident doit être connecté.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Postconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">L'abonnement aux notifications est sauvegardé et le résident recevera antérieurement des notifications lorsqu'il y aura des modifications au projet.</li>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                    <div class="scenario-main">
+                        
+                    </div>
+                </div>
+                <div class="scenario" id="cu-15">
+                    <div class="scenario-meta">
+                        <h4 class="cu-name">
+                            <strong>CU:</strong> Se désabonner d'un projet
+                        </h4>
+                        <p class="cu-goal">
+                            <strong>Objectif:</strong> Un résident souhaite se désabonner des notifications d'un projet de travail.
+                        </p>
+                        
+                        <hr>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Acteurs</h5>
+                            <ul class="bare-list cu-actors">
+                                <li class="cu-actor">Résident (Principal)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Préconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Le résident doit être connecté.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Postconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">La modification des abonnements est enregisté et le résident ne recevra plus les notifications concernant le projet de travail.</li>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                    <div class="scenario-main">
+                        
+                    </div>
+                    
+                </div>
+                <div class="scenario" id="cu-15">
+                    <div class="scenario-meta">
+                        <h4 class="cu-name">
+                            <strong>CU:</strong> Consulter les entraves routières causées par les travaux en cours
+                        </h4>
+                        <p class="cu-goal">
+                            <strong>Objectif:</strong> Un résident souhaite obtenir des informations sur les entraves causées par les travaux entrepris dans la ville de Montréal.
+                        </p>
+                        
+                        <hr>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Acteurs</h5>
+                            <ul class="bare-list cu-actors">
+                                <li class="cu-actor">Résident (Principal)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Préconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Le résident doit être connecté.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Postconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Aucune</li>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                    <div class="scenario-main">
+                        
                     </div>
                 </div>
 
@@ -1760,24 +1805,22 @@
                         <li>
                             Comptes résidents:
                             <ul>
-                                <li>
-                                    Email: test_resident@gmail.com
-                                </li>
-                                <li>
-                                    Mot de passe: qwerty
-                                </li>
+                                <li><b>Email:</b>resident1@gmail.com; <b>Password: </b>resident1</li>
+                                <li><b>Email:</b>resident2@gmail.com; <b>Password: </b>resident2</li>
+                                <li><b>Email:</b>resident3@gmail.com; <b>Password: </b>resident3</li>
+                                <li><b>Email:</b>resident4@gmail.com; <b>Password: </b>resident4</li>
+                                    
                             </ul>
                         </li>
                         <li>
-                            Compte intervenant:
-                            <ul>
-                                <li>
-                                    Email: test_intervenant@gmail.com
-                                </li>
-                                <li>
-                                    Mot de passe: qwerty
-                                </li>
-                            </ul>
+                            Comptes intervenants:
+                                <ul>
+                                    <li><b>Email:</b>intervenant1@gmail.com; <b>Password: </b>intervenant1</li>
+                                    <li><b>Email:</b>intervenant2@gmail.com; <b>Password: </b>intervenant2</li>
+                                    <li><b>Email:</b>intervenant3@gmail.com; <b>Password: </b>intervenant3</li>
+                                    <li><b>Email:</b>intervenant4@gmail.com; <b>Password: </b>intervenant4</li>
+                                        
+                                </ul>
                         </li>
                     </ul>
                     
@@ -1787,9 +1830,15 @@
                     Afin d'éxécuter le code, il faut run les commandes suivantes:
                     
                     <ul>
-                        <li><code>cd ./prototype2</code> si on est pas dans le répertoire <em><b>/prototype2</b></em> et s'assurer d'être dans le même répertoire que le fichier <code>pom.xml</code>.</li>
-                        <li><code>java -jar maVille.jar</code> pour éxécuter le fichier éxécutable.</li>
+                        <li><code>cd ./application</code> si on est pas dans le répertoire <em><b>/application</b></em>.</li>
+                        <li><code>java -cp prototype2-1.jar org.prototype.MaVille</code> pour éxécuter le fichier éxécutable.</li>
                     </ul>
+                </p>
+                <p>Afin d'éxécuter les tests unitaires, il faut pull le répertoire prototype2 au complet de GitHub
+                    <ul>
+                    <li>S'assurer d'être dans le répertoire avec le fichier <code>pom.xml</code>.</li>
+                    <li>Éxécuter la commande <code>mvn test</code> pour éxécuter le fichier avec les tests unitaires.</li>
+                </ul>
                 </p>
             </section>
         </div>
