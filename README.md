@@ -40,7 +40,7 @@ D'abord, il faut télécharger une copie du folder prototype2
         Éxécuter la commande <code>mvn package</code>
     </li>
     <li>
-        Créer un folder <code>src</code> dans le folder <code>target</code> et y déposer les fichiers de <code>prototype2/data</code>
+        Créer un folder <code>src</code> dans le folder <code>prototype2/target</code> et y déposer les fichiers de <code>prototype2/data</code>
     <li>
         S'assurer d'être dans le folder <code>prototype2/target</code> et éxécuter <code>java -cp prototype2-1.jar org.prototype.MaVille</code>
     </li>    
