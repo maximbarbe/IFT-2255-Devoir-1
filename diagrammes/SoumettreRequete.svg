@@ -166,8 +166,10 @@
     ><rect x="0" y="0" clip-path="url(#clipPath2)" fill="none" width="121" rx="15" ry="15" height="40"
     /></g
     ><g font-size="11px" transform="translate(388,113)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
-    ><text x="4" xml:space="preserve" y="24" clip-path="url(#clipPath3)" stroke="none"
-      >Choisir onglet Travaux</text
+    ><text x="26" xml:space="preserve" y="17" clip-path="url(#clipPath3)" stroke="none"
+      >Choisir onglet</text
+      ><text x="36" xml:space="preserve" y="32" clip-path="url(#clipPath3)" stroke="none"
+      >Requetes</text
     ></g
     ><g font-size="11px" transform="translate(362,319)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" stroke-opacity="1"
     ><rect x="0" y="0" clip-path="url(#clipPath4)" width="180" rx="15" ry="15" height="40" stroke="none"
