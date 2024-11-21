@@ -19,3 +19,29 @@ Organisation du répertoire:
 
 > [/diagrammes](/diagrammes/): Ce folder contient tous les diagrammes présents dans le rapport.<br/>
 > [rapport.html](/rapport.html): Ce fichier contient le rapport du devoir.
+
+<h2> Instructions pour éxécuter et tester l'application:</h2>
+D'abord, il faut télécharger une copie du folder prototype2
+<h3>Tester:</h3>
+<ul>
+    <li>
+        Se rendre dans le folder <code>prototype2</code>
+    </li>
+    <li>
+        Éxécuter la commande <code>mvn test</code>
+    </li>
+</ul>
+<h3>Éxécuter:</h3>
+<ul>
+    <li>
+        Se rendre dans le folder <code>prototype2</code>
+    </li>
+    <li>
+        Éxécuter la commande <code>mvn package</code>
+    </li>
+    <li>
+        Créer un folder <code>src</code> dans le folder <code>target</code> et y déposer les fichiers de <code>data</code>
+    <li>
+        S'assurer d'être dans le folder <code>prototype2/target</code> et éxécuter <code>java -cp prototype2-1.jar org.prototype.MaVille</code>
+    </li>    
+</ul>    

@@ -704,8 +704,8 @@
                         <br />
                         <li><b>Exigences:</b></li>
                         <li>Glossaire (Aissatou Ndiaye, Maxim Barbe): 3h; Semaines 3-6 et 12</li>
-                        <li>Diagrammes CU (Maxim Barbe, Aissatou Ndiaye, Riste Popov): 8h; Semaines 3-6 et 11</li>
-                        <li>Diagrammes Activite (Aissatou Ndiaye, Riste Popov): 6h; Semaines 4-6 et 11</li>
+                        <li>Diagrammes CU (Maxim Barbe, Aissatou Ndiaye, Riste Popov): 9h; Semaines 3-6 et 11-12</li>
+                        <li>Diagrammes Activite (Maxim Barbe, Aissatou Ndiaye, Riste Popov): 8h; Semaines 4-6 et 11-12</li>
                         <li>Scenarios (Maxim Barbe, Aissatou Ndiaye): 10h; Semaines 3-6 et 12</li>
                         <br />
                         <li><b>Analyse:</b></li>
@@ -734,7 +734,7 @@
 
                 <h3 class="subsection-title">Hypothèses (optionnel)</h3>
                 <p>
-                    On assume que les travaux peuvent être uniquement identifiés avec l'aide d'un id, cela sera utilisé pour identifier les travaux lors du signalement de problèmes.
+                    On assume que les tous les objets possèdent un ID unique qui leur permettra d'être identifié.
                 </p>
             </section>
 
@@ -1529,7 +1529,7 @@
                         
                     </div>
                 </div>
-                <div class="scenario" id="cu-15">
+                <div class="scenario" id="cu-16">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
                             <strong>CU:</strong> Se désabonner d'un projet
@@ -1567,7 +1567,7 @@
                     </div>
                     
                 </div>
-                <div class="scenario" id="cu-15">
+                <div class="scenario" id="cu-17">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
                             <strong>CU:</strong> Consulter les entraves routières causées par les travaux en cours
@@ -1604,7 +1604,7 @@
                         
                     </div>
                 </div>
-                <div class="scenario" id="cu-15">
+                <div class="scenario" id="cu-18">
                     <div class="scenario-meta">
                         <h4 class="cu-name">
                             <strong>CU:</strong> Envoyer une notification
@@ -1642,6 +1642,83 @@
                     </div>
                 </div>
 
+                <div class="scenario" id="cu-19">
+                    <div class="scenario-meta">
+                        <h4 class="cu-name">
+                            <strong>CU:</strong> Fermer une requête de travail
+                        </h4>
+                        <p class="cu-goal">
+                            <strong>Objectif:</strong> Un résident souhaite fermer une requête de travail.
+                        </p>
+                        
+                        <hr>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Acteurs</h5>
+                            <ul class="bare-list cu-actors">
+                                <li class="cu-actor">Résident (Principal)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Préconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">Le résident doit être connecté.</li>
+                                <li class="dash">Le résident doit avoir déposé une requête de travail auparavant.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Postconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">La requête sera fermée et n'apparaîtra plus pour les intervenants.</li>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                    <div class="scenario-main">
+                        
+                    </div>
+                </div>
+                
+                <div class="scenario" id="cu-20">
+                    <div class="scenario-meta">
+                        <h4 class="cu-name">
+                            <strong>CU:</strong> Confirmer une candidature
+                        </h4>
+                        <p class="cu-goal">
+                            <strong>Objectif:</strong> Un intervenant souhaite confirmer sa candidature à une requête de travail.
+                        </p>
+                        
+                        <hr>
+
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Acteurs</h5>
+                            <ul class="bare-list cu-actors">
+                                <li class="cu-actor">Intervenant (Principal), Résident (Secondaire)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Préconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">L'intervenant doit être connecté.</li>
+                                <li class="dash">L'intervenant doit avoir soumis une candidature à une requête de travail d'un résident et celui-ci doit l'avoir accepter.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cu-part">
+                            <h5 class="cu-part-title">Postconditions</h5>
+                            <ul class="bare-list cu-conditions">
+                                <li class="dash">La candidature aura maintenant le statut de confirmée et sera updaté en base de donnée.</li>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                    <div class="scenario-main">
+                        
+                    </div>
+                </div>
 
             
                 
