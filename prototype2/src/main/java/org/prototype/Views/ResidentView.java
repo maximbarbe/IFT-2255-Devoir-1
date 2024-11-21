@@ -297,7 +297,8 @@ public class ResidentView extends View implements ConnectedView{
             String titre = reader.nextLine();
             println("Description détaillée: ");
             String desc = reader.nextLine();
-            String type = "RESIDENTIELS";
+            print("Type de travail: ");
+            String type = reader.nextLine();
 
             print("Date de début espéré (YYYY-MM-DD): ");
             String date = reader.nextLine();
