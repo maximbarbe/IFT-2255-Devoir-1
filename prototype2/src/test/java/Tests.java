@@ -159,7 +159,7 @@ class Tests {
     public void testGetRequeteByQuartier() {
         RequeteController.setRequetesFile("src/test/testRequetes.csv");
         // Spécifiez un quartier qui existe dans vos données
-        String quartierTest = "avenue De Lorimier "; // Remplacez par un quartier réel présent dans vos données
+        String quartierTest = "Outremont "; // Remplacez par un quartier réel présent dans vos données
 
         // Appel de la méthode à tester
         ArrayList<Requete> result = RequeteController.getRequeteByQuartier(quartierTest);
