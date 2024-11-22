@@ -34,7 +34,7 @@ public class IntervenantController {
             while ((line = reader.readLine())!=null) {
                 TypeIntervenant type = null;
                 String[] data = line.split(",");
-                switch (data[4]) {
+                switch (data[3]) {
                     case "entreprise_publique":
                         type = TypeIntervenant.ENTREPRISE_PUBLIQUE;
                         break;
