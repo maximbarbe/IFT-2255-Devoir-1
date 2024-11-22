@@ -133,10 +133,26 @@ public class ResidentView extends View implements ConnectedView{
     public void consulterTravaux(){
         while (true) {
             clearConsole();
-            println("Travaux en cours ou futurs: \n\n");
             ArrayList<Travail> travaux = TravailController.getTravaux();
+            ArrayList<Travail> travauxPresent = new ArrayList<>();
+            ArrayList<Travail> travauxFuturs = new ArrayList<>();
             for (Travail t:travaux) {
-                println("ID: "+t.getId() + "; Titre: "+t.getTitre() + "; Intervenant: "+t.getIdentifiantIntervenant() + "; Quartiers affectés: "+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + "; Status: "+t.getStatus());
+                if (t.getStatus().equals(StatutProjet.EN_COURS)) {
+                    travauxPresent.add(t);
+                } else if (t.getStatus().equals(StatutProjet.PREVU)) {
+                    travauxFuturs.add(t);
+                }
+            }
+            println("Travaux en cours: \n\n");
+            
+            for (Travail t:travauxPresent) {
+                println("ID: "+t.getId() + "; Titre: "+t.getTitre() + "; Intervenant: "+t.getIdentifiantIntervenant() + "; Quartiers affectés: "+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + "; Date de début: "+t.getDateDebut() + "; Date de fin: " + t.getDateFin());
+            }
+            print("\n\n");
+            println("Travaux dans les 3 prochains mois: \n\n");
+
+            for (Travail t:travauxFuturs) {
+                println("ID: "+t.getId() + "; Titre: "+t.getTitre() + "; Intervenant: "+t.getIdentifiantIntervenant() + "; Quartiers affectés: "+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + "; Date de début: "+t.getDateDebut() + "; Date de fin: " + t.getDateFin());
             }
 
             while (true) {
