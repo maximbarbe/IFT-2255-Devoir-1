@@ -113,6 +113,12 @@ public class IntervenantController extends RegisterController{
             return 4;
         }
 
+        // Initialement, je voulais utiliser la fonction withBcrypt fournie et utiliser une quantité de salt différente.
+        // Toutefois, cela ne marchait pas, donc j'ai dû utiliser les paramètres dans l'exemple de la documentation.
+        // C'est-à-dire, utiliser une longueur de salt de 12 et la fonction withArgon2()
+        // La documentation peut être trouvée ici:
+        // https://github.com/Password4j/password4j
+        // Source: Bertoldi, D. (2024, 31 juillet). password4j. GitHub. https://github.com/Password4j/password4j.
         if (!saveIntervenant(new Intervenant(nom, adresseCourriel, Password.hash(motDePasse).addRandomSalt(12).withArgon2().getResult(), determineIntervenantType(type), identifiantVille))) {
             return 5;
         }
