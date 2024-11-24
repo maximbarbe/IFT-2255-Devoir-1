@@ -4,7 +4,9 @@ package org.prototype.Controllers;
 import org.prototype.Models.Utilisateur;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
+import com.password4j.*;
 
 
 /**
@@ -16,7 +18,7 @@ public class UtilisateurController {
      * Fetch tous les utilisateurs
      * @return - La liste de tous les utilisateurs 
      */
-    private static ArrayList<Utilisateur> getUtilisateurs() {
+    public static ArrayList<Utilisateur> getUtilisateurs() {
         ArrayList<Utilisateur> users = new ArrayList<>();
         users.addAll(ResidentController.getResidents());
         users.addAll(IntervenantController.getIntervenants());
@@ -34,11 +36,15 @@ public class UtilisateurController {
     public static Utilisateur getUtilisateur(String email, String password){
         ArrayList<Utilisateur> users = UtilisateurController.getUtilisateurs();
         for (Utilisateur u:users) {
-            if (u.getAdresseCourriel().equals(email) && u.getMotDePasse().equals(password)) {
+            // La méthode pour checker les passwords est prise de la documentation officielle de password4j:
+            // https://github.com/Password4j/password4j
+            // Source: Bertoldi, D. (2024, 31 juillet). password4j. GitHub. https://github.com/Password4j/password4j.
+            if (u.getAdresseCourriel().toLowerCase().equals(email.toLowerCase()) && Password.check(password, u.getMotDePasse()).withArgon2()) {
                 return u;
             }
         }
         return null;
     }
+
 
 }

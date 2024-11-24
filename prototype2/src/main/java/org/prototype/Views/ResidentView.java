@@ -22,7 +22,7 @@ public class ResidentView extends View implements ConnectedView{
             println("2) Profil");
             println("3) Notifications");
             println("4) Requetes");
-            println("5) Quitter");
+            println("5) Se déconnecter");
             print("Votre choix > ");
             String res = reader.nextLine();
             switch (res) {
@@ -39,7 +39,7 @@ public class ResidentView extends View implements ConnectedView{
                     pageRequeteTravail();
                     continue;
                 case "5":
-                    System.exit(0);
+                    return;
                 default:
                     println("Mauvais choix, veuillez réessayer");
             }

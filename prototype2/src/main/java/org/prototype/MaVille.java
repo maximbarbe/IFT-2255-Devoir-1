@@ -1,6 +1,7 @@
 package org.prototype;
 
 
+import org.prototype.Controllers.ResidentController;
 import org.prototype.Models.Utilisateur;
 import org.prototype.Views.UnauthenticatedView;
 
@@ -29,6 +30,10 @@ public class MaVille {
     }
     public static void main(String[] args) {
         UnauthenticatedView app = new UnauthenticatedView();
+
+        ResidentController.initHashMap();
+
+
         // Commence l'application
         app.startApplication();
 

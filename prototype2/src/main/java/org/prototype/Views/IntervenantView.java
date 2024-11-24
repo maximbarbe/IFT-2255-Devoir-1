@@ -20,7 +20,7 @@ public class IntervenantView extends View implements ConnectedView{
             println("2) Consulter les requêtes de travail");
             println("3) Mettre à jour les informations sur un chantier");
             println("4) Profil");
-            println("5) Quitter");
+            println("5) Se déconnecter");
             print("Votre choix > ");
             String code = reader.nextLine();
             switch (code) {
@@ -37,7 +37,7 @@ public class IntervenantView extends View implements ConnectedView{
                     afficherProfil();
                     continue;
                 case "5":
-                    System.exit(0);
+                    return;
                 default:
                     println("Mauvais choix, veuillez réessayer!");
                     return;

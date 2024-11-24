@@ -1,5 +1,7 @@
 package org.prototype.Views;
 
+import org.prototype.Controllers.IntervenantController;
+import org.prototype.Controllers.ResidentController;
 import org.prototype.Controllers.UtilisateurController;
 import org.prototype.MaVille;
 import org.prototype.Models.Resident;
@@ -18,25 +20,28 @@ public class UnauthenticatedView extends View{
      */
     public void pageAccueil() {
         while (true) {
+            MaVille.setCurUser(null);
             clearConsole();
             println("MaVille");
             println("\n");
             println("1) S'inscrire");
             println("2) Se connecter");
-
-                print("Votre choix: > ");
-                String choice =reader.nextLine();
-                switch (choice) {
-                    case "1":
-                        pageInscription();
-                        continue;
-                    case "2":
-                        pageConnexion();
-                        continue;
-                    default:
-                        println("Mauvais choix, veuillez réessayer");
-                        continue;
-                }
+            println("3) Quitter");
+            print("Votre choix: > ");
+            String choice =reader.nextLine();
+            switch (choice) {
+                case "1":
+                    pageInscription();
+                    continue;
+                case "2":
+                    pageConnexion();
+                    continue;
+                case "3":
+                    System.exit(0);
+                default:
+                    println("Mauvais choix, veuillez réessayer");
+                    continue;
+            }
 
         }
 
@@ -105,13 +110,46 @@ public class UnauthenticatedView extends View{
             String telephone = reader.nextLine();
             print("Adresse résidentielle > ");
             String adresse = reader.nextLine();
+            print("Code postal (YYY YYY) > ");
+            String postalCode = reader.nextLine();
             println("1) Modifier; 2) Confirmer; 3) Annuler");
 
             switch (reader.nextLine()) {
                 case "1":
                     continue;
                 case "2":
-                    return true;
+                    int statusCode = ResidentController.createResident(name, bday, email, password, adresse, telephone, postalCode);
+                    String msg = "";
+                    switch (statusCode) {
+                        case 0:
+                            return true;
+                        case 1:
+                            msg = "L'adresse courriel existe déjà, veuillez vous connecter";
+                            break;
+                        case 2:
+                            msg = "Le format d'adresse courriel est invalide.";
+                            break;
+                        case 3:
+                            msg = "Le format de date de naissance est invalide.";
+                            break;
+                        case 4:
+                            msg = "Vous ne possédez pas au moins 16 ans.";
+                            break;
+                        case 5:
+                            msg = "Le format de code postal n'est pas valide.";
+                            break;
+                        case 6:
+                            msg = "Le code postal fournit de correspond pas à un quartier.";
+                            break;
+                        case 7:
+                            msg = "Erreur lors de la sauvegarde de votre compte, veuillez réessayer.";
+                            break;
+
+                    }
+                    println(msg);
+                    print("Appuyez sur n'importe quelle touche pour continuer");
+                    reader.nextLine();
+                    continue;
                 case "3":
                     return false;
                 default:
@@ -134,15 +172,15 @@ public class UnauthenticatedView extends View{
             String email = reader.nextLine();
             print("Mot de passe > ");
             String password =reader.nextLine();
+            String type;
             while (true) {
                 println("Type: (1) Entreprise publique, (2) Entrepreneur privé, (3) Particulier");
-                String type;
                 switch (reader.nextLine()) {
                     case "1":
-                        type = "Entreprise publique";
+                        type = "entreprise_publique";
                         break;
                     case "2":
-                        type = "Entrepreneur privé";
+                        type = "entrepreneur_prive";
                         break;
                     case "3":
                         type = "particulier";
@@ -165,7 +203,30 @@ public class UnauthenticatedView extends View{
                 case "1":
                     continue;
                 case "2":
-                    return true;
+                    String msg = "";
+                    switch (IntervenantController.createIntervenant(name, type, email, password, code)) {
+                        case 0:
+                            return true;
+                        case 1:
+                            msg="Cet identifiant a déjà été utilisé, veuillez vous connecter ou contacter la ville.";
+                            break;
+                        case 2:
+                            msg = "L'identifiant fourni n'est pas dans le bon format, assurez vous d'écrire un code à 8 chiffres.";
+                            break;
+                        case 3:
+                            msg = "L'adresse courrielle existe déjà, connectez-vous.";
+                            break;
+                        case 4:
+                            msg = "L'adresse courriel n'est pas dans le bon format.";
+                            break;
+                        case 5:
+                            msg = "Une erreur est survenue lors de l'enregistrement de votre compte, veuillez réessayer.";
+                            break;
+                    }
+                    println(msg);
+                    println("Appuyez sur n'importe quelle touche pour continuer");
+                    reader.nextLine();
+                    continue;
                 case "3":
                     return false;
                 default:
