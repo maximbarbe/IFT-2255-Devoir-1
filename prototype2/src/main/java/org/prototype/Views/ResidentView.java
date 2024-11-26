@@ -1,8 +1,6 @@
 package org.prototype.Views;
 
-import org.prototype.Controllers.EntraveController;
-import org.prototype.Controllers.RequeteController;
-import org.prototype.Controllers.TravailController;
+import org.prototype.Controllers.*;
 import org.prototype.MaVille;
 import org.prototype.Models.*;
 import java.util.ArrayList;
@@ -353,26 +351,68 @@ public class ResidentView extends View implements ConnectedView{
         while (true) {
             clearConsole();
             println("Voici votre plage horaire:\n");
-            println("Lundi: 8:00-12:00");
-            println("Mardi: 15:00-17:00");
-            println("Mercredi: 12:00-15:00");
-            println("Jeudi: Aucune");
-            println("Vendredi: 16:00-18:00");
-            println("Samedi: Aucune");
-            println("Dimanche: Aucune");
+            PlageHoraire plage = PlageHoraireController.getPlageHoraire(MaVille.getCurUser().getAdresseCourriel());
+            println(String.format("Lundi: " + ((plage.getLundi()[0] == plage.getLundi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getLundi()[0]/60, plage.getLundi()[0]%60, plage.getLundi()[1]/60, plage.getLundi()[1]%60));
+            println(String.format("Mardi: " + ((plage.getMardi()[0] == plage.getMardi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getMardi()[0]/60, plage.getMardi()[0]%60, plage.getMardi()[1]/60, plage.getMardi()[1]%60));
+            println(String.format("Mercredi: " + ((plage.getMercredi()[0] == plage.getMercredi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getMercredi()[0]/60, plage.getMercredi()[0]%60, plage.getMercredi()[1]/60, plage.getMercredi()[1]%60));
+            println(String.format("Jeudi: " + ((plage.getJeudi()[0] == plage.getJeudi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getJeudi()[0]/60, plage.getJeudi()[0]%60, plage.getJeudi()[1]/60, plage.getJeudi()[1]%60));
+            println(String.format("Vendredi: " + ((plage.getVendredi()[0] == plage.getVendredi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getVendredi()[0]/60, plage.getVendredi()[0]%60, plage.getVendredi()[1]/60, plage.getVendredi()[1]%60));
+            println(String.format("Samedi: " + ((plage.getSamedi()[0] == plage.getSamedi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getSamedi()[0]/60, plage.getSamedi()[0]%60, plage.getSamedi()[1]/60, plage.getSamedi()[1]%60));
+            println(String.format("Dimanche: " + ((plage.getDimanche()[0] == plage.getDimanche()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getDimanche()[0]/60, plage.getDimanche()[0]%60, plage.getDimanche()[1]/60, plage.getDimanche()[1]%60));
             println("\n");
             while (true) {
                 println("1) Modifier la plage horaire; 2) Voir les plages horaires des autres résidents du quartier; 3) Revenir");
                 print("Votre choix > ");
                 switch (reader.nextLine()) {
                     case "1":
-                        println("Affichage de la page de modification des plages horaires...");
-                        println("Appuyez sur n'importe quelle touche");
-                        reader.nextLine();
+                        while (true) {
+                            print("Entrez la journée que vous voulez changer (Lundi=1 à Dimanche=7) ou 8 pour revenir: ");
+                            int code = 8;
+                            try {
+                                code = Integer.parseInt(reader.nextLine());
+                            } catch (Exception e) {
+                                println("Mauvaise entrée, veuillez réessayer");
+                                continue;
+                            }
+                            switch (code) {
+                                case 8:
+                                    break;
+                                default:
+                                    print("Entrez l'heure de début (HH:MM): ");
+                                    String startTime = reader.nextLine();
+                                    print("Entrez l'heure de fin (HH:MM): ");
+                                    String endTime = reader.nextLine();
+                                    if (!PlageHoraireController.updatePlageHoraire(PlageHoraireController.getPlageHoraire(MaVille.getCurUser().getAdresseCourriel()), code, startTime, endTime)) {
+                                        println("Erreur lors de la mise à jour de la plage horaire, assurez-vous de bien suivre le format indiqué et d'entrer une heure valide.");
+                                    } else {
+                                        println("La plage horaire a été modifée avec succès.");
+                                    }
+                                    continue;
+                            }
+                            break;
+                        }
                         break;
                     case "2":
-                        println("Affichage de la page pour voir les plages horaires...");
-                        println("Appuyez sur n'importe quelle touche");
+                        clearConsole();
+                        println("Voici les pages horaires des autres résidents de votre quartier: \n");
+                        Resident curResident = (Resident) MaVille.getCurUser();
+                        for (Resident r: ResidentController.getResidentsByQuartier(curResident.getQuartier())) {
+                            if (!r.getAdresseCourriel().equals(curResident.getAdresseCourriel())) {
+                                println("Voici la page horaire de: " + r.getNomComplet());
+                                plage = PlageHoraireController.getPlageHoraire(r.getAdresseCourriel());
+                                println(String.format("Lundi: " + ((plage.getLundi()[0] == plage.getLundi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getLundi()[0]/60, plage.getLundi()[0]%60, plage.getLundi()[1]/60, plage.getLundi()[1]%60));
+                                println(String.format("Mardi: " + ((plage.getMardi()[0] == plage.getMardi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getMardi()[0]/60, plage.getMardi()[0]%60, plage.getMardi()[1]/60, plage.getMardi()[1]%60));
+                                println(String.format("Mercredi: " + ((plage.getMercredi()[0] == plage.getMercredi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getMercredi()[0]/60, plage.getMercredi()[0]%60, plage.getMercredi()[1]/60, plage.getMercredi()[1]%60));
+                                println(String.format("Jeudi: " + ((plage.getJeudi()[0] == plage.getJeudi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getJeudi()[0]/60, plage.getJeudi()[0]%60, plage.getJeudi()[1]/60, plage.getJeudi()[1]%60));
+                                println(String.format("Vendredi: " + ((plage.getVendredi()[0] == plage.getVendredi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getVendredi()[0]/60, plage.getVendredi()[0]%60, plage.getVendredi()[1]/60, plage.getVendredi()[1]%60));
+                                println(String.format("Samedi: " + ((plage.getSamedi()[0] == plage.getSamedi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getSamedi()[0]/60, plage.getSamedi()[0]%60, plage.getSamedi()[1]/60, plage.getSamedi()[1]%60));
+                                println(String.format("Dimanche: " + ((plage.getDimanche()[0] == plage.getDimanche()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), plage.getDimanche()[0]/60, plage.getDimanche()[0]%60, plage.getDimanche()[1]/60, plage.getDimanche()[1]%60));
+                                println("============================================================================");
+
+                            }
+
+                        }
+                        println("Appuyez sur n'importe quelle touche pour continuer.");
                         reader.nextLine();
                         break;
                     case "3":

@@ -9,13 +9,15 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import com.password4j.*;
 import org.prototype.Models.Resident;
+import org.prototype.Models.Utilisateur;
+
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
 /**
  * Classe qui s'occupe des opérations concernant les résidents
  */
-public class ResidentController extends RegisterController{
+public class ResidentController{
 
 
     private static String residentFile = "src/residents.csv";
@@ -148,4 +150,28 @@ public class ResidentController extends RegisterController{
             return new ArrayList<>();
         }
     }
+
+    private static boolean isEmailFormatValid(String email) {
+        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9.]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+$");
+        if (emailPattern.matcher(email).matches()) {
+            return true;
+        } else return false;
+    }
+
+    private static boolean doesEmailExist(String adresseCourriel) {
+        ArrayList<Utilisateur> utilisateurs = UtilisateurController.getUtilisateurs();
+        for (Utilisateur u:utilisateurs) {
+            if (u.getAdresseCourriel().toLowerCase().equals(adresseCourriel.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static ArrayList<Resident> getResidentsByQuartier(String quartier) {
+        ArrayList<Resident> residents = getResidents();
+        residents.removeIf(r -> r.getQuartier().toLowerCase().equals(quartier.toLowerCase()) == false);
+        return residents;
+    }
+
 }

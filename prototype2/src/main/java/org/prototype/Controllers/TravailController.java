@@ -259,10 +259,14 @@ public class TravailController {
         ArrayList<Travail> filtered = new ArrayList<>();
 
         for (Travail t:travaux) {
-            if (t.getQuartiers().contains(quartier.toLowerCase())) {
-                filtered.add(t);
+            for (String s:t.getQuartiers()) {
+                if (s.contains(quartier.toLowerCase())) {
+                    filtered.add(t);
+                    break;
+                }
             }
         }
+
         return filtered;
     }
 

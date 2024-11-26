@@ -3,6 +3,7 @@ package org.prototype.Controllers;
 
 import org.prototype.Models.Utilisateur;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -45,6 +46,5 @@ public class UtilisateurController {
         }
         return null;
     }
-
 
 }

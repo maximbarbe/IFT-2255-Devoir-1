@@ -10,11 +10,12 @@ import java.util.regex.Pattern;
 import com.password4j.*;
 import org.prototype.Models.Intervenant;
 import org.prototype.Models.TypeIntervenant;
+import org.prototype.Models.Utilisateur;
 
 /**
  * Classe qui s'occupe des opérations concernant l'objet <code>Intervenant</code> (i.e. la création, la modification ou sauvegarder dans un fichier)
  */
-public class IntervenantController extends RegisterController{
+public class IntervenantController{
 
     private static String intervenantFile ="src/intervenants.csv";
     /**
@@ -126,6 +127,22 @@ public class IntervenantController extends RegisterController{
         return 0;
     }
 
+    private static boolean doesEmailExist(String adresseCourriel) {
+        ArrayList<Utilisateur> utilisateurs = UtilisateurController.getUtilisateurs();
+        for (Utilisateur u:utilisateurs) {
+            if (u.getAdresseCourriel().toLowerCase().equals(adresseCourriel.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isEmailFormatValid(String email) {
+        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9.]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+$");
+        if (emailPattern.matcher(email).matches()) {
+            return true;
+        } else return false;
+    }
 
 
 
