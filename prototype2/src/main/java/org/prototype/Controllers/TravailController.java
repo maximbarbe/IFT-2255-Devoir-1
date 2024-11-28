@@ -275,6 +275,18 @@ public class TravailController {
         return filtered;
     }
 
+    public static boolean isEndDateValid(String endDate) {
+        try {
+            LocalDate now = LocalDate.now();
+            LocalDate end = LocalDate.parse(endDate);
+            if (now.until(end, ChronoUnit.DAYS) < 0) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     public static boolean doQuartiersExist(String[] quartiers) {
         try {
@@ -314,7 +326,10 @@ public class TravailController {
             return null;
         }
         ArrayList<Travail> travauxEntrepris = getTravauxFromFile();
-        int id = travauxEntrepris.size() == 0 ? 0:Integer.parseInt(travauxEntrepris.get(travauxEntrepris.size() - 1).getId()) + 1;
+        int id = 0;
+        for (Travail t:travauxEntrepris) {
+            id = Integer.max(id, Integer.parseInt(t.getId())+ 1);
+        }
         ArrayList<String> quartiers = new ArrayList<>();
         ArrayList<String> rues = new ArrayList<>();
         for (String q:quartiersAffectes) {
@@ -334,6 +349,31 @@ public class TravailController {
             writer.append(travail.getId() + ","+travail.getTitre() + ","+travail.getDescription()+","+String.join(";",travail.getQuartiers())+","+ String.join(";", travail.getRuesAffectees())+","+travail.getDateDebut() + "," + travail.getDateFin() + "," + travail.getStatus().toString() + "," + travail.getIdentifiantIntervenant() + "," + travail.getType().toString() + "\n");
             writer.close();
             return;
+        } catch (Exception e) {
+            return;
+        }
+    }
+
+    public static ArrayList<Travail> getTravauxByIntervenant(String intervenant) {
+        ArrayList<Travail> travaux = getTravauxFromFile();
+        travaux.removeIf(t -> !t.getIdentifiantIntervenant().equals(intervenant));
+        return travaux;
+    }
+
+    public static void updateTravail(Travail newTravail) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(travauxFile));
+            ArrayList<String> lines = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.split(",")[0].equals(newTravail.getId())) {
+                    lines.add(line);
+                }
+            }
+            lines.add(newTravail.getId() + ","+newTravail.getTitre() + ","+newTravail.getDescription()+","+String.join(";",newTravail.getQuartiers())+","+ String.join(";", newTravail.getRuesAffectees())+","+newTravail.getDateDebut() + "," + newTravail.getDateFin() + "," + newTravail.getStatus().toString() + "," + newTravail.getIdentifiantIntervenant() + "," + newTravail.getType().toString());
+            BufferedWriter writer = new BufferedWriter(new FileWriter(travauxFile));
+            writer.write(String.join("\n", lines) + "\n");
+            writer.close();
         } catch (Exception e) {
             return;
         }

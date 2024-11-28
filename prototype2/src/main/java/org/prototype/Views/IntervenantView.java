@@ -180,9 +180,11 @@ public class IntervenantView extends View implements ConnectedView{
         while(true) {
             clearConsole();
             println("Vos chantiers: \n");
-            println("\t - ID: 0187 - Rénovation de la maison d'un résident");
-            println("\t - ID: 0188 - Installation de panneaux de circulation");
-            println("\t - ID: 0199 - Construction d'une nouvelle ligne de la STM");
+            ArrayList<Travail> travaux = TravailController.getTravauxByIntervenant(MaVille.getCurUser().getAdresseCourriel());
+            for (int i = 0; i < travaux.size() ;i++) {
+                println("ID:" + (i + 1) + "; Titre:" + travaux.get(i).getTitre() + "; Description: " + travaux.get(i).getDescription() + "; Statut: " + travaux.get(i).getStatus() + "; Date de début: " + travaux.get(i).getDateDebut() + "; Date de fin: " + travaux.get(i).getDateFin());
+            }
+            println("");
             while (true) {
                 println("1) Modifier les informations d'un chantier; 2) Revenir");
                 print("Votre choix > ");
@@ -208,30 +210,96 @@ public class IntervenantView extends View implements ConnectedView{
     public void modifierInfosChantiers() {
         while (true) {
             clearConsole();
-            println("Modifier des informations du chantier (Veuillez laisser blank si on ne veut pas modifier):\n");
-            print("ID du chantier: ");
-            String id = reader.nextLine();
-            print("Description du projet: ");
-            reader.nextLine();
-            print("Date de fin prévue: ");
-            reader.nextLine();
-            print("Statut du projet: ");
-            reader.nextLine();
+            println("Vos chantiers: \n");
+            ArrayList<Travail> travaux = TravailController.getTravauxByIntervenant(MaVille.getCurUser().getAdresseCourriel());
+            for (int i = 0; i < travaux.size() ;i++) {
+                println("ID:" + (i + 1) + "; Titre:" + travaux.get(i).getTitre() + "; Description: " + travaux.get(i).getDescription() + "; Statut: " + travaux.get(i).getStatus() + "; Date de début: " + travaux.get(i).getDateDebut() + "; Date de fin: " + travaux.get(i).getDateFin());
+            }
+            println("");
+            print("Entrez l'index du travail à modifier > ");
+            Travail travailAModifier;
+            try {
+                travailAModifier = travaux.get(Integer.parseInt(reader.nextLine()) - 1);
+            } catch (Exception e) {
+                println("Vous n'avez pas entré un index valide, veuillez réessayer");
+                println("Appuyez sur n'importe quelle touche pour continuer");
+                continue;
+            }
             while (true) {
-                println("1) Confirmer les changements; 2) Annuler");
+                println("1) Modifier la description du projet; 2) Modifier la date de fin prévue; 3) Changer le statut du projet; 4) Revenir");
                 print("Votre choix > ");
-                switch(reader.nextLine()) {
+                switch (reader.nextLine()) {
                     case "1":
-                        println("Changements effectués");
-                        println("Appuyez sur n'importe quelle touche pour continuer");
-                        reader.nextLine();
-                        return;
+                        println("Entrez la nouvelle description du projet: ");
+                        String newDesc = reader.nextLine();
+                        print("1) Confirmer; 2) Annuler > ");
+                        if (reader.nextLine().equals("1")) {
+                            travailAModifier.setDescription(newDesc);
+                            TravailController.updateTravail(travailAModifier);
+                            println("Le projet a été modifié avec succès, appuyez sur n'importe quelle touche pour continuer. ");
+                            reader.nextLine();
+                        } else {
+                            println("Le changement a été annulé, appuyez sur n'importe quelle touche pour continuer.");
+                            reader.nextLine();
+
+                        }
+                        continue;
+
                     case "2":
+                        print("Entrez la nouvelle date de fin prévue (YYYY-MM-DD) > ");
+                        String newDate = reader.nextLine();
+
+                        print("1) Confirmer; 2) Annuler > ");
+                        if (reader.nextLine().equals("1")) {
+                            if (!TravailController.isEndDateValid(newDate)) {
+                                println("Vous n'avez pas entré une date valide, veuillez réessayer");
+                                println("Appuyez sur n'importe quelle touche pour continuer. ");
+                                reader.nextLine();
+                                continue;
+                            }
+                            travailAModifier.setDateFin(newDate);
+                            TravailController.updateTravail(travailAModifier);
+                            println("Le projet a été modifié avec succès, appuyez sur n'importe quelle touche pour continuer. ");
+                            reader.nextLine();
+                        } else {
+                            println("Le changement a été annulé, appuyez sur n'importe quelle touche pour continuer.");
+                            reader.nextLine();
+                        }
+                        continue;
+                    case "3":
+                        StatutProjet[] statutsPossibles = StatutProjet.values();
+                        for (int i = 0; i < statutsPossibles.length; i++) {
+                            println((i + 1) + ")" + statutsPossibles[i]);
+                        }
+                        print("Entrez l'index du statut du projet > ");
+                        StatutProjet nouveauStatut;
+                        try {
+                            nouveauStatut = statutsPossibles[Integer.parseInt(reader.nextLine()) - 1];
+                        } catch (Exception e) {
+                            println("Vous n'avez pas entré un index valide, appuyez sur n'importe quelle touche pour continuer.");
+                            reader.nextLine();
+                            continue;
+                        }
+                        print("1) Confirmer; 2) Annuler > ");
+                        if (reader.nextLine().equals("1")) {
+                            travailAModifier.setStatus(nouveauStatut);
+                            TravailController.updateTravail(travailAModifier);
+                            println("Le projet a été modifié avec succès, appuyez sur n'importe quelle touche pour continuer. ");
+                            reader.nextLine();
+                        } else {
+                            println("Le changement a été annulé, appuyez sur n'importe quelle touche pour continuer.");
+                            reader.nextLine();
+                        }
+                        continue;
+                    case "4":
                         return;
                     default:
-                        println("Mauvais choix, veuillez réessayer");
+                        println("Mauvaise entrée, veuillez réessayer");
+                        continue;
                 }
             }
+
+
 
 
         }
@@ -336,6 +404,7 @@ public class IntervenantView extends View implements ConnectedView{
                         } else {
                             plage.setId(travail.getId());
                             PlageHoraireController.savePlageHoraire(plage);
+                            println("Le nouveau projet a été soumis avec succès");
                             println("Appuyez sur n'importe quelle touche pour continuer");
                             reader.nextLine();
                         }

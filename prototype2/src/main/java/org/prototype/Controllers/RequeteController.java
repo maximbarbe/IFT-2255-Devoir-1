@@ -90,11 +90,11 @@ public class RequeteController {
             try {
                 // L'appel à getRequetes() est uniquement utilisé pour déterminer le ID de notre nouvelle requête
                 ArrayList<Requete> requetes = RequeteController.getRequetes();
-                if (requetes.size() == 0) {
-                    saveRequete(new Requete(0, titre, description, type, dateDebutEspere, userID, quartier));
-                } else {
-                    saveRequete(new Requete(requetes.get(requetes.size() -1).getRequeteId() + 1, titre, description, type, dateDebutEspere, userID, quartier));
+                int id = 0;
+                for (Requete r:requetes) {
+                    id = Integer.max(id, r.getRequeteId() + 1);
                 }
+                saveRequete(new Requete(id, titre, description, type, dateDebutEspere, userID, quartier));
 
             } catch (Exception e) {
                 return false;

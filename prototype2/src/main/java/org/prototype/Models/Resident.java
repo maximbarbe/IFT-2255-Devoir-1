@@ -1,5 +1,6 @@
 package org.prototype.Models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -9,15 +10,25 @@ public class Resident extends Utilisateur{
     private String dateDeNaissance;
     private String numTelephone;
     private String adresseResidentielle;
-    private Set<String> notifications;
+    private HashSet<String> seenNotifications;
 
     private String quartier;
-    public Resident(String nomComplet, String adresseCourriel, String motDePasse, String dateDeNaissance, String numTelephone, String adresseResidentielle, String quartier) {
+    public Resident(String nomComplet, String adresseCourriel, String motDePasse, String dateDeNaissance, String numTelephone, String adresseResidentielle, String quartier, HashSet<String> notifications) {
         super(nomComplet, adresseCourriel, motDePasse);
         this.dateDeNaissance = dateDeNaissance;
         this.numTelephone = numTelephone;
         this.adresseResidentielle = adresseResidentielle;
         this.quartier = quartier;
+        this.seenNotifications = notifications;
+    }
+
+    public HashSet<String> getSeenNotifications() {
+        return this.seenNotifications;
+    }
+
+    public void setSeenNotifications(HashSet<String> notifications) {
+        this.seenNotifications = notifications;
+        
     }
 
     public String getQuartier() {

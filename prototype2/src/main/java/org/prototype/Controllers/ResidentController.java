@@ -124,7 +124,7 @@ public class ResidentController{
         // https://github.com/Password4j/password4j
         // Source: Bertoldi, D. (2024, 31 juillet). password4j. GitHub. https://github.com/Password4j/password4j.
         String hashed_password = Password.hash(motDePasse).addRandomSalt(12).withArgon2().getResult();
-        if (!saveResident(new Resident(nomComplet, adresseCourriel, hashed_password, dateDeNaissance, numTelephone, adresseResidentielle, quartier))) {
+        if (!saveResident(new Resident(nomComplet, adresseCourriel, hashed_password, dateDeNaissance, numTelephone, adresseResidentielle, quartier, null))) {
             return 7;
         }
 
@@ -142,7 +142,7 @@ public class ResidentController{
             String line;
             while ((line = reader.readLine())!=null) {
                 String[] data = line.split(";");
-                residents.add(new Resident(data[0], data[1], data[2], data[3], data[4], data[5], data[6]));
+                residents.add(new Resident(data[0], data[1], data[2], data[3], data[4], data[5], data[6], null));
             }
             reader.close();
             return residents;
