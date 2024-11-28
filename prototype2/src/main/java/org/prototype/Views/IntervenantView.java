@@ -1,6 +1,8 @@
 package org.prototype.Views;
 
+import org.prototype.Controllers.PlageHoraireController;
 import org.prototype.Controllers.RequeteController;
+import org.prototype.Controllers.TravailController;
 import org.prototype.MaVille;
 import org.prototype.Models.*;
 
@@ -238,43 +240,114 @@ public class IntervenantView extends View implements ConnectedView{
      * Permet de soumettre un nouveau projet de travail.
      */
     public void soumettreNouveauTravail() {
-        clearConsole();
-        println("Veuillez remplir le formulaire suivant pour soumettre un nouveau projet de travail: ");
-        println("Titre: ");
-        reader.nextLine();
-        println("Description du projet: ");
-        reader.nextLine();
-        println("Quartiers affectés: ");
-        reader.nextLine();
-        println("Rues affectées: ");
-        reader.nextLine();
-        println("Date de début (YYYY-MM-DD): ");
-        reader.nextLine();
-        println("Date de fin (YYYY-MM-DD): ");
-        reader.nextLine();
-        println("Horaire des travaux: ");
-        reader.nextLine();
         while (true) {
-            println("1) Consulter les préférences; 2) Confirmer; 3) Annuler");
-            String res = reader.nextLine();
-            switch (res) {
-                case "1":
-                    println("Affichage de la page des préférences");
-                    println("Appuyez sur n'importe quelle tâche pour continuer");
-                    reader.nextLine();
-                    continue;
-                case "2":
-                    println("Vous n'avez aucun conflit avec les préférences des résidents.");
-                    println("Formulaire soumis avec succès");
-                    println("Appuyez sur n'importe quelle tâche pour continuer");
-                    reader.nextLine();
-                    return;
-                case "3":
-                    println("Annulation du formulaire");
-                    return;
-                default:
-                    println("Mauvais choix, veuillez réessayer");
-                    break;
+            clearConsole();
+            println("Veuillez remplir le formulaire suivant pour soumettre un nouveau projet de travail: ");
+            println("Titre: ");
+            String titre = reader.nextLine();
+            println("Description du projet: ");
+            String description = reader.nextLine();
+            TypeTravail[] types = TypeTravail.values();
+            for (int i = 0; i < types.length; i++) {
+                println((i+1)+") " + types[i].toString());
+            }
+            println("Entrez l'index du type de travail");
+            String idx = reader.nextLine();
+            TypeTravail typeChoisi;
+            try {
+                typeChoisi = types[Integer.parseInt(idx) - 1];
+            } catch (Exception e) {
+                println("Entrez un index valide");
+                println("Appuyez sur n'importe quelle touche pour continuer");
+                continue;
+            }
+            println("Quartiers affectés (séparés par des virgules): ");
+            String quartiers = reader.nextLine();
+            println("Rues affectées (séparés par des virgules): ");
+            String rues = reader.nextLine();
+            println("Date de début (YYYY-MM-DD): ");
+            String dateDebut = reader.nextLine();
+            println("Date de fin (YYYY-MM-DD): ");
+            String dateFin = reader.nextLine();
+            println("Horaire des travaux: ");
+            print("Lundi (HH:MM-HH:MM ou laisser blank pour aucune): ");
+            String lundi = reader.nextLine();
+            print("Mardi (HH:MM-HH:MM ou laisser blank pour aucune): ");
+            String mardi = reader.nextLine();
+            print("Mercredi (HH:MM-HH:MM ou laisser blank pour aucune): ");
+            String mercredi = reader.nextLine();
+            print("Jeudi (HH:MM-HH:MM ou laisser blank pour aucune): ");
+            String jeudi = reader.nextLine();
+            print("Vendredi (HH:MM-HH:MM ou laisser blank pour aucune): ");
+            String vendredi = reader.nextLine();
+            print("Samedi (HH:MM-HH:MM ou laisser blank pour aucune): ");
+            String samedi = reader.nextLine();
+            print("Dimanche (HH:MM-HH:MM ou laisser blank pour aucune): ");
+            String dimanche = reader.nextLine();
+            PlageHoraire plage = PlageHoraireController.creerPlageHoraire(lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche);
+            if (plage == null) {
+                println("Vous avez entré une plage invalide, veuillez réessayer");
+                println("Appuyez sur n'importe quelle touche pour continuer");
+                reader.nextLine();
+                continue;
+            }
+            String[] quartiersAffectes = quartiers.split(",");
+            String[] ruesAffectees = rues.split(",");
+            if (!TravailController.doQuartiersExist(quartiersAffectes)) {
+                println("Certains des quartiers entrés n'existent pas, veuillez réessayer");
+                println("Appuyez sur n'importe quelle touche pour continuer");
+                reader.nextLine();
+                continue;
+            }
+            ArrayList<PlageHoraire> plagesHorairesQuartier = PlageHoraireController.getPlageHoraireByQuartiers(quartiersAffectes);
+            int conflits = PlageHoraireController.nombreConflits(plage, plagesHorairesQuartier);
+            if (conflits != 0) {
+                println("Vous avez des conflits d'horaire avec certains des résidents des quartiers que vous avez listé, veuillez vérifier leur préférences");
+            }
+            while (true) {
+                println("1) Consulter les préférences; 2) Confirmer; 3) Annuler");
+                String res = reader.nextLine();
+                switch (res) {
+                    case "1":
+                        for (PlageHoraire p: plagesHorairesQuartier) {
+                            println("Plage horaire de " + p.getId());
+                            println(String.format("Lundi: " + ((p.getLundi()[0] == p.getLundi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), p.getLundi()[0]/60, p.getLundi()[0]%60, p.getLundi()[1]/60, p.getLundi()[1]%60));
+                            println(String.format("Mardi: " + ((p.getMardi()[0] == p.getMardi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), p.getMardi()[0]/60, p.getMardi()[0]%60, p.getMardi()[1]/60, p.getMardi()[1]%60));
+                            println(String.format("Mercredi: " + ((p.getMercredi()[0] == p.getMercredi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), p.getMercredi()[0]/60, p.getMercredi()[0]%60, p.getMercredi()[1]/60, p.getMercredi()[1]%60));
+                            println(String.format("Jeudi: " + ((p.getJeudi()[0] == p.getJeudi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), p.getJeudi()[0]/60, p.getJeudi()[0]%60, p.getJeudi()[1]/60, p.getJeudi()[1]%60));
+                            println(String.format("Vendredi: " + ((p.getVendredi()[0] == p.getVendredi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), p.getVendredi()[0]/60, p.getVendredi()[0]%60, p.getVendredi()[1]/60, p.getVendredi()[1]%60));
+                            println(String.format("Samedi: " + ((p.getSamedi()[0] == p.getSamedi()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), p.getSamedi()[0]/60, p.getSamedi()[0]%60, p.getSamedi()[1]/60, p.getSamedi()[1]%60));
+                            println(String.format("Dimanche: " + ((p.getDimanche()[0] == p.getDimanche()[1]) ? "Aucune": "%02d:%02d-%02d:%02d"), p.getDimanche()[0]/60, p.getDimanche()[0]%60, p.getDimanche()[1]/60, p.getDimanche()[1]%60));
+                            println("============================================================================");
+                            println("");
+
+                        }
+                        println("Appuyez sur n'importe quelle touche pour continuer");
+                        reader.nextLine();
+                        continue;
+                    case "2":
+
+                        Travail travail = TravailController.creerTravail(titre, description, typeChoisi, quartiersAffectes, ruesAffectees, dateDebut, dateFin);
+                        if (travail == null) {
+                            println("Les dates entrées sont invalides, veuillez réessayer");
+                            println("Appuyez sur n'importe quelle touche pour continuer");
+                            reader.nextLine();
+                            continue;
+                        } else {
+                            plage.setId(travail.getId());
+                            PlageHoraireController.savePlageHoraire(plage);
+                            println("Appuyez sur n'importe quelle touche pour continuer");
+                            reader.nextLine();
+                        }
+
+                        return;
+                    case "3":
+                        println("Annulation du formulaire");
+                        return;
+                    default:
+                        println("Mauvais choix, veuillez réessayer");
+                        break;
+                }
             }
         }
     }

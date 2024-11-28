@@ -1,6 +1,7 @@
 package org.prototype.Controllers;
 
 import org.prototype.API.ApiCaller;
+import org.prototype.MaVille;
 import org.prototype.Models.StatutProjet;
 import org.prototype.Models.Travail;
 import org.json.*;
@@ -8,12 +9,16 @@ import org.prototype.Models.TypeTravail;
 
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 
+import java.io.FileWriter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 
 /**
@@ -25,7 +30,7 @@ public class TravailController {
     // Mapper qui servira de transformer la réponse de l'API en type de travail que notre programme peut reconnaître 
     private static HashMap<String, TypeTravail> constructionTypeMapper = null;
     private static String travauxFile = "src/travaux.csv";
-
+    private static String quartiersFile = "src/codesPostaux.csv";
     public static String getTravauxFile() {
         return travauxFile;
     }
@@ -268,6 +273,70 @@ public class TravailController {
         }
 
         return filtered;
+    }
+
+
+    public static boolean doQuartiersExist(String[] quartiers) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(quartiersFile));
+            String line;
+            HashSet<String> quarts = new HashSet<>();
+            while ((line= reader.readLine()) != null) {
+                quarts.add(line.split(",")[1].toLowerCase());
+            }
+            for (String q:quartiers) {
+                if (!quarts.contains(q.toLowerCase())) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
+    private static boolean areDatesValid(String startDate, String endDate) {
+        try {
+            LocalDate now = LocalDate.now();
+            LocalDate start = LocalDate.parse(startDate);
+            LocalDate end = LocalDate.parse(endDate);
+            if (now.until(end, ChronoUnit.DAYS) < 0 || start.until(end, ChronoUnit.DAYS) <= 0) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public static Travail creerTravail(String titre, String description, TypeTravail type, String[] quartiersAffectes, String[] ruesAffectees, String dateDebut, String dateFin) {
+        if (!areDatesValid(dateDebut, dateFin)) {
+            return null;
+        }
+        ArrayList<Travail> travauxEntrepris = getTravauxFromFile();
+        int id = travauxEntrepris.size() == 0 ? 0:Integer.parseInt(travauxEntrepris.get(travauxEntrepris.size() - 1).getId()) + 1;
+        ArrayList<String> quartiers = new ArrayList<>();
+        ArrayList<String> rues = new ArrayList<>();
+        for (String q:quartiersAffectes) {
+            quartiers.add(q);
+        }
+        for (String r:ruesAffectees) {
+            rues.add(r);
+        }
+        Travail travail = new Travail(String.valueOf(id), titre, description, quartiers, rues, dateDebut, dateFin, MaVille.getCurUser().getAdresseCourriel(), type);
+        saveTravail(travail);
+        return travail;
+    }
+
+    private static void saveTravail(Travail travail) {
+        try  {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(travauxFile, true));
+            writer.append(travail.getId() + ","+travail.getTitre() + ","+travail.getDescription()+","+String.join(";",travail.getQuartiers())+","+ String.join(";", travail.getRuesAffectees())+","+travail.getDateDebut() + "," + travail.getDateFin() + "," + travail.getStatus().toString() + "," + travail.getIdentifiantIntervenant() + "," + travail.getType().toString() + "\n");
+            writer.close();
+            return;
+        } catch (Exception e) {
+            return;
+        }
     }
 
 

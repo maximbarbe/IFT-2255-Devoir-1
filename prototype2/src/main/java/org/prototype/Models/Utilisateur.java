@@ -1,5 +1,6 @@
 package org.prototype.Models;
 
+
 /**
  * Classe abstraite qui représente un utilisateur quelconque.
  */
@@ -7,7 +8,6 @@ public abstract class Utilisateur {
     private String nomComplet;
     private String adresseCourriel;
     private String motDePasse;
-
     
 
 

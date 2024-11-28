@@ -14,9 +14,9 @@ public class PlageHoraire {
         String vendredi = (getVendredi()[0] == getVendredi()[1])? "null":getVendredi()[0]+"-"+getVendredi()[1];
         String samedi = (getSamedi()[0] == getSamedi()[1])? "null":getSamedi()[0]+"-"+getSamedi()[1];
         String dimanche = (getDimanche()[0] == getDimanche()[1])? "null":getDimanche()[0]+"-"+getDimanche()[1];
-        return String.join(";",new String[]{userId, lundi, mardi, mercredi, jeudi, vendredi,samedi,dimanche});
+        return String.join(",",new String[]{id, lundi, mardi, mercredi, jeudi, vendredi,samedi,dimanche});
     }
-    private String userId;
+    private String id;
 
     private int[] lundi = {0,0};
     private int[] mardi = {0,0};
@@ -27,12 +27,12 @@ public class PlageHoraire {
     private int[] dimanche = {0,0};
 
 
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int[] getDimanche() {
@@ -91,8 +91,8 @@ public class PlageHoraire {
         this.vendredi = vendredi;
     }
 
-    public PlageHoraire(String userId, int lundiStart, int lundiEnd, int mardiStart, int mardiEnd, int mercrediStart, int mercrediEnd, int jeudiStart, int jeudiEnd, int vendrediStart, int vendrediEnd, int samediStart, int samediEnd, int dimancheStart, int dimancheEnd) {
-        this.userId = userId;
+    public PlageHoraire(String id, int lundiStart, int lundiEnd, int mardiStart, int mardiEnd, int mercrediStart, int mercrediEnd, int jeudiStart, int jeudiEnd, int vendrediStart, int vendrediEnd, int samediStart, int samediEnd, int dimancheStart, int dimancheEnd) {
+        this.id = id;
         this.lundi = new int[]{lundiStart, lundiEnd};
         this.mardi = new int[]{mardiStart, mardiEnd};
         this.mercredi = new int[]{mercrediStart, mercrediEnd};

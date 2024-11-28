@@ -1,5 +1,7 @@
 package org.prototype.Models;
 
+import java.util.Set;
+
 /**
  * Classe représentant un résident qui utilise l'application, contient toutes les caractéristiques/méthodes propres aux résidents.
  */
@@ -7,7 +9,7 @@ public class Resident extends Utilisateur{
     private String dateDeNaissance;
     private String numTelephone;
     private String adresseResidentielle;
-
+    private Set<String> notifications;
 
     private String quartier;
     public Resident(String nomComplet, String adresseCourriel, String motDePasse, String dateDeNaissance, String numTelephone, String adresseResidentielle, String quartier) {
