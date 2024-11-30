@@ -9,6 +9,8 @@ import org.prototype.Models.Utilisateur;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Classe qui s'occupe de la vue qu'un utilisateur non-connecté voit.
@@ -119,7 +121,8 @@ public class UnauthenticatedView extends View{
                 case "1":
                     continue;
                 case "2":
-                    int statusCode = ResidentController.createResident(name, bday, email, password, adresse, telephone, postalCode, LocalDate.now().toString());
+                    // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class LocalDateTime. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html.
+                    int statusCode = ResidentController.createResident(name, bday, email, password, adresse, telephone, postalCode, LocalDateTime.now().toString());
                     String msg = "";
                     switch (statusCode) {
                         case 0:

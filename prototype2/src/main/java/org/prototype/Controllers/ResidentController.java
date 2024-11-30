@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import com.password4j.*;
@@ -190,7 +191,7 @@ public class ResidentController{
             String line;
 
             while ((line = reader.readLine()) != null) {
-                String[] data = line.split(",");
+                String[] data = line.split(";");
                 if (!data[1].equals(r.getAdresseCourriel())) {
                     residents.add(line);
                 }
@@ -211,6 +212,7 @@ public class ResidentController{
         Resident cur = (Resident) MaVille.getCurUser();
         HashSet<String> seenNotis = cur.getSeenNotifications();
         notifications.forEach(e -> seenNotis.add(e.getNotificationID()));
+        cur.setSeenNotifications(seenNotis);
         updateResident(cur);
     }
 }

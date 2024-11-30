@@ -33,7 +33,7 @@ public class Resident extends Utilisateur{
     }
 
     public HashSet<String> getSeenNotifications() {
-        return this.seenNotifications;
+        return (HashSet<String>) this.seenNotifications.clone();
     }
 
     public void setSeenNotifications(HashSet<String> notifications) {

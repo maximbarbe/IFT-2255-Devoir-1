@@ -8,6 +8,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -56,10 +58,15 @@ public class NotificationController {
     public static ArrayList<Notification> getNotificationsForResident(Resident curUser) {
         ArrayList<Notification> notifications = getWorkNotifications(curUser.getQuartier());
         notifications.addAll(getCandidatureNotifications(RequeteController.getRequeteByUser(MaVille.getCurUser().getAdresseCourriel())));
-        notifications.removeIf(e -> LocalDate.parse(e.getDate()).isBefore(LocalDate.parse(curUser.getCreationDate())));
 
+        // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class DateTimeFormatter. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html.
 
-        return sortNotifications(notifications);
+        notifications.removeIf(e -> LocalDateTime.parse(e.getDate()).isBefore(LocalDateTime.parse(curUser.getCreationDate())));
+
+        if (notifications.size() == 0) {
+            return notifications;
+        }
+        return sortNotifications(0, notifications.size() - 1, notifications);
     }
 
     public static ArrayList<Notification> getAllNotifications() {
@@ -76,19 +83,23 @@ public class NotificationController {
                 String[] data = line.split(",");
                 notifications.add(new NotificationDeCandidature(data[0], data[1], data[2], data[3], data[4], data[5]));
             }
-
-            return sortNotifications(notifications);
+            if (notifications.size() == 0) {
+                return notifications;
+            }
+            return sortNotifications(0, notifications.size() - 1, notifications);
         } catch (Exception e) {
             return new ArrayList<>();
         }
     }
-    private static ArrayList<Notification> sortNotifications(ArrayList<Notification> notifications) {
-        if (notifications.size() == 0 || notifications.size() == 1) {
-            return notifications;
+    private static ArrayList<Notification> sortNotifications(int start, int end, ArrayList<Notification> notifications) {
+        if (start == end) {
+            ArrayList<Notification> notis = new ArrayList<>();
+            notis.add(notifications.get(start));
+            return notis;
         } else {
             ArrayList<Notification> merged = new ArrayList<>();
-            ArrayList<Notification> leftSublist = sortNotifications((ArrayList)notifications.subList(0, notifications.size() / 2));
-            ArrayList<Notification> rightSublist = sortNotifications((ArrayList)notifications.subList(notifications.size() / 2, notifications.size()));
+            ArrayList<Notification> leftSublist = sortNotifications(start, start + (start + end)/2, notifications);
+            ArrayList<Notification> rightSublist = sortNotifications(start + (start + end)/2 + 1, end, notifications);
             int i = 0; int j = 0;
             while (i != leftSublist.size() && j != rightSublist.size()) {
                 if (Integer.parseInt(leftSublist.get(i).getNotificationID()) <= Integer.parseInt(rightSublist.get(j).getNotificationID())) {

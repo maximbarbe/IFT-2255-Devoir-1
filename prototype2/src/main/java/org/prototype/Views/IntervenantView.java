@@ -8,6 +8,8 @@ import org.prototype.MaVille;
 import org.prototype.Models.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -406,7 +408,9 @@ public class IntervenantView extends View implements ConnectedView{
                         } else {
                             plage.setId(travail.getId());
                             PlageHoraireController.savePlageHoraire(plage);
-                            NotificationController.createWorkNotification("Création du projet " + travail.getTitre(), "Le projet " + travail.getTitre() + "a été créé par l'intervenant" + MaVille.getCurUser().getNomComplet() + " et affectera votre quartier.", MaVille.getCurUser().getAdresseCourriel(), travail.getId(), LocalDate.now().toString());
+                            // Pour les notifications, nous devons non seulement garder la date, mais également l'heure qu'elle a été créée. Ceci peut se fait avec DateTimeFormatter.
+                            // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class LocalDateTime. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html.
+                            NotificationController.createWorkNotification("Création du projet " + travail.getTitre(), "Le projet " + travail.getTitre() + "a été créé par l'intervenant " + MaVille.getCurUser().getNomComplet() + " et affectera votre quartier.", MaVille.getCurUser().getAdresseCourriel(), travail.getId(), LocalDateTime.now().toString());
                             println("Le nouveau projet a été soumis avec succès");
                             println("Appuyez sur n'importe quelle touche pour continuer");
                             reader.nextLine();

@@ -346,7 +346,7 @@ public class TravailController {
     private static void saveTravail(Travail travail) {
         try  {
             BufferedWriter writer = new BufferedWriter(new FileWriter(travauxFile, true));
-            writer.append(travail.getId() + ","+travail.getTitre() + ","+travail.getDescription()+","+String.join(";",travail.getQuartiers())+","+ String.join(";", travail.getRuesAffectees())+","+travail.getDateDebut() + "," + travail.getDateFin() + "," + travail.getStatus().toString() + "," + travail.getIdentifiantIntervenant() + "," + travail.getType().toString() + "\n");
+            writer.append(travail.getId() + ","+travail.getTitre() + ","+travail.getDescription()+","+String.join(";",travail.getQuartiers()).toLowerCase()+","+ String.join(";", travail.getRuesAffectees()).toLowerCase()+","+travail.getDateDebut() + "," + travail.getDateFin() + "," + travail.getStatus().toString() + "," + travail.getIdentifiantIntervenant() + "," + travail.getType().toString() + "\n");
             writer.close();
             return;
         } catch (Exception e) {
