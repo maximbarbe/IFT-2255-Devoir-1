@@ -379,5 +379,18 @@ public class TravailController {
         }
     }
 
-
+    public static ArrayList<Travail> getTravauxParTitre(String titre) {
+        ArrayList<Travail> travaux = getTravaux();
+        ArrayList<Travail> filteredTravaux = new ArrayList<>();
+        for (Travail t:travaux) {
+            if (t.getTitre().length() < titre.length()) {
+                continue;
+            } else {
+                if (t.getTitre().toLowerCase().contains(titre.toLowerCase())) {
+                    filteredTravaux.add(t);
+                }
+            }
+        }
+        return filteredTravaux;
+    }
 }

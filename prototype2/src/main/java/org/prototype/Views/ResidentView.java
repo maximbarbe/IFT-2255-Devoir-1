@@ -94,8 +94,19 @@ public class ResidentView extends View implements ConnectedView{
                 println("1) Rechercher par rue; 2) Rechercher par travail; 3) Revenir");
                 print("Votre choix > ");
 
-                // Filtre les entraves par travail via les ID.
+
                 switch (reader.nextLine()) {
+                    // Filtre les entraves par travail via les rues.
+                    case "1":
+                        print("Entrez la rue désirée (ex: rue jean-brillant) > ");
+                        String rue = reader.nextLine();
+                        clearConsole();
+                        ArrayList<Entrave> entravesFiltreesByStreet = EntraveController.getEntravesByStreet(rue);
+                        for (Entrave e:entravesFiltreesByStreet) {
+                            println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
+                        }
+                        continue;
+                        // Filtre les entraves par travail via les ID.
                     case "2":
                         print("Entrez l'ID du travail > ");
                         String id = reader.nextLine();
@@ -106,16 +117,7 @@ public class ResidentView extends View implements ConnectedView{
                         }
 
                         continue;
-                // Filtre les entraves par travail via les rues.         
-                    case "1":
-                        print("Entrez la rue désirée (ex: rue jean-brillant) > ");
-                        String rue = reader.nextLine();
-                        clearConsole();
-                        ArrayList<Entrave> entravesFiltreesByStreet = EntraveController.getEntravesByStreet(rue);
-                        for (Entrave e:entravesFiltreesByStreet) {
-                            println("ID du travail correspondant: " + e.getTravailId()+"; Nom de la rue: "+e.getStreetId() + "; Effet sur la rue: "+e.getStreetImpact());
-                        }
-                        continue;
+
                     case "3":
                         return;
                     default:
@@ -160,7 +162,17 @@ public class ResidentView extends View implements ConnectedView{
                 String res = reader.nextLine();
                 switch (res) {
                     case "1":
-                        println("Affichage de la barre de recherche...");
+                        println("Entrez le titre du travail à rechercher: ");
+                        String titre = reader.nextLine();
+                        ArrayList<Travail> travauxParTitre = TravailController.getTravauxParTitre(titre);
+                        if (travauxParTitre.size() == 0) {
+                            println("Il n'y a aucun travaux avec ce titre");
+                        } else {
+                            for (Travail t: travauxParTitre) {
+                                println("ID: "+t.getId() + "; Titre: "+t.getTitre() + "; Intervenant: "+t.getIdentifiantIntervenant() + "; Quartiers affectés: "+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + "; Date de début: "+t.getDateDebut() + "; Date de fin: " + t.getDateFin());
+                                println("");
+                            }
+                        }
                         println("Appuyer sur n'importe quelle touche pour continuer");
                         reader.nextLine();
                         break;
@@ -430,17 +442,15 @@ public class ResidentView extends View implements ConnectedView{
      * Affiche les notifications qu'un résident a recu et permet d'accéder à la fonctionnalité de modifier les abonnements aux notifications.
      */
     public void pageNotifications(ArrayList<Notification> notifications){
-        //!TODO Update la liste des notifications pas vues (Simple intersection d'ensemble).
-        //!TODO Il faut également après avoir update la liste, sauver le nouveau résident dans le fichier des résidents
         ResidentController.updateSeenNotifications(notifications);
         while (true) {
             clearConsole();
 
-            println("Notifications: ");
+            println("Nouvelles notifications: ");
             for (int i = notifications.size() - 1; i >= 0; i--) {
                 println("\t-Titre:" + notifications.get(i).getTitre());
                 println("\t-Description: " + notifications.get(i).getDescription());
-                println("\t-Date: "+notifications.get(i).getDate());
+                println("\t-Date: "+notifications.get(i).getDate().split("T")[0]);
                 println("");
             }
             while (true) {
@@ -450,7 +460,13 @@ public class ResidentView extends View implements ConnectedView{
                 String res = reader.nextLine();
                 switch (res) {
                     case "1":
-                        println("Affichage page pour modifier les notifications...");
+                        ArrayList<Notification> notis = NotificationController.getAllNotifications();
+                        for (int i = notis.size() - 1; i >= 0; i--) {
+                            println("\t-Titre:" + notis.get(i).getTitre());
+                            println("\t-Description: " + notis.get(i).getDescription());
+                            println("\t-Date: "+notis.get(i).getDate().split("T")[0]);
+                            println("");
+                        }
                         println("Appuyez sur n'importe quelle touche pour continuer");
                         reader.nextLine();
                         break;

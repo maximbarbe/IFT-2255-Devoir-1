@@ -217,7 +217,7 @@ public class IntervenantView extends View implements ConnectedView{
             println("Vos chantiers: \n");
             ArrayList<Travail> travaux = TravailController.getTravauxByIntervenant(MaVille.getCurUser().getAdresseCourriel());
             for (int i = 0; i < travaux.size() ;i++) {
-                println("ID:" + (i + 1) + "; Titre:" + travaux.get(i).getTitre() + "; Description: " + travaux.get(i).getDescription() + "; Statut: " + travaux.get(i).getStatus() + "; Date de début: " + travaux.get(i).getDateDebut() + "; Date de fin: " + travaux.get(i).getDateFin());
+                println((i + 1) + ") Titre:" + travaux.get(i).getTitre() + "; Description: " + travaux.get(i).getDescription() + "; Statut: " + travaux.get(i).getStatus() + "; Date de début: " + travaux.get(i).getDateDebut() + "; Date de fin: " + travaux.get(i).getDateFin());
             }
             println("");
             print("Entrez l'index du travail à modifier > ");
@@ -286,8 +286,11 @@ public class IntervenantView extends View implements ConnectedView{
                         }
                         print("1) Confirmer; 2) Annuler > ");
                         if (reader.nextLine().equals("1")) {
+                            StatutProjet ancienStatut = travailAModifier.getStatus();
                             travailAModifier.setStatus(nouveauStatut);
                             TravailController.updateTravail(travailAModifier);
+                            // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class LocalDateTime. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html.
+                            NotificationController.createWorkNotification("Changement de statut", "Le projet " + travailAModifier.getTitre() + " est passé du statut " + ancienStatut.toString() + " au statut " + travailAModifier.getStatus().toString()+".", MaVille.getCurUser().getAdresseCourriel(), travailAModifier.getId(), LocalDateTime.now().toString());
                             println("Le projet a été modifié avec succès, appuyez sur n'importe quelle touche pour continuer. ");
                             reader.nextLine();
                         } else {
@@ -408,9 +411,9 @@ public class IntervenantView extends View implements ConnectedView{
                         } else {
                             plage.setId(travail.getId());
                             PlageHoraireController.savePlageHoraire(plage);
-                            // Pour les notifications, nous devons non seulement garder la date, mais également l'heure qu'elle a été créée. Ceci peut se fait avec DateTimeFormatter.
+                            // Pour les notifications, nous devons non seulement garder la date, mais également l'heure qu'elle a été créée. Ceci peut se faire avec LocalDateTime.
                             // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class LocalDateTime. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html.
-                            NotificationController.createWorkNotification("Création du projet " + travail.getTitre(), "Le projet " + travail.getTitre() + "a été créé par l'intervenant " + MaVille.getCurUser().getNomComplet() + " et affectera votre quartier.", MaVille.getCurUser().getAdresseCourriel(), travail.getId(), LocalDateTime.now().toString());
+                            NotificationController.createWorkNotification("Création du projet " + travail.getTitre(), "Le projet " + travail.getTitre() + " a été créé par l'intervenant " + MaVille.getCurUser().getNomComplet() + " et affectera votre quartier.", MaVille.getCurUser().getAdresseCourriel(), travail.getId(), LocalDateTime.now().toString());
                             println("Le nouveau projet a été soumis avec succès");
                             println("Appuyez sur n'importe quelle touche pour continuer");
                             reader.nextLine();
