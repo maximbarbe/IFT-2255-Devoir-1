@@ -112,7 +112,7 @@ public class TravailController {
      * Va chercher la liste des travaux qui sont stockés localement dans un fichier
      * @return - La liste des travaux
      */
-    private static ArrayList<Travail> getTravauxFromFile() {
+    public static ArrayList<Travail> getTravauxFromFile() {
         ArrayList<Travail> travaux =  new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(travauxFile));

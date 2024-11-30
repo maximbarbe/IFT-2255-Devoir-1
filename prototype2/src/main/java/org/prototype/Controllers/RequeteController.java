@@ -176,4 +176,10 @@ public class RequeteController {
         }
         return requetesFiltrees;
     }
+
+    public static ArrayList<Requete> getRequeteByUser(String userID) {
+        ArrayList<Requete> requetes = getRequetes();
+        requetes.removeIf(r -> !r.getUserID().equals(userID));
+        return requetes;
+    }
 }

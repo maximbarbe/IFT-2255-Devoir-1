@@ -8,10 +8,13 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import com.password4j.*;
+import org.prototype.MaVille;
+import org.prototype.Models.Notification;
 import org.prototype.Models.Resident;
 import org.prototype.Models.Utilisateur;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.regex.Pattern;
 
 /**
@@ -49,7 +52,7 @@ public class ResidentController{
     private static boolean saveResident(Resident r) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(residentFile, true));
-            writer.append(r.getNomComplet() + ";"+r.getAdresseCourriel()+";"+r.getMotDePasse()+";"+r.getDateDeNaissance()+";"+r.getNumTelephone()+";"+r.getAdresseResidentielle()+";"+r.getQuartier());
+            writer.append(r.getNomComplet() + ";"+r.getAdresseCourriel()+";"+r.getMotDePasse()+";"+r.getDateDeNaissance()+";"+r.getNumTelephone()+";"+r.getAdresseResidentielle()+";"+r.getQuartier()+";"+ String.join(",", r.getSeenNotifications()) + ";" + r.getCreationDate());
             writer.close();
         } catch (Exception e) {
             return false;
@@ -94,7 +97,7 @@ public class ResidentController{
      * @param numTelephone
      * @return
      */
-    public static int createResident(String nomComplet, String dateDeNaissance, String adresseCourriel, String motDePasse, String adresseResidentielle, String numTelephone, String postalCode) {
+    public static int createResident(String nomComplet, String dateDeNaissance, String adresseCourriel, String motDePasse, String adresseResidentielle, String numTelephone, String postalCode, String creationDate) {
         if (doesEmailExist(adresseCourriel)) {
             return 1;
         }
@@ -124,7 +127,7 @@ public class ResidentController{
         // https://github.com/Password4j/password4j
         // Source: Bertoldi, D. (2024, 31 juillet). password4j. GitHub. https://github.com/Password4j/password4j.
         String hashed_password = Password.hash(motDePasse).addRandomSalt(12).withArgon2().getResult();
-        if (!saveResident(new Resident(nomComplet, adresseCourriel, hashed_password, dateDeNaissance, numTelephone, adresseResidentielle, quartier, null))) {
+        if (!saveResident(new Resident(nomComplet, adresseCourriel, hashed_password, dateDeNaissance, numTelephone, adresseResidentielle, quartier, new HashSet<>(), creationDate))) {
             return 7;
         }
 
@@ -142,7 +145,12 @@ public class ResidentController{
             String line;
             while ((line = reader.readLine())!=null) {
                 String[] data = line.split(";");
-                residents.add(new Resident(data[0], data[1], data[2], data[3], data[4], data[5], data[6], null));
+                HashSet<String> seenNotifications = new HashSet<>();
+                if (!data[7].equals("")){
+                    String[] ids = data[7].split(",");
+                    for (String id:ids) {seenNotifications.add(id);};
+                }
+                residents.add(new Resident(data[0], data[1], data[2], data[3], data[4], data[5], data[6], seenNotifications, data[8]));
             }
             reader.close();
             return residents;
@@ -174,4 +182,35 @@ public class ResidentController{
         return residents;
     }
 
+
+    public static void updateResident(Resident r) {
+        try {
+            ArrayList<String> residents = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader(residentFile));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (!data[1].equals(r.getAdresseCourriel())) {
+                    residents.add(line);
+                }
+            }
+            residents.add(r.getNomComplet() + ";"+r.getAdresseCourriel()+";"+r.getMotDePasse()+";"+r.getDateDeNaissance()+";"+r.getNumTelephone()+";"+r.getAdresseResidentielle()+";"+r.getQuartier() + ";" + String.join(",", r.getSeenNotifications())+ ";" + r.getCreationDate()+ "\n");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(residentFile));
+            writer.write(String.join("\n", residents));
+            writer.close();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static void updateSeenNotifications(ArrayList<Notification> notifications) {
+        if (notifications.size() == 0) {
+            return;
+        }
+        Resident cur = (Resident) MaVille.getCurUser();
+        HashSet<String> seenNotis = cur.getSeenNotifications();
+        notifications.forEach(e -> seenNotis.add(e.getNotificationID()));
+        updateResident(cur);
+    }
 }

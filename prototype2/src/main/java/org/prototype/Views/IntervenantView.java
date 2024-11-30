@@ -1,11 +1,13 @@
 package org.prototype.Views;
 
+import org.prototype.Controllers.NotificationController;
 import org.prototype.Controllers.PlageHoraireController;
 import org.prototype.Controllers.RequeteController;
 import org.prototype.Controllers.TravailController;
 import org.prototype.MaVille;
 import org.prototype.Models.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -404,6 +406,7 @@ public class IntervenantView extends View implements ConnectedView{
                         } else {
                             plage.setId(travail.getId());
                             PlageHoraireController.savePlageHoraire(plage);
+                            NotificationController.createWorkNotification("Création du projet " + travail.getTitre(), "Le projet " + travail.getTitre() + "a été créé par l'intervenant" + MaVille.getCurUser().getNomComplet() + " et affectera votre quartier.", MaVille.getCurUser().getAdresseCourriel(), travail.getId(), LocalDate.now().toString());
                             println("Le nouveau projet a été soumis avec succès");
                             println("Appuyez sur n'importe quelle touche pour continuer");
                             reader.nextLine();

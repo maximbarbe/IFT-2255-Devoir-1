@@ -5,23 +5,19 @@ import java.util.ArrayList;
 public class NotificationDeTravail extends Notification{
     
 
-    private final ArrayList<String> quartiersAffectes;
-    private final ArrayList<String> ruesAffectees;
+    private final String travailID;
     
     
 
-    public NotificationDeTravail(String titre, String description, ArrayList<String> quartiersAffectes, ArrayList<String> ruesAffectees) {
-        super(titre, description);
-        this.quartiersAffectes = quartiersAffectes;
-        this.ruesAffectees = ruesAffectees;
+    public NotificationDeTravail(String titre, String description, String intervenant, String travailID, String date, String notificationID) {
+        super(titre, description, intervenant, notificationID, date);
+        this.travailID = travailID;
     }
 
 
-    public ArrayList<String> quartiersAffectes() {
-        return this.quartiersAffectes;
+    public String getTravailID() {
+        return this.travailID;
     }
 
-    public ArrayList<String> ruesAffectees() {
-        return this.ruesAffectees;
-    }
+
 }

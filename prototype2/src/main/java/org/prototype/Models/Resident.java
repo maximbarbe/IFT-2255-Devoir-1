@@ -11,15 +11,25 @@ public class Resident extends Utilisateur{
     private String numTelephone;
     private String adresseResidentielle;
     private HashSet<String> seenNotifications;
-
+    private String creationDate;
     private String quartier;
-    public Resident(String nomComplet, String adresseCourriel, String motDePasse, String dateDeNaissance, String numTelephone, String adresseResidentielle, String quartier, HashSet<String> notifications) {
+    public Resident(String nomComplet, String adresseCourriel, String motDePasse, String dateDeNaissance, String numTelephone, String adresseResidentielle, String quartier, HashSet<String> notifications, String creationDate) {
         super(nomComplet, adresseCourriel, motDePasse);
         this.dateDeNaissance = dateDeNaissance;
         this.numTelephone = numTelephone;
         this.adresseResidentielle = adresseResidentielle;
         this.quartier = quartier;
         this.seenNotifications = notifications;
+        this.creationDate = creationDate;
+    }
+
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
     }
 
     public HashSet<String> getSeenNotifications() {

@@ -14,11 +14,12 @@ public class ResidentView extends View implements ConnectedView{
     @Override
     public void menuPrincipal() {
         while (true) {
+            ArrayList<Notification> unseenNotifications = NotificationController.getUnseenNotifications((Resident) MaVille.getCurUser());
             clearConsole();
             println("Menu principal:\n");
             println("1) Travaux");
             println("2) Profil");
-            println("3) Notifications");
+            println("3) Notifications (" + unseenNotifications.size() + ")");
             println("4) Requetes");
             println("5) Se déconnecter");
             print("Votre choix > ");
@@ -31,7 +32,7 @@ public class ResidentView extends View implements ConnectedView{
                     afficherProfil();
                     continue;
                 case "3":
-                    pageNotifications();
+                    pageNotifications(unseenNotifications);
                     continue;
                 case "4":
                     pageRequeteTravail();
@@ -257,20 +258,18 @@ public class ResidentView extends View implements ConnectedView{
         while (true) {
             clearConsole();
             println("Mes requêtes: ");
-            for (Requete r:RequeteController.getRequetes()) {
-                if (r.getUserID().equals(MaVille.getCurUser().getAdresseCourriel())) {
-                    println("ID: "+r.getRequeteId());
-                    println("Titre: "+r.getTitre());
-                    println("Description: "+r.getDescription());
-                    println("Type de travail: " + r.getType().toString());
-                    println("Date de début espéré: " + r.getDateDebutEspere());
-                    println("Quartier: "+r.getQuartier());
-                    println("Statut: Aucune candidature soumise");
-                    for (int i = 0; i < 60;i++) {
-                        print("=");
-                    }
-                    println("");
+            for (Requete r:RequeteController.getRequeteByUser(MaVille.getCurUser().getAdresseCourriel())) {
+                println("ID: "+r.getRequeteId());
+                println("Titre: "+r.getTitre());
+                println("Description: "+r.getDescription());
+                println("Type de travail: " + r.getType().toString());
+                println("Date de début espéré: " + r.getDateDebutEspere());
+                println("Quartier: "+r.getQuartier());
+                println("Statut: Aucune candidature soumise");
+                for (int i = 0; i < 60;i++) {
+                    print("=");
                 }
+                println("");
             }
 
             while (true) {
@@ -430,17 +429,22 @@ public class ResidentView extends View implements ConnectedView{
     /**
      * Affiche les notifications qu'un résident a recu et permet d'accéder à la fonctionnalité de modifier les abonnements aux notifications.
      */
-    public void pageNotifications(){
+    public void pageNotifications(ArrayList<Notification> notifications){
+        //!TODO Update la liste des notifications pas vues (Simple intersection d'ensemble).
+        //!TODO Il faut également après avoir update la liste, sauver le nouveau résident dans le fichier des résidents
+        ResidentController.updateSeenNotifications(notifications);
         while (true) {
             clearConsole();
+
             println("Notifications: ");
-            println("\t-Projet `Construction sur le pont Jacques-Cartier` a commencé dans votre quartier (ID:0000).");
-            println("\t-Modification des détails du projet `Construction au pavillon Roger-Gaudry` (ID:0001).");
-            println("\t-Projet `Rénovation au pavillon André-Aisenstadt` est terminé (ID:0002).");
-            println("\t-Retour sur votre requête de travail `Besoin de rénovation au HEC.`");
-            println("\n");
+            for (int i = notifications.size() - 1; i >= 0; i--) {
+                println("\t-Titre:" + notifications.get(i).getTitre());
+                println("\t-Description: " + notifications.get(i).getDescription());
+                println("\t-Date: "+notifications.get(i).getDate());
+                println("");
+            }
             while (true) {
-                println("1) Modifier les abonnements aux notifications.");
+                println("1) Voir toutes les notifications");
                 println("2) Revenir");
                 print("Votre choix > ");
                 String res = reader.nextLine();

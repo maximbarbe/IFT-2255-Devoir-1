@@ -8,6 +8,7 @@ import org.prototype.Models.Resident;
 import org.prototype.Models.Utilisateur;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * Classe qui s'occupe de la vue qu'un utilisateur non-connecté voit.
@@ -118,7 +119,7 @@ public class UnauthenticatedView extends View{
                 case "1":
                     continue;
                 case "2":
-                    int statusCode = ResidentController.createResident(name, bday, email, password, adresse, telephone, postalCode);
+                    int statusCode = ResidentController.createResident(name, bday, email, password, adresse, telephone, postalCode, LocalDate.now().toString());
                     String msg = "";
                     switch (statusCode) {
                         case 0:
