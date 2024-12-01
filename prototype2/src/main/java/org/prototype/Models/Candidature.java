@@ -4,17 +4,32 @@ package org.prototype.Models;
  * Classe représentant une candidature soumise par les intervenants
  */
 public class Candidature {
-    private final int requeteID;
+    private final String requeteID;
     private final String intervenant;
     private final String dateDebut;
     private final String dateFin;
+    // La classe Boolean nous permet de définir
+    // null = Aucune réponse
+    // True = Acceptée
+    // False = Refusée
     private Boolean acceptee = null;
 
-    public Candidature(int requeteID, String intervenant, String dateDebut, String dateFin) {
+    private String message;
+
+    public Candidature(String requeteID, String intervenant, String dateDebut, String dateFin, String message) {
         this.requeteID = requeteID;
         this.intervenant = intervenant;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.message = message;
+    }
+
+    public void setMessage(String msg) {
+        this.message = msg;
+    }
+
+    public String getMessage() {
+        return this.message;
     }
 
     public String getDateFin() {
@@ -25,7 +40,7 @@ public class Candidature {
         return dateDebut;
     }
 
-    public int getRequeteID() {
+    public String getRequeteID() {
         return requeteID;
     }
 

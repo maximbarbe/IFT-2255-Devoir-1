@@ -24,7 +24,7 @@ import java.util.HashSet;
 /**
  * Classe qui gère toutes les opérations reliées aux travaux.
  */
-public class TravailController {
+public class TravailController{
 
 
     // Mapper qui servira de transformer la réponse de l'API en type de travail que notre programme peut reconnaître 

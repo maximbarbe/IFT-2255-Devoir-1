@@ -129,7 +129,8 @@ public class RequeteController {
 
             }
         } catch (Exception e) {};
-
+        // On enlève les requêtes fermées.
+        requetes.removeIf(r -> r.getStatut().equals(RequeteStatut.FERMEE));
         return requetes;
     }
 
@@ -181,5 +182,11 @@ public class RequeteController {
         ArrayList<Requete> requetes = getRequetes();
         requetes.removeIf(r -> !r.getUserID().equals(userID));
         return requetes;
+    }
+
+    public static boolean doesRequeteExist(String id) {
+        ArrayList<Requete> requetes = getRequetes();
+        requetes.removeIf(r -> !String.valueOf(r.getRequeteId()).equals(id));
+        return requetes.size() != 0;
     }
 }
