@@ -277,7 +277,15 @@ public class ResidentView extends View implements ConnectedView{
                 println("Type de travail: " + r.getType().toString());
                 println("Date de début espéré: " + r.getDateDebutEspere());
                 println("Quartier: "+r.getQuartier());
-                println("Statut: Aucune candidature soumise");
+                ArrayList<Candidature> candidatures = CandidatureController.getCandidaturesByRequete(String.valueOf(r.getRequeteId()));
+                if (candidatures.size() == 0) {
+                    println("Statut: Aucune candidature soumise");
+                } else if (candidatures.size() == 1){
+                    println("Statut: 1 candidature a été soumise");
+                } else {
+                    println("Statut: " + candidatures.size() + " candidatures ont été soumises.");
+                }
+
                 for (int i = 0; i < 60;i++) {
                     print("=");
                 }
@@ -296,10 +304,40 @@ public class ResidentView extends View implements ConnectedView{
                         reader.nextLine();
                         break;
                     case "2":
-                        println("Affichage de page pour fermer candidature");
-                        println("Appuyez sur n'importe quelle touche pour continuer");
-                        reader.nextLine();
-                        break;
+                        clearConsole();
+                        println("Mes requêtes\n");
+                        ArrayList<Requete> mesRequetes = RequeteController.getRequeteByUser(MaVille.getCurUser().getAdresseCourriel());
+                        for (int i = 0; i < mesRequetes.size(); i++) {
+                            println((i+1) + ") Titre: " + mesRequetes.get(i).getTitre());
+                        }
+                        println("");
+                        print("Entrez l'index de la requête que vous désirez fermer > ");
+                        try {
+
+                            Requete requeteAEnlever = mesRequetes.get(Integer.parseInt(reader.nextLine()) - 1);
+                            println("1) Confirmer; 2) Annuler");
+                            print("Votre choix > ");
+                            switch (reader.nextLine()) {
+                                case "1":
+                                    ArrayList<Candidature> candidatures = CandidatureController.getCandidaturesByRequete(String.valueOf(requeteAEnlever.getRequeteId()));
+                                    candidatures.forEach(c -> CandidatureController.removeCandidature(c));
+                                    RequeteController.fermerRequete(requeteAEnlever);
+                                    println("La candidature a été fermée avec succès.");
+                                    println("Appuyez sur n'importe quelle touche pour continuer");
+                                    reader.nextLine();
+                                    continue;
+                                default:
+                                    continue;
+                            }
+
+
+                        } catch (Exception e) {
+                            println("Vous n'avez pas entré un index valide. Veuillez réessayer");
+                            println("Appuyez sur n'importe quelle touche pour continuer.");
+                            reader.nextLine();
+                            continue;
+                        }
+
                     case "3":
                         return;
                     default:
