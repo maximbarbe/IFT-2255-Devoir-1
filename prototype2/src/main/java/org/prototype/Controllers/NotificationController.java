@@ -3,10 +3,7 @@ package org.prototype.Controllers;
 import org.prototype.MaVille;
 import org.prototype.Models.*;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -51,13 +48,30 @@ public class NotificationController {
         }
     }
 
-    private static ArrayList<Notification> getCandidatureNotifications(ArrayList<Requete> requetes) {
-        return new ArrayList<>();
+    private static ArrayList<Notification> getCandidatureNotifications(Resident curUser) {
+        ArrayList<Requete> requetes = RequeteController.getRequeteByUser(curUser.getAdresseCourriel());
+        HashSet<String> requetesID = new HashSet<>();
+        for (Requete r:requetes) {
+            requetesID.add(String.valueOf(r.getRequeteId()));
+        }
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(candidatureNotificationsFile));
+            String line;
+            ArrayList<Notification> notifications = new ArrayList<>();
+            while ((line= reader.readLine()) != null) {
+                String[] data = line.split(",");
+                notifications.add(new NotificationDeCandidature(data[0], data[1], data[2], data[3], data[4], data[5]));
+            }
+            notifications.removeIf(n -> !requetesID.contains(((NotificationDeCandidature)n).getRequeteID()));
+            return notifications;
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
     }
 
     public static ArrayList<Notification> getNotificationsForResident(Resident curUser) {
         ArrayList<Notification> notifications = getWorkNotifications(curUser.getQuartier());
-        notifications.addAll(getCandidatureNotifications(RequeteController.getRequeteByUser(MaVille.getCurUser().getAdresseCourriel())));
+        notifications.addAll(getCandidatureNotifications((Resident)MaVille.getCurUser()));
 
         // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class DateTimeFormatter. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html.
 
@@ -146,5 +160,18 @@ public class NotificationController {
         }
     }
 
+    public static void pushCandidatureNotifications(String titre, String description, String intervenant, String requete, String date) {
+        try {
+            ArrayList<Notification> notis = getAllNotifications();
+            int id = 0;
+            if (notis.size() != 0) {
+                id = Integer.parseInt(notis.get(notis.size() - 1).getNotificationID()) + 1;
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(candidatureNotificationsFile, true));
+            writer.append(String.join(",", new String[]{titre, description,intervenant,requete,date,String.valueOf(id)}));
+            writer.close();
+            return;
+        } catch (Exception e) {return;}
+    };
 
 }

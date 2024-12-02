@@ -237,6 +237,8 @@ public class IntervenantView extends View implements ConnectedView{
                             int responseCode = CandidatureController.createCandidature(id, dateDebut, dateFin, MaVille.getCurUser().getAdresseCourriel(), "");
                             switch (responseCode) {
                                 case 0:
+                                    // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class LocalDateTime. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html.
+                                    NotificationController.pushCandidatureNotifications("Une candidature a été déposée sur une de vos requêtes", "L'intervenant " + MaVille.getCurUser().getNomComplet() + " a déposé sa candidature sur votre requête intitulée '"+requetes.get(Integer.parseInt(idx) - 1).getTitre()+"'.", MaVille.getCurUser().getAdresseCourriel(), String.valueOf(requetes.get(Integer.parseInt(idx) - 1).getRequeteId()), LocalDateTime.now().toString());
                                     println("Votre candidature a été soumise avec succès.");
                                     println("Appuyez sur n'importe quelle touche pour continuer.");
                                     reader.nextLine();
