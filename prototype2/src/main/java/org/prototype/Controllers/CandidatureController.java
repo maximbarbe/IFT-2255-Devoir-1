@@ -4,10 +4,7 @@ import org.prototype.Models.Candidature;
 import org.prototype.Models.Requete;
 import org.prototype.Models.StatutCandidature;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -100,6 +97,16 @@ public class CandidatureController {
     }
 
 
+    public static void removeCandidature(Candidature c) {
+        ArrayList<Candidature> candidatures = getCandidatures();
+        candidatures.removeIf(candidature -> candidature.getRequeteID().equals(c.getRequeteID()));
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile));
+            for (Candidature candidature:candidatures) {
+                saveCandidature(candidature);
+            }
+        } catch (Exception e) {}
+    }
 
     private static boolean saveCandidature(Candidature candidature) {
         try {

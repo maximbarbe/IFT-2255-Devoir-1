@@ -77,11 +77,25 @@ public class IntervenantView extends View implements ConnectedView{
             print("Votre choix > ");
             switch (reader.nextLine()) {
                 case "1":
+                    clearConsole();
                     candidatures = CandidatureController.getCandidaturesByIntervenant(MaVille.getCurUser().getAdresseCourriel());
+                    candidatures.removeIf(c -> c.getStatut().equals(StatutCandidature.CONFIRMEE));
                     for (int i = 0; i < candidatures.size(); i++) {
-                        println("");
+                        println((i+1) + ") Requête: " + candidatures.get(i).getRequeteID() + "; Date de début: " + candidatures.get(i).getDateDebut() + "; Date de fin: " + candidatures.get(i).getDateFin() + "; Statut: " + candidatures.get(i).getStatut().toString());
                     }
-
+                    print("Entrez l'index de la candidature à soustraire > ");
+                    try {
+                        Candidature candidatureAEnlever = candidatures.get(Integer.parseInt(reader.nextLine()) - 1);
+                        CandidatureController.removeCandidature(candidatureAEnlever);
+                        println("La candidature a été soustraite.");
+                        println("Appuyez sur n'importe quelle touche pour continuer.");
+                        reader.nextLine();
+                    } catch (Exception e) {
+                        println("Vous n'avez pas entré un index valide. Veuillez réessayer");
+                        println("Appuyez sur n'importe quelle touche pour continuer.");
+                        reader.nextLine();
+                        continue;
+                    }
                 default:
                     return;
 
