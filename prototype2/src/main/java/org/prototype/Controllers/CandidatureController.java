@@ -1,6 +1,8 @@
 package org.prototype.Controllers;
 
 import org.prototype.Models.Candidature;
+import org.prototype.Models.Requete;
+import org.prototype.Models.StatutCandidature;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 public class CandidatureController {
 
 
-    private static String candidaturesFile = "src/candidatureNotifications.csv";
+    private static String candidaturesFile = "src/candidatures.csv";
 
     /**
      * Fetch les candidatures dans le fichier csv "candidatures.csv".
@@ -30,16 +32,20 @@ public class CandidatureController {
             String line;
             while ((line=reader.readLine()) != null) {
                 String[] data = line.split(",");
-                Boolean accepte;
-                if (data[4].equals("null")) {
-                    accepte=null;
-                } else if (data[4].equals("true")) {
-                    accepte=true;
-                } else {
-                    accepte=false;
+                StatutCandidature statut = StatutCandidature.EN_ATTENTE;
+                for (StatutCandidature s:StatutCandidature.values()) {
+                    if (data[4].equals(s.toString())) {
+                        statut = s;
+                        break;
+                    }
                 }
-                candidatures.add(new Candidature(data[0], data[1], data[2], data[3], data[5]));
-                candidatures.get(candidatures.size() - 1).setAcceptee(accepte);
+                if (data.length == 5) {
+                    candidatures.add(new Candidature(data[0], data[3], data[1], data[2], ""));
+                } else {
+                    candidatures.add(new Candidature(data[0], data[3], data[1], data[2], data[5]));
+                }
+
+                candidatures.get(candidatures.size() - 1).setStatut(statut);
             }
             return candidatures;
         } catch (Exception e) {
@@ -69,12 +75,28 @@ public class CandidatureController {
         }
     }
 
-    public static boolean createCandidature(String requeteID, String dateDebut, String dateFin, String intervenant, String msg) {
+    private static boolean canSendCandidature(String requeteID, String intervenant) {
+        ArrayList<Candidature> candidature = getCandidaturesByIntervenant(intervenant);
+        for (Candidature c:candidature) {
+            if (c.getRequeteID().equals(requeteID)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static int createCandidature(String requeteID, String dateDebut, String dateFin, String intervenant, String msg) {
         if (!areDatesValid(dateDebut, dateFin)) {
-            return false;
+            return 1;
+        }
+        if (!canSendCandidature(requeteID, intervenant)) {
+            return 2;
         }
 
-        return saveCandidature(new Candidature(requeteID, dateDebut, dateFin, intervenant, msg));
+        if (!saveCandidature(new Candidature(requeteID, intervenant, dateDebut, dateFin, msg))) {
+            return 3;
+        } else {
+            return 0;
+        }
     }
 
 
@@ -82,13 +104,8 @@ public class CandidatureController {
     private static boolean saveCandidature(Candidature candidature) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile, true));
-            String status;
-            if (candidature.getAcceptee() == null) {
-                status = "null";
-            } else {
-                status = candidature.getAcceptee().toString();
-            }
-            writer.append(candidature.getRequeteID() + ","+candidature.getIntervenant() + ","+candidature.getDateDebut()+","+candidature.getDateFin() + ","+status + "," + candidature.getMessage()+"\n");
+
+            writer.append(candidature.getRequeteID() + ","+candidature.getDateDebut()+","+candidature.getDateFin() + ","+candidature.getIntervenant() + ","+candidature.getStatut().toString() + "," + candidature.getMessage()+"\n");
             writer.close();
 
             return true;

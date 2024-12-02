@@ -59,9 +59,9 @@ public class IntervenantView extends View implements ConnectedView{
             ArrayList<Candidature> candidatures = CandidatureController.getCandidaturesByIntervenant(MaVille.getCurUser().getAdresseCourriel());
             for (int i = 0; i < candidatures.size(); i++) {
                 String statut;
-                if (candidatures.get(i).getAcceptee() == null) {
+                if (candidatures.get(i).getStatut() == StatutCandidature.EN_ATTENTE) {
                     statut = "Pas de réponse";
-                } else if(candidatures.get(i).getAcceptee() == true) {
+                } else if(candidatures.get(i).getStatut() == StatutCandidature.ACCEPTE) {
                     statut = "Candidature acceptée";
                 } else {
                     statut = "Candidature refusée";
@@ -72,7 +72,8 @@ public class IntervenantView extends View implements ConnectedView{
 
             println("");
             println("1) Soustraire une candidature");
-            println("2) Revenir");
+            println("2) Confirmer une candidature acceptée");
+            println("3) Revenir");
             print("Votre choix > ");
             switch (reader.nextLine()) {
                 case "1":
@@ -94,20 +95,21 @@ public class IntervenantView extends View implements ConnectedView{
     public void consulterRequetes() {
         clearConsole();
         println("Requêtes: ");
-        for (Requete r: RequeteController.getRequetes()) {
-            if (r.getStatut().equals(RequeteStatut.OUVERTE)) {
-                println("ID: "+r.getRequeteId());
-                println("Titre: "+r.getTitre());
-                println("Description: "+r.getDescription());
-                println("Type de travail: " + r.getType().toString());
-                println("Date de début espéré: " + r.getDateDebutEspere());
-                println("Quartier: "+r.getQuartier());
-                println("Déposé par: " + r.getUserID());
-                for (int i = 0; i < 60;i++) {
-                    print("=");
-                }
-                println("");
+        ArrayList<Requete> requetes = RequeteController.getRequetes();
+        for (int i = 0; i < requetes.size(); i++) {
+            Requete r = requetes.get(i);
+            println("Index :" + (i + 1));
+            println("Titre: "+r.getTitre());
+            println("Description: "+r.getDescription());
+            println("Type de travail: " + r.getType().toString());
+            println("Date de début espéré: " + r.getDateDebutEspere());
+            println("Quartier: "+r.getQuartier());
+            println("Déposé par: " + r.getUserID());
+            for (int j = 0; j < 60;j++) {
+                print("=");
             }
+            println("");
+
         }
         println("");
         while (true) {
@@ -158,19 +160,19 @@ public class IntervenantView extends View implements ConnectedView{
                             String quartier = reader.nextLine();
                             ArrayList<Requete> requetesFiltresByQuartier = RequeteController.getRequeteByQuartier(quartier);
                             for (Requete r:requetesFiltresByQuartier) {
-                                if (r.getStatut().equals(RequeteStatut.OUVERTE)) {
-                                    println("ID: "+r.getRequeteId());
-                                    println("Titre: "+r.getTitre());
-                                    println("Description: "+r.getDescription());
-                                    println("Type de travail: " + r.getType().toString());
-                                    println("Date de début espéré: " + r.getDateDebutEspere());
-                                    println("Quartier: "+r.getQuartier());
-                                    println("Déposé par: " + r.getUserID());
-                                    for (int i = 0; i < 60;i++) {
-                                        print("=");
-                                    }
-                                    println("");
+
+                                println("ID: "+r.getRequeteId());
+                                println("Titre: "+r.getTitre());
+                                println("Description: "+r.getDescription());
+                                println("Type de travail: " + r.getType().toString());
+                                println("Date de début espéré: " + r.getDateDebutEspere());
+                                println("Quartier: "+r.getQuartier());
+                                println("Déposé par: " + r.getUserID());
+                                for (int i = 0; i < 60;i++) {
+                                    print("=");
                                 }
+                                println("");
+
                             }
                             continue;
                         // Filtrer les requêtes par date.
@@ -202,28 +204,47 @@ public class IntervenantView extends View implements ConnectedView{
                             continue;
                     }
                 case "2":
-                    print("Entrez l'ID de la requête > ");
-                    String id = reader.nextLine();
-                    if (!RequeteController.doesRequeteExist(id)) {
+                    print("Entrez l'index de la requête > ");
+                    String idx = reader.nextLine();
+                    String id = "";
+                    try {
+                        id = String.valueOf(requetes.get(Integer.parseInt(idx) - 1).getRequeteId());
+                    } catch(Exception e) {
+                        println("Choisissez un index valide.");
                         continue;
                     }
                     print("Entrez la date de début (YYYY-MM-DD) > ");
                     String dateDebut = reader.nextLine();
                     print("Entrez la date de fin (YYYY-MM-DD) > ");
                     String dateFin  = reader.nextLine();
-                    print("1) Confirmer; 2) Annuler");
+                    println("1) Confirmer; 2) Annuler");
                     switch (reader.nextLine()) {
                         case "1":
-                            if (CandidatureController.createCandidature(id, dateDebut, dateFin, MaVille.getCurUser().getAdresseCourriel(), "")) {
-                                //!TODO Faire que ca push une notification
-                                println("La candidature a été soumise avec succès!");
-                                println("Appuyez sur n'importe quelle touche pour continuer");
-                                reader.nextLine();
-                            } else {
-                                println("Il y a eu un problème lors de la soumission, assurez vous d'utiliser les formats indiqués!");
-                                println("Appuyez sur n'importe quelle touche pour continuer");
-                                reader.nextLine();
+                            int responseCode = CandidatureController.createCandidature(id, dateDebut, dateFin, MaVille.getCurUser().getAdresseCourriel(), "");
+                            switch (responseCode) {
+                                case 0:
+                                    println("Votre candidature a été soumise avec succès.");
+                                    println("Appuyez sur n'importe quelle touche pour continuer.");
+                                    reader.nextLine();
+                                    continue;
+                                case 1:
+                                    println("Les dates entrées ne sont pas valides.");
+                                    println("Appuyez sur n'importe quelle touche pour continuer.");
+                                    reader.nextLine();
+                                    continue;
+
+                                case 2:
+                                    println("Vous avez déjà envoyé une candidature pour cette requête.");
+                                    println("Appuyez sur n'importe quelle touche pour continuer.");
+                                    reader.nextLine();
+                                    continue;
+                                case 3:
+                                    println("Erreur lors de la sauvegarde de la candidature.");
+                                    println("Appuyez sur n'importe quelle touche pour continuer.");
+                                    reader.nextLine();
+                                    continue;
                             }
+
                             continue;
                         default:
                             continue;

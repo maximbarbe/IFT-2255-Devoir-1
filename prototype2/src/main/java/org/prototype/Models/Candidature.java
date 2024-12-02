@@ -12,7 +12,7 @@ public class Candidature {
     // null = Aucune réponse
     // True = Acceptée
     // False = Refusée
-    private Boolean acceptee = null;
+    private StatutCandidature statut = StatutCandidature.EN_ATTENTE;
 
     private String message;
 
@@ -45,14 +45,14 @@ public class Candidature {
     }
 
     public String getIntervenant() {
-        return intervenant;
+        return this.intervenant;
     }
 
-    public Boolean getAcceptee() {
-        return acceptee;    
+    public StatutCandidature getStatut() {
+        return this.statut;
     }
 
-    public void setAcceptee(boolean val) {
-        this.acceptee = val;
+    public void setStatut(StatutCandidature val) {
+        this.statut = val;
     }
 }
