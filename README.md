@@ -5,24 +5,26 @@ Description du projet:
 
 Liste des fonctionnalités de l'application par rôle :
 Résidents :
--Créer un compte.
--Se connecter et déconnecter.
--Modifier leurs préférences horaires.
--Consulter les travaux en cours et à venir.
--Rechercher ou filtrer les travaux par quartier.
--Consulter les entraves et rechercher par rue.
--Soumettre une requête de travail et suivre son avancement.
--Consulter leurs requêtes de travail.
--Recevoir des notifications.
+<ul>
+<li>Créer un compte.</li>
+<li>Se connecter et déconnecter.</li>
+<li>Modifier leurs préférences horaires.</li>
+<li>Consulter les travaux en cours et à venir.</li>
+<li>Rechercher ou filtrer les travaux par quartier.</li>
+<li>Consulter les entraves et rechercher par rue.</li>
+<li>Soumettre une requête de travail et suivre son avancement.</li>
+<li>Consulter leurs requêtes de travail.</li>
+<li>Recevoir des notifications.</li>
+</ul>
 
-Intervenants :
--Créer un compte.
--Soumettre des candidatures pour des requêtes de travail.
--Soustraire leurs candidatures.
--Soumettre des projets.
--Modifier le statut des projets.
--Envoyer des notifications aux résidents concernés.
-
+<ul>Intervenants :
+<li>Créer un compte.</li>
+<li>Soumettre des candidatures pour des requêtes de travail.</li>
+<li>Soustraire leurs candidatures.</li>
+<li>Soumettre des projets.</li>
+<li>Modifier le statut des projets.</li>
+<li>Envoyer des notifications aux résidents concernés.</li>
+</ul>
 
 Organisation du répertoire:
 > [/prototype2](/prototype2/): Ce folder contient tous les fichiers nécessaire pour éxécuter le prototype.
