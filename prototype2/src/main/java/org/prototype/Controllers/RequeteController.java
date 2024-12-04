@@ -89,7 +89,7 @@ public class RequeteController {
         } else {
             try {
                 // L'appel à getRequetes() est uniquement utilisé pour déterminer le ID de notre nouvelle requête
-                ArrayList<Requete> requetes = RequeteController.getRequetes();
+                ArrayList<Requete> requetes = RequeteController.getRequetes(false);
                 int id = 0;
                 for (Requete r:requetes) {
                     id = Integer.max(id, r.getRequeteId() + 1);
@@ -109,7 +109,7 @@ public class RequeteController {
      * Fetch la liste des requêtes à partir d'un fichier de données prédéfini
      * @return - La liste des requêtes
      */
-    public static ArrayList<Requete> getRequetes(){
+    public static ArrayList<Requete> getRequetes(boolean removeClosed){
         ArrayList<Requete> requetes = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(requetesFile));
@@ -130,7 +130,8 @@ public class RequeteController {
             }
         } catch (Exception e) {};
         // On enlève les requêtes fermées.
-        requetes.removeIf(r -> r.getStatut().equals(RequeteStatut.FERMEE));
+        if (removeClosed) {requetes.removeIf(r -> r.getStatut().equals(RequeteStatut.FERMEE));}
+
         return requetes;
     }
 
@@ -141,7 +142,7 @@ public class RequeteController {
      */
     public static ArrayList<Requete> getRequeteByType(String type) {
         ArrayList<Requete> requetesFiltrees = new ArrayList<>();
-        for (Requete r:getRequetes()) {
+        for (Requete r:getRequetes(true)) {
             if (r.getType().toString().equals(type)) {
                 requetesFiltrees.add(r);
             }
@@ -155,7 +156,7 @@ public class RequeteController {
      */    
     public static ArrayList<Requete> getRequeteByQuartier(String quartier) {
         ArrayList<Requete> requetesFiltrees = new ArrayList<>();
-        for (Requete r:getRequetes()) {
+        for (Requete r:getRequetes(true)) {
             if (r.getQuartier().toLowerCase().equals(quartier.toLowerCase())) {
                 requetesFiltrees.add(r);
             }
@@ -170,7 +171,7 @@ public class RequeteController {
      */
     public static ArrayList<Requete> getRequeteByDate(String date) {
         ArrayList<Requete> requetesFiltrees = new ArrayList<>();
-        for (Requete r:getRequetes()) {
+        for (Requete r:getRequetes(true)) {
             if (r.getDateDebutEspere().toLowerCase().equals(date.toLowerCase())) {
                 requetesFiltrees.add(r);
             }
@@ -179,14 +180,16 @@ public class RequeteController {
     }
 
     public static ArrayList<Requete> getRequeteByUser(String userID) {
-        ArrayList<Requete> requetes = getRequetes();
+        ArrayList<Requete> requetes = getRequetes(true);
         requetes.removeIf(r -> !r.getUserID().equals(userID));
         return requetes;
     }
 
     public static void fermerRequete(Requete requete) {
-        ArrayList<Requete> requetes = getRequetes();
+        ArrayList<Requete> requetes = getRequetes(false);
         requetes.removeIf(r-> r.getRequeteId() == requete.getRequeteId());
+        requete.setStatut(RequeteStatut.FERMEE);
+        requetes.add(requete);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(requetesFile));
             ArrayList<String> lines = new ArrayList<>();

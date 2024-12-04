@@ -63,8 +63,10 @@ public class IntervenantView extends View implements ConnectedView{
                     statut = "Pas de réponse";
                 } else if(candidatures.get(i).getStatut() == StatutCandidature.ACCEPTE) {
                     statut = "Candidature acceptée";
-                } else {
+                } else if (candidatures.get(i).getStatut() == StatutCandidature.REFUSEE ){
                     statut = "Candidature refusée";
+                } else {
+                    statut = "Candidature confirmée";
                 }
                 println((i+1) + ") " + "Requête: " + candidatures.get(i).getRequeteID() + "; Statut: " + statut + "; Date de début prévu: " + candidatures.get(i).getDateDebut() + "; Date de fin prévu: "+candidatures.get(i).getDateFin());
             }
@@ -96,6 +98,37 @@ public class IntervenantView extends View implements ConnectedView{
                         reader.nextLine();
                         continue;
                     }
+                case "2":
+                    clearConsole();
+                    println("Mes candidatures confirmées: ");
+                    candidatures = CandidatureController.getCandidaturesByIntervenant(MaVille.getCurUser().getAdresseCourriel());
+                    candidatures.removeIf(c -> !c.getStatut().equals(StatutCandidature.ACCEPTE));
+                    for (int i = 0; i < candidatures.size(); i++) {
+                        println((i + 1) +") Requête: " + candidatures.get(i).getRequeteID() + "; Message laissé: " + candidatures.get(i).getMessage());
+                    }
+                    print("Entrez l'index de la candidature à confirmer > ");
+                    Candidature candidatureAConfirmer;
+                    try {
+                        candidatureAConfirmer = candidatures.get(Integer.parseInt(reader.nextLine()) - 1);
+                    } catch (Exception e) {
+                        println("Vous n'avez pas entré un index valide, veuillez réessayer.");
+                        println("Appuyez sur n'importe quelle touche pour continuer.");
+                        reader.nextLine();
+                        continue;
+                    }
+                    println("1) Confirmer; 2) Annuler");
+                    print("Votre choix > ");
+                    switch (reader.nextLine()) {
+                        case "1":
+                            candidatureAConfirmer.setStatut(StatutCandidature.CONFIRMEE);
+                            CandidatureController.updateCandidature(candidatureAConfirmer);
+                            // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class LocalDateTime. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html.
+                            NotificationController.pushCandidatureNotifications("Candidature confirmée", "L'intervenant " + MaVille.getCurUser().getNomComplet() + " a confirmé sa candidature sur la requête ayant le ID " + candidatureAConfirmer.getRequeteID(), MaVille.getCurUser().getAdresseCourriel(), candidatureAConfirmer.getRequeteID(), LocalDateTime.now().toString());
+                            continue;
+                        default:
+                            continue;
+
+                    }
                 default:
                     return;
 
@@ -109,7 +142,8 @@ public class IntervenantView extends View implements ConnectedView{
     public void consulterRequetes() {
         clearConsole();
         println("Requêtes: ");
-        ArrayList<Requete> requetes = RequeteController.getRequetes();
+        ArrayList<Requete> requetes = RequeteController.getRequetes(true);
+
         for (int i = 0; i < requetes.size(); i++) {
             Requete r = requetes.get(i);
             println("Index :" + (i + 1));
@@ -337,6 +371,8 @@ public class IntervenantView extends View implements ConnectedView{
                         if (reader.nextLine().equals("1")) {
                             travailAModifier.setDescription(newDesc);
                             TravailController.updateTravail(travailAModifier);
+                            // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class LocalDateTime. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html.
+                            NotificationController.createWorkNotification("Changement de description", "La description du projet " + travailAModifier.getTitre() + " a changé.", MaVille.getCurUser().getAdresseCourriel(), travailAModifier.getId(), LocalDateTime.now().toString());
                             println("Le projet a été modifié avec succès, appuyez sur n'importe quelle touche pour continuer. ");
                             reader.nextLine();
                         } else {
@@ -358,8 +394,11 @@ public class IntervenantView extends View implements ConnectedView{
                                 reader.nextLine();
                                 continue;
                             }
+                            String dateFin = travailAModifier.getDateFin();
                             travailAModifier.setDateFin(newDate);
                             TravailController.updateTravail(travailAModifier);
+                            // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class LocalDateTime. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html.
+                            NotificationController.createWorkNotification("Changement de date de fin", "La date de fin du projet " + travailAModifier.getTitre() + " est passé de " + dateFin + " à " + newDate+".", MaVille.getCurUser().getAdresseCourriel(), travailAModifier.getId(), LocalDateTime.now().toString());
                             println("Le projet a été modifié avec succès, appuyez sur n'importe quelle touche pour continuer. ");
                             reader.nextLine();
                         } else {

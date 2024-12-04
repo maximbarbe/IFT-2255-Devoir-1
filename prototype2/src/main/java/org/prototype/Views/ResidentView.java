@@ -278,6 +278,7 @@ public class ResidentView extends View implements ConnectedView{
                 println("Date de début espéré: " + r.getDateDebutEspere());
                 println("Quartier: "+r.getQuartier());
                 ArrayList<Candidature> candidatures = CandidatureController.getCandidaturesByRequete(String.valueOf(r.getRequeteId()));
+                candidatures.removeIf(c -> !c.getStatut().equals(StatutCandidature.EN_ATTENTE));
                 if (candidatures.size() == 0) {
                     println("Statut: Aucune candidature soumise");
                 } else if (candidatures.size() == 1){
@@ -299,10 +300,50 @@ public class ResidentView extends View implements ConnectedView{
                 print("Votre choix > ");
                 switch (reader.nextLine()) {
                     case "1":
-                        println("Affichage de page pour voir les candidatures");
-                        println("Appuyez sur n'importe quelle touche pour continuer");
-                        reader.nextLine();
-                        break;
+                        clearConsole();
+                        ArrayList<Requete> requetes = RequeteController.getRequeteByUser(MaVille.getCurUser().getAdresseCourriel());
+                        ArrayList<Candidature> candidatures = new ArrayList<>();
+                        for (Requete r:requetes) {;
+                            candidatures.addAll(CandidatureController.getCandidaturesByRequete(String.valueOf(r.getRequeteId())));
+                        }
+                        candidatures.removeIf(c -> !c.getStatut().equals(StatutCandidature.EN_ATTENTE));
+                        for (int i = 0; i < candidatures.size();i++) {
+                            println((i+1)+") Requête: "+candidatures.get(i).getRequeteID() + "; Intervenant: " + candidatures.get(i).getIntervenant() + "; Date de début: " + candidatures.get(i).getDateDebut() + "; Date de fin: "+candidatures.get(i).getDateFin());
+
+                        }
+                        print("Entrez l'index de la candidature que vous voulez prendre une décision > ");
+                        Candidature candidatureAUpdate;
+                        try {
+                            candidatureAUpdate = candidatures.get(Integer.parseInt(reader.nextLine()) - 1);
+                        } catch (Exception e) {
+                            println("Vous n'avez pas entré un index valide, veuillez réessayer.");
+                            println("Appuyez sur n'importe quelle touche.");
+                            reader.nextLine();
+                            continue;
+                        }
+                        println("1) Accepter; 2) Refuser; 3) Revenir");
+                        println("Votre choix > ");
+                        switch(reader.nextLine()) {
+                            case "1":
+                                print("Entrez un message si désiré > ");
+                                String msg = reader.nextLine();
+                                candidatureAUpdate.setStatut(StatutCandidature.ACCEPTE);
+                                candidatureAUpdate.setMessage(msg);
+                                CandidatureController.updateCandidature(candidatureAUpdate);
+                                println("La candidature a été acceptée.");
+                                println("Appuyez sur n'importe quelle touche pour continuer");
+                                reader.nextLine();
+                                continue;
+                            case "2":
+                                candidatureAUpdate.setStatut(StatutCandidature.REFUSEE);
+                                CandidatureController.updateCandidature(candidatureAUpdate);
+                                println("La candidature a été refusée.");
+                                println("Appuyez sur n'importe quelle touche pour continuer");
+                                reader.nextLine();
+                                continue;
+                            default:
+                                continue;
+                        }
                     case "2":
                         clearConsole();
                         println("Mes requêtes\n");
@@ -319,8 +360,13 @@ public class ResidentView extends View implements ConnectedView{
                             print("Votre choix > ");
                             switch (reader.nextLine()) {
                                 case "1":
-                                    ArrayList<Candidature> candidatures = CandidatureController.getCandidaturesByRequete(String.valueOf(requeteAEnlever.getRequeteId()));
-                                    candidatures.forEach(c -> CandidatureController.removeCandidature(c));
+                                    ArrayList<Candidature> candidaturesByRequete = CandidatureController.getCandidaturesByRequete(String.valueOf(requeteAEnlever.getRequeteId()));
+                                    for (Candidature c:candidaturesByRequete) {
+                                        if (!c.getStatut().equals(StatutCandidature.CONFIRMEE) && !c.getStatut().equals(StatutCandidature.REFUSEE)) {
+                                            c.setStatut(StatutCandidature.REFUSEE);
+                                            CandidatureController.updateCandidature(c);
+                                        }
+                                    }
                                     RequeteController.fermerRequete(requeteAEnlever);
                                     println("La candidature a été fermée avec succès.");
                                     println("Appuyez sur n'importe quelle touche pour continuer");
@@ -344,7 +390,7 @@ public class ResidentView extends View implements ConnectedView{
                         println("Mauvais choix, veuillez réessayer");
                         continue;
                 }
-                break;
+
             }
         }
     }

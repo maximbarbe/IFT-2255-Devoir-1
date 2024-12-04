@@ -81,6 +81,23 @@ public class CandidatureController {
         }
         return true;
     }
+
+    public static int createCandidature(String requeteID, String dateDebut, String dateFin, String intervenant, String msg, StatutCandidature statut) {
+        if (!areDatesValid(dateDebut, dateFin)) {
+            return 1;
+        }
+        if (!canSendCandidature(requeteID, intervenant)) {
+            return 2;
+        }
+        Candidature c = new Candidature(requeteID, intervenant, dateDebut, dateFin, msg);
+        c.setStatut(statut);
+        if (!saveCandidature(c)) {
+            return 3;
+        } else {
+            return 0;
+        }
+    }
+
     public static int createCandidature(String requeteID, String dateDebut, String dateFin, String intervenant, String msg) {
         if (!areDatesValid(dateDebut, dateFin)) {
             return 1;
@@ -99,7 +116,7 @@ public class CandidatureController {
 
     public static void removeCandidature(Candidature c) {
         ArrayList<Candidature> candidatures = getCandidatures();
-        candidatures.removeIf(candidature -> candidature.getRequeteID().equals(c.getRequeteID()));
+        candidatures.removeIf(candidature -> candidature.getRequeteID().equals(c.getRequeteID()) && candidature.getIntervenant().equals(c.getIntervenant()));
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile));
             for (Candidature candidature:candidatures) {
@@ -127,6 +144,25 @@ public class CandidatureController {
         return candidatures;
     }
 
+    public static void updateCandidature(Candidature c) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(candidaturesFile));
+            String line;
+            ArrayList<String> lines = new ArrayList<>();
+            while ((line= reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data[0].equals(c.getRequeteID()) && data[3].equals(c.getIntervenant())) {
+                    continue;
+                } else {
+                    lines.add(line);
+                }
+            }
+            lines.add(c.getRequeteID() + ","+c.getDateDebut()+","+c.getDateFin() + ","+c.getIntervenant() + ","+c.getStatut().toString() + "," + c.getMessage());
+            BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile));
+            writer.write(String.join("\n", lines) + "\n");
+            writer.close();
+        } catch (Exception e) {return;}
+    }
 
 
 }

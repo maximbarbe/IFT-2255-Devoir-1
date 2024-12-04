@@ -168,7 +168,7 @@ public class NotificationController {
                 id = Integer.parseInt(notis.get(notis.size() - 1).getNotificationID()) + 1;
             }
             BufferedWriter writer = new BufferedWriter(new FileWriter(candidatureNotificationsFile, true));
-            writer.append(String.join(",", new String[]{titre, description,intervenant,requete,date,String.valueOf(id)}));
+            writer.append(String.join(",", new String[]{titre, description,intervenant,requete,date,String.valueOf(id)}) + "\n");
             writer.close();
             return;
         } catch (Exception e) {return;}

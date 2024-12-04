@@ -17,6 +17,14 @@ certaines valeurs de versions.-->
     </properties>
 
     <dependencies>
+
+        <!-- Tiré de https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin/0.8.12 -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.12</version>
+        </dependency>
+
         <!-- Tiré de https://mvnrepository.com/artifact/org.slf4j/slf4j-nop/2.0.16 -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -51,6 +59,14 @@ certaines valeurs de versions.-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>org.prototype.MaVille</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
 
             <plugin>

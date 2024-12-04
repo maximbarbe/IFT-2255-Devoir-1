@@ -36,7 +36,7 @@ class Tests {
     public void createRequeteAndSaveToFileTest() {
 
         RequeteController.setRequetesFile("src/test/testRequetes.csv");
-        ArrayList<Requete> requetes = RequeteController.getRequetes();
+        ArrayList<Requete> requetes = RequeteController.getRequetes(true);
         Requete expectedRequete;
         if (requetes.size() == 0) {
             expectedRequete = new Requete(0, "test requete", "just un test d'une requete", "souterrain", "2025-01-01", "test@gmail.com", "outremont");
@@ -44,7 +44,7 @@ class Tests {
             expectedRequete = new Requete(requetes.size(), "test requete", "just un test d'une requete", "souterrain", "2025-01-01", "test@gmail.com", "outremont");
         }
         RequeteController.creerRequete("test requete", "just un test d'une requete", "souterrain", "2025-01-01", "test@gmail.com", "outremont");
-        requetes = RequeteController.getRequetes();
+        requetes = RequeteController.getRequetes(true);
         if (requetes.size() == 0) {
             fail("La requête n'a pas été sauvegardée dans le fichier");
         }
@@ -126,7 +126,7 @@ class Tests {
     @Test
     public void getRequeteTest() {
         RequeteController.setRequetesFile("src/test/testRequetes2.csv");
-        ArrayList<Requete> requetes = RequeteController.getRequetes();
+        ArrayList<Requete> requetes = RequeteController.getRequetes(true);
         Requete premiereRequete = requetes.get(0);
         String expectedRequête = "0,test,tester,RESIDENTIELS,2025-04-01,Verdun,resident3@gmail.com";
         String requete1 = (premiereRequete.getRequeteId() + "," + premiereRequete.getTitre() + "," + premiereRequete.getDescription() + "," + premiereRequete.getType() + "," + premiereRequete.getDateDebutEspere() + "," + premiereRequete.getQuartier() + "," + premiereRequete.getUserID());
