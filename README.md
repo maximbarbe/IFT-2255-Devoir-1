@@ -3,12 +3,31 @@
 Description du projet:
 > <i>MaVille</i> est une application dont les buts principaux sont d'informer les résidents sur les projets de construction à venir et de donner une voix aux résidants quant aux choix qui sont faits par rapport aux projets de construction. En effet, les responsables des projets de construction déposent des projets futurs qui peuvent être consultés par les résidents et ceux-ci peuvent même soumettre des requêtes de travaux. De plus, les résidents peuvent être notifiés lorsque des nouveaux projets qui affectent une rue ou un quartier qu'ils fréquentent apparaîssent. Avec cette application, on souhaite donc atténuer les sentiments de frustration des résidents surpris par l'apparition de nouveaux chantiers de construction.
 
+Liste des fonctionnalités de l'application par rôle :
+Résidents :
+-Créer un compte.
+-Se connecter et déconnecter.
+-Modifier leurs préférences horaires.
+-Consulter les travaux en cours et à venir.
+-Rechercher ou filtrer les travaux par quartier.
+-Consulter les entraves et rechercher par rue.
+-Soumettre une requête de travail et suivre son avancement.
+-Consulter leurs requêtes de travail.
+-Recevoir des notifications.
+
+Intervenants :
+-Créer un compte.
+-Soumettre des candidatures pour des requêtes de travail.
+-Soustraire leurs candidatures.
+-Soumettre des projets.
+-Modifier le statut des projets.
+-Envoyer des notifications aux résidents concernés.
 
 
 Organisation du répertoire:
 > [/prototype2](/prototype2/): Ce folder contient tous les fichiers nécessaire pour éxécuter le prototype.
 >> [/src](/prototype2/src/): Ce folder contient les fichiers Java et les fichiers csv.
->>> [/test](/prototype2/src/test/): Ce folder contient les fichiers pour les tests.<br/>
+>>> [/test](/prototype2/src/test/): Ce folder contient les fichiers pour les tests dont des fichiers CSV.<br/>
 >>>> [/java](/prototype2/src/test/java/): Ce folder contient le fichier Java pour les tests.<br/>
 
 >>> [/main/java/org/prototype](/prototype2/src/main/java/org/prototype/) Ce folder contient toutes les classes présentes dans le prototype.
@@ -17,7 +36,7 @@ Organisation du répertoire:
 >>>> [/Models](/prototype2/src/main/java/org/prototype/Models/) Ce folder contient toutes les classes qui représente les Modèles dans l'architecture MVC. <br/>
 >>>> [/Views](/prototype2/src/main/java/org/prototype/Views/) Ce folder contient toutes les classes qui représente les Vues dans l'architecture MVC. <br/>
 
-> [/diagrammes](/diagrammes/): Ce folder contient tous les diagrammes présents dans le rapport.<br/>
+> [/diagrammes](/diagrammes/): Ce folder contient tous les images de diagrammes présentes dans le rapport.<br/>
 > [rapport.html](/rapport.html): Ce fichier contient le rapport du devoir.
 
 <h2> Instructions pour éxécuter et tester l'application:</h2>
