@@ -184,9 +184,19 @@ public class RequeteController {
         return requetes;
     }
 
-    public static boolean doesRequeteExist(String id) {
+    public static void fermerRequete(Requete requete) {
         ArrayList<Requete> requetes = getRequetes();
-        requetes.removeIf(r -> !String.valueOf(r.getRequeteId()).equals(id));
-        return requetes.size() != 0;
+        requetes.removeIf(r-> r.getRequeteId() == requete.getRequeteId());
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(requetesFile));
+            ArrayList<String> lines = new ArrayList<>();
+            for (Requete r:requetes) {
+                lines.add(r.getRequeteId() + ","+r.getTitre()+","+r.getDescription()+","+r.getType().toString()+","+r.getDateDebutEspere()+","+r.getStatut().toString()+","+r.getUserID()+","+r.getQuartier());
+            }
+            if (lines.size() != 0) {
+                writer.write(String.join("\n", lines) + "\n");
+            }
+            writer.close();
+        } catch (Exception e){};
     }
 }

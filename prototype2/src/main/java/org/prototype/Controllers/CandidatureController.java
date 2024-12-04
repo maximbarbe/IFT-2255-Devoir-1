@@ -121,6 +121,11 @@ public class CandidatureController {
         }
     }
 
+    public static ArrayList<Candidature> getCandidaturesByRequete(String requeteID) {
+        ArrayList<Candidature> candidatures = getCandidatures();
+        candidatures.removeIf(c -> !c.getRequeteID().equals(requeteID));
+        return candidatures;
+    }
 
 
 
