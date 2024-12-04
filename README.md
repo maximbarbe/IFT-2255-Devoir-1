@@ -4,8 +4,8 @@ Description du projet:
 > <i>MaVille</i> est une application dont les buts principaux sont d'informer les résidents sur les projets de construction à venir et de donner une voix aux résidants quant aux choix qui sont faits par rapport aux projets de construction. En effet, les responsables des projets de construction déposent des projets futurs qui peuvent être consultés par les résidents et ceux-ci peuvent même soumettre des requêtes de travaux. De plus, les résidents peuvent être notifiés lorsque des nouveaux projets qui affectent une rue ou un quartier qu'ils fréquentent apparaîssent. Avec cette application, on souhaite donc atténuer les sentiments de frustration des résidents surpris par l'apparition de nouveaux chantiers de construction.
 
 Liste des fonctionnalités de l'application par rôle :
-Résidents :
-<ul>
+
+<ul>Résidents :
 <li>Créer un compte.</li>
 <li>Se connecter et déconnecter.</li>
 <li>Modifier leurs préférences horaires.</li>
