@@ -117,7 +117,7 @@ public class IntervenantController{
     private static boolean saveIntervenant(Intervenant i) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(intervenantFile, true));
-            writer.append(i.getNomComplet() + ";"+i.getAdresseCourriel()+";"+i.getMotDePasse()+";"+i.getType().toString()+";"+i.getIdentifiantVille());
+            writer.append(i.getNomComplet() + ";"+i.getAdresseCourriel()+";"+i.getMotDePasse()+";"+i.getType().toString()+";"+i.getIdentifiantVille() + "\n");
             writer.close();
         } catch (Exception e) {
             return false;
