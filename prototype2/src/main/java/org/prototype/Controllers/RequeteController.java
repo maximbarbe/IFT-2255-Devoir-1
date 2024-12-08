@@ -179,12 +179,25 @@ public class RequeteController {
         return requetesFiltrees;
     }
 
+
+/**
+ * Récupère une liste de requêtes associées à un utilisateur spécifique.
+ *
+ * @param userID L'identifiant de l'utilisateur pour lequel récupérer les requêtes.
+ * @return Une liste de {@link Requete} appartenant à l'utilisateur spécifié.
+ */
     public static ArrayList<Requete> getRequeteByUser(String userID) {
         ArrayList<Requete> requetes = getRequetes(true);
         requetes.removeIf(r -> !r.getUserID().equals(userID));
         return requetes;
     }
 
+ /**
+ * Ferme une requête donnée en mettant à jour son statut à {@link RequeteStatut#FERMEE}
+ * et sauvegarde les modifications dans le fichier des requêtes.
+ *
+ * @param requete La {@link Requete} à fermer.
+ */
     public static void fermerRequete(Requete requete) {
         ArrayList<Requete> requetes = getRequetes(false);
         requetes.removeIf(r-> r.getRequeteId() == requete.getRequeteId());

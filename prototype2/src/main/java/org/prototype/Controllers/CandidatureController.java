@@ -11,16 +11,19 @@ import java.util.ArrayList;
 
 
 /**
- * Classe qui s'occupe de contrôler la création, la modification et le "fetching" des candidatures
+ * Contrôleur responsable de la création, de la modification, et de la récupération des candidatures.
  */
 public class CandidatureController {
 
-
+    /**
+     * Chemin du fichier contenant les candidatures.
+     */
     private static String candidaturesFile = "src/candidatures.csv";
 
     /**
-     * Fetch les candidatures dans le fichier csv "candidatures.csv".
-     * @return - La liste de toutes les candidatures
+     * Récupère toutes les candidatures depuis le fichier CSV.
+     *
+     * @return Une liste de {@link Candidature}.
      */
     private static ArrayList<Candidature> getCandidatures(){
         try {
@@ -50,6 +53,13 @@ public class CandidatureController {
         }
     }
 
+
+    /**
+     * Récupère les candidatures associées à un intervenant spécifique.
+     *
+     * @param intervenant Le nom de l'intervenant.
+     * @return Une liste de {@link Candidature} correspondant à l'intervenant.
+     */
     public static ArrayList<Candidature> getCandidaturesByIntervenant(String intervenant) {
         ArrayList<Candidature> candidatures = getCandidatures();
         candidatures.removeIf(c -> !c.getIntervenant().equals(intervenant));
@@ -58,6 +68,14 @@ public class CandidatureController {
 
 
 
+
+    /**
+     * Vérifie si les dates de début et de fin sont valides.
+     *
+     * @param startDate La date de début au format {@link String}.
+     * @param endDate   La date de fin au format {@link String}.
+     * @return {@code true} si les dates sont valides, sinon {@code false}.
+     */
     private static boolean areDatesValid(String startDate, String endDate) {
         try {
             LocalDate now = LocalDate.now();
@@ -72,6 +90,14 @@ public class CandidatureController {
         }
     }
 
+
+    /**
+     * Vérifie si une candidature peut être envoyée pour une requête donnée par un intervenant spécifique.
+     *
+     * @param requeteID   L'identifiant de la requête.
+     * @param intervenant Le nom de l'intervenant.
+     * @return {@code true} si la candidature peut être envoyée, sinon {@code false}.
+     */
     private static boolean canSendCandidature(String requeteID, String intervenant) {
         ArrayList<Candidature> candidature = getCandidaturesByIntervenant(intervenant);
         for (Candidature c:candidature) {
@@ -82,6 +108,18 @@ public class CandidatureController {
         return true;
     }
 
+
+    /**
+     * Crée une nouvelle candidature avec un statut spécifique.
+     *
+     * @param requeteID   L'identifiant de la requête.
+     * @param dateDebut   La date de début.
+     * @param dateFin     La date de fin.
+     * @param intervenant Le nom de l'intervenant.
+     * @param msg         Le message de la candidature.
+     * @param statut      Le statut de la candidature.
+     * @return Un code d'état : 0 si succès, 1 si les dates sont invalides, 2 si la candidature existe déjà, 3 si l'enregistrement échoue.
+     */
     public static int createCandidature(String requeteID, String dateDebut, String dateFin, String intervenant, String msg, StatutCandidature statut) {
         if (!areDatesValid(dateDebut, dateFin)) {
             return 1;
@@ -98,6 +136,17 @@ public class CandidatureController {
         }
     }
 
+
+    /**
+     * Crée une nouvelle candidature avec le statut par défaut.
+     *
+     * @param requeteID   L'identifiant de la requête.
+     * @param dateDebut   La date de début.
+     * @param dateFin     La date de fin.
+     * @param intervenant Le nom de l'intervenant.
+     * @param msg         Le message de la candidature.
+     * @return Un code d'état : 0 si succès, 1 si les dates sont invalides, 2 si la candidature existe déjà, 3 si l'enregistrement échoue.
+     */
     public static int createCandidature(String requeteID, String dateDebut, String dateFin, String intervenant, String msg) {
         if (!areDatesValid(dateDebut, dateFin)) {
             return 1;
@@ -114,6 +163,12 @@ public class CandidatureController {
     }
 
 
+
+    /**
+     * Supprime une candidature spécifique.
+     *
+     * @param c La candidature à supprimer.
+     */
     public static void removeCandidature(Candidature c) {
         ArrayList<Candidature> candidatures = getCandidatures();
         candidatures.removeIf(candidature -> candidature.getRequeteID().equals(c.getRequeteID()) && candidature.getIntervenant().equals(c.getIntervenant()));
@@ -125,6 +180,15 @@ public class CandidatureController {
         } catch (Exception e) {}
     }
 
+
+
+
+    /**
+     * Enregistre une candidature dans le fichier CSV.
+     *
+     * @param candidature La candidature à enregistrer.
+     * @return {@code true} si l'enregistrement réussit, sinon {@code false}.
+     */
     private static boolean saveCandidature(Candidature candidature) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile, true));
@@ -138,12 +202,27 @@ public class CandidatureController {
         }
     }
 
+
+
+
+   /**
+     * Récupère les candidatures associées à une requête spécifique.
+     *
+     * @param requeteID L'identifiant de la requête.
+     * @return Une liste de {@link Candidature} correspondant à la requête.
+     */ 
     public static ArrayList<Candidature> getCandidaturesByRequete(String requeteID) {
         ArrayList<Candidature> candidatures = getCandidatures();
         candidatures.removeIf(c -> !c.getRequeteID().equals(requeteID));
         return candidatures;
     }
 
+    
+     /**
+     * Met à jour une candidature existante dans le fichier CSV.
+     *
+     * @param c La candidature mise à jour.
+     */
     public static void updateCandidature(Candidature c) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(candidaturesFile));

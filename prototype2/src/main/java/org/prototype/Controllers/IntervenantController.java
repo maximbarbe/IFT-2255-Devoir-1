@@ -13,24 +13,43 @@ import org.prototype.Models.TypeIntervenant;
 import org.prototype.Models.Utilisateur;
 
 /**
- * Classe qui s'occupe des opérations concernant l'objet <code>Intervenant</code> (i.e. la création, la modification ou sauvegarder dans un fichier)
+ * Classe responsable des opérations sur les objets {@link Intervenant},
+ * telles que la création, la modification et la sauvegarde des intervenants dans un fichier.
  */
 public class IntervenantController{
 
-    private static String intervenantFile ="src/intervenants.csv";
-    /**
-     * Fetch la liste des intervenants à partir d'un fichier de données prédéfini
-     * @return - La liste des intervenants
+     /**
+     * Chemin du fichier contenant les informations des intervenants.
      */
+    private static String intervenantFile ="src/intervenants.csv";
 
+
+    /**
+     * Obtient le chemin du fichier des intervenants.
+     *
+     * @return Le chemin du fichier des intervenants.
+     */
     public static String getIntervenantFile() {
         return intervenantFile;
     }
 
 
+     /**
+     * Définit le chemin du fichier des intervenants.
+     *
+     * @param file Le nouveau chemin du fichier des intervenants.
+     */
     public static void setIntervenantFile(String file) {
         intervenantFile = file;
     }
+
+
+
+    /**
+     * Récupère la liste des intervenants depuis le fichier CSV.
+     *
+     * @return Une liste de {@link Intervenant}.
+     */
     public static ArrayList<Intervenant> getIntervenants() {
         try {
             ArrayList<Intervenant> intervenants = new ArrayList<>();
@@ -48,6 +67,14 @@ public class IntervenantController{
         }
     }
 
+
+
+    /**
+     * Vérifie si un identifiant de ville existe déjà parmi les intervenants.
+     *
+     * @param id L'identifiant de la ville à vérifier.
+     * @return {@code true} si l'identifiant existe déjà, sinon {@code false}.
+     */
     private static boolean doesIdentifiantVilleExist(String id) {
         ArrayList<Intervenant> intervenants = getIntervenants();
         for (Intervenant i:intervenants) {
@@ -58,6 +85,14 @@ public class IntervenantController{
         return false;
     }
 
+
+
+    /**
+     * Détermine le type d'intervenant à partir d'une chaîne de caractères.
+     *
+     * @param type La chaîne représentant le type d'intervenant.
+     * @return Le {@link TypeIntervenant} correspondant.
+     */
     private static TypeIntervenant determineIntervenantType(String type) {
         switch (type.toLowerCase()) {
             case "entrepreneur_prive":
@@ -72,6 +107,13 @@ public class IntervenantController{
     }
 
 
+
+     /**
+     * Enregistre un intervenant dans le fichier CSV.
+     *
+     * @param i L'intervenant à enregistrer.
+     * @return {@code true} si l'enregistrement réussit, sinon {@code false}.
+     */
     private static boolean saveIntervenant(Intervenant i) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(intervenantFile, true));
@@ -83,6 +125,13 @@ public class IntervenantController{
         return true;
     }
 
+
+    /**
+     * Vérifie si le format de l'identifiant de ville est valide (8 chiffres).
+     *
+     * @param id L'identifiant à vérifier.
+     * @return {@code true} si le format est valide, sinon {@code false}.
+     */
     private static boolean identifiantFormatValid(String id) {
         Pattern format = Pattern.compile("^[0-9]{8}$");
         if (format.matcher(id).matches()) {
@@ -91,14 +140,17 @@ public class IntervenantController{
         return false;
     }
 
+
     /**
+     * Crée un nouvel intervenant.
      *
-     * @param nom
-     * @param type
-     * @param adresseCourriel
-     * @param motDePasse
-     * @param identifiantVille
-     * @return
+     * @param nom             Le nom complet de l'intervenant.
+     * @param type            Le type d'intervenant.
+     * @param adresseCourriel L'adresse courriel de l'intervenant.
+     * @param motDePasse      Le mot de passe de l'intervenant.
+     * @param identifiantVille L'identifiant de ville à 8 chiffres.
+     * @return Un code d'état : 0 si succès, 1 si l'identifiant de ville existe déjà, 2 si le format de l'identifiant est invalide,
+     *         3 si l'adresse courriel existe déjà, 4 si le format de l'adresse courriel est invalide, 5 si l'enregistrement échoue.
      */
     public static int createIntervenant(String nom, String type, String adresseCourriel, String motDePasse, String identifiantVille) {
         if (doesIdentifiantVilleExist(identifiantVille)) {
@@ -127,6 +179,13 @@ public class IntervenantController{
         return 0;
     }
 
+
+    /**
+     * Vérifie si une adresse courriel existe déjà parmi les utilisateurs.
+     *
+     * @param adresseCourriel L'adresse courriel à vérifier.
+     * @return {@code true} si l'adresse existe déjà, sinon {@code false}.
+     */
     private static boolean doesEmailExist(String adresseCourriel) {
         ArrayList<Utilisateur> utilisateurs = UtilisateurController.getUtilisateurs();
         for (Utilisateur u:utilisateurs) {
@@ -137,6 +196,14 @@ public class IntervenantController{
         return false;
     }
 
+
+
+     /**
+     * Vérifie si le format de l'adresse courriel est valide.
+     *
+     * @param email L'adresse courriel à vérifier.
+     * @return {@code true} si le format est valide, sinon {@code false}.
+     */
     private static boolean isEmailFormatValid(String email) {
         Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9.]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+$");
         if (emailPattern.matcher(email).matches()) {
