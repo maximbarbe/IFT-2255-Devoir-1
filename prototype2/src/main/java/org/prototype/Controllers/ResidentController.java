@@ -53,7 +53,7 @@ public class ResidentController{
     private static boolean saveResident(Resident r) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(residentFile, true));
-            writer.append(r.getNomComplet() + ";"+r.getAdresseCourriel()+";"+r.getMotDePasse()+";"+r.getDateDeNaissance()+";"+r.getNumTelephone()+";"+r.getAdresseResidentielle()+";"+r.getQuartier()+";"+ String.join(",", r.getSeenNotifications()) + ";" + r.getCreationDate());
+            writer.append(r.getNomComplet() + ";"+r.getAdresseCourriel()+";"+r.getMotDePasse()+";"+r.getDateDeNaissance()+";"+r.getNumTelephone()+";"+r.getAdresseResidentielle()+";"+r.getQuartier()+";"+ String.join(",", r.getSeenNotifications()) + ";" + r.getCreationDate() + "\n");
             writer.close();
         } catch (Exception e) {
             return false;
