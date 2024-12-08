@@ -19,17 +19,30 @@ import java.util.HashSet;
 import java.util.regex.Pattern;
 
 /**
- * Classe qui s'occupe des opérations concernant les résidents
+ * Classe responsable des opérations liées aux résidents, telles que la création,
+ * la mise à jour et la récupération des informations des résidents.
  */
 public class ResidentController{
-
-
+    
+    /**
+     * Chemin du fichier contenant les informations des résidents.
+     */
     private static String residentFile = "src/residents.csv";
 
+    /**
+     * Obtient le chemin du fichier des résidents.
+     *
+     * @return Le chemin du fichier des résidents.
+     */
     public static String getResidentFile() {
         return residentFile;
     }
 
+    /**
+     * Définit le chemin du fichier des résidents.
+     *
+     * @param file Le nouveau chemin du fichier des résidents.
+     */
     public static void setResidentFile(String file) {
         residentFile = file;
     }
@@ -37,6 +50,9 @@ public class ResidentController{
     private static HashMap<String, String> convertPostalCode = new HashMap<>();
 
 
+    /**
+     * Initialise la table de hachage pour la conversion des codes postaux en quartiers.
+     */
     public static void initHashMap() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src/codesPostaux.csv"));
@@ -50,6 +66,14 @@ public class ResidentController{
         }
     }
 
+
+
+ /**
+ * Sauvegarde un résident dans le fichier des résidents.
+ *
+ * @param r Le résident à sauvegarder.
+ * @return {@code true} si le résident a été sauvegardé avec succès, sinon {@code false}.
+ */
     private static boolean saveResident(Resident r) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(residentFile, true));
@@ -63,6 +87,13 @@ public class ResidentController{
     }
 
 
+
+/**
+ * Vérifie si une chaîne de caractères représente une date valide au format ISO (yyyy-MM-dd).
+ *
+ * @param dateDeNaissance La date de naissance sous forme de chaîne de caractères.
+ * @return Un objet {@link LocalDate} si le format est valide, sinon {@code null}.
+ */
     private static LocalDate isDateFormatValid(String dateDeNaissance) {
         LocalDate birthday;
         try {
@@ -73,6 +104,13 @@ public class ResidentController{
         return birthday;
     }
 
+
+/**
+ * Vérifie si la date de naissance correspond à un âge d'au moins 16 ans.
+ *
+ * @param birthday La date de naissance sous forme d'objet {@link LocalDate}.
+ * @return {@code true} si l'âge est d'au moins 16 ans, sinon {@code false}.
+ */
     private static boolean isAtLeastSixteen(LocalDate birthday) {
         LocalDate cur = LocalDate.now();
         if (birthday.until(cur, ChronoUnit.YEARS) >= 16) {
@@ -80,6 +118,13 @@ public class ResidentController{
         } else return false;
     }
 
+
+/**
+ * Vérifie si un code postal respecte le format valide (par exemple, "A1B 2C3").
+ *
+ * @param postalCode Le code postal à vérifier.
+ * @return {@code true} si le format est valide, sinon {@code false}.
+ */
     private static boolean isPostalCodeFormatValid(String postalCode) {
         Pattern postalCodePattern = Pattern.compile("^[a-zA-Z0-9]{3} [a-zA-Z0-9]{3}$");
         if (postalCodePattern.matcher(postalCode).matches()) {
@@ -87,16 +132,20 @@ public class ResidentController{
         } else return false;
     }
 
-
-    /**
+ /**
+     * Crée un nouveau résident et l'enregistre dans le fichier des résidents.
      *
-     * @param nomComplet
-     * @param dateDeNaissance
-     * @param adresseCourriel
-     * @param motDePasse
-     * @param adresseResidentielle
-     * @param numTelephone
-     * @return
+     * @param nomComplet            Le nom complet du résident.
+     * @param dateDeNaissance       La date de naissance du résident au format {@link String}.
+     * @param adresseCourriel       L'adresse courriel du résident.
+     * @param motDePasse            Le mot de passe du résident.
+     * @param adresseResidentielle  L'adresse résidentielle du résident.
+     * @param numTelephone          Le numéro de téléphone du résident.
+     * @param postalCode            Le code postal du résident.
+     * @param creationDate          La date de création du compte.
+     * @return Un code d'état : 0 si succès, 1 si l'email existe déjà, 2 si le format de l'email est invalide,
+     * 3 si la date de naissance est invalide, 4 si l'âge est inférieur à 16 ans, 5 si le code postal est invalide,
+     * 6 si le code postal ne correspond à aucun quartier, 7 si l'enregistrement échoue.
      */
     public static int createResident(String nomComplet, String dateDeNaissance, String adresseCourriel, String motDePasse, String adresseResidentielle, String numTelephone, String postalCode, String creationDate) {
         if (doesEmailExist(adresseCourriel)) {
@@ -136,8 +185,9 @@ public class ResidentController{
     }
 
     /**
-     * Fetch la liste des résidents à partir d'un fichier prédéfini
-     * @return - La liste des résidents
+     * Récupère la liste de tous les résidents depuis le fichier CSV.
+     *
+     * @return Une liste de {@link Resident}.
      */
     public static ArrayList<Resident> getResidents(){
         try {
@@ -160,6 +210,12 @@ public class ResidentController{
         }
     }
 
+/**
+ * Vérifie si une adresse courriel respecte le format valide.
+ *
+ * @param email L'adresse courriel à vérifier.
+ * @return {@code true} si l'adresse courriel est valide, sinon {@code false}.
+ */
     private static boolean isEmailFormatValid(String email) {
         Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9.]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+$");
         if (emailPattern.matcher(email).matches()) {
@@ -167,6 +223,13 @@ public class ResidentController{
         } else return false;
     }
 
+
+/**
+ * Vérifie si une adresse courriel existe déjà dans la liste des utilisateurs.
+ *
+ * @param adresseCourriel L'adresse courriel à vérifier.
+ * @return {@code true} si l'adresse courriel existe déjà, sinon {@code false}.
+ */
     private static boolean doesEmailExist(String adresseCourriel) {
         ArrayList<Utilisateur> utilisateurs = UtilisateurController.getUtilisateurs();
         for (Utilisateur u:utilisateurs) {
@@ -177,6 +240,13 @@ public class ResidentController{
         return false;
     }
 
+
+ /**
+ * Récupère une liste de résidents vivant dans un quartier spécifique.
+ *
+ * @param quartier Le nom du quartier pour lequel récupérer les résidents.
+ * @return Une liste de {@link Resident} associés au quartier spécifié.
+ */
     public static ArrayList<Resident> getResidentsByQuartier(String quartier) {
         ArrayList<Resident> residents = getResidents();
         residents.removeIf(r -> r.getQuartier().toLowerCase().equals(quartier.toLowerCase()) == false);
@@ -184,6 +254,11 @@ public class ResidentController{
     }
 
 
+     /**
+     * Met à jour les informations d'un résident dans le fichier CSV.
+     *
+     * @param r Le {@link Resident} à mettre à jour.
+     */
     public static void updateResident(Resident r) {
         try {
             ArrayList<String> residents = new ArrayList<>();
@@ -205,6 +280,11 @@ public class ResidentController{
         }
     }
 
+    /**
+     * Met à jour les notifications vues pour le résident actuellement connecté.
+     *
+     * @param notifications Une liste de {@link Notification} à marquer comme vues.
+     */
     public static void updateSeenNotifications(ArrayList<Notification> notifications) {
         if (notifications.size() == 0) {
             return;

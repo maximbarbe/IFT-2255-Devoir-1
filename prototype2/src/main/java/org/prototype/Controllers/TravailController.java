@@ -22,25 +22,45 @@ import java.util.HashSet;
 
 
 /**
- * Classe qui gère toutes les opérations reliées aux travaux.
+ * Classe qui gère toutes les opérations liées aux travaux, y compris l'interaction avec une API externe,
+ * la création, la mise à jour, le filtrage et la sauvegarde des travaux.
  */
 public class TravailController{
 
 
     // Mapper qui servira de transformer la réponse de l'API en type de travail que notre programme peut reconnaître 
     private static HashMap<String, TypeTravail> constructionTypeMapper = null;
+
+    /**
+     * Chemin du fichier contenant les informations des travaux.
+     */
     private static String travauxFile = "src/travaux.csv";
+
+     /**
+     * Chemin du fichier contenant les codes postaux et quartiers.
+     */
     private static String quartiersFile = "src/codesPostaux.csv";
+
+     /**
+     * Obtient le chemin du fichier des travaux.
+     *
+     * @return Le chemin du fichier des travaux.
+     */
     public static String getTravauxFile() {
         return travauxFile;
     }
 
+    /**
+     * Définit le chemin du fichier des travaux.
+     *
+     * @param file Le nouveau chemin du fichier des travaux.
+     */
     public static void setTravauxFile(String file) {
         travauxFile = file;
     }
 
-    /**
-     * Initialise notre mapper.
+   /**
+     * Initialise le mappage des types de travaux à partir des catégories reconnues par l'API.
      */
     private static void initHashMap(){
         if (constructionTypeMapper != null) {
@@ -69,7 +89,7 @@ public class TravailController{
      * Si la date de début est après la date courante, alors le projet est prévu. Dans les autres cas, le projet est en cours.
      * @param date1 - La date du début du projet
      * @param date2 - La date de fin du projet
-     * @return - Le statut du projet
+     * @return - Le statut du projet ({@link StatutProjet#TERMINE}, {@link StatutProjet#PREVU}, ou {@link StatutProjet#EN_COURS}).
      */
     private static StatutProjet determineProjectStatus(String date1, String date2) {
         LocalDate cur = LocalDate.now();
@@ -87,7 +107,7 @@ public class TravailController{
     /**
      * Parse la réponse obtenue à l'appel au service de la ville de Montréal
      * @param response - La réponse sous format de String
-     * @return - La liste des travaux extraits
+     * @return Une liste de {@link Travail} extraits de la réponse.
      */
     private static ArrayList<Travail> parseTravailApiCall(String response) {
         // La procédure du parsing de JSON est basé sur:
@@ -110,7 +130,7 @@ public class TravailController{
 
     /**
      * Va chercher la liste des travaux qui sont stockés localement dans un fichier
-     * @return - La liste des travaux
+     * @return Une liste de {@link Travail} stockés localement.
      */
     public static ArrayList<Travail> getTravauxFromFile() {
         ArrayList<Travail> travaux =  new ArrayList<>();
@@ -177,7 +197,7 @@ public class TravailController{
 
     /**
      * Fetch la liste des travaux, ceci sera composée des travaux obtenus à partir de l'API et de ceux créés en utilisant l'application
-     * @return - La liste des travaux brute, non filtrée
+     * @return Une liste complète de {@link Travail}.
      */
     public static ArrayList<Travail> getTravaux() {
         String apiRes = ApiCaller.get("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
@@ -202,7 +222,7 @@ public class TravailController{
     /**
      * Fetch la liste des travaux qui possèdent un certain type donné
      * @param type - Le type par lequel filtrer les travaux
-     * @return - La liste de travaux filtrée
+     * @return Une liste filtrée de {@link Travail}.
      */
     public static ArrayList<Travail> getTravauxByType(String type) {
         TypeTravail t = null;
@@ -275,6 +295,12 @@ public class TravailController{
         return filtered;
     }
 
+/**
+ * Vérifie si une date de fin est valide en s'assurant qu'elle n'est pas antérieure à la date actuelle.
+ *
+ * @param endDate La date de fin sous forme de chaîne au format ISO (yyyy-MM-dd).
+ * @return {@code true} si la date de fin est valide, sinon {@code false}.
+ */
     public static boolean isEndDateValid(String endDate) {
         try {
             LocalDate now = LocalDate.now();
@@ -288,6 +314,13 @@ public class TravailController{
         }
     }
 
+
+/**
+ * Vérifie si tous les quartiers spécifiés existent dans le fichier des quartiers.
+ *
+ * @param quartiers Un tableau de noms de quartiers.
+ * @return {@code true} si tous les quartiers existent, sinon {@code false}.
+ */
     public static boolean doQuartiersExist(String[] quartiers) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(quartiersFile));
@@ -308,6 +341,13 @@ public class TravailController{
     }
 
 
+/**
+ * Vérifie si les dates de début et de fin sont valides, avec une date de fin postérieure à la date de début.
+ *
+ * @param startDate La date de début au format ISO (yyyy-MM-dd).
+ * @param endDate   La date de fin au format ISO (yyyy-MM-dd).
+ * @return {@code true} si les dates sont valides, sinon {@code false}.
+ */
     private static boolean areDatesValid(String startDate, String endDate) {
         try {
             LocalDate now = LocalDate.now();
@@ -321,6 +361,20 @@ public class TravailController{
             return false;
         }
     }
+
+
+/**
+ * Crée un nouveau travail avec les informations spécifiées et le sauvegarde dans le fichier.
+ *
+ * @param titre            Le titre du travail.
+ * @param description      La description du travail.
+ * @param type             Le type de travail.
+ * @param quartiersAffectes Les quartiers affectés par le travail.
+ * @param ruesAffectees     Les rues affectées par le travail.
+ * @param dateDebut         La date de début du travail au format ISO (yyyy-MM-dd).
+ * @param dateFin           La date de fin du travail au format ISO (yyyy-MM-dd).
+ * @return Le travail créé, ou {@code null} si les dates ne sont pas valides.
+ */
     public static Travail creerTravail(String titre, String description, TypeTravail type, String[] quartiersAffectes, String[] ruesAffectees, String dateDebut, String dateFin) {
         if (!areDatesValid(dateDebut, dateFin)) {
             return null;
@@ -343,6 +397,12 @@ public class TravailController{
         return travail;
     }
 
+
+/**
+ * Sauvegarde un travail dans le fichier des travaux.
+ *
+ * @param travail Le travail à sauvegarder.
+ */
     private static void saveTravail(Travail travail) {
         try  {
             BufferedWriter writer = new BufferedWriter(new FileWriter(travauxFile, true));
@@ -354,12 +414,24 @@ public class TravailController{
         }
     }
 
+
+ /**
+ * Récupère les travaux associés à un intervenant spécifique.
+ *
+ * @param intervenant L'identifiant de l'intervenant.
+ * @return Une liste de {@link Travail} associés à l'intervenant.
+ */
     public static ArrayList<Travail> getTravauxByIntervenant(String intervenant) {
         ArrayList<Travail> travaux = getTravauxFromFile();
         travaux.removeIf(t -> !t.getIdentifiantIntervenant().equals(intervenant));
         return travaux;
     }
 
+/**
+ * Met à jour les informations d'un travail existant dans le fichier.
+ *
+ * @param newTravail Le travail mis à jour.
+ */
     public static void updateTravail(Travail newTravail) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(travauxFile));
@@ -379,6 +451,12 @@ public class TravailController{
         }
     }
 
+/**
+ * Récupère les travaux dont le titre contient la chaîne spécifiée.
+ *
+ * @param titre Le titre (ou une partie du titre) à rechercher.
+ * @return Une liste de {@link Travail} correspondant au titre spécifié.
+ */
     public static ArrayList<Travail> getTravauxParTitre(String titre) {
         ArrayList<Travail> travaux = getTravaux();
         ArrayList<Travail> filteredTravaux = new ArrayList<>();
