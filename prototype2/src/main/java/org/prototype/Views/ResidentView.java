@@ -544,7 +544,7 @@ public class ResidentView extends View implements ConnectedView{
                 String res = reader.nextLine();
                 switch (res) {
                     case "1":
-                        ArrayList<Notification> notis = NotificationController.getAllNotifications();
+                        ArrayList<Notification> notis = NotificationController.getNotificationsForResident((Resident) MaVille.getCurUser());
                         for (int i = notis.size() - 1; i >= 0; i--) {
                             println("\t-Titre:" + notis.get(i).getTitre());
                             println("\t-Description: " + notis.get(i).getDescription());
