@@ -121,7 +121,7 @@ public class TravailController{
             JSONObject travail = travaux.getJSONObject(i);
             ArrayList<String> quartiers = new ArrayList<>();
             quartiers.add(travail.getString("boroughid").toLowerCase());
-            Travail cur = new Travail(travail.getString("id"), travail.getString("reason_category"), travail.getString("occupancy_name"), quartiers, null, travail.getString("duration_start_date").split("T")[0], travail.getString("duration_end_date").split("T")[0], travail.get("organizationname").toString(), constructionTypeMapper.putIfAbsent(travail.getString("reason_category"), TypeTravail.AUTRE));
+            Travail cur = new Travail(travail.getString("id"), travail.getString("reason_category"), travail.getString("occupancy_name"), quartiers, null, travail.getString("duration_start_date").split("T")[0], travail.getString("duration_end_date").split("T")[0], travail.get("organizationname").toString(), constructionTypeMapper.getOrDefault(travail.getString("reason_category"), TypeTravail.AUTRE));
             cur.setStatus(determineProjectStatus(cur.getDateDebut(), cur.getDateFin()));
             apiTravaux.add(cur);
         }

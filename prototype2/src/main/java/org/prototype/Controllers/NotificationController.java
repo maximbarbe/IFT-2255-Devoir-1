@@ -118,7 +118,7 @@ public class NotificationController {
      *
      * @return Une liste de toutes les {@link Notification}.
      */
-    public static ArrayList<Notification> getAllNotifications() {
+    private static ArrayList<Notification> getAllNotifications() {
         try {
             ArrayList<Notification> notifications = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new FileReader(workNotificationsFile));

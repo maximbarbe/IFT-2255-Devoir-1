@@ -2,11 +2,7 @@ package org.prototype.Controllers;
 
 
 import org.prototype.Models.Utilisateur;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
-
 import com.password4j.*;
 
 
@@ -32,7 +28,6 @@ public class UtilisateurController {
      * @param email - Le email de l'utilisateur
      * @param password - Le mot de passe de l'utilisateur
      * @return - L'utilisateur avec le email et le mot de passe passés
-     * @throws IOException - si on n'est pas capable de lire du fichier
      */
     public static Utilisateur getUtilisateur(String email, String password){
         ArrayList<Utilisateur> users = UtilisateurController.getUtilisateurs();

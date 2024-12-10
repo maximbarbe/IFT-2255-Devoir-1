@@ -99,7 +99,7 @@ public class PlageHoraireController {
             String line;
             ArrayList<ArrayList<Integer>> times = new ArrayList<ArrayList<Integer>>();
             while ((line = reader.readLine())!=null) {
-                String[] data = line.split(";");
+                String[] data = line.split(",");
                 if (data[0].equals(userID)) {
                     for (int i = 1; i < data.length; i++) {
                         ArrayList<Integer> temp = new ArrayList<>();

@@ -109,32 +109,6 @@ public class CandidatureController {
     }
 
 
-    /**
-     * Crée une nouvelle candidature avec un statut spécifique.
-     *
-     * @param requeteID   L'identifiant de la requête.
-     * @param dateDebut   La date de début.
-     * @param dateFin     La date de fin.
-     * @param intervenant Le nom de l'intervenant.
-     * @param msg         Le message de la candidature.
-     * @param statut      Le statut de la candidature.
-     * @return Un code d'état : 0 si succès, 1 si les dates sont invalides, 2 si la candidature existe déjà, 3 si l'enregistrement échoue.
-     */
-    public static int createCandidature(String requeteID, String dateDebut, String dateFin, String intervenant, String msg, StatutCandidature statut) {
-        if (!areDatesValid(dateDebut, dateFin)) {
-            return 1;
-        }
-        if (!canSendCandidature(requeteID, intervenant)) {
-            return 2;
-        }
-        Candidature c = new Candidature(requeteID, intervenant, dateDebut, dateFin, msg);
-        c.setStatut(statut);
-        if (!saveCandidature(c)) {
-            return 3;
-        } else {
-            return 0;
-        }
-    }
 
 
     /**
