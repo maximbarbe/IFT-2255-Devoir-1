@@ -143,7 +143,7 @@ public class ResidentController{
      * @param numTelephone          Le numéro de téléphone du résident.
      * @param postalCode            Le code postal du résident.
      * @param creationDate          La date de création du compte.
-     * @return Un code d'état : 0 si succès, 1 si l'email existe déjà, 2 si le format de l'email est invalide,
+     * @return Un code d'état : 0 si succès, 1 si l'email existe déjà, 2 si le format de l'email est invalide ou du password,
      * 3 si la date de naissance est invalide, 4 si l'âge est inférieur à 16 ans, 5 si le code postal est invalide,
      * 6 si le code postal ne correspond à aucun quartier, 7 si l'enregistrement échoue.
      */
@@ -151,7 +151,7 @@ public class ResidentController{
         if (doesEmailExist(adresseCourriel)) {
             return 1;
         }
-        if (!isEmailFormatValid(adresseCourriel)) {
+        if (!isEmailFormatValid(adresseCourriel) || motDePasse.length() < 8) {
             return 2;
         }
         LocalDate birthday = isDateFormatValid(dateDeNaissance);

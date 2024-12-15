@@ -150,7 +150,7 @@ public class IntervenantController{
      * @param motDePasse      Le mot de passe de l'intervenant.
      * @param identifiantVille L'identifiant de ville à 8 chiffres.
      * @return Un code d'état : 0 si succès, 1 si l'identifiant de ville existe déjà, 2 si le format de l'identifiant est invalide,
-     *         3 si l'adresse courriel existe déjà, 4 si le format de l'adresse courriel est invalide, 5 si l'enregistrement échoue.
+     *         3 si l'adresse courriel existe déjà, 4 si le format de l'adresse courriel est invalide ou le mot de passe est invalide, 5 si l'enregistrement échoue.
      */
     public static int createIntervenant(String nom, String type, String adresseCourriel, String motDePasse, String identifiantVille) {
         if (doesIdentifiantVilleExist(identifiantVille)) {
@@ -162,7 +162,7 @@ public class IntervenantController{
         if (doesEmailExist(adresseCourriel)) {
             return 3;
         }
-        if (!isEmailFormatValid(adresseCourriel)) {
+        if (!isEmailFormatValid(adresseCourriel) || motDePasse.length() < 8) {
             return 4;
         }
 

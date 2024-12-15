@@ -1,12 +1,12 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.prototype.Controllers.ResidentController;
 import org.prototype.Models.Resident;
@@ -18,11 +18,18 @@ public class creerCompteTest {
         ResidentController.setResidentFile("src/residents.csv");
     }
 
+    @BeforeEach
+    public void setUpFile() throws IOException{
+        ResidentController.setResidentFile("src/test/testResidents.csv");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(ResidentController.getResidentFile()));
+        writer.close();
+    }
+
     @Test
     public void testCreerCompteResident() {
         ResidentController.initHashMap(); // hashmap contenant les quartiers
-        ResidentController.setResidentFile("src/test/testResidents.csv");
-        Integer statuscode = ResidentController.createResident("Alice Test", "1999-12-12", "alice@gmail.com","123456", "123 rue jean", "514-300-4000", "H1C 3L6", LocalDateTime.now().toString());
+
+        Integer statuscode = ResidentController.createResident("Alice Test", "1999-12-12", "alice@gmail.com","12345678", "123 rue jean", "514-300-4000", "H1C 3L6", LocalDateTime.now().toString());
         Resident resultUser = null;
         assertTrue(statuscode == 0); // si 0 alors résident créé
         ArrayList<Resident> residents = new ArrayList<>();

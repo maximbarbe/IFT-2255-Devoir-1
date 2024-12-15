@@ -409,7 +409,7 @@ public class ResidentView extends View implements ConnectedView{
             print("Type de travail: ");
             String type = reader.nextLine();
 
-            print("Date de début espéré (YYYY-MM-DD): ");
+            print("Date de début espéré (YYYY-MM-DD) (Date doit être aujourd'hui ou future): ");
             String date = reader.nextLine();
             while (true) {
                 println("1) Confirmer; 2) Modifier; 3) Revenir au menu");

@@ -107,7 +107,7 @@ public class UnauthenticatedView extends View{
             String bday = reader.nextLine();
             print("Adresse courriel > ");
             String email = reader.nextLine();
-            print("Mot de passe > ");
+            print("Mot de passe (au moins 8 caractères)> ");
             String password =reader.nextLine();
             print("Téléphone (optionnel) > ");
             String telephone = reader.nextLine();
@@ -174,7 +174,7 @@ public class UnauthenticatedView extends View{
             String name = reader.nextLine();
             print("Adresse courriel > ");
             String email = reader.nextLine();
-            print("Mot de passe > ");
+            print("Mot de passe (Au moins 8 caractères)> ");
             String password =reader.nextLine();
             String type;
             while (true) {
