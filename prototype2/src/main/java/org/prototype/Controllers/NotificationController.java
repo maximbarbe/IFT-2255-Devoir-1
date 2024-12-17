@@ -143,7 +143,7 @@ public class NotificationController {
 
 
      /**
-     * Trie une liste de notifications en utilisant un algorithme de tri récursif.
+     * Trie une liste de notifications en utilisant un merge sort.
      *
      * @param start        Index de début.
      * @param end          Index de fin.

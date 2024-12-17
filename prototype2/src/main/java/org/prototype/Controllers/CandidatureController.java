@@ -20,6 +20,15 @@ public class CandidatureController {
      */
     private static String candidaturesFile = "src/candidatures.csv";
 
+    public static String getCandidaturesFile() {
+        return candidaturesFile;
+    }
+
+
+    public static void setCandidaturesFile(String newFile) {
+        candidaturesFile = newFile;
+    }
+
     /**
      * Récupère toutes les candidatures depuis le fichier CSV.
      *
