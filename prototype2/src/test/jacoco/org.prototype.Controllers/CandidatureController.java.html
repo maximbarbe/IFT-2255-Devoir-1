@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CandidatureController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype2</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Controllers</a> &gt; <span class="el_source">CandidatureController.java</span></div><h1>CandidatureController.java</h1><pre class="source lang-java linenums">package org.prototype.Controllers;
+
+import org.prototype.Models.Candidature;
+import org.prototype.Models.StatutCandidature;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+
+
+/**
+ * Contrôleur responsable de la création, de la modification, et de la récupération des candidatures.
+ */
+<span class="nc" id="L14">public class CandidatureController {</span>
+
+    /**
+     * Chemin du fichier contenant les candidatures.
+     */
+<span class="fc" id="L19">    private static String candidaturesFile = &quot;src/candidatures.csv&quot;;</span>
+
+    public static String getCandidaturesFile() {
+<span class="fc" id="L22">        return candidaturesFile;</span>
+    }
+
+
+    public static void setCandidaturesFile(String newFile) {
+<span class="fc" id="L27">        candidaturesFile = newFile;</span>
+<span class="fc" id="L28">    }</span>
+
+    /**
+     * Récupère toutes les candidatures depuis le fichier CSV.
+     *
+     * @return Une liste de {@link Candidature}.
+     */
+    private static ArrayList&lt;Candidature&gt; getCandidatures(){
+        try {
+<span class="fc" id="L37">            BufferedReader reader = new BufferedReader(new FileReader(candidaturesFile));</span>
+<span class="fc" id="L38">            ArrayList&lt;Candidature&gt; candidatures = new ArrayList&lt;&gt;();</span>
+            String line;
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            while ((line=reader.readLine()) != null) {</span>
+<span class="fc" id="L41">                String[] data = line.split(&quot;,&quot;);</span>
+<span class="fc" id="L42">                StatutCandidature statut = StatutCandidature.EN_ATTENTE;</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">                for (StatutCandidature s:StatutCandidature.values()) {</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">                    if (data[4].equals(s.toString())) {</span>
+<span class="fc" id="L45">                        statut = s;</span>
+<span class="fc" id="L46">                        break;</span>
+                    }
+                }
+<span class="fc bfc" id="L49" title="All 2 branches covered.">                if (data.length == 5) {</span>
+<span class="fc" id="L50">                    candidatures.add(new Candidature(data[0], data[3], data[1], data[2], &quot;&quot;));</span>
+                } else {
+<span class="fc" id="L52">                    candidatures.add(new Candidature(data[0], data[3], data[1], data[2], data[5]));</span>
+                }
+
+<span class="fc" id="L55">                candidatures.get(candidatures.size() - 1).setStatut(statut);</span>
+<span class="fc" id="L56">            }</span>
+<span class="fc" id="L57">            return candidatures;</span>
+<span class="nc" id="L58">        } catch (Exception e) {</span>
+<span class="nc" id="L59">            return new ArrayList&lt;&gt;();</span>
+        }
+    }
+
+
+    /**
+     * Récupère les candidatures associées à un intervenant spécifique.
+     *
+     * @param intervenant Le nom de l'intervenant.
+     * @return Une liste de {@link Candidature} correspondant à l'intervenant.
+     */
+    public static ArrayList&lt;Candidature&gt; getCandidaturesByIntervenant(String intervenant) {
+<span class="fc" id="L71">        ArrayList&lt;Candidature&gt; candidatures = getCandidatures();</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        candidatures.removeIf(c -&gt; !c.getIntervenant().equals(intervenant));</span>
+<span class="fc" id="L73">        return candidatures;</span>
+    };
+
+
+
+
+    /**
+     * Vérifie si les dates de début et de fin sont valides.
+     *
+     * @param startDate La date de début au format {@link String}.
+     * @param endDate   La date de fin au format {@link String}.
+     * @return {@code true} si les dates sont valides, sinon {@code false}.
+     */
+    private static boolean areDatesValid(String startDate, String endDate) {
+        try {
+<span class="fc" id="L88">            LocalDate now = LocalDate.now();</span>
+<span class="fc" id="L89">            LocalDate start = LocalDate.parse(startDate);</span>
+<span class="fc" id="L90">            LocalDate end = LocalDate.parse(endDate);</span>
+<span class="pc bpc" id="L91" title="1 of 4 branches missed.">            if (now.until(end, ChronoUnit.DAYS) &lt; 0 || start.until(end, ChronoUnit.DAYS) &lt;= 0) {</span>
+<span class="fc" id="L92">                return false;</span>
+            }
+<span class="fc" id="L94">            return true;</span>
+<span class="nc" id="L95">        } catch (Exception e) {</span>
+<span class="nc" id="L96">            return false;</span>
+        }
+    }
+
+
+    /**
+     * Vérifie si une candidature peut être envoyée pour une requête donnée par un intervenant spécifique.
+     *
+     * @param requeteID   L'identifiant de la requête.
+     * @param intervenant Le nom de l'intervenant.
+     * @return {@code true} si la candidature peut être envoyée, sinon {@code false}.
+     */
+    private static boolean canSendCandidature(String requeteID, String intervenant) {
+<span class="fc" id="L109">        ArrayList&lt;Candidature&gt; candidature = getCandidaturesByIntervenant(intervenant);</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        for (Candidature c:candidature) {</span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">            if (c.getRequeteID().equals(requeteID)) {</span>
+<span class="fc" id="L112">                return false;</span>
+            }
+<span class="nc" id="L114">        }</span>
+<span class="fc" id="L115">        return true;</span>
+    }
+
+
+
+
+    /**
+     * Crée une nouvelle candidature avec le statut par défaut.
+     *
+     * @param requeteID   L'identifiant de la requête.
+     * @param dateDebut   La date de début.
+     * @param dateFin     La date de fin.
+     * @param intervenant Le nom de l'intervenant.
+     * @param msg         Le message de la candidature.
+     * @return Un code d'état : 0 si succès, 1 si les dates sont invalides, 2 si la candidature existe déjà, 3 si l'enregistrement échoue.
+     */
+    public static int createCandidature(String requeteID, String dateDebut, String dateFin, String intervenant, String msg) {
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (!areDatesValid(dateDebut, dateFin)) {</span>
+<span class="fc" id="L133">            return 1;</span>
+        }
+<span class="fc bfc" id="L135" title="All 2 branches covered.">        if (!canSendCandidature(requeteID, intervenant)) {</span>
+<span class="fc" id="L136">            return 2;</span>
+        }
+
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">        if (!saveCandidature(new Candidature(requeteID, intervenant, dateDebut, dateFin, msg))) {</span>
+<span class="nc" id="L140">            return 3;</span>
+        } else {
+<span class="fc" id="L142">            return 0;</span>
+        }
+    }
+
+
+
+    /**
+     * Supprime une candidature spécifique.
+     *
+     * @param c La candidature à supprimer.
+     */
+    public static void removeCandidature(Candidature c) {
+<span class="nc" id="L154">        ArrayList&lt;Candidature&gt; candidatures = getCandidatures();</span>
+<span class="nc bnc" id="L155" title="All 4 branches missed.">        candidatures.removeIf(candidature -&gt; candidature.getRequeteID().equals(c.getRequeteID()) &amp;&amp; candidature.getIntervenant().equals(c.getIntervenant()));</span>
+        try {
+<span class="nc" id="L157">            BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile));</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">            for (Candidature candidature:candidatures) {</span>
+<span class="nc" id="L159">                saveCandidature(candidature);</span>
+<span class="nc" id="L160">            }</span>
+<span class="nc" id="L161">        } catch (Exception e) {}</span>
+<span class="nc" id="L162">    }</span>
+
+
+
+
+    /**
+     * Enregistre une candidature dans le fichier CSV.
+     *
+     * @param candidature La candidature à enregistrer.
+     * @return {@code true} si l'enregistrement réussit, sinon {@code false}.
+     */
+    private static boolean saveCandidature(Candidature candidature) {
+        try {
+<span class="fc" id="L175">            BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile, true));</span>
+
+<span class="fc" id="L177">            writer.append(candidature.getRequeteID() + &quot;,&quot;+candidature.getDateDebut()+&quot;,&quot;+candidature.getDateFin() + &quot;,&quot;+candidature.getIntervenant() + &quot;,&quot;+candidature.getStatut().toString() + &quot;,&quot; + candidature.getMessage()+&quot;\n&quot;);</span>
+<span class="fc" id="L178">            writer.close();</span>
+
+<span class="fc" id="L180">            return true;</span>
+<span class="nc" id="L181">        } catch (Exception e) {</span>
+<span class="nc" id="L182">            return false;</span>
+        }
+    }
+
+
+
+
+   /**
+     * Récupère les candidatures associées à une requête spécifique.
+     *
+     * @param requeteID L'identifiant de la requête.
+     * @return Une liste de {@link Candidature} correspondant à la requête.
+     */ 
+    public static ArrayList&lt;Candidature&gt; getCandidaturesByRequete(String requeteID) {
+<span class="nc" id="L196">        ArrayList&lt;Candidature&gt; candidatures = getCandidatures();</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">        candidatures.removeIf(c -&gt; !c.getRequeteID().equals(requeteID));</span>
+<span class="nc" id="L198">        return candidatures;</span>
+    }
+
+    
+     /**
+     * Met à jour une candidature existante dans le fichier CSV.
+     *
+     * @param c La candidature mise à jour.
+     */
+    public static void updateCandidature(Candidature c) {
+        try {
+<span class="fc" id="L209">            BufferedReader reader = new BufferedReader(new FileReader(candidaturesFile));</span>
+            String line;
+<span class="fc" id="L211">            ArrayList&lt;String&gt; lines = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L212">            boolean found = false;</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">            while ((line= reader.readLine()) != null) {</span>
+<span class="fc" id="L214">                String[] data = line.split(&quot;,&quot;);</span>
+<span class="pc bpc" id="L215" title="1 of 4 branches missed.">                if (data[0].equals(c.getRequeteID()) &amp;&amp; data[3].equals(c.getIntervenant())) {</span>
+<span class="fc" id="L216">                    found=true;</span>
+<span class="fc" id="L217">                    continue;</span>
+                } else {
+<span class="fc" id="L219">                    lines.add(line);</span>
+                }
+<span class="fc" id="L221">            }</span>
+<span class="fc bfc" id="L222" title="All 2 branches covered.">            if (!found) {</span>
+<span class="fc" id="L223">                return;</span>
+            }
+<span class="fc" id="L225">            lines.add(c.getRequeteID() + &quot;,&quot;+c.getDateDebut()+&quot;,&quot;+c.getDateFin() + &quot;,&quot;+c.getIntervenant() + &quot;,&quot;+c.getStatut().toString() + &quot;,&quot; + c.getMessage());</span>
+<span class="fc" id="L226">            BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile));</span>
+<span class="fc" id="L227">            writer.write(String.join(&quot;\n&quot;, lines) + &quot;\n&quot;);</span>
+<span class="fc" id="L228">            writer.close();</span>
+<span class="pc" id="L229">        } catch (Exception e) {return;}</span>
+<span class="fc" id="L230">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
