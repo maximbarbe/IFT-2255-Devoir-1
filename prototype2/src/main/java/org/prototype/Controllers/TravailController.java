@@ -11,12 +11,10 @@ import org.prototype.Models.TypeTravail;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
-
 import java.io.FileWriter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 

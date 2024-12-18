@@ -1,7 +1,6 @@
 package org.prototype.Models;
 
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Classe représentant un résident qui utilise l'application, contient toutes les caractéristiques/méthodes propres aux résidents.

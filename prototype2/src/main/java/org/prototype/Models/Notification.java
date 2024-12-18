@@ -1,6 +1,5 @@
 package org.prototype.Models;
 
-import java.util.ArrayList;
 
 /**
  * Classe abstraite représentant une notification créée lors de la modification d'un projet

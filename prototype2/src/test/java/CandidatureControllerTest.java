@@ -1,16 +1,13 @@
 import java.io.*;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.prototype.Controllers.CandidatureController;
-import org.prototype.Controllers.IntervenantController;
 import org.prototype.Models.Candidature;
-import org.prototype.Models.Intervenant;
-
+import org.prototype.Models.StatutCandidature;
 
 
 public class CandidatureControllerTest {
@@ -25,31 +22,36 @@ public class CandidatureControllerTest {
 
     @AfterEach
     public void getInitialState() {
+        // Restore l'état initial
         CandidatureController.setCandidaturesFile("src/candidatures.csv");
     }
 
 
     @Test
     public void creerCandidatureSucces() {
-        assertTrue(CandidatureController.createCandidature("0", "2024-12-17", "2025-01-01", "tester", "") == 0);
+        // Test pour voir si on peut créer une candidature
+        assertTrue(CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "") == 0);
 
     }
 
     @Test
     public void creerCandidatureEchecCandidatureDejaEnvoyee() {
-        CandidatureController.createCandidature("0", "2024-12-17", "2025-01-01", "tester", "");
-        assert(CandidatureController.createCandidature("0", "2024-12-17", "2025-01-01", "tester", "")==2);
+        // Test pour voir la réponse lorsqu'on essaye d'envoyer une candidature à une requête qu'on en a déjà envoyé une
+        CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "");
+        assert(CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "")==2);
     }
 
     @Test
     public void creerCandidatureEchecDateInvalide() {
-        assert(CandidatureController.createCandidature("0", "2024-12-17", "2024-01-01", "tester", "")==1);
+        // Test pour voir la réponse lorsqu'on met une date de fin plus tôt qu'une date de début
+        assert(CandidatureController.createCandidature("0", "2025-12-17", "2024-01-01", "tester", "")==1);
     }
 
     @Test
     public void updateCandidatureTestSucces() {
-        CandidatureController.createCandidature("0", "2024-12-17", "2025-01-01", "tester", "");
-        Candidature expected = new Candidature("0", "tester", "2024-12-17", "2025-01-01", "message_test");
+        // Test pour voir si la fonctionnalité d'update une candidature fonctionne.
+        CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "");
+        Candidature expected = new Candidature("0", "tester", "2025-12-17", "2026-01-01", "message_test");
         CandidatureController.updateCandidature(expected);
         Candidature actual = CandidatureController.getCandidaturesByIntervenant("tester").get(0);
         assertEquals(expected.getRequeteID(), actual.getRequeteID());
@@ -61,8 +63,9 @@ public class CandidatureControllerTest {
     }
     @Test
     public void updateCandidatureTestSanitaire() {
-        CandidatureController.createCandidature("0", "2024-12-17", "2025-01-01", "tester", "");
-        Candidature expected = new Candidature("0", "tester", "2024-12-17", "2025-01-01", "message_test");
+        // Test pour voir si la composition d'update candidature en faisant l'opération inverse donne la candidature initiale.
+        CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "");
+        Candidature expected = new Candidature("0", "tester", "2025-12-17", "2026-01-01", "message_test");
         CandidatureController.updateCandidature(expected);
         expected.setMessage("");
         CandidatureController.updateCandidature(expected);
@@ -74,9 +77,22 @@ public class CandidatureControllerTest {
         assertEquals(expected.getDateDebut(), actual.getDateDebut());
         assertEquals(expected.getDateFin(), actual.getDateFin());
     }
+    
     @Test
     public void updateCandidatureTestCandidatureNonExistente() {
-
+        // Test pour voir si rien ne se passe lorsqu'on essaye d'update une candidature non-existante
+        CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "");
+        Candidature candidatureNonExistente = new Candidature("1", "tester", "2025-12-17", "2026-01-01", "message_test");
+        CandidatureController.updateCandidature(candidatureNonExistente);
+        ArrayList<Candidature> candidatures = CandidatureController.getCandidaturesByIntervenant("tester");
+        assertTrue(candidatures.size() == 1);
+        Candidature actual = candidatures.get(0);
+        assertEquals("0", actual.getRequeteID());
+        assertEquals("tester", actual.getIntervenant());
+        assertEquals(StatutCandidature.EN_ATTENTE, actual.getStatut());
+        assertEquals("", actual.getMessage());
+        assertEquals("2025-12-17", actual.getDateDebut());
+        assertEquals("2026-01-01", actual.getDateFin());
 
     }
 

@@ -6,11 +6,7 @@ import org.prototype.Controllers.UtilisateurController;
 import org.prototype.MaVille;
 import org.prototype.Models.Resident;
 import org.prototype.Models.Utilisateur;
-
-import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Classe qui s'occupe de la vue qu'un utilisateur non-connecté voit.

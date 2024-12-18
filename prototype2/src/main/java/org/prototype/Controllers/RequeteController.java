@@ -3,8 +3,6 @@ package org.prototype.Controllers;
 
 import org.prototype.Models.Requete;
 import org.prototype.Models.RequeteStatut;
-
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;

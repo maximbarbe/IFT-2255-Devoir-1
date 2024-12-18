@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.prototype.Controllers.IntervenantController;
 import org.prototype.Controllers.ResidentController;
-import org.prototype.Models.Intervenant;
 import org.prototype.Models.Resident;
 
 
@@ -34,6 +31,7 @@ public class ResidentControllerTest {
 
     @Test
     public void CreerCompteResidentTestSucces() {
+        // Test pour voir si la création de compte résident fonctionne
         ResidentController.initHashMap(); // hashmap contenant les quartiers
 
         Integer statuscode = ResidentController.createResident("Alice Test", "1999-12-12", "alice@gmail.com","12345678", "123 rue jean", "514-300-4000", "H1C 3L6", LocalDateTime.now().toString());
@@ -83,11 +81,13 @@ public class ResidentControllerTest {
 
     @Test
     public void creerCompteResidentEchecUtilisateurTropJeune() {
+        // Test pour voir si essayer de créer un compte résident trop jeune donne un erreur
         assertTrue(ResidentController.createResident("tester", "2010-01-01", "test@gmail.com", "password123", "123 rue jean", "","H1C 3L6", LocalDateTime.now().toString())==4);
     }
 
     @Test
     public void creerCompteResidentEchecEmailExistant() {
+        // Test pour voir si essayer de créer un compte résident avec un email existant donne une erreur
         ResidentController.createResident("tester", "1999-01-01", "alice@gmail.com", "password123", "123 rue jean", "","H1C 3L6", LocalDateTime.now().toString());
         assertTrue(ResidentController.createResident("Alice Test", "1999-12-12", "alice@gmail.com","12345678", "123 rue jean", "514-300-4000", "H1C 3L6", LocalDateTime.now().toString())==1);
     }

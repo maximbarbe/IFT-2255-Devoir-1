@@ -1,9 +1,7 @@
 package org.prototype.Controllers;
 
 import org.prototype.Models.Candidature;
-import org.prototype.Models.Requete;
 import org.prototype.Models.StatutCandidature;
-
 import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -211,13 +209,18 @@ public class CandidatureController {
             BufferedReader reader = new BufferedReader(new FileReader(candidaturesFile));
             String line;
             ArrayList<String> lines = new ArrayList<>();
+            boolean found = false;
             while ((line= reader.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data[0].equals(c.getRequeteID()) && data[3].equals(c.getIntervenant())) {
+                    found=true;
                     continue;
                 } else {
                     lines.add(line);
                 }
+            }
+            if (!found) {
+                return;
             }
             lines.add(c.getRequeteID() + ","+c.getDateDebut()+","+c.getDateFin() + ","+c.getIntervenant() + ","+c.getStatut().toString() + "," + c.getMessage());
             BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile));

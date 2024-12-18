@@ -3,10 +3,7 @@ package org.prototype.Views;
 import org.prototype.Controllers.*;
 import org.prototype.MaVille;
 import org.prototype.Models.*;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**

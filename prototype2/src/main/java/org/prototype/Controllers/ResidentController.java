@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import com.password4j.*;
@@ -13,7 +12,6 @@ import org.prototype.MaVille;
 import org.prototype.Models.Notification;
 import org.prototype.Models.Resident;
 import org.prototype.Models.Utilisateur;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.regex.Pattern;
