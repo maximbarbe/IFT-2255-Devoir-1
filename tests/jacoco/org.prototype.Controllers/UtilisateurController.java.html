@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UtilisateurController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype2</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Controllers</a> &gt; <span class="el_source">UtilisateurController.java</span></div><h1>UtilisateurController.java</h1><pre class="source lang-java linenums">package org.prototype.Controllers;
+
+
+import org.prototype.Models.Utilisateur;
+import java.util.ArrayList;
+import com.password4j.*;
+
+
+/**
+ * Classe qui s'occupe des opérations concernant les utilisateurs
+ */
+<span class="nc" id="L12">public class UtilisateurController {</span>
+
+    /**
+     * Fetch tous les utilisateurs
+     * @return - La liste de tous les utilisateurs 
+     */
+    public static ArrayList&lt;Utilisateur&gt; getUtilisateurs() {
+<span class="fc" id="L19">        ArrayList&lt;Utilisateur&gt; users = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L20">        users.addAll(ResidentController.getResidents());</span>
+<span class="fc" id="L21">        users.addAll(IntervenantController.getIntervenants());</span>
+<span class="fc" id="L22">        return users;</span>
+
+    }
+
+    /**
+     * Fetch un utilisateur en particulier des fichiers de données
+     * @param email - Le email de l'utilisateur
+     * @param password - Le mot de passe de l'utilisateur
+     * @return - L'utilisateur avec le email et le mot de passe passés
+     */
+    public static Utilisateur getUtilisateur(String email, String password){
+<span class="fc" id="L33">        ArrayList&lt;Utilisateur&gt; users = UtilisateurController.getUtilisateurs();</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        for (Utilisateur u:users) {</span>
+            // La méthode pour checker les passwords est prise de la documentation officielle de password4j:
+            // https://github.com/Password4j/password4j
+            // Source: Bertoldi, D. (2024, 31 juillet). password4j. GitHub. https://github.com/Password4j/password4j.
+<span class="pc bpc" id="L38" title="1 of 4 branches missed.">            if (u.getAdresseCourriel().toLowerCase().equals(email.toLowerCase()) &amp;&amp; Password.check(password, u.getMotDePasse()).withArgon2()) {</span>
+<span class="fc" id="L39">                return u;</span>
+            }
+<span class="fc" id="L41">        }</span>
+<span class="fc" id="L42">        return null;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
