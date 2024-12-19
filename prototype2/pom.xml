@@ -54,7 +54,8 @@ certaines valeurs de versions.-->
     </dependencies>
     <build>
         <plugins>
-            <!-- Tiré de https://github.com/BeginSecure/JaCoCoTesting/blob/master/pom.xml et https://www.youtube.com/watch?v=AS7Akff7mzo&t=244s -->
+            <!-- Le code pour inclure le plugin Jacoco a été tiré de ici https://github.com/BeginSecure/JaCoCoTesting/blob/master/pom.xml -->
+            <!-- Source: BeginSecure. (2023, 22 octobre). JaCoCoTesting/pom.xml. GitHub. https://github.com/BeginSecure/JaCoCoTesting/blob/master/pom.xml.-->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
