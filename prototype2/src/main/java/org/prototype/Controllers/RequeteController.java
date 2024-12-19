@@ -92,7 +92,7 @@ public class RequeteController {
                 for (Requete r:requetes) {
                     id = Integer.max(id, r.getRequeteId() + 1);
                 }
-                saveRequete(new Requete(id, titre, description, type, dateDebutEspere, userID, quartier));
+                saveRequete(new Requete(id, titre.replace(",", ""), description.replace(",", ""), type.replace(",", ""), dateDebutEspere, userID, quartier));
 
             } catch (Exception e) {
                 return false;

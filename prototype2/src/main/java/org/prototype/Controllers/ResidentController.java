@@ -149,7 +149,7 @@ public class ResidentController{
         if (doesEmailExist(adresseCourriel)) {
             return 1;
         }
-        if (!isEmailFormatValid(adresseCourriel) || motDePasse.length() < 8) {
+        if (!isEmailFormatValid(adresseCourriel) || motDePasse.length() < 8 || motDePasse.contains(",")) {
             return 2;
         }
         LocalDate birthday = isDateFormatValid(dateDeNaissance);
@@ -175,7 +175,7 @@ public class ResidentController{
         // https://github.com/Password4j/password4j
         // Source: Bertoldi, D. (2024, 31 juillet). password4j. GitHub. https://github.com/Password4j/password4j.
         String hashed_password = Password.hash(motDePasse).addRandomSalt(12).withArgon2().getResult();
-        if (!saveResident(new Resident(nomComplet, adresseCourriel, hashed_password, dateDeNaissance, numTelephone, adresseResidentielle, quartier, new HashSet<>(), creationDate))) {
+        if (!saveResident(new Resident(nomComplet.replace(";",""), adresseCourriel.replace(";",""), hashed_password, dateDeNaissance, numTelephone.replace(";",""), adresseResidentielle.replace(";",""), quartier, new HashSet<>(), creationDate))) {
             return 7;
         }
 
@@ -215,7 +215,7 @@ public class ResidentController{
  * @return {@code true} si l'adresse courriel est valide, sinon {@code false}.
  */
     private static boolean isEmailFormatValid(String email) {
-        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9.]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+$");
+        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+$");
         if (emailPattern.matcher(email).matches()) {
             return true;
         } else return false;

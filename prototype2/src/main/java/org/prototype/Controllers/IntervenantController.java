@@ -162,7 +162,7 @@ public class IntervenantController{
         if (doesEmailExist(adresseCourriel)) {
             return 3;
         }
-        if (!isEmailFormatValid(adresseCourriel) || motDePasse.length() < 8) {
+        if (!isEmailFormatValid(adresseCourriel) || motDePasse.length() < 8 || motDePasse.contains(";")) {
             return 4;
         }
 
@@ -172,7 +172,7 @@ public class IntervenantController{
         // La documentation peut être trouvée ici:
         // https://github.com/Password4j/password4j
         // Source: Bertoldi, D. (2024, 31 juillet). password4j. GitHub. https://github.com/Password4j/password4j.
-        if (!saveIntervenant(new Intervenant(nom, adresseCourriel, Password.hash(motDePasse).addRandomSalt(12).withArgon2().getResult(), determineIntervenantType(type), identifiantVille))) {
+        if (!saveIntervenant(new Intervenant(nom.replace(";", ""), adresseCourriel.replace(";",""), Password.hash(motDePasse).addRandomSalt(12).withArgon2().getResult(), determineIntervenantType(type), identifiantVille))) {
             return 5;
         }
 
@@ -205,7 +205,7 @@ public class IntervenantController{
      * @return {@code true} si le format est valide, sinon {@code false}.
      */
     private static boolean isEmailFormatValid(String email) {
-        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9.]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+$");
+        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+$");
         if (emailPattern.matcher(email).matches()) {
             return true;
         } else return false;

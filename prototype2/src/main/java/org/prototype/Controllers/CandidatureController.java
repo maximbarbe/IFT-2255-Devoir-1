@@ -174,7 +174,7 @@ public class CandidatureController {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile, true));
 
-            writer.append(candidature.getRequeteID() + ","+candidature.getDateDebut()+","+candidature.getDateFin() + ","+candidature.getIntervenant() + ","+candidature.getStatut().toString() + "," + candidature.getMessage()+"\n");
+            writer.append(candidature.getRequeteID() + ","+candidature.getDateDebut()+","+candidature.getDateFin() + ","+candidature.getIntervenant() + ","+candidature.getStatut().toString() + "," + candidature.getMessage().replace(",","")+"\n");
             writer.close();
 
             return true;

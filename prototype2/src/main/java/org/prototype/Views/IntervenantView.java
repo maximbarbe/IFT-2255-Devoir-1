@@ -354,8 +354,14 @@ public class IntervenantView extends View implements ConnectedView{
                 travailAModifier = travaux.get(Integer.parseInt(reader.nextLine()) - 1);
             } catch (Exception e) {
                 println("Vous n'avez pas entré un index valide, veuillez réessayer");
-                println("Appuyez sur n'importe quelle touche pour continuer");
-                continue;
+                println("Appuyez sur 0 pour continuer ou 1 pour revenir");
+                switch (reader.nextLine()) {
+                    case "0":
+                        continue;
+                    default:
+                        break;
+                }
+                break;
             }
             while (true) {
                 println("1) Modifier la description du projet; 2) Modifier la date de fin prévue; 3) Changer le statut du projet; 4) Revenir");
@@ -366,7 +372,7 @@ public class IntervenantView extends View implements ConnectedView{
                         String newDesc = reader.nextLine();
                         print("1) Confirmer; 2) Annuler > ");
                         if (reader.nextLine().equals("1")) {
-                            travailAModifier.setDescription(newDesc);
+                            travailAModifier.setDescription(newDesc.replace(",", ""));
                             TravailController.updateTravail(travailAModifier);
                             // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class LocalDateTime. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html.
                             NotificationController.createWorkNotification("Changement de description", "La description du projet " + travailAModifier.getTitre() + " a changé.", MaVille.getCurUser().getAdresseCourriel(), travailAModifier.getId(), LocalDateTime.now().toString());
@@ -469,7 +475,7 @@ public class IntervenantView extends View implements ConnectedView{
                 println("Appuyez sur n'importe quelle touche pour continuer");
                 continue;
             }
-            println("Quartiers affectés (séparés par des virgules): ");
+            println("Quartiers affectés (séparés par des virgules) (Au moins 1): ");
             String quartiers = reader.nextLine();
             println("Rues affectées (séparés par des virgules): ");
             String rues = reader.nextLine();

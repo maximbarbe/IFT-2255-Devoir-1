@@ -127,7 +127,7 @@ public class UnauthenticatedView extends View{
                             msg = "L'adresse courriel existe déjà, veuillez vous connecter";
                             break;
                         case 2:
-                            msg = "Le format d'adresse courriel est invalide.";
+                            msg = "Entrée invalide, vérifiez que vous avez bien entré une adresse email valide et un mot de passe valide.";
                             break;
                         case 3:
                             msg = "Le format de date de naissance est invalide.";
@@ -217,7 +217,7 @@ public class UnauthenticatedView extends View{
                             msg = "L'adresse courrielle existe déjà, connectez-vous.";
                             break;
                         case 4:
-                            msg = "L'adresse courriel n'est pas dans le bon format.";
+                            msg = "Entrée invalide, veuillez vous assurer de respecter les formats.";
                             break;
                         case 5:
                             msg = "Une erreur est survenue lors de l'enregistrement de votre compte, veuillez réessayer.";

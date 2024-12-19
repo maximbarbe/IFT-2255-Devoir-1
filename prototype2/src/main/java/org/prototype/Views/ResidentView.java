@@ -328,7 +328,7 @@ public class ResidentView extends View implements ConnectedView{
                                 print("Entrez un message si désiré > ");
                                 String msg = reader.nextLine();
                                 candidatureAUpdate.setStatut(StatutCandidature.ACCEPTE);
-                                candidatureAUpdate.setMessage(msg);
+                                candidatureAUpdate.setMessage(msg.replace(",",""));
                                 CandidatureController.updateCandidature(candidatureAUpdate);
                                 println("La candidature a été acceptée.");
                                 println("Appuyez sur n'importe quelle touche pour continuer");

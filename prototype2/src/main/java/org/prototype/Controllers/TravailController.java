@@ -404,7 +404,7 @@ public class TravailController{
     private static void saveTravail(Travail travail) {
         try  {
             BufferedWriter writer = new BufferedWriter(new FileWriter(travauxFile, true));
-            writer.append(travail.getId() + ","+travail.getTitre() + ","+travail.getDescription()+","+String.join(";",travail.getQuartiers()).toLowerCase()+","+ String.join(";", travail.getRuesAffectees()).toLowerCase()+","+travail.getDateDebut() + "," + travail.getDateFin() + "," + travail.getStatus().toString() + "," + travail.getIdentifiantIntervenant() + "," + travail.getType().toString() + "\n");
+            writer.append(travail.getId() + ","+travail.getTitre().replace(",","") + ","+travail.getDescription().replace(",","")+","+String.join(";",travail.getQuartiers()).toLowerCase()+","+ String.join(";", travail.getRuesAffectees()).toLowerCase()+","+travail.getDateDebut() + "," + travail.getDateFin() + "," + travail.getStatus().toString() + "," + travail.getIdentifiantIntervenant() + "," + travail.getType().toString() + "\n");
             writer.close();
             return;
         } catch (Exception e) {
@@ -440,7 +440,7 @@ public class TravailController{
                     lines.add(line);
                 }
             }
-            lines.add(newTravail.getId() + ","+newTravail.getTitre() + ","+newTravail.getDescription()+","+String.join(";",newTravail.getQuartiers())+","+ String.join(";", newTravail.getRuesAffectees())+","+newTravail.getDateDebut() + "," + newTravail.getDateFin() + "," + newTravail.getStatus().toString() + "," + newTravail.getIdentifiantIntervenant() + "," + newTravail.getType().toString());
+            lines.add(newTravail.getId() + ","+newTravail.getTitre().replace(",","") + ","+newTravail.getDescription().replace(",","")+","+String.join(";",newTravail.getQuartiers())+","+ String.join(";", newTravail.getRuesAffectees())+","+newTravail.getDateDebut() + "," + newTravail.getDateFin() + "," + newTravail.getStatus().toString() + "," + newTravail.getIdentifiantIntervenant() + "," + newTravail.getType().toString());
             BufferedWriter writer = new BufferedWriter(new FileWriter(travauxFile));
             writer.write(String.join("\n", lines) + "\n");
             writer.close();
