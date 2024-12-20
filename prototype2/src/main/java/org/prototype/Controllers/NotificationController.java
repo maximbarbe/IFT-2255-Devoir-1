@@ -154,8 +154,8 @@ public class NotificationController {
             return notis;
         } else {
             ArrayList<Notification> merged = new ArrayList<>();
-            ArrayList<Notification> leftSublist = sortNotifications(start, start + (start + end)/2, notifications);
-            ArrayList<Notification> rightSublist = sortNotifications(start + (start + end)/2 + 1, end, notifications);
+            ArrayList<Notification> leftSublist = sortNotifications(start, start + (end-start)/2, notifications);
+            ArrayList<Notification> rightSublist = sortNotifications(start + (end-start)/2 + 1, end, notifications);
             int i = 0; int j = 0;
             while (i != leftSublist.size() && j != rightSublist.size()) {
                 if (Integer.parseInt(leftSublist.get(i).getNotificationID()) <= Integer.parseInt(rightSublist.get(j).getNotificationID())) {
