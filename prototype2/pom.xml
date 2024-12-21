@@ -7,7 +7,7 @@ certaines valeurs de versions.-->
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.prototype</groupId>
-    <artifactId>prototype2</artifactId>
+    <artifactId>MaVille</artifactId>
     <version>1</version>
 
     <properties>

@@ -3,9 +3,9 @@
 Description du projet:
 > <i>MaVille</i> est une application dont les buts principaux sont d'informer les résidents sur les projets de construction à venir et de donner une voix aux résidants quant aux choix qui sont faits par rapport aux projets de construction. En effet, les responsables des projets de construction déposent des projets futurs qui peuvent être consultés par les résidents et ceux-ci peuvent même soumettre des requêtes de travaux. De plus, les résidents peuvent être notifiés lorsque des nouveaux projets qui affectent une rue ou un quartier qu'ils fréquentent apparaîssent. Avec cette application, on souhaite donc atténuer les sentiments de frustration des résidents surpris par l'apparition de nouveaux chantiers de construction.
 
-Liste des fonctionnalités de l'application par rôle :
-
-<ul>Résidents :
+<h2>Liste des fonctionnalités de l'application par rôle :</h2>
+<h3>Résidents</h3>
+<ul>
 <li>Créer un compte.</li>
 <li>Se connecter et déconnecter.</li>
 <li>Modifier leurs préférences horaires.</li>
@@ -16,8 +16,8 @@ Liste des fonctionnalités de l'application par rôle :
 <li>Consulter leurs requêtes de travail.</li>
 <li>Recevoir des notifications.</li>
 </ul>
-
-<ul>Intervenants :
+<h3>Intervenants</h3>
+<ul>
 <li>Créer un compte.</li>
 <li>Soumettre des candidatures pour des requêtes de travail.</li>
 <li>Soustraire leurs candidatures.</li>
@@ -26,7 +26,8 @@ Liste des fonctionnalités de l'application par rôle :
 <li>Envoyer des notifications aux résidents concernés.</li>
 </ul>
 
-Organisation du répertoire:
+<h2>Organisation du répertoire:</h2>
+
 > [/prototype2](/prototype2/): Ce folder contient tous les fichiers nécessaire pour éxécuter le prototype.
 >> [/src](/prototype2/src/): Ce folder contient les fichiers Java et les fichiers csv.
 >>> [/test](/prototype2/src/test/): Ce folder contient les fichiers pour les tests dont des fichiers CSV.<br/>
@@ -37,9 +38,21 @@ Organisation du répertoire:
 >>>> [/Controllers](/prototype2/src/main/java/org/prototype/Controllers/) Ce folder contient toutes les classes qui représente les Controller dans l'architecture MVC. <br/>
 >>>> [/Models](/prototype2/src/main/java/org/prototype/Models/) Ce folder contient toutes les classes qui représente les Modèles dans l'architecture MVC. <br/>
 >>>> [/Views](/prototype2/src/main/java/org/prototype/Views/) Ce folder contient toutes les classes qui représente les Vues dans l'architecture MVC. <br/>
-
+> [/docs](/docs/): Ce folder contient la documentation JavaDoc.
 > [/diagrammes](/diagrammes/): Ce folder contient tous les images de diagrammes présentes dans le rapport.<br/>
 > [rapport.html](/rapport.html): Ce fichier contient le rapport du devoir.
+
+<h2>Données incluses dans l'application</h2>
+L'application fournit initialement des données fictives pour tester l'application. Dans ces données on retrouve<br/>
+<ul>
+    <li>5 comptes résidents préconfigurés dont deux résidents sont dans le même quartier (les informations de connection sont dans le rapport)</li>
+    <li>5 comptes intervenants préconfigurés dont deux résidents sont dans le même quartier (les informations de connection sont dans le rapport)</li>
+    <li>5 requêtes de travail dont deux ont des candidatures déposées par les comptes intervenants créés</li>
+    <li>5 projets dont au moins un prévu dans les 3 prochains mois</li>
+</ul>
+
+<h2>Versions nécessaires pour éxécuter l'application</h2>
+L'application a été crée avec la version <code>apache-maven-3.9.6</code> de Maven et la version <code>20.0.2</code> de Java.
 
 <h2> Instructions pour éxécuter et tester l'application:</h2>
 D'abord, il faut télécharger une copie du folder prototype2
@@ -63,6 +76,6 @@ D'abord, il faut télécharger une copie du folder prototype2
     <li>
         Créer un folder <code>src</code> dans le folder <code>prototype2/target</code> et y déposer les fichiers de <code>prototype2/data</code>
     <li>
-        S'assurer d'être dans le folder <code>prototype2/target</code> et éxécuter <code>java -cp prototype2-1.jar org.prototype.MaVille</code>
+        S'assurer d'être dans le folder <code>prototype2/target</code> et éxécuter <code>java -jar MaVille-1.jar</code>
     </li>    
 </ul>    
