@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utilisateur.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype2</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Models</a> &gt; <span class="el_source">Utilisateur.java</span></div><h1>Utilisateur.java</h1><pre class="source lang-java linenums">package org.prototype.Models;
+
+
+/**
+ * Classe abstraite qui représente un utilisateur quelconque.
+ * Cette classe contient les informations de base pour tous les types d'utilisateurs.
+ */
+public abstract class Utilisateur {
+
+    /** Le nom complet de l'utilisateur. */ 
+    private String nomComplet;
+
+    /** L'adresse courriel de l'utilisateur. */ 
+    private String adresseCourriel;
+
+    /** Le mot de passe de l'utilisateur (hashé). */ 
+    private String motDePasse;
+    
+
+    /**
+     * Constructeur pour créer un utilisateur avec les informations spécifiées.
+     *
+     * @param nomComplet      Le nom complet de l'utilisateur.
+     * @param adresseCourriel L'adresse courriel de l'utilisateur.
+     * @param motDePasse      Le mot de passe de l'utilisateur (hashé).
+     */
+<span class="fc" id="L27">    public Utilisateur(String nomComplet, String adresseCourriel, String motDePasse) {</span>
+<span class="fc" id="L28">        this.nomComplet = nomComplet;</span>
+<span class="fc" id="L29">        this.adresseCourriel = adresseCourriel;</span>
+<span class="fc" id="L30">        this.motDePasse = motDePasse;</span>
+<span class="fc" id="L31">    }</span>
+
+   /**
+     * Retourne le nom complet de l'utilisateur.
+     *
+     * @return Le nom complet de l'utilisateur.
+     */ 
+    public String getNomComplet() {
+<span class="fc" id="L39">        return nomComplet;</span>
+    }
+
+   /**
+     * Retourne l'adresse courriel de l'utilisateur.
+     *
+     * @return L'adresse courriel de l'utilisateur.
+     */ 
+    public String getAdresseCourriel() {
+<span class="fc" id="L48">        return adresseCourriel;</span>
+    }
+
+    /**
+     * Retourne le mot de passe de l'utilisateur.
+     *
+     * @return Le mot de passe de l'utilisateur (hashé).
+     */
+    public String getMotDePasse() {
+<span class="fc" id="L57">        return motDePasse;</span>
+    }
+
+    /**
+     * Modifie l'adresse courriel de l'utilisateur.
+     *
+     * @param adresseCourriel La nouvelle adresse courriel de l'utilisateur.
+     */
+    public void setAdresseCourriel(String adresseCourriel) {
+<span class="nc" id="L66">        this.adresseCourriel = adresseCourriel;</span>
+<span class="nc" id="L67">    }</span>
+
+    /**
+     * Modifie le mot de passe de l'utilisateur.
+     *
+     * @param motDePasse Le nouveau mot de passe de l'utilisateur (hashé).
+     */
+    public void setMotDePasse(String motDePasse) {
+<span class="nc" id="L75">        this.motDePasse = motDePasse;</span>
+<span class="nc" id="L76">    }</span>
+
+    
+   /**
+     * Modifie le nom complet de l'utilisateur.
+     *
+     * @param nomComplet Le nouveau nom complet de l'utilisateur.
+     */ 
+    public void setNomComplet(String nomComplet) {
+<span class="nc" id="L85">        this.nomComplet = nomComplet;</span>
+<span class="nc" id="L86">    }</span>
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

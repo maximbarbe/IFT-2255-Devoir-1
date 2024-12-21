@@ -1,17 +1,12 @@
 package org.prototype.Controllers;
 
-
-import org.prototype.Models.Intervenant;
 import org.prototype.Models.PlageHoraire;
 import org.prototype.Models.Resident;
-import org.prototype.Models.TypeIntervenant;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.regex.Pattern;
 

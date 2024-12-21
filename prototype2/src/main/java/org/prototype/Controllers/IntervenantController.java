@@ -150,7 +150,7 @@ public class IntervenantController{
      * @param motDePasse      Le mot de passe de l'intervenant.
      * @param identifiantVille L'identifiant de ville à 8 chiffres.
      * @return Un code d'état : 0 si succès, 1 si l'identifiant de ville existe déjà, 2 si le format de l'identifiant est invalide,
-     *         3 si l'adresse courriel existe déjà, 4 si le format de l'adresse courriel est invalide, 5 si l'enregistrement échoue.
+     *         3 si l'adresse courriel existe déjà, 4 si le format de l'adresse courriel est invalide ou le mot de passe est invalide, 5 si l'enregistrement échoue.
      */
     public static int createIntervenant(String nom, String type, String adresseCourriel, String motDePasse, String identifiantVille) {
         if (doesIdentifiantVilleExist(identifiantVille)) {
@@ -162,7 +162,7 @@ public class IntervenantController{
         if (doesEmailExist(adresseCourriel)) {
             return 3;
         }
-        if (!isEmailFormatValid(adresseCourriel)) {
+        if (!isEmailFormatValid(adresseCourriel) || motDePasse.length() < 8 || motDePasse.contains(";")) {
             return 4;
         }
 
@@ -172,7 +172,7 @@ public class IntervenantController{
         // La documentation peut être trouvée ici:
         // https://github.com/Password4j/password4j
         // Source: Bertoldi, D. (2024, 31 juillet). password4j. GitHub. https://github.com/Password4j/password4j.
-        if (!saveIntervenant(new Intervenant(nom, adresseCourriel, Password.hash(motDePasse).addRandomSalt(12).withArgon2().getResult(), determineIntervenantType(type), identifiantVille))) {
+        if (!saveIntervenant(new Intervenant(nom.replace(";", ""), adresseCourriel.replace(";",""), Password.hash(motDePasse).addRandomSalt(12).withArgon2().getResult(), determineIntervenantType(type), identifiantVille))) {
             return 5;
         }
 
@@ -205,7 +205,7 @@ public class IntervenantController{
      * @return {@code true} si le format est valide, sinon {@code false}.
      */
     private static boolean isEmailFormatValid(String email) {
-        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9.]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+$");
+        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+$");
         if (emailPattern.matcher(email).matches()) {
             return true;
         } else return false;

@@ -1,2 +1,1 @@
-test;tester1@gmail.com;testpassword;2000-01-01;;3200 rue jean-brilliant;Mercier-Hochelaga-Maisonneuve
-
+Alice Test;alice@gmail.com;$argon2id$v=19$m=15360,t=2,p=1$BeIZY1Q9ztQZnrY/$6lJGdsLM0kk9zV6ijAauh2VrqkwfRRgkIyt4Blh3hX0;1999-12-12;514-300-4000;123 rue jean;rivière-des-prairies-pointe-aux-trembles;;2024-12-18T21:45:20.367478800

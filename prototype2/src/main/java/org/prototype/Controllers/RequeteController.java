@@ -3,8 +3,6 @@ package org.prototype.Controllers;
 
 import org.prototype.Models.Requete;
 import org.prototype.Models.RequeteStatut;
-
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -94,7 +92,7 @@ public class RequeteController {
                 for (Requete r:requetes) {
                     id = Integer.max(id, r.getRequeteId() + 1);
                 }
-                saveRequete(new Requete(id, titre, description, type, dateDebutEspere, userID, quartier));
+                saveRequete(new Requete(id, titre.replace(",", ""), description.replace(",", ""), type.replace(",", ""), dateDebutEspere, userID, quartier));
 
             } catch (Exception e) {
                 return false;

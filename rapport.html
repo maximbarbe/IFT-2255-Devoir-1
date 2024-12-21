@@ -584,7 +584,7 @@
     <header class="report-header">
         <div class="title-section">
             <div>
-                <h1 class="report-title">Rapport du devoir 2</h1>
+                <h1 class="report-title">Rapport du devoir 3</h1>
                 <p class="report-summary">
                     <em>Court résumé du rapport</em> &ndash; Ce livrable aborde les différents flux que l'on retrouve lors de l'utilisation du modèle itératif et incrémental, plus communément connu comme le processus unifié.
                     En effet, en abordant le processus de conception du logiciel <em>MaVille</em>, on explorera les différentes tâches, les différentes questions, ainsi que les différents diagrammes qu'un concepteur de logiciel
@@ -746,10 +746,11 @@
                     <li>Tests: (Maxim Barbe, Aissatou Ndiaye, Riste Popov); 1h; Semaines 11-12</li>
                     <li>Documentation: (Maxim Barbe); 3h; Semaine 10</li>
                     <br />
-                    <li><b>À venir:</b></li>
-                    <li>Implémentation: Semaines 13-15</li>
-                    <li>Tests: Semaines 13-15</li>
-                    <li>Documentation: Semaines 13-15</li>
+
+                <h4>Devoir 3</h4>
+                    <li>Implémentation: (Maxim Barbe); 15h; Semaines 13-15</li>
+                    <li>Tests: (Maxim Barbe, Riste Popov); 2h; Semaines 14-15</li>
+                    <li>Documentation: (Aissatou Ndiaye); 4h; Semaines 13-15</li>
                 </ul>
 
                 <h3 class="subsection-title">Hypothèses (optionnel)</h3>
@@ -906,6 +907,7 @@
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
                                 <li class="cu-actor">Résident (Principal)</li>
+                                <li class="cu-actor">Api de la ville (Secondaire)</li>
                             </ul>
                         </div>
                         
@@ -1602,6 +1604,7 @@
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
                                 <li class="cu-actor">Résident (Principal)</li>
+                                <li class="cu-actor">Api de la ville (Secondaire)</li>
                             </ul>
                         </div>
                         
@@ -1934,15 +1937,16 @@
                 <h2 id="prototype" class="section-title">Prototype</h2>
                 <p>Cette version du prototype a été fait avec Maven. Pour s'assurer que ca marche bien, la version de Maven avec laquelle le projet a été fait est <b>apache-maven-3.9.6</b> et la version de java est <b>JDK-17</b>.</p>    
                 <p>
-                    Trois comptes résident et intervenant sont préconfigurés pour utiliser l'application:
+                    Cinq comptes résident et intervenant sont préconfigurés pour utiliser l'application:
                     <ul>                        
                         <li>
                             Comptes résidents:
                             <ul>
-                                <li><b>Email:</b>resident1@gmail.com; <b>Password: </b>resident1</li>
-                                <li><b>Email:</b>resident2@gmail.com; <b>Password: </b>resident2</li>
-                                <li><b>Email:</b>resident3@gmail.com; <b>Password: </b>resident3</li>
-                                <li><b>Email:</b>resident4@gmail.com; <b>Password: </b>resident4</li>
+                                <li><b>Email:</b>jean@gmail.com; <b>Password: </b>password123</li>
+                                <li><b>Email:</b>resident@gmail.com; <b>Password: </b>password</li>
+                                <li><b>Email:</b>john_doe@outlook.ca; <b>Password: </b>johndoe1</li>
+                                <li><b>Email:</b>mixam@umontreal.ca; <b>Password: </b>qwerty123</li>
+                                <li><b>Email:</b>roger@umontreal.ca; <b>Password: </b>rogergaudry</li>
                                     
                             </ul>
                         </li>
@@ -1953,6 +1957,7 @@
                                     <li><b>Email:</b>intervenant2@gmail.com; <b>Password: </b>intervenant2</li>
                                     <li><b>Email:</b>intervenant3@gmail.com; <b>Password: </b>intervenant3</li>
                                     <li><b>Email:</b>intervenant4@gmail.com; <b>Password: </b>intervenant4</li>
+                                    <li><b>Email:</b>intervenant5@gmail.com; <b>Password: </b>intervenant5</li>
                                         
                                 </ul>
                         </li>
@@ -1960,12 +1965,6 @@
                     
 
                 </p>
-                <p>Documentation JavaDoc:</p>
-            <p>
-                La documentation JavaDoc complète de l'application est disponible au lien suivant :
-                    <a href="./docs/index.html">Documentation JavaDoc</a>
-            </p>
-
                 <p>
                     Afin d'éxécuter le code, il faut run les commandes suivantes:
                     
@@ -1980,6 +1979,20 @@
                     <li>Éxécuter la commande <code>mvn test</code> pour éxécuter le fichier avec les tests unitaires.</li>
                 </ul>
                 </p>
+
+
+            <h3>Documentation JavaDoc:</h3>
+            <p>
+                La documentation JavaDoc complète de l'application est disponible au lien suivant :
+                    <a href="./docs/index.html">Documentation JavaDoc</a>
+            </p>
+            <h3>Rapport de test JaCoCo: </h3>
+            <p>
+                Le rapport de test JaCoCo est accessible au <a href="./tests/jacoco/index.html">Rapport JaCoCo</a>
+            </p>
+
+
+                
             </section>
         </div>
     </main>

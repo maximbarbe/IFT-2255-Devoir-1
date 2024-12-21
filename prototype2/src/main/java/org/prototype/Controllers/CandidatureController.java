@@ -1,9 +1,7 @@
 package org.prototype.Controllers;
 
 import org.prototype.Models.Candidature;
-import org.prototype.Models.Requete;
 import org.prototype.Models.StatutCandidature;
-
 import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -19,6 +17,15 @@ public class CandidatureController {
      * Chemin du fichier contenant les candidatures.
      */
     private static String candidaturesFile = "src/candidatures.csv";
+
+    public static String getCandidaturesFile() {
+        return candidaturesFile;
+    }
+
+
+    public static void setCandidaturesFile(String newFile) {
+        candidaturesFile = newFile;
+    }
 
     /**
      * Récupère toutes les candidatures depuis le fichier CSV.
@@ -167,7 +174,7 @@ public class CandidatureController {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile, true));
 
-            writer.append(candidature.getRequeteID() + ","+candidature.getDateDebut()+","+candidature.getDateFin() + ","+candidature.getIntervenant() + ","+candidature.getStatut().toString() + "," + candidature.getMessage()+"\n");
+            writer.append(candidature.getRequeteID() + ","+candidature.getDateDebut()+","+candidature.getDateFin() + ","+candidature.getIntervenant() + ","+candidature.getStatut().toString() + "," + candidature.getMessage().replace(",","")+"\n");
             writer.close();
 
             return true;
@@ -202,13 +209,18 @@ public class CandidatureController {
             BufferedReader reader = new BufferedReader(new FileReader(candidaturesFile));
             String line;
             ArrayList<String> lines = new ArrayList<>();
+            boolean found = false;
             while ((line= reader.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data[0].equals(c.getRequeteID()) && data[3].equals(c.getIntervenant())) {
+                    found=true;
                     continue;
                 } else {
                     lines.add(line);
                 }
+            }
+            if (!found) {
+                return;
             }
             lines.add(c.getRequeteID() + ","+c.getDateDebut()+","+c.getDateFin() + ","+c.getIntervenant() + ","+c.getStatut().toString() + "," + c.getMessage());
             BufferedWriter writer = new BufferedWriter(new FileWriter(candidaturesFile));

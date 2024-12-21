@@ -1,6 +1,5 @@
 package org.prototype.Models;
 
-import java.util.ArrayList;
 
 /**
  * Classe représentant une notification spécifique liée à un travail.

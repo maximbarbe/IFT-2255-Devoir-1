@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Notification.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype2</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Models</a> &gt; <span class="el_source">Notification.java</span></div><h1>Notification.java</h1><pre class="source lang-java linenums">package org.prototype.Models;
+
+
+/**
+ * Classe abstraite représentant une notification créée lors de la modification d'un projet
+ * et destinée aux résidents.
+ */
+public abstract class Notification {
+
+     /** L'identifiant unique de la notification. */
+    private final String notificationID;
+
+     /** Le titre de la notification. */
+    private final String titre;
+
+     /** La description détaillée de la notification. */
+    private final String description;
+
+     /** La date de création de la notification au format ISO (yyyy-MM-dd). */
+    private final String date;
+
+    /** L'intervenant responsable de la notification. */
+    private final String intervenant;
+
+     /**
+     * Constructeur pour initialiser une notification avec les informations spécifiées.
+     *
+     * @param titre          Le titre de la notification.
+     * @param description    La description détaillée de la notification.
+     * @param intervenant    L'identifiant de l'intervenant responsable.
+     * @param notificationID L'identifiant unique de la notification.
+     * @param date           La date de création de la notification au format ISO (yyyy-MM-dd).
+     */
+<span class="nc" id="L34">    public Notification(String titre, String description, String intervenant, String notificationID, String date) {</span>
+<span class="nc" id="L35">        this.titre = titre;</span>
+<span class="nc" id="L36">        this.description = description;</span>
+<span class="nc" id="L37">        this.date = date;</span>
+<span class="nc" id="L38">        this.intervenant = intervenant;</span>
+<span class="nc" id="L39">        this.notificationID = notificationID;</span>
+<span class="nc" id="L40">    }</span>
+
+    /**
+     * Retourne l'identifiant de l'intervenant responsable de la notification.
+     *
+     * @return L'identifiant de l'intervenant.
+     */
+    public String getIntervenant() {
+<span class="nc" id="L48">        return intervenant;</span>
+    }
+
+    /**
+     * Retourne le titre de la notification.
+     *
+     * @return Le titre de la notification.
+     */
+    public String getTitre() {
+<span class="nc" id="L57">        return titre;</span>
+    }
+
+    /**
+     * Retourne la description détaillée de la notification.
+     *
+     * @return La description de la notification.
+     */
+    public String getDescription() {
+<span class="nc" id="L66">        return description;</span>
+    }
+
+    /**
+     * Retourne l'identifiant unique de la notification.
+     *
+     * @return L'identifiant de la notification.
+     */
+    public String getNotificationID() {
+<span class="nc" id="L75">        return notificationID;</span>
+    }
+
+    /**
+     * Retourne la date de création de la notification.
+     *
+     * @return La date de la notification au format ISO (yyyy-MM-dd).
+     */
+    public String getDate() {
+<span class="nc" id="L84">        return date;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

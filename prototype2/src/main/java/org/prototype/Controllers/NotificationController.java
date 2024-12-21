@@ -2,11 +2,8 @@ package org.prototype.Controllers;
 
 import org.prototype.MaVille;
 import org.prototype.Models.*;
-
 import java.io.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -143,7 +140,7 @@ public class NotificationController {
 
 
      /**
-     * Trie une liste de notifications en utilisant un algorithme de tri récursif.
+     * Trie une liste de notifications en utilisant un merge sort.
      *
      * @param start        Index de début.
      * @param end          Index de fin.
@@ -157,8 +154,8 @@ public class NotificationController {
             return notis;
         } else {
             ArrayList<Notification> merged = new ArrayList<>();
-            ArrayList<Notification> leftSublist = sortNotifications(start, start + (start + end)/2, notifications);
-            ArrayList<Notification> rightSublist = sortNotifications(start + (start + end)/2 + 1, end, notifications);
+            ArrayList<Notification> leftSublist = sortNotifications(start, start + (end-start)/2, notifications);
+            ArrayList<Notification> rightSublist = sortNotifications(start + (end-start)/2 + 1, end, notifications);
             int i = 0; int j = 0;
             while (i != leftSublist.size() && j != rightSublist.size()) {
                 if (Integer.parseInt(leftSublist.get(i).getNotificationID()) <= Integer.parseInt(rightSublist.get(j).getNotificationID())) {

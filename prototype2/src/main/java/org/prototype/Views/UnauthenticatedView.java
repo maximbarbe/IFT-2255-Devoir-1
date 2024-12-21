@@ -6,11 +6,7 @@ import org.prototype.Controllers.UtilisateurController;
 import org.prototype.MaVille;
 import org.prototype.Models.Resident;
 import org.prototype.Models.Utilisateur;
-
-import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Classe qui s'occupe de la vue qu'un utilisateur non-connecté voit.
@@ -107,7 +103,7 @@ public class UnauthenticatedView extends View{
             String bday = reader.nextLine();
             print("Adresse courriel > ");
             String email = reader.nextLine();
-            print("Mot de passe > ");
+            print("Mot de passe (au moins 8 caractères)> ");
             String password =reader.nextLine();
             print("Téléphone (optionnel) > ");
             String telephone = reader.nextLine();
@@ -131,7 +127,7 @@ public class UnauthenticatedView extends View{
                             msg = "L'adresse courriel existe déjà, veuillez vous connecter";
                             break;
                         case 2:
-                            msg = "Le format d'adresse courriel est invalide.";
+                            msg = "Entrée invalide, vérifiez que vous avez bien entré une adresse email valide et un mot de passe valide.";
                             break;
                         case 3:
                             msg = "Le format de date de naissance est invalide.";
@@ -174,7 +170,7 @@ public class UnauthenticatedView extends View{
             String name = reader.nextLine();
             print("Adresse courriel > ");
             String email = reader.nextLine();
-            print("Mot de passe > ");
+            print("Mot de passe (Au moins 8 caractères)> ");
             String password =reader.nextLine();
             String type;
             while (true) {
@@ -221,7 +217,7 @@ public class UnauthenticatedView extends View{
                             msg = "L'adresse courrielle existe déjà, connectez-vous.";
                             break;
                         case 4:
-                            msg = "L'adresse courriel n'est pas dans le bon format.";
+                            msg = "Entrée invalide, veuillez vous assurer de respecter les formats.";
                             break;
                         case 5:
                             msg = "Une erreur est survenue lors de l'enregistrement de votre compte, veuillez réessayer.";
