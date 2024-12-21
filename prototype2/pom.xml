@@ -98,7 +98,7 @@ certaines valeurs de versions.-->
             </plugin>
 
             <plugin>
-                <!-- Tiré de https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin/3.4.2 -->
+                <!-- Tiré de https://maven.apache.org/shared/maven-archiver/examples/classpath.html -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.4.2</version>
