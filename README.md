@@ -29,7 +29,7 @@ Description du projet:
 <h2>Organisation du répertoire:</h2>
 
 > [/prototype2](/prototype2/): Ce folder contient tous les fichiers nécessaire pour éxécuter le prototype.
->> [/data](/prototype2/data/): Ce folder contient les fichiers de données nécessaires pour l'application.
+>> [/data](/prototype2/data/): Ce folder contient les fichiers de données nécessaires pour l'application.<br/>
 >> [/src](/prototype2/src/): Ce folder contient les fichiers Java et les fichiers csv.
 >>> [/test](/prototype2/src/test/): Ce folder contient les fichiers pour les tests dont des fichiers CSV.<br/>
 >>>> [/java](/prototype2/src/test/java/): Ce folder contient le fichier Java pour les tests.<br/>
