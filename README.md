@@ -39,8 +39,8 @@ Description du projet:
 >>>> [/Controllers](/prototype2/src/main/java/org/prototype/Controllers/) Ce folder contient toutes les classes qui représente les Controller dans l'architecture MVC. <br/>
 >>>> [/Models](/prototype2/src/main/java/org/prototype/Models/) Ce folder contient toutes les classes qui représente les Modèles dans l'architecture MVC. <br/>
 >>>> [/Views](/prototype2/src/main/java/org/prototype/Views/) Ce folder contient toutes les classes qui représente les Vues dans l'architecture MVC. <br/>
-> [/docs](/docs/): Ce folder contient la documentation JavaDoc.
-> [/tests/](/tests/): Ce folder contient les rapports de tests générés avec JaCoCo.
+> [/docs](/docs/): Ce folder contient la documentation JavaDoc.<br/>
+> [/tests/](/tests/): Ce folder contient les rapports de tests générés avec JaCoCo.<br/>
 > [/diagrammes](/diagrammes/): Ce folder contient tous les images de diagrammes présentes dans le rapport.<br/>
 > [rapport.html](/rapport.html): Ce fichier contient le rapport du devoir.
 
