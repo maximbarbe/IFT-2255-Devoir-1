@@ -27,13 +27,6 @@ public class RequeteController {
         requetesFile = file;
     }
 
-    /**
-     * Change le statut de la requête à <code>RequeteStatut.FERMEE</code>
-     * @param r - La requête spécifique
-     */
-    public static void closeRequete(Requete r) {
-        r.setStatut(RequeteStatut.FERMEE);
-    }
 
     /**
      * Vérifie si une date
