@@ -31,7 +31,7 @@ public class UtilisateurControllerTest {
 
     @Test
     public void getUtilisateurTestSucces() {
-        // Test pour voir si on peut aller chercher un compte utilisateur avec des données exactes
+        // Dans ce test, on s'attend à un succès puisqu'on essaie d'aller chercher un compte résident avec des données exactes.
         ResidentController.createResident("Alice Test", "1999-12-12", "alice@gmail.com","12345678", "123 rue jean", "514-300-4000", "H1C 3L6", LocalDateTime.now().toString());
         Resident user = (Resident)UtilisateurController.getUtilisateur("alice@gmail.com", "12345678");
         assertEquals("Alice Test", user.getNomComplet());
@@ -42,7 +42,7 @@ public class UtilisateurControllerTest {
 
     @Test
     public void getUtilisateurTestSuccesDifferentLetterCase() {
-        // Test pour voir si on peut aller chercher un compte utilisateur avec un email ayant des lettercases différents
+        // Dans ce test, on s'attend à un succès puisqu'on essaie d'aller chercher un compte résident avec un email ayant des lettercase différents, ce qui ne devrait pas déranger.
         ResidentController.createResident("Alice Test", "1999-12-12", "alice@gmail.com","12345678", "123 rue jean", "514-300-4000", "H1C 3L6", LocalDateTime.now().toString());
         Resident user = (Resident)UtilisateurController.getUtilisateur("aLiCe@GmAiL.com", "12345678");
         assertEquals("Alice Test", user.getNomComplet());
@@ -53,7 +53,7 @@ public class UtilisateurControllerTest {
 
     @Test
     public void getUtilisateurTestEchecPasswordIncorrect() {
-        // Test pour voir si entrer un password incorrect, mais un email correct ne retourne pas l'utilisateur
+        // Dans ce test, on s'attend à un échec puisqu'on essaie d'aller chercher un compte résident avec un password invalide.
         ResidentController.createResident("Alice Test", "1999-12-12", "alice@gmail.com","12345678", "123 rue jean", "514-300-4000", "H1C 3L6", LocalDateTime.now().toString());
         Utilisateur user = UtilisateurController.getUtilisateur("alice@gmail.com", "12345679");
         assertEquals(null, user);

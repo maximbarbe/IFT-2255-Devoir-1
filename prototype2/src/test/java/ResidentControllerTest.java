@@ -31,7 +31,7 @@ public class ResidentControllerTest {
 
     @Test
     public void CreerCompteResidentTestSucces() {
-        // Test pour voir si la création de compte résident fonctionne
+        // Dans ce test, on s'attend à un succès puisqu'on essaie de créer un compte résident avec des données valides.
         ResidentController.initHashMap(); // hashmap contenant les quartiers
 
         Integer statuscode = ResidentController.createResident("Alice Test", "1999-12-12", "alice@gmail.com","12345678", "123 rue jean", "514-300-4000", "H1C 3L6", LocalDateTime.now().toString());
@@ -81,13 +81,13 @@ public class ResidentControllerTest {
 
     @Test
     public void creerCompteResidentEchecUtilisateurTropJeune() {
-        // Test pour voir si essayer de créer un compte résident trop jeune donne un erreur
+        // Dans ce test, on s'attend à un échec puisqu'on essaie de créer un résident avec un utilisateur trop jeune (< 16 ans).
         assertTrue(ResidentController.createResident("tester", "2010-01-01", "test@gmail.com", "password123", "123 rue jean", "","H1C 3L6", LocalDateTime.now().toString())==4);
     }
 
     @Test
     public void creerCompteResidentEchecEmailExistant() {
-        // Test pour voir si essayer de créer un compte résident avec un email existant donne une erreur
+        // Dans ce test, on s'attend à un échec puisqu'on essaie de créer un résident avec un email déjà utilisé par un autre résident.
         ResidentController.createResident("tester", "1999-01-01", "alice@gmail.com", "password123", "123 rue jean", "","H1C 3L6", LocalDateTime.now().toString());
         assertTrue(ResidentController.createResident("Alice Test", "1999-12-12", "alice@gmail.com","12345678", "123 rue jean", "514-300-4000", "H1C 3L6", LocalDateTime.now().toString())==1);
     }

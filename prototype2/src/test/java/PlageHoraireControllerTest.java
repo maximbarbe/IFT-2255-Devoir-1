@@ -26,7 +26,7 @@ public class PlageHoraireControllerTest {
 
     @Test
     public void updatePlageHoraireSucces() {
-        // Test pour voir si l'update de plage horaire avec des données valides fonctionnes
+        // Dans ce test, on s'attend à un succès puisqu'on essaie d'update une plage horaire avec des données valides.
         PlageHoraire plageHoraire = PlageHoraireController.creerPlageHoraire("10:00-15:00", "09:00-18:00", "23:00-23:59", "22:00-22:30", "15:00-16:00", "01:00-02:00", "03:00-04:30");
         PlageHoraireController.savePlageHoraire(plageHoraire);
         assertTrue(PlageHoraireController.updatePlageHoraire(plageHoraire, 1, "15:00", "17:00")==true);
@@ -34,7 +34,7 @@ public class PlageHoraireControllerTest {
 
     @Test
     public void updatePlageHoraireSanitaire() {
-        // Test pour voir si la composition par opération inverse donne la plage initiale
+        // Ceci est un test sanitaire pour voir si la composition par l'opération inverse donne le résultat initial.
         PlageHoraire plageHoraire = PlageHoraireController.creerPlageHoraire("10:00-15:00", "09:00-18:00", "23:00-23:59", "22:00-22:30", "15:00-16:00", "01:00-02:00", "03:00-04:30");
         PlageHoraireController.savePlageHoraire(plageHoraire);
         PlageHoraireController.updatePlageHoraire(plageHoraire, 1, "15:00", "17:00");
@@ -46,7 +46,7 @@ public class PlageHoraireControllerTest {
 
     @Test
     public void updatePlageHoraireEchec() {
-        // Test pour voir si on met une heure invalide donne un échec
+        // Dans ce test, on s'attend à un échec puisqu'on essaie d'update une plage horaire avec des données invalides.
         PlageHoraire plageHoraire = PlageHoraireController.creerPlageHoraire("10:00-15:00", "09:00-18:00", "23:00-23:59", "22:00-22:30", "15:00-16:00", "01:00-02:00", "03:00-04:30");
         PlageHoraireController.savePlageHoraire(plageHoraire);
         assertTrue(PlageHoraireController.updatePlageHoraire(plageHoraire, 1, "15:00", "23:64")==false);

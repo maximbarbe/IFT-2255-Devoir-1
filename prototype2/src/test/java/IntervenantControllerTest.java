@@ -24,14 +24,14 @@ public class IntervenantControllerTest {
 
     @Test
     public void createIntervenantTestSucces() {
-        // Test pour voir si le controller crée bel et bien un intervenant lorsque des informations
+        // Dans ce test, on s'attend à un succès puisqu'on essaie de créer des comptes intervenants avec des données valides.
         assertTrue(IntervenantController.createIntervenant("TestIntervenant", "entrepreneur_prive", "intervenant@gmail.com", "password123", "00000000") == 0);
         assertTrue(IntervenantController.createIntervenant("Tester", "entreprise_publique", "intervenant1@gmail.com", "password123456789", "00000001") == 0);
     }
 
     @Test
     public void createIntervenantTestEchecEmailExistant() {
-        // Test pour voir la réponse lorsqu'on essaye de créer un intervenant avec un email qui existe déjà
+        // Dans ce test, on s'attend à un échec puisqu'on essaie de créer un intervenant avec un email qui existe déjà.
         assertTrue(IntervenantController.createIntervenant("TestIntervenant", "entrepreneur_prive", "intervenant@gmail.com", "password123", "00000000") == 0);
         assertTrue(IntervenantController.createIntervenant("TestIntervenant", "entrepreneur_prive", "intervenant@gmail.com", "password123", "00000001") == 3);
 
@@ -39,7 +39,7 @@ public class IntervenantControllerTest {
 
     @Test
     public void createIntervenantTestEchecIdentifiantExistant() {
-        // Test pour voir la réponse lorsqu'on essaye de créer un intervenant avec un identifiant qui existe déjà
+        // Dans ce test, on s'attend à un échec puisqu'on essaie de créer un intervenant avec un identifiant qui existe déjà.
         assertTrue(IntervenantController.createIntervenant("TestIntervenant", "entrepreneur_prive", "intervenant@gmail.com", "password123", "00000000") == 0);
         assertTrue(IntervenantController.createIntervenant("TestIntervenant", "entrepreneur_prive", "intervenant1@gmail.com", "password123", "00000000") == 1);
 

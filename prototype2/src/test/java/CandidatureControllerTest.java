@@ -29,27 +29,27 @@ public class CandidatureControllerTest {
 
     @Test
     public void creerCandidatureSucces() {
-        // Test pour voir si on peut créer une candidature
+        // Dans ce test, on s'attend à un succès puisqu'on crée une candidature avec des données valides.
         assertTrue(CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "") == 0);
 
     }
 
     @Test
     public void creerCandidatureEchecCandidatureDejaEnvoyee() {
-        // Test pour voir la réponse lorsqu'on essaye d'envoyer une candidature à une requête qu'on en a déjà envoyé une
+        // Dans ce test, on s'attend à un échec puisqu'on essaie de créer une candidature à une requête dont une candidature a déjà été déposée par le même intervenant.
         CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "");
         assert(CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "")==2);
     }
 
     @Test
     public void creerCandidatureEchecDateInvalide() {
-        // Test pour voir la réponse lorsqu'on met une date de fin plus tôt qu'une date de début
+        // Dans ce test, on s'attend à un échec puisqu'on essaie de créer une candidature avec des données invalides.
         assert(CandidatureController.createCandidature("0", "2025-12-17", "2024-01-01", "tester", "")==1);
     }
 
     @Test
     public void updateCandidatureTestSucces() {
-        // Test pour voir si la fonctionnalité d'update une candidature fonctionne.
+        // Dans ce test, on s'attend à un succès puisqu'on essaie d'update une candidature avec des données valides.
         CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "");
         Candidature expected = new Candidature("0", "tester", "2025-12-17", "2026-01-01", "message_test");
         CandidatureController.updateCandidature(expected);
@@ -63,7 +63,7 @@ public class CandidatureControllerTest {
     }
     @Test
     public void updateCandidatureTestSanitaire() {
-        // Test pour voir si la composition d'update candidature en faisant l'opération inverse donne la candidature initiale.
+        // Dans ce test, on veut voir si après la composition par l'opération inverse, si on arrive au résultat initial.
         CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "");
         Candidature expected = new Candidature("0", "tester", "2025-12-17", "2026-01-01", "message_test");
         CandidatureController.updateCandidature(expected);
@@ -80,7 +80,7 @@ public class CandidatureControllerTest {
     
     @Test
     public void updateCandidatureTestCandidatureNonExistente() {
-        // Test pour voir si rien ne se passe lorsqu'on essaye d'update une candidature non-existante
+        // Dans ce test, on essaie d'update une candidature non-existente, on s'attend à ce que rien ne se passe.
         CandidatureController.createCandidature("0", "2025-12-17", "2026-01-01", "tester", "");
         Candidature candidatureNonExistente = new Candidature("1", "tester", "2025-12-17", "2026-01-01", "message_test");
         CandidatureController.updateCandidature(candidatureNonExistente);
