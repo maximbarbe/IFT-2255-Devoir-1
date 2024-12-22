@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResidentView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype2</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Views</a> &gt; <span class="el_source">ResidentView.java</span></div><h1>ResidentView.java</h1><pre class="source lang-java linenums">package org.prototype.Views;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResidentView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MaVille</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Views</a> &gt; <span class="el_source">ResidentView.java</span></div><h1>ResidentView.java</h1><pre class="source lang-java linenums">package org.prototype.Views;
 
 import org.prototype.Controllers.*;
 import org.prototype.MaVille;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
     @Override
     public void menuPrincipal() {
-        while (true) {
+<span class="nc" id="L16">        while (true) {</span>
 <span class="nc" id="L17">            ArrayList&lt;Notification&gt; unseenNotifications = NotificationController.getUnseenNotifications((Resident) MaVille.getCurUser());</span>
 <span class="nc" id="L18">            clearConsole();</span>
 <span class="nc" id="L19">            println(&quot;Menu principal:\n&quot;);</span>
@@ -42,7 +42,7 @@ import java.util.ArrayList;
                 default:
 <span class="nc" id="L43">                    println(&quot;Mauvais choix, veuillez réessayer&quot;);</span>
             }
-<span class="nc" id="L45">        }</span>
+        }
     }
     /**
      * Affiche le sous-menu du travail et permet aux résidents d'accéder à toutes les fonctionnalités reliées au travail.
@@ -55,7 +55,7 @@ import java.util.ArrayList;
 <span class="nc" id="L55">            println(&quot;3) Plages horaires&quot;);</span>
 <span class="nc" id="L56">            println(&quot;4) Revenir&quot;);</span>
 <span class="nc" id="L57">            print(&quot;Votre choix &gt; &quot;);</span>
-            while (true) {
+<span class="nc" id="L58">            while (true) {</span>
 <span class="nc bnc" id="L59" title="All 5 branches missed.">                switch (reader.nextLine()) {</span>
                     case &quot;1&quot;:
 <span class="nc" id="L61">                        consulterTravaux();</span>
@@ -70,9 +70,9 @@ import java.util.ArrayList;
 <span class="nc" id="L70">                        return;</span>
                     default:
 <span class="nc" id="L72">                        println(&quot;Mauvais choix, veuillez réessayer&quot;);</span>
-<span class="nc" id="L73">                        continue;</span>
+                        continue;
                 }
-<span class="nc" id="L75">                break;</span>
+                break;
             }
 
 
@@ -89,8 +89,8 @@ import java.util.ArrayList;
 <span class="nc" id="L89">            ArrayList&lt;Entrave&gt; entraves = EntraveController.getEntraves();</span>
 <span class="nc bnc" id="L90" title="All 2 branches missed.">            for (Entrave e:entraves) {</span>
 <span class="nc" id="L91">                println(&quot;ID du travail correspondant: &quot; + e.getTravailId()+&quot;; Nom de la rue: &quot;+e.getStreetId() + &quot;; Effet sur la rue: &quot;+e.getStreetImpact());</span>
-<span class="nc" id="L92">            }</span>
-            while (true) {
+            }
+<span class="nc" id="L93">            while (true) {</span>
 <span class="nc" id="L94">                println(&quot;1) Rechercher par rue; 2) Rechercher par travail; 3) Revenir&quot;);</span>
 <span class="nc" id="L95">                print(&quot;Votre choix &gt; &quot;);</span>
 
@@ -104,7 +104,7 @@ import java.util.ArrayList;
 <span class="nc" id="L104">                        ArrayList&lt;Entrave&gt; entravesFiltreesByStreet = EntraveController.getEntravesByStreet(rue);</span>
 <span class="nc bnc" id="L105" title="All 2 branches missed.">                        for (Entrave e:entravesFiltreesByStreet) {</span>
 <span class="nc" id="L106">                            println(&quot;ID du travail correspondant: &quot; + e.getTravailId()+&quot;; Nom de la rue: &quot;+e.getStreetId() + &quot;; Effet sur la rue: &quot;+e.getStreetImpact());</span>
-<span class="nc" id="L107">                        }</span>
+                        }
 <span class="nc" id="L108">                        continue;</span>
                         // Filtre les entraves par travail via les ID.
                     case &quot;2&quot;:
@@ -114,7 +114,7 @@ import java.util.ArrayList;
 <span class="nc" id="L114">                        ArrayList&lt;Entrave&gt; entravesFiltrees = EntraveController.getEntravesByID(id);</span>
 <span class="nc bnc" id="L115" title="All 2 branches missed.">                        for (Entrave e:entravesFiltrees) {</span>
 <span class="nc" id="L116">                            println(&quot;ID du travail correspondant: &quot; + e.getTravailId()+&quot;; Nom de la rue: &quot;+e.getStreetId() + &quot;; Effet sur la rue: &quot;+e.getStreetImpact());</span>
-<span class="nc" id="L117">                        }</span>
+                        }
 
 <span class="nc" id="L119">                        continue;</span>
 
@@ -123,7 +123,7 @@ import java.util.ArrayList;
                     default:
 <span class="nc" id="L124">                        println(&quot;Mauvais choix, veuillez réessayer&quot;);</span>
                         break;
-<span class="nc" id="L126">                }</span>
+                }
             }
         }
     }
@@ -143,20 +143,20 @@ import java.util.ArrayList;
 <span class="nc bnc" id="L143" title="All 2 branches missed.">                } else if (t.getStatus().equals(StatutProjet.PREVU)) {</span>
 <span class="nc" id="L144">                    travauxFuturs.add(t);</span>
                 }
-<span class="nc" id="L146">            }</span>
+            }
 <span class="nc" id="L147">            println(&quot;Travaux en cours: \n\n&quot;);</span>
             
 <span class="nc bnc" id="L149" title="All 2 branches missed.">            for (Travail t:travauxPresent) {</span>
 <span class="nc" id="L150">                println(&quot;ID: &quot;+t.getId() + &quot;; Titre: &quot;+t.getTitre() + &quot;; Intervenant: &quot;+t.getIdentifiantIntervenant() + &quot;; Quartiers affectés: &quot;+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + &quot;; Date de début: &quot;+t.getDateDebut() + &quot;; Date de fin: &quot; + t.getDateFin());</span>
-<span class="nc" id="L151">            }</span>
+            }
 <span class="nc" id="L152">            print(&quot;\n\n&quot;);</span>
 <span class="nc" id="L153">            println(&quot;Travaux dans les 3 prochains mois: \n\n&quot;);</span>
 
 <span class="nc bnc" id="L155" title="All 2 branches missed.">            for (Travail t:travauxFuturs) {</span>
 <span class="nc" id="L156">                println(&quot;ID: &quot;+t.getId() + &quot;; Titre: &quot;+t.getTitre() + &quot;; Intervenant: &quot;+t.getIdentifiantIntervenant() + &quot;; Quartiers affectés: &quot;+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + &quot;; Date de début: &quot;+t.getDateDebut() + &quot;; Date de fin: &quot; + t.getDateFin());</span>
-<span class="nc" id="L157">            }</span>
+            }
 
-            while (true) {
+<span class="nc" id="L159">            while (true) {</span>
 <span class="nc" id="L160">                println(&quot;1) Rechercher; 2) Filtrer; 3) Revenir&quot;);</span>
 <span class="nc" id="L161">                print(&quot;Votre choix &gt; &quot;);</span>
 <span class="nc" id="L162">                String res = reader.nextLine();</span>
@@ -167,11 +167,11 @@ import java.util.ArrayList;
 <span class="nc" id="L167">                        ArrayList&lt;Travail&gt; travauxParTitre = TravailController.getTravauxParTitre(titre);</span>
 <span class="nc bnc" id="L168" title="All 2 branches missed.">                        if (travauxParTitre.size() == 0) {</span>
 <span class="nc" id="L169">                            println(&quot;Il n'y a aucun travaux avec ce titre&quot;);</span>
-                        } else {
+<span class="nc" id="L170">                        } else {</span>
 <span class="nc bnc" id="L171" title="All 2 branches missed.">                            for (Travail t: travauxParTitre) {</span>
 <span class="nc" id="L172">                                println(&quot;ID: &quot;+t.getId() + &quot;; Titre: &quot;+t.getTitre() + &quot;; Intervenant: &quot;+t.getIdentifiantIntervenant() + &quot;; Quartiers affectés: &quot;+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + &quot;; Date de début: &quot;+t.getDateDebut() + &quot;; Date de fin: &quot; + t.getDateFin());</span>
 <span class="nc" id="L173">                                println(&quot;&quot;);</span>
-<span class="nc" id="L174">                            }</span>
+                            }
                         }
 <span class="nc" id="L176">                        println(&quot;Appuyer sur n'importe quelle touche pour continuer&quot;);</span>
 <span class="nc" id="L177">                        reader.nextLine();</span>
@@ -189,7 +189,7 @@ import java.util.ArrayList;
 
 <span class="nc bnc" id="L190" title="All 2 branches missed.">                                    for (Travail t:travauxFiltres) {</span>
 <span class="nc" id="L191">                                        println(&quot;ID: &quot;+t.getId() + &quot;Titre: &quot;+t.getTitre() + &quot;; Intervenant: &quot;+t.getIdentifiantIntervenant() + &quot;; Quartiers affectés: &quot;+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + &quot;; Status: &quot;+t.getStatus());</span>
-<span class="nc" id="L192">                                    }</span>
+                                    }
 <span class="nc" id="L193">                                    continue;</span>
                                 // Filtrer les travaux par type.    
                                 case &quot;2&quot;:
@@ -204,7 +204,7 @@ import java.util.ArrayList;
 <span class="nc" id="L204">                                        ArrayList&lt;Travail&gt; travauxFiltresByType = TravailController.getTravauxByType(s.toString());</span>
 <span class="nc bnc" id="L205" title="All 2 branches missed.">                                        for (Travail t:travauxFiltresByType) {</span>
 <span class="nc" id="L206">                                            println(&quot;ID: &quot;+t.getId() + &quot;Titre: &quot;+t.getTitre() + &quot;; Intervenant: &quot;+t.getIdentifiantIntervenant() + &quot;; Quartiers affectés: &quot;+t.getQuartiers().toString().substring(1, t.getQuartiers().toString().length()-1) + &quot;; Status: &quot;+t.getStatus());</span>
-<span class="nc" id="L207">                                        }</span>
+                                        }
 <span class="nc" id="L208">                                        continue;</span>
 <span class="nc" id="L209">                                    } catch (Exception e) {</span>
 <span class="nc" id="L210">                                        println(&quot;Mauvais choix, veuillez réessayer&quot;);</span>
@@ -215,20 +215,20 @@ import java.util.ArrayList;
                                     break;
 
                             }
-<span class="nc" id="L218">                            break;</span>
+                            break;
                         }
-                    break;
+<span class="nc" id="L220">                    break;</span>
 
                     case &quot;3&quot;:
 <span class="nc" id="L223">                        return;</span>
                     default:
 <span class="nc" id="L225">                        println(&quot;Mauvais choix, veuillez réessayer&quot;);</span>
-<span class="nc" id="L226">                        continue;</span>
+                        continue;
                 }
-<span class="nc" id="L228">                break;</span>
+                break;
             }
 
-<span class="nc" id="L231">        }</span>
+        }
     };
 
     /**
@@ -237,7 +237,7 @@ import java.util.ArrayList;
     public void pageRequeteTravail() {
         while (true) {
 <span class="nc" id="L239">            clearConsole();</span>
-            while (true) {
+<span class="nc" id="L240">            while (true) {</span>
 <span class="nc" id="L241">                println(&quot;1) Soumettre une requête de travail&quot;);</span>
 <span class="nc" id="L242">                println(&quot;2) Faire le suivi de vos requêtes de travail&quot;);</span>
 <span class="nc" id="L243">                println(&quot;3) Revenir&quot;);</span>
@@ -255,7 +255,7 @@ import java.util.ArrayList;
 <span class="nc" id="L255">                        println(&quot;Mauvais choix, veuillez réessayer&quot;);</span>
                         break;
 
-<span class="nc" id="L258">                }</span>
+                }
             }
 
         }
@@ -283,7 +283,7 @@ import java.util.ArrayList;
 <span class="nc" id="L283">                    println(&quot;Statut: Aucune candidature soumise&quot;);</span>
 <span class="nc bnc" id="L284" title="All 2 branches missed.">                } else if (candidatures.size() == 1){</span>
 <span class="nc" id="L285">                    println(&quot;Statut: 1 candidature a été soumise&quot;);</span>
-                } else {
+<span class="nc" id="L286">                } else {</span>
 <span class="nc" id="L287">                    println(&quot;Statut: &quot; + candidatures.size() + &quot; candidatures ont été soumises.&quot;);</span>
                 }
 
@@ -291,9 +291,9 @@ import java.util.ArrayList;
 <span class="nc" id="L291">                    print(&quot;=&quot;);</span>
                 }
 <span class="nc" id="L293">                println(&quot;&quot;);</span>
-<span class="nc" id="L294">            }</span>
+            }
 
-            while (true) {
+<span class="nc" id="L296">            while (true) {</span>
 <span class="nc" id="L297">                println(&quot;1) Voir candidatures&quot;);</span>
 <span class="nc" id="L298">                println(&quot;2) Fermer requête&quot;);</span>
 <span class="nc" id="L299">                println(&quot;3) Revenir&quot;);</span>
@@ -305,7 +305,7 @@ import java.util.ArrayList;
 <span class="nc" id="L305">                        ArrayList&lt;Candidature&gt; candidatures = new ArrayList&lt;&gt;();</span>
 <span class="nc bnc" id="L306" title="All 2 branches missed.">                        for (Requete r:requetes) {;</span>
 <span class="nc" id="L307">                            candidatures.addAll(CandidatureController.getCandidaturesByRequete(String.valueOf(r.getRequeteId())));</span>
-<span class="nc" id="L308">                        }</span>
+                        }
 <span class="nc bnc" id="L309" title="All 2 branches missed.">                        candidatures.removeIf(c -&gt; !c.getStatut().equals(StatutCandidature.EN_ATTENTE));</span>
 <span class="nc bnc" id="L310" title="All 2 branches missed.">                        for (int i = 0; i &lt; candidatures.size();i++) {</span>
 <span class="nc" id="L311">                            println((i+1)+&quot;) Requête: &quot;+candidatures.get(i).getRequeteID() + &quot;; Intervenant: &quot; + candidatures.get(i).getIntervenant() + &quot;; Date de début: &quot; + candidatures.get(i).getDateDebut() + &quot;; Date de fin: &quot;+candidatures.get(i).getDateFin());</span>
@@ -320,7 +320,7 @@ import java.util.ArrayList;
 <span class="nc" id="L320">                            println(&quot;Appuyez sur n'importe quelle touche.&quot;);</span>
 <span class="nc" id="L321">                            reader.nextLine();</span>
 <span class="nc" id="L322">                            continue;</span>
-<span class="nc" id="L323">                        }</span>
+                        }
 <span class="nc" id="L324">                        println(&quot;1) Accepter; 2) Refuser; 3) Revenir&quot;);</span>
 <span class="nc" id="L325">                        println(&quot;Votre choix &gt; &quot;);</span>
 <span class="nc bnc" id="L326" title="All 3 branches missed.">                        switch(reader.nextLine()) {</span>
@@ -328,7 +328,7 @@ import java.util.ArrayList;
 <span class="nc" id="L328">                                print(&quot;Entrez un message si désiré &gt; &quot;);</span>
 <span class="nc" id="L329">                                String msg = reader.nextLine();</span>
 <span class="nc" id="L330">                                candidatureAUpdate.setStatut(StatutCandidature.ACCEPTE);</span>
-<span class="nc" id="L331">                                candidatureAUpdate.setMessage(msg);</span>
+<span class="nc" id="L331">                                candidatureAUpdate.setMessage(msg.replace(&quot;,&quot;,&quot;&quot;));</span>
 <span class="nc" id="L332">                                CandidatureController.updateCandidature(candidatureAUpdate);</span>
 <span class="nc" id="L333">                                println(&quot;La candidature a été acceptée.&quot;);</span>
 <span class="nc" id="L334">                                println(&quot;Appuyez sur n'importe quelle touche pour continuer&quot;);</span>
@@ -366,7 +366,7 @@ import java.util.ArrayList;
 <span class="nc" id="L366">                                            c.setStatut(StatutCandidature.REFUSEE);</span>
 <span class="nc" id="L367">                                            CandidatureController.updateCandidature(c);</span>
                                         }
-<span class="nc" id="L369">                                    }</span>
+                                    }
 <span class="nc" id="L370">                                    RequeteController.fermerRequete(requeteAEnlever);</span>
 <span class="nc" id="L371">                                    println(&quot;La candidature a été fermée avec succès.&quot;);</span>
 <span class="nc" id="L372">                                    println(&quot;Appuyez sur n'importe quelle touche pour continuer&quot;);</span>
@@ -388,7 +388,7 @@ import java.util.ArrayList;
 <span class="nc" id="L388">                        return;</span>
                     default:
 <span class="nc" id="L390">                        println(&quot;Mauvais choix, veuillez réessayer&quot;);</span>
-<span class="nc" id="L391">                        continue;</span>
+                        continue;
                 }
 
             }
@@ -411,7 +411,7 @@ import java.util.ArrayList;
 
 <span class="nc" id="L412">            print(&quot;Date de début espéré (YYYY-MM-DD) (Date doit être aujourd'hui ou future): &quot;);</span>
 <span class="nc" id="L413">            String date = reader.nextLine();</span>
-            while (true) {
+<span class="nc" id="L414">            while (true) {</span>
 <span class="nc" id="L415">                println(&quot;1) Confirmer; 2) Modifier; 3) Revenir au menu&quot;);</span>
 <span class="nc bnc" id="L416" title="All 4 branches missed.">                switch (reader.nextLine()) {</span>
                     case &quot;1&quot;:
@@ -420,23 +420,23 @@ import java.util.ArrayList;
 <span class="nc" id="L420">                            println(&quot;Requête envoyée avec succès!&quot;);</span>
 <span class="nc" id="L421">                            println(&quot;Appuyez sur n'importe quelle touche pour continuer&quot;);</span>
 <span class="nc" id="L422">                            reader.nextLine();</span>
-                        } else {
+<span class="nc" id="L423">                        } else {</span>
 <span class="nc" id="L424">                            println(&quot;Il y a eu un problème lors de l'envoi de la requête.&quot;);</span>
 <span class="nc" id="L425">                            println(&quot;Appuyez sur n'importe quelle touche pour continuer&quot;);</span>
 <span class="nc" id="L426">                            reader.nextLine();</span>
                         };
 <span class="nc" id="L428">                        return;</span>
                     case &quot;2&quot;:
-<span class="nc" id="L430">                        break;</span>
+                        break;
                     case &quot;3&quot;:
 <span class="nc" id="L432">                        return;</span>
                     default:
 <span class="nc" id="L434">                        println(&quot;Mauvais choix, veuillez réessayer&quot;);</span>
-<span class="nc" id="L435">                        continue;</span>
+                        continue;
                 }
-<span class="nc" id="L437">                break;</span>
+                break;
             }
-<span class="nc" id="L439">        }</span>
+        }
     };
 
     /**
@@ -455,12 +455,12 @@ import java.util.ArrayList;
 <span class="nc bnc" id="L455" title="All 2 branches missed.">            println(String.format(&quot;Samedi: &quot; + ((plage.getSamedi()[0] == plage.getSamedi()[1]) ? &quot;Aucune&quot;: &quot;%02d:%02d-%02d:%02d&quot;), plage.getSamedi()[0]/60, plage.getSamedi()[0]%60, plage.getSamedi()[1]/60, plage.getSamedi()[1]%60));</span>
 <span class="nc bnc" id="L456" title="All 2 branches missed.">            println(String.format(&quot;Dimanche: &quot; + ((plage.getDimanche()[0] == plage.getDimanche()[1]) ? &quot;Aucune&quot;: &quot;%02d:%02d-%02d:%02d&quot;), plage.getDimanche()[0]/60, plage.getDimanche()[0]%60, plage.getDimanche()[1]/60, plage.getDimanche()[1]%60));</span>
 <span class="nc" id="L457">            println(&quot;\n&quot;);</span>
-            while (true) {
+<span class="nc" id="L458">            while (true) {</span>
 <span class="nc" id="L459">                println(&quot;1) Modifier la plage horaire; 2) Voir les plages horaires des autres résidents du quartier; 3) Revenir&quot;);</span>
 <span class="nc" id="L460">                print(&quot;Votre choix &gt; &quot;);</span>
 <span class="nc bnc" id="L461" title="All 4 branches missed.">                switch (reader.nextLine()) {</span>
                     case &quot;1&quot;:
-                        while (true) {
+<span class="nc" id="L463">                        while (true) {</span>
 <span class="nc" id="L464">                            print(&quot;Entrez la journée que vous voulez changer (Lundi=1 à Dimanche=7) ou 8 pour revenir: &quot;);</span>
 <span class="nc" id="L465">                            int code = 8;</span>
                             try {
@@ -468,7 +468,7 @@ import java.util.ArrayList;
 <span class="nc" id="L468">                            } catch (Exception e) {</span>
 <span class="nc" id="L469">                                println(&quot;Mauvaise entrée, veuillez réessayer&quot;);</span>
 <span class="nc" id="L470">                                continue;</span>
-<span class="nc" id="L471">                            }</span>
+                            }
 <span class="nc bnc" id="L472" title="All 2 branches missed.">                            switch (code) {</span>
                                 case 8:
 <span class="nc" id="L474">                                    break;</span>
@@ -479,12 +479,12 @@ import java.util.ArrayList;
 <span class="nc" id="L479">                                    String endTime = reader.nextLine();</span>
 <span class="nc bnc" id="L480" title="All 2 branches missed.">                                    if (!PlageHoraireController.updatePlageHoraire(PlageHoraireController.getPlageHoraire(MaVille.getCurUser().getAdresseCourriel()), code, startTime, endTime)) {</span>
 <span class="nc" id="L481">                                        println(&quot;Erreur lors de la mise à jour de la plage horaire, assurez-vous de bien suivre le format indiqué et d'entrer une heure valide.&quot;);</span>
-                                    } else {
+<span class="nc" id="L482">                                    } else {</span>
 <span class="nc" id="L483">                                        println(&quot;La plage horaire a été modifée avec succès.&quot;);</span>
                                     }
-<span class="nc" id="L485">                                    continue;</span>
+                                    continue;
                             }
-<span class="nc" id="L487">                            break;</span>
+                            break;
                         }
                         break;
                     case &quot;2&quot;:
@@ -506,7 +506,7 @@ import java.util.ArrayList;
 
                             }
 
-<span class="nc" id="L509">                        }</span>
+                        }
 <span class="nc" id="L510">                        println(&quot;Appuyez sur n'importe quelle touche pour continuer.&quot;);</span>
 <span class="nc" id="L511">                        reader.nextLine();</span>
 <span class="nc" id="L512">                        break;</span>
@@ -514,20 +514,20 @@ import java.util.ArrayList;
 <span class="nc" id="L514">                        return;</span>
                     default:
 <span class="nc" id="L516">                        println(&quot;Mauvais choix, veuillez réessayer&quot;);</span>
-<span class="nc" id="L517">                        continue;</span>
+                        continue;
                 }
-<span class="nc" id="L519">                break;</span>
+                break;
             }
 
 
-<span class="nc" id="L523">        }</span>
+        }
     };
     /**
      * Affiche les notifications qu'un résident a recu et permet d'accéder à la fonctionnalité de modifier les abonnements aux notifications.
      */
     public void pageNotifications(ArrayList&lt;Notification&gt; notifications){
 <span class="nc" id="L529">        ResidentController.updateSeenNotifications(notifications);</span>
-        while (true) {
+<span class="nc" id="L530">        while (true) {</span>
 <span class="nc" id="L531">            clearConsole();</span>
 
 <span class="nc" id="L533">            println(&quot;Nouvelles notifications: &quot;);</span>
@@ -559,7 +559,7 @@ import java.util.ArrayList;
                     default:
 <span class="nc" id="L560">                        println(&quot;Mauvais choix, veuillez réessayer.\n&quot;);</span>
                 }
-<span class="nc" id="L562">                break;</span>
+                break;
             }
 
 
@@ -578,7 +578,7 @@ import java.util.ArrayList;
 <span class="nc" id="L578">            println(&quot;Email: &quot;+curUser.getAdresseCourriel());</span>
 <span class="nc" id="L579">            println(&quot;Numéro de téléphone: &quot; + curUser.getNumTelephone());</span>
 <span class="nc" id="L580">            println(&quot;Date de naissance: &quot; + curUser.getDateDeNaissance());</span>
-            while (true) {
+<span class="nc" id="L581">            while (true) {</span>
 <span class="nc" id="L582">                println(&quot;1) Modifier le profil; 2) Revenir&quot;);</span>
 <span class="nc" id="L583">                String res = reader.nextLine();</span>
 <span class="nc bnc" id="L584" title="All 3 branches missed.">                switch (res) {</span>
@@ -592,12 +592,12 @@ import java.util.ArrayList;
 
                     default:
 <span class="nc" id="L594">                        println(&quot;Mauvais choix, veuillez réessayer.&quot;);</span>
-<span class="nc" id="L595">                        continue;</span>
+                        continue;
                 }
-<span class="nc" id="L597">                break;</span>
+                break;
             }
 
-<span class="nc" id="L600">        }</span>
+        }
     };
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

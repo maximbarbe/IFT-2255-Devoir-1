@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnauthenticatedView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype2</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Views</a> &gt; <span class="el_source">UnauthenticatedView.java</span></div><h1>UnauthenticatedView.java</h1><pre class="source lang-java linenums">package org.prototype.Views;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnauthenticatedView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MaVille</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Views</a> &gt; <span class="el_source">UnauthenticatedView.java</span></div><h1>UnauthenticatedView.java</h1><pre class="source lang-java linenums">package org.prototype.Views;
 
 import org.prototype.Controllers.IntervenantController;
 import org.prototype.Controllers.ResidentController;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
      * Affiche la page d'accueil, la page que l'on obtient en ouvrnt l'application, et permet de se connecter/s'inscrire.
      */
     public void pageAccueil() {
-        while (true) {
+<span class="nc" id="L21">        while (true) {</span>
 <span class="nc" id="L22">            MaVille.setCurUser(null);</span>
 <span class="nc" id="L23">            clearConsole();</span>
 <span class="nc" id="L24">            println(&quot;MaVille&quot;);</span>
@@ -39,7 +39,7 @@ import java.time.LocalDateTime;
 <span class="nc" id="L39">                    System.exit(0);</span>
                 default:
 <span class="nc" id="L41">                    println(&quot;Mauvais choix, veuillez réessayer&quot;);</span>
-<span class="nc" id="L42">                    continue;</span>
+                    continue;
             }
 
         }
@@ -50,7 +50,7 @@ import java.time.LocalDateTime;
      * Affiche la page d'inscription et permet à l'utilisateur de choisir s'il veut s'inscrire en tant que résident ou intervenant.
      */
     public void pageInscription(){
-        while (true) {
+<span class="nc" id="L53">        while (true) {</span>
 <span class="nc" id="L54">            clearConsole();</span>
 <span class="nc" id="L55">            println(&quot;1) Résident&quot;);</span>
 <span class="nc" id="L56">            println(&quot;2) Intervenant&quot;);</span>
@@ -82,7 +82,7 @@ import java.time.LocalDateTime;
 <span class="nc" id="L82">                    return;</span>
 
                 default:
-<span class="nc" id="L85">                    continue;</span>
+                    continue;
             }
         }
 
@@ -115,7 +115,7 @@ import java.time.LocalDateTime;
 
 <span class="nc bnc" id="L116" title="All 4 branches missed.">            switch (reader.nextLine()) {</span>
                 case &quot;1&quot;:
-<span class="nc" id="L118">                    continue;</span>
+                    continue;
                 case &quot;2&quot;:
                     // Source: Java™ Platform, Standard Edition 8 API Specification. (s.d.). Class LocalDateTime. Oracle. https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html.
 <span class="nc" id="L121">                    int statusCode = ResidentController.createResident(name, bday, email, password, adresse, telephone, postalCode, LocalDateTime.now().toString());</span>
@@ -127,7 +127,7 @@ import java.time.LocalDateTime;
 <span class="nc" id="L127">                            msg = &quot;L'adresse courriel existe déjà, veuillez vous connecter&quot;;</span>
 <span class="nc" id="L128">                            break;</span>
                         case 2:
-<span class="nc" id="L130">                            msg = &quot;Le format d'adresse courriel est invalide.&quot;;</span>
+<span class="nc" id="L130">                            msg = &quot;Entrée invalide, vérifiez que vous avez bien entré une adresse email valide et un mot de passe valide.&quot;;</span>
 <span class="nc" id="L131">                            break;</span>
                         case 3:
 <span class="nc" id="L133">                            msg = &quot;Le format de date de naissance est invalide.&quot;;</span>
@@ -173,7 +173,7 @@ import java.time.LocalDateTime;
 <span class="nc" id="L173">            print(&quot;Mot de passe (Au moins 8 caractères)&gt; &quot;);</span>
 <span class="nc" id="L174">            String password =reader.nextLine();</span>
             String type;
-            while (true) {
+<span class="nc" id="L176">            while (true) {</span>
 <span class="nc" id="L177">                println(&quot;Type: (1) Entreprise publique, (2) Entrepreneur privé, (3) Particulier&quot;);</span>
 <span class="nc bnc" id="L178" title="All 4 branches missed.">                switch (reader.nextLine()) {</span>
                     case &quot;1&quot;:
@@ -189,9 +189,9 @@ import java.time.LocalDateTime;
 <span class="nc" id="L189">                        println(&quot;Mauvais choix, veuillez recommencer.&quot;);</span>
 <span class="nc" id="L190">                        print(&quot;Appuyez sur n'importe quelle touche&quot;);</span>
 <span class="nc" id="L191">                        reader.nextLine();</span>
-<span class="nc" id="L192">                        continue;</span>
+                        continue;
                 }
-<span class="nc" id="L194">                break;</span>
+                break;
             }
 
 <span class="nc" id="L197">            print(&quot;Code fourni par la ville &gt; &quot;);</span>
@@ -201,7 +201,7 @@ import java.time.LocalDateTime;
 
 <span class="nc bnc" id="L202" title="All 4 branches missed.">            switch (reader.nextLine()) {</span>
                 case &quot;1&quot;:
-<span class="nc" id="L204">                    continue;</span>
+                    continue;
                 case &quot;2&quot;:
 <span class="nc" id="L206">                    String msg = &quot;&quot;;</span>
 <span class="nc bnc" id="L207" title="All 7 branches missed.">                    switch (IntervenantController.createIntervenant(name, type, email, password, code)) {</span>
@@ -217,7 +217,7 @@ import java.time.LocalDateTime;
 <span class="nc" id="L217">                            msg = &quot;L'adresse courrielle existe déjà, connectez-vous.&quot;;</span>
 <span class="nc" id="L218">                            break;</span>
                         case 4:
-<span class="nc" id="L220">                            msg = &quot;L'adresse courriel n'est pas dans le bon format.&quot;;</span>
+<span class="nc" id="L220">                            msg = &quot;Entrée invalide, veuillez vous assurer de respecter les formats.&quot;;</span>
 <span class="nc" id="L221">                            break;</span>
                         case 5:
 <span class="nc" id="L223">                            msg = &quot;Une erreur est survenue lors de l'enregistrement de votre compte, veuillez réessayer.&quot;;</span>
@@ -256,11 +256,11 @@ import java.time.LocalDateTime;
 <span class="nc" id="L256">                print(&quot;Votre choix &gt; &quot;);</span>
 <span class="nc bnc" id="L257" title="All 3 branches missed.">                switch (reader.nextLine()) {</span>
                     case &quot;1&quot;:
-<span class="nc" id="L259">                        continue;</span>
+                        continue;
                     case &quot;2&quot;:
 <span class="nc" id="L261">                        return;</span>
 
-<span class="nc" id="L263">                }</span>
+                }
             // On redirige l'utilisateur vers la bonne vue.    
 <span class="nc bnc" id="L265" title="All 2 branches missed.">            } else if (connectedUser instanceof Resident) {</span>
 <span class="nc" id="L266">                MaVille.setCurUser(connectedUser);</span>
@@ -275,7 +275,7 @@ import java.time.LocalDateTime;
             }
 
 
-<span class="nc" id="L278">        }</span>
+        }
     };
 
     /**

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequeteController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype2</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Controllers</a> &gt; <span class="el_source">RequeteController.java</span></div><h1>RequeteController.java</h1><pre class="source lang-java linenums">package org.prototype.Controllers;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequeteController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MaVille</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Controllers</a> &gt; <span class="el_source">RequeteController.java</span></div><h1>RequeteController.java</h1><pre class="source lang-java linenums">package org.prototype.Controllers;
 
 
 import org.prototype.Models.Requete;
@@ -18,22 +18,22 @@ import java.util.ArrayList;
 
 
 <span class="nc" id="L20">    private static String requetesFile =&quot;src/requetes.csv&quot;;</span>
-
+    /**
+     * Obtient le fichier des requêtes
+     * @return le fichier contenant les requêtes
+     * */
     public static String getRequetesFile() {
-<span class="nc" id="L23">        return requetesFile;</span>
+<span class="nc" id="L26">        return requetesFile;</span>
     }
 
-    public static void setRequetesFile(String file) {
-<span class="nc" id="L27">        requetesFile = file;</span>
-<span class="nc" id="L28">    }</span>
-
     /**
-     * Change le statut de la requête à &lt;code&gt;RequeteStatut.FERMEE&lt;/code&gt;
-     * @param r - La requête spécifique
-     */
-    public static void closeRequete(Requete r) {
-<span class="nc" id="L35">        r.setStatut(RequeteStatut.FERMEE);</span>
-<span class="nc" id="L36">    }</span>
+     * Permet de changer le chemin vers le fichier des requêtes
+     * @param file Le chemin vers le nouveau fichier.
+     * */
+    public static void setRequetesFile(String file) {
+<span class="nc" id="L34">        requetesFile = file;</span>
+<span class="nc" id="L35">    }</span>
+
 
     /**
      * Vérifie si une date
@@ -91,12 +91,12 @@ import java.util.ArrayList;
 <span class="nc" id="L91">                int id = 0;</span>
 <span class="nc bnc" id="L92" title="All 2 branches missed.">                for (Requete r:requetes) {</span>
 <span class="nc" id="L93">                    id = Integer.max(id, r.getRequeteId() + 1);</span>
-<span class="nc" id="L94">                }</span>
-<span class="nc" id="L95">                saveRequete(new Requete(id, titre, description, type, dateDebutEspere, userID, quartier));</span>
+                }
+<span class="nc" id="L95">                saveRequete(new Requete(id, titre.replace(&quot;,&quot;, &quot;&quot;), description.replace(&quot;,&quot;, &quot;&quot;), type.replace(&quot;,&quot;, &quot;&quot;), dateDebutEspere, userID, quartier));</span>
 
 <span class="nc" id="L97">            } catch (Exception e) {</span>
 <span class="nc" id="L98">                return false;</span>
-<span class="nc" id="L99">            }</span>
+            }
 
 <span class="nc" id="L101">            return true;</span>
         }
@@ -125,7 +125,7 @@ import java.util.ArrayList;
 <span class="nc" id="L125">                requetes.add(new Requete(id, titre, description, type, dateDebutEspere, userID, quartier));</span>
 <span class="nc" id="L126">                requetes.get(requetes.size() - 1).setStatut(statut);</span>
 
-<span class="nc" id="L128">            }</span>
+            }
 <span class="nc" id="L129">        } catch (Exception e) {};</span>
         // On enlève les requêtes fermées.
 <span class="nc bnc" id="L131" title="All 2 branches missed.">        if (removeClosed) {requetes.removeIf(r -&gt; r.getStatut().equals(RequeteStatut.FERMEE));}</span>
@@ -144,7 +144,7 @@ import java.util.ArrayList;
 <span class="nc bnc" id="L144" title="All 2 branches missed.">            if (r.getType().toString().equals(type)) {</span>
 <span class="nc" id="L145">                requetesFiltrees.add(r);</span>
             }
-<span class="nc" id="L147">        }</span>
+        }
 <span class="nc" id="L148">        return requetesFiltrees;</span>
     }
     /**
@@ -158,7 +158,7 @@ import java.util.ArrayList;
 <span class="nc bnc" id="L158" title="All 2 branches missed.">            if (r.getQuartier().toLowerCase().equals(quartier.toLowerCase())) {</span>
 <span class="nc" id="L159">                requetesFiltrees.add(r);</span>
             }
-<span class="nc" id="L161">        }</span>
+        }
 <span class="nc" id="L162">        return requetesFiltrees;</span>
     }
 
@@ -173,7 +173,7 @@ import java.util.ArrayList;
 <span class="nc bnc" id="L173" title="All 2 branches missed.">            if (r.getDateDebutEspere().toLowerCase().equals(date.toLowerCase())) {</span>
 <span class="nc" id="L174">                requetesFiltrees.add(r);</span>
             }
-<span class="nc" id="L176">        }</span>
+        }
 <span class="nc" id="L177">        return requetesFiltrees;</span>
     }
 
@@ -206,7 +206,7 @@ import java.util.ArrayList;
 <span class="nc" id="L206">            ArrayList&lt;String&gt; lines = new ArrayList&lt;&gt;();</span>
 <span class="nc bnc" id="L207" title="All 2 branches missed.">            for (Requete r:requetes) {</span>
 <span class="nc" id="L208">                lines.add(r.getRequeteId() + &quot;,&quot;+r.getTitre()+&quot;,&quot;+r.getDescription()+&quot;,&quot;+r.getType().toString()+&quot;,&quot;+r.getDateDebutEspere()+&quot;,&quot;+r.getStatut().toString()+&quot;,&quot;+r.getUserID()+&quot;,&quot;+r.getQuartier());</span>
-<span class="nc" id="L209">            }</span>
+            }
 <span class="nc bnc" id="L210" title="All 2 branches missed.">            if (lines.size() != 0) {</span>
 <span class="nc" id="L211">                writer.write(String.join(&quot;\n&quot;, lines) + &quot;\n&quot;);</span>
             }

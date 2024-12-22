@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TravailController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">prototype2</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Controllers</a> &gt; <span class="el_source">TravailController.java</span></div><h1>TravailController.java</h1><pre class="source lang-java linenums">package org.prototype.Controllers;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TravailController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MaVille</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Controllers</a> &gt; <span class="el_source">TravailController.java</span></div><h1>TravailController.java</h1><pre class="source lang-java linenums">package org.prototype.Controllers;
 
 import org.prototype.API.ApiCaller;
 import org.prototype.MaVille;
@@ -172,7 +172,7 @@ import java.util.HashSet;
 <span class="nc" id="L172">            travail.setStatus(statusProjet);</span>
 
 <span class="nc" id="L174">            travaux.add(travail);</span>
-<span class="nc" id="L175">            }</span>
+            }
 <span class="nc" id="L176">            return travaux;</span>
 <span class="nc" id="L177">        } catch (Exception e) {</span>
 <span class="nc" id="L178">            return new ArrayList&lt;&gt;();</span>
@@ -212,7 +212,7 @@ import java.util.HashSet;
 <span class="nc" id="L212">                filtered.add(t);</span>
             }
 
-<span class="nc" id="L215">        }</span>
+        }
 <span class="nc" id="L216">        return filtered;</span>
     }
 
@@ -268,7 +268,7 @@ import java.util.HashSet;
 <span class="nc bnc" id="L268" title="All 2 branches missed.">            if (tr.getType().equals(t)) {</span>
 <span class="nc" id="L269">                filtered.add(tr);</span>
             }
-<span class="nc" id="L271">        }</span>
+        }
 <span class="nc" id="L272">        return filtered;</span>
     }
 
@@ -287,8 +287,8 @@ import java.util.HashSet;
 <span class="nc" id="L287">                    filtered.add(t);</span>
 <span class="nc" id="L288">                    break;</span>
                 }
-<span class="nc" id="L290">            }</span>
-<span class="nc" id="L291">        }</span>
+            }
+        }
 
 <span class="nc" id="L293">        return filtered;</span>
     }
@@ -381,7 +381,7 @@ import java.util.HashSet;
 <span class="nc" id="L381">        int id = 0;</span>
 <span class="nc bnc" id="L382" title="All 2 branches missed.">        for (Travail t:travauxEntrepris) {</span>
 <span class="nc" id="L383">            id = Integer.max(id, Integer.parseInt(t.getId())+ 1);</span>
-<span class="nc" id="L384">        }</span>
+        }
 <span class="nc" id="L385">        ArrayList&lt;String&gt; quartiers = new ArrayList&lt;&gt;();</span>
 <span class="nc" id="L386">        ArrayList&lt;String&gt; rues = new ArrayList&lt;&gt;();</span>
 <span class="nc bnc" id="L387" title="All 2 branches missed.">        for (String q:quartiersAffectes) {</span>
@@ -404,7 +404,7 @@ import java.util.HashSet;
     private static void saveTravail(Travail travail) {
         try  {
 <span class="nc" id="L406">            BufferedWriter writer = new BufferedWriter(new FileWriter(travauxFile, true));</span>
-<span class="nc" id="L407">            writer.append(travail.getId() + &quot;,&quot;+travail.getTitre() + &quot;,&quot;+travail.getDescription()+&quot;,&quot;+String.join(&quot;;&quot;,travail.getQuartiers()).toLowerCase()+&quot;,&quot;+ String.join(&quot;;&quot;, travail.getRuesAffectees()).toLowerCase()+&quot;,&quot;+travail.getDateDebut() + &quot;,&quot; + travail.getDateFin() + &quot;,&quot; + travail.getStatus().toString() + &quot;,&quot; + travail.getIdentifiantIntervenant() + &quot;,&quot; + travail.getType().toString() + &quot;\n&quot;);</span>
+<span class="nc" id="L407">            writer.append(travail.getId() + &quot;,&quot;+travail.getTitre().replace(&quot;,&quot;,&quot;&quot;) + &quot;,&quot;+travail.getDescription().replace(&quot;,&quot;,&quot;&quot;)+&quot;,&quot;+String.join(&quot;;&quot;,travail.getQuartiers()).toLowerCase()+&quot;,&quot;+ String.join(&quot;;&quot;, travail.getRuesAffectees()).toLowerCase()+&quot;,&quot;+travail.getDateDebut() + &quot;,&quot; + travail.getDateFin() + &quot;,&quot; + travail.getStatus().toString() + &quot;,&quot; + travail.getIdentifiantIntervenant() + &quot;,&quot; + travail.getType().toString() + &quot;\n&quot;);</span>
 <span class="nc" id="L408">            writer.close();</span>
 <span class="nc" id="L409">            return;</span>
 <span class="nc" id="L410">        } catch (Exception e) {</span>
@@ -440,13 +440,13 @@ import java.util.HashSet;
 <span class="nc" id="L440">                    lines.add(line);</span>
                 }
             }
-<span class="nc" id="L443">            lines.add(newTravail.getId() + &quot;,&quot;+newTravail.getTitre() + &quot;,&quot;+newTravail.getDescription()+&quot;,&quot;+String.join(&quot;;&quot;,newTravail.getQuartiers())+&quot;,&quot;+ String.join(&quot;;&quot;, newTravail.getRuesAffectees())+&quot;,&quot;+newTravail.getDateDebut() + &quot;,&quot; + newTravail.getDateFin() + &quot;,&quot; + newTravail.getStatus().toString() + &quot;,&quot; + newTravail.getIdentifiantIntervenant() + &quot;,&quot; + newTravail.getType().toString());</span>
+<span class="nc" id="L443">            lines.add(newTravail.getId() + &quot;,&quot;+newTravail.getTitre().replace(&quot;,&quot;,&quot;&quot;) + &quot;,&quot;+newTravail.getDescription().replace(&quot;,&quot;,&quot;&quot;)+&quot;,&quot;+String.join(&quot;;&quot;,newTravail.getQuartiers())+&quot;,&quot;+ String.join(&quot;;&quot;, newTravail.getRuesAffectees())+&quot;,&quot;+newTravail.getDateDebut() + &quot;,&quot; + newTravail.getDateFin() + &quot;,&quot; + newTravail.getStatus().toString() + &quot;,&quot; + newTravail.getIdentifiantIntervenant() + &quot;,&quot; + newTravail.getType().toString());</span>
 <span class="nc" id="L444">            BufferedWriter writer = new BufferedWriter(new FileWriter(travauxFile));</span>
 <span class="nc" id="L445">            writer.write(String.join(&quot;\n&quot;, lines) + &quot;\n&quot;);</span>
 <span class="nc" id="L446">            writer.close();</span>
 <span class="nc" id="L447">        } catch (Exception e) {</span>
 <span class="nc" id="L448">            return;</span>
-<span class="nc" id="L449">        }</span>
+        }
 <span class="nc" id="L450">    }</span>
 
 /**
@@ -466,7 +466,7 @@ import java.util.HashSet;
 <span class="nc" id="L466">                    filteredTravaux.add(t);</span>
                 }
             }
-<span class="nc" id="L469">        }</span>
+        }
 <span class="nc" id="L470">        return filteredTravaux;</span>
     }
 }
