@@ -18,11 +18,17 @@ public class CandidatureController {
      */
     private static String candidaturesFile = "src/candidatures.csv";
 
+    /**
+     * @return - Le chemin du fichier contenant les candidatures.
+     * */
     public static String getCandidaturesFile() {
         return candidaturesFile;
     }
 
-
+    /**
+     * Change le chemin vers le fichier des candidatures
+     * @param newFile Le chemin du nouveau fichier des candidatures
+     * */
     public static void setCandidaturesFile(String newFile) {
         candidaturesFile = newFile;
     }

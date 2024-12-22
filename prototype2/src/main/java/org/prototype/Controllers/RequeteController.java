@@ -18,11 +18,18 @@ public class RequeteController {
 
 
     private static String requetesFile ="src/requetes.csv";
-
+    /**
+     * Obtient le fichier des requêtes
+     * @return le fichier contenant les requêtes
+     * */
     public static String getRequetesFile() {
         return requetesFile;
     }
 
+    /**
+     * Permet de changer le chemin vers le fichier des requêtes
+     * @param file Le chemin vers le nouveau fichier.
+     * */
     public static void setRequetesFile(String file) {
         requetesFile = file;
     }
