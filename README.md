@@ -79,6 +79,6 @@ D'abord, il faut télécharger une copie du folder prototype2
     <li>
         Créer un folder <code>src</code> dans le folder <code>prototype2/target</code> et y déposer les fichiers de <code>prototype2/data</code>
     <li>
-        S'assurer d'être dans le folder <code>prototype2/target</code> et éxécuter <code>java -jar MaVille-1.jar</code>
+        S'assurer d'être dans le folder <code>prototype2/target</code> et éxécuter <code>java -cp MaVille-1.jar org.prototype.MaVille</code>
     </li>    
 </ul>    
