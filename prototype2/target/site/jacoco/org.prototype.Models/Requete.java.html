@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Requete.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MaVille</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Models</a> &gt; <span class="el_source">Requete.java</span></div><h1>Requete.java</h1><pre class="source lang-java linenums">package org.prototype.Models;
+
+/**
+ * Classe représentant une requête de travail que les résidents peuvent envoyer aux intervenants.
+ */
+public class Requete {
+
+    /** L'identifiant unique de la requête. */
+    private final int requeteId;
+
+    /** Le titre de la requête. */
+    private String titre;
+
+    /** La description détaillée de la requête. */
+    private String description;
+
+    /** Le type de travail demandé. */
+    private String type;
+
+    /** La date de début espérée pour le travail au format ISO (yyyy-MM-dd). */
+    private String dateDebutEspere;
+
+    /** Le quartier concerné par la requête. */
+    private String quartier;
+
+   /** Le statut actuel de la requête (par défaut à {@link RequeteStatut#OUVERTE}). */ 
+<span class="nc" id="L27">    private RequeteStatut statut = RequeteStatut.OUVERTE;</span>
+
+    /** L'identifiant de l'utilisateur (résident) qui a créé la requête. */
+    private final String userID;
+
+    /**
+     * Constructeur pour créer une nouvelle requête de travail avec les informations spécifiées.
+     *
+     * @param requeteId        L'identifiant unique de la requête.
+     * @param titre            Le titre de la requête.
+     * @param description      La description détaillée de la requête.
+     * @param type             Le type de travail demandé.
+     * @param dateDebutEspere  La date de début espérée pour le travail.
+     * @param userID           L'identifiant de l'utilisateur ayant créé la requête.
+     * @param quartier         Le quartier concerné par la requête.
+     */
+<span class="nc" id="L43">    public Requete(int requeteId, String titre, String description, String type, String dateDebutEspere, String userID, String quartier) {</span>
+<span class="nc" id="L44">        this.requeteId = requeteId;</span>
+<span class="nc" id="L45">        this.titre = titre;</span>
+<span class="nc" id="L46">        this.description = description;</span>
+<span class="nc" id="L47">        this.type = type;</span>
+<span class="nc" id="L48">        this.dateDebutEspere = dateDebutEspere;</span>
+<span class="nc" id="L49">        this.userID = userID;</span>
+<span class="nc" id="L50">        this.quartier = quartier;</span>
+
+<span class="nc" id="L52">    }</span>
+
+    /**
+     * Retourne le quartier concerné par la requête.
+     *
+     * @return Le quartier de la requête.
+     */
+    public String getQuartier() {
+<span class="nc" id="L60">        return quartier;</span>
+    }
+
+    /**
+     * Retourne l'identifiant unique de la requête.
+     *
+     * @return L'identifiant de la requête.
+     */
+    public int getRequeteId() {
+<span class="nc" id="L69">        return requeteId;</span>
+    }
+
+    /**
+     * Retourne l'identifiant de l'utilisateur ayant créé la requête.
+     *
+     * @return L'identifiant de l'utilisateur.
+     */
+    public String getUserID() {
+<span class="nc" id="L78">        return userID;</span>
+    }
+
+    /**
+     * Retourne la description de la requête.
+     *
+     * @return La description de la requête.
+     */
+    public String getDescription() {
+<span class="nc" id="L87">        return description;</span>
+    }
+
+    /**
+     * Retourne le type de travail demandé.
+     *
+     * @return Le type de travail.
+     */
+    public String getType() {
+<span class="nc" id="L96">        return type;</span>
+    }
+
+    /**
+     * Retourne le titre de la requête.
+     *
+     * @return Le titre de la requête.
+     */
+    public String getTitre() {
+<span class="nc" id="L105">        return titre;</span>
+    }
+
+    /**
+     * Retourne la date de début espérée pour le travail.
+     *
+     * @return La date de début espérée au format ISO (yyyy-MM-dd).
+     */
+    public String getDateDebutEspere() {
+<span class="nc" id="L114">        return dateDebutEspere;</span>
+    }
+
+    /**
+     * Modifie la description de la requête.
+     *
+     * @param description La nouvelle description de la requête.
+     */
+    public void setDescription(String description) {
+<span class="nc" id="L123">        this.description = description;</span>
+<span class="nc" id="L124">    }</span>
+
+    /**
+     * Modifie le type de travail demandé.
+     *
+     * @param type Le nouveau type de travail.
+     */ 
+    public void setType(String type) {
+<span class="nc" id="L132">        this.type = type;</span>
+<span class="nc" id="L133">    }</span>
+
+    /**
+     * Modifie le titre de la requête.
+     *
+     * @param titre Le nouveau titre de la requête.
+     */
+    public void setTitre(String titre) {
+<span class="nc" id="L141">        this.titre = titre;</span>
+<span class="nc" id="L142">    }</span>
+
+    /**
+     * Modifie la date de début espérée pour le travail.
+     *
+     * @param dateDebutEspere La nouvelle date de début espérée au format ISO (yyyy-MM-dd).
+     */
+    public void setDateDebutEspere(String dateDebutEspere) {
+<span class="nc" id="L150">        this.dateDebutEspere = dateDebutEspere;</span>
+<span class="nc" id="L151">    }</span>
+
+    /**
+     * Modifie le statut de la requête.
+     *
+     * @param statut Le nouveau statut de la requête ({@link RequeteStatut}).
+     */
+    public void setStatut(RequeteStatut statut) {
+<span class="nc" id="L159">        this.statut = statut;</span>
+<span class="nc" id="L160">    }</span>
+
+    /**
+     * Retourne le statut actuel de la requête.
+     *
+     * @return Le statut de la requête ({@link RequeteStatut}).
+     */
+    public RequeteStatut getStatut() {
+<span class="nc" id="L168">        return statut;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

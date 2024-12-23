@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlageHoraire.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MaVille</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Models</a> &gt; <span class="el_source">PlageHoraire.java</span></div><h1>PlageHoraire.java</h1><pre class="source lang-java linenums">package org.prototype.Models;
+
+/**
+ * Classe représentant l'horaire de disponibilité des résidents ou l'horaire pendant lequel les travaux seront entrepris
+ */
+public class PlageHoraire {
+
+     /**
+     * Retourne une représentation sous forme de chaîne de la plage horaire.
+     * Affiche &quot;null&quot; pour les jours sans horaire défini.
+     *
+     * @return Une chaîne représentant les horaires pour chaque jour de la semaine.
+     */
+    @Override
+    public String toString() {
+<span class="pc bpc" id="L16" title="1 of 2 branches missed.">        String lundi = (getLundi()[0] == getLundi()[1])? &quot;null&quot;:getLundi()[0]+&quot;-&quot;+getLundi()[1];</span>
+<span class="pc bpc" id="L17" title="1 of 2 branches missed.">        String mardi = (getMardi()[0] == getMardi()[1])? &quot;null&quot;:getMardi()[0]+&quot;-&quot;+getMardi()[1];</span>
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        String mercredi = (getMercredi()[0] == getMercredi()[1])? &quot;null&quot;:getMercredi()[0]+&quot;-&quot;+getMercredi()[1];</span>
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">        String jeudi = (getJeudi()[0] == getJeudi()[1])? &quot;null&quot;:getJeudi()[0]+&quot;-&quot;+getJeudi()[1];</span>
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        String vendredi = (getVendredi()[0] == getVendredi()[1])? &quot;null&quot;:getVendredi()[0]+&quot;-&quot;+getVendredi()[1];</span>
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        String samedi = (getSamedi()[0] == getSamedi()[1])? &quot;null&quot;:getSamedi()[0]+&quot;-&quot;+getSamedi()[1];</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        String dimanche = (getDimanche()[0] == getDimanche()[1])? &quot;null&quot;:getDimanche()[0]+&quot;-&quot;+getDimanche()[1];</span>
+<span class="fc" id="L23">        return String.join(&quot;,&quot;,new String[]{id, lundi, mardi, mercredi, jeudi, vendredi,samedi,dimanche});</span>
+    }
+
+    /** L'identifiant associé à cette plage horaire. */
+    private String id;
+
+    /** La plage horaire pour le lundi (en minutes depuis minuit). */
+<span class="fc" id="L30">    private int[] lundi = {0,0};</span>
+
+   /** La plage horaire pour le mardi (en minutes depuis minuit). */ 
+<span class="fc" id="L33">    private int[] mardi = {0,0};</span>
+
+    /** La plage horaire pour le mercredi (en minutes depuis minuit). */
+<span class="fc" id="L36">    private int[] mercredi = {0,0};</span>
+
+    /** La plage horaire pour le jeudi (en minutes depuis minuit). */
+<span class="fc" id="L39">    private int[] jeudi = {0,0};</span>
+
+    /** La plage horaire pour le vendredi (en minutes depuis minuit). */
+<span class="fc" id="L42">    private int[] vendredi = {0,0};</span>
+
+    /** La plage horaire pour le samedi (en minutes depuis minuit). */
+<span class="fc" id="L45">    private int[] samedi = {0,0};</span>
+
+   /** La plage horaire pour le dimanche (en minutes depuis minuit). */ 
+<span class="fc" id="L48">    private int[] dimanche = {0,0};</span>
+
+
+    /**
+     * Retourne l'identifiant de la plage horaire.
+     *
+     * @return L'identifiant de la plage horaire.
+     */
+    public String getId() {
+<span class="fc" id="L57">        return id;</span>
+    }
+
+    /**
+     * Définit l'identifiant de la plage horaire.
+     *
+     * @param id Le nouvel identifiant de la plage horaire.
+     */
+    public void setId(String id) {
+<span class="nc" id="L66">        this.id = id;</span>
+<span class="nc" id="L67">    }</span>
+
+    public int[] getDimanche() {
+<span class="fc" id="L70">        return dimanche;</span>
+    }
+
+    public int[] getJeudi() {
+<span class="fc" id="L74">        return jeudi;</span>
+    }
+
+    /**
+     * Retourne la plage horaire du lundi.
+     *
+     * @return Un tableau contenant l'heure de début et l'heure de fin pour le lundi.
+     */
+    public int[] getLundi() {
+<span class="fc" id="L83">        return lundi;</span>
+    }
+
+    /**
+     * Définit la plage horaire du lundi.
+     *
+     * @param lundi Un tableau contenant l'heure de début et l'heure de fin pour le lundi.
+     */
+    public void setLundi(int[] lundi) {
+<span class="fc" id="L92">        this.lundi = lundi;</span>
+<span class="fc" id="L93">    }</span>
+
+    // Méthodes similaires pour chaque jour de la semaine
+    public int[] getMardi() {
+<span class="fc" id="L97">        return mardi;</span>
+    }
+
+    public int[] getMercredi() {
+<span class="fc" id="L101">        return mercredi;</span>
+    }
+
+    public int[] getSamedi() {
+<span class="fc" id="L105">        return samedi;</span>
+    }
+
+    public int[] getVendredi() {
+<span class="fc" id="L109">        return vendredi;</span>
+    }
+
+    public void setDimanche(int[] dimanche) {
+<span class="nc" id="L113">        this.dimanche = dimanche;</span>
+<span class="nc" id="L114">    }</span>
+
+    public void setJeudi(int[] jeudi) {
+<span class="nc" id="L117">        this.jeudi = jeudi;</span>
+<span class="nc" id="L118">    }</span>
+
+    public void setMardi(int[] mardi) {
+<span class="nc" id="L121">        this.mardi = mardi;</span>
+<span class="nc" id="L122">    }</span>
+
+    public void setMercredi(int[] mercredi) {
+<span class="nc" id="L125">        this.mercredi = mercredi;</span>
+<span class="nc" id="L126">    }</span>
+
+    public void setSamedi(int[] samedi) {
+<span class="nc" id="L129">        this.samedi = samedi;</span>
+<span class="nc" id="L130">    }</span>
+
+    public void setVendredi(int[] vendredi) {
+<span class="nc" id="L133">        this.vendredi = vendredi;</span>
+<span class="nc" id="L134">    }</span>
+
+    /**
+     * Constructeur pour initialiser une plage horaire avec des horaires spécifiques pour chaque jour de la semaine.
+     *
+     * @param id            L'identifiant de la plage horaire.
+     * @param lundiStart    Heure de début du lundi (en minutes depuis minuit).
+     * @param lundiEnd      Heure de fin du lundi (en minutes depuis minuit).
+     * @param mardiStart    Heure de début du mardi (en minutes depuis minuit).
+     * @param mardiEnd      Heure de fin du mardi (en minutes depuis minuit).
+     * @param mercrediStart Heure de début du mercredi (en minutes depuis minuit).
+     * @param mercrediEnd   Heure de fin du mercredi (en minutes depuis minuit).
+     * @param jeudiStart    Heure de début du jeudi (en minutes depuis minuit).
+     * @param jeudiEnd      Heure de fin du jeudi (en minutes depuis minuit).
+     * @param vendrediStart Heure de début du vendredi (en minutes depuis minuit).
+     * @param vendrediEnd   Heure de fin du vendredi (en minutes depuis minuit).
+     * @param samediStart   Heure de début du samedi (en minutes depuis minuit).
+     * @param samediEnd     Heure de fin du samedi (en minutes depuis minuit).
+     * @param dimancheStart Heure de début du dimanche (en minutes depuis minuit).
+     * @param dimancheEnd   Heure de fin du dimanche (en minutes depuis minuit).
+     */
+<span class="fc" id="L155">    public PlageHoraire(String id, int lundiStart, int lundiEnd, int mardiStart, int mardiEnd, int mercrediStart, int mercrediEnd, int jeudiStart, int jeudiEnd, int vendrediStart, int vendrediEnd, int samediStart, int samediEnd, int dimancheStart, int dimancheEnd) {</span>
+<span class="fc" id="L156">        this.id = id;</span>
+<span class="fc" id="L157">        this.lundi = new int[]{lundiStart, lundiEnd};</span>
+<span class="fc" id="L158">        this.mardi = new int[]{mardiStart, mardiEnd};</span>
+<span class="fc" id="L159">        this.mercredi = new int[]{mercrediStart, mercrediEnd};</span>
+<span class="fc" id="L160">        this.jeudi = new int[]{jeudiStart, jeudiEnd};</span>
+<span class="fc" id="L161">        this.vendredi = new int[]{vendrediStart, vendrediEnd};</span>
+<span class="fc" id="L162">        this.samedi = new int[]{samediStart, samediEnd};</span>
+<span class="fc" id="L163">        this.dimanche = new int[]{dimancheStart, dimancheEnd};</span>
+<span class="fc" id="L164">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TravailController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MaVille</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Controllers</a> &gt; <span class="el_source">TravailController.java</span></div><h1>TravailController.java</h1><pre class="source lang-java linenums">package org.prototype.Controllers;
+
+import org.prototype.API.ApiCaller;
+import org.prototype.MaVille;
+import org.prototype.Models.StatutProjet;
+import org.prototype.Models.Travail;
+import org.json.*;
+import org.prototype.Models.TypeTravail;
+
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.HashSet;
+
+
+/**
+ * Classe qui gère toutes les opérations liées aux travaux, y compris l'interaction avec une API externe,
+ * la création, la mise à jour, le filtrage et la sauvegarde des travaux.
+ */
+<span class="nc" id="L26">public class TravailController{</span>
+
+
+    // Mapper qui servira de transformer la réponse de l'API en type de travail que notre programme peut reconnaître 
+<span class="nc" id="L30">    private static HashMap&lt;String, TypeTravail&gt; constructionTypeMapper = null;</span>
+
+    /**
+     * Chemin du fichier contenant les informations des travaux.
+     */
+<span class="nc" id="L35">    private static String travauxFile = &quot;src/travaux.csv&quot;;</span>
+
+     /**
+     * Chemin du fichier contenant les codes postaux et quartiers.
+     */
+<span class="nc" id="L40">    private static String quartiersFile = &quot;src/codesPostaux.csv&quot;;</span>
+
+     /**
+     * Obtient le chemin du fichier des travaux.
+     *
+     * @return Le chemin du fichier des travaux.
+     */
+    public static String getTravauxFile() {
+<span class="nc" id="L48">        return travauxFile;</span>
+    }
+
+    /**
+     * Définit le chemin du fichier des travaux.
+     *
+     * @param file Le nouveau chemin du fichier des travaux.
+     */
+    public static void setTravauxFile(String file) {
+<span class="nc" id="L57">        travauxFile = file;</span>
+<span class="nc" id="L58">    }</span>
+
+   /**
+     * Initialise le mappage des types de travaux à partir des catégories reconnues par l'API.
+     */
+    private static void initHashMap(){
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (constructionTypeMapper != null) {</span>
+<span class="nc" id="L65">            return;</span>
+        }
+<span class="nc" id="L67">        constructionTypeMapper = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L68">        constructionTypeMapper.put(&quot;Construction/rénovation sans excavation&quot;, TypeTravail.CONSTRUCTION_OU_RENOVATION);</span>
+<span class="nc" id="L69">        constructionTypeMapper.put(&quot;Autre&quot;, TypeTravail.AUTRE);</span>
+<span class="nc" id="L70">        constructionTypeMapper.put(&quot;S-3 Infrastructure souterraine majeure - Massifs et conduits&quot;, TypeTravail.SOUTERRAINS);</span>
+<span class="nc" id="L71">        constructionTypeMapper.put(&quot;Construction/rénovation avec excavation&quot;, TypeTravail.CONSTRUCTION_OU_RENOVATION);</span>
+<span class="nc" id="L72">        constructionTypeMapper.put(&quot;Égouts et aqueducs - Excavation&quot;, TypeTravail.SOUTERRAINS);</span>
+<span class="nc" id="L73">        constructionTypeMapper.put(&quot;Égouts et aqueducs - Réhabilitation&quot;, TypeTravail.ENTRETIEN_URBAIN);</span>
+<span class="nc" id="L74">        constructionTypeMapper.put(&quot;Entretien&quot;, TypeTravail.ENTRETIEN_URBAIN);</span>
+<span class="nc" id="L75">        constructionTypeMapper.put(&quot;S-3 Infrastructure souterraine majeure - Puits d'accès&quot;, TypeTravail.SOUTERRAINS);</span>
+<span class="nc" id="L76">        constructionTypeMapper.put(&quot;Égouts et aqueducs - Inspection et nettoyage&quot;, TypeTravail.ENTRETIEN_URBAIN);</span>
+<span class="nc" id="L77">        constructionTypeMapper.put(&quot;AS-2 Réseau aérosouterrain existant&quot;, TypeTravail.ENTRETIEN_DES_RESEAUX_DE_TELECOMMUNICATION);</span>
+<span class="nc" id="L78">        constructionTypeMapper.put(&quot;Réseaux routier - Réfection et travaux corrélatifs&quot;, TypeTravail.ROUTIERS);</span>
+<span class="nc" id="L79">        constructionTypeMapper.put(&quot;S-2 Infrastructure souterraine mineure ou équipement hors-sol - Réseaux électriques, télécommunications ou câbles des distributions &quot;, TypeTravail.SOUTERRAINS);</span>
+<span class="nc" id="L80">        constructionTypeMapper.put(&quot;S-4 Déblocage de conduits souterrains&quot;, TypeTravail.SOUTERRAINS);</span>
+
+
+<span class="nc" id="L83">    }</span>
+
+    /**
+     * Détermine le status du projet, dépend de la date. Si la date de fin est avant la date courante, alors le projet est terminé.
+     * Si la date de début est après la date courante, alors le projet est prévu. Dans les autres cas, le projet est en cours.
+     * @param date1 - La date du début du projet
+     * @param date2 - La date de fin du projet
+     * @return - Le statut du projet ({@link StatutProjet#TERMINE}, {@link StatutProjet#PREVU}, ou {@link StatutProjet#EN_COURS}).
+     */
+    private static StatutProjet determineProjectStatus(String date1, String date2) {
+<span class="nc" id="L93">        LocalDate cur = LocalDate.now();</span>
+<span class="nc" id="L94">        LocalDate d1 = LocalDate.parse(date1);</span>
+<span class="nc" id="L95">        LocalDate d2 = LocalDate.parse(date2);</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (d2.isBefore(cur)) {</span>
+<span class="nc" id="L97">            return StatutProjet.TERMINE;</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        } else if (d1.isAfter(cur)) {</span>
+<span class="nc" id="L99">            return StatutProjet.PREVU;</span>
+        } else {
+<span class="nc" id="L101">            return StatutProjet.EN_COURS;</span>
+        }
+    }
+
+    /**
+     * Parse la réponse obtenue à l'appel au service de la ville de Montréal
+     * @param response - La réponse sous format de String
+     * @return Une liste de {@link Travail} extraits de la réponse.
+     */
+    private static ArrayList&lt;Travail&gt; parseTravailApiCall(String response) {
+        // La procédure du parsing de JSON est basé sur:
+        // Source: obataku. (2012, 9 août). See my comment. You need to include the full org.json library when running as android.jar only contains stubs to compile [Commentaire sur le post de forum en ligne Parsing JSON string in Java.]. StackOverflow. https://stackoverflow.com/a/11875002.
+        // Ce commentaire a essentiellement été utilisé juste pour apprendre comment utiliser la librairie en pratique.
+<span class="nc" id="L114">        initHashMap();</span>
+<span class="nc" id="L115">        ArrayList&lt;Travail&gt; apiTravaux = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L116">        JSONObject res = new JSONObject(response);</span>
+<span class="nc" id="L117">        JSONArray travaux = res.getJSONObject(&quot;result&quot;).getJSONArray(&quot;records&quot;);</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        for (int i =0; i&lt; travaux.length();i ++) {</span>
+<span class="nc" id="L119">            JSONObject travail = travaux.getJSONObject(i);</span>
+<span class="nc" id="L120">            ArrayList&lt;String&gt; quartiers = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L121">            quartiers.add(travail.getString(&quot;boroughid&quot;).toLowerCase());</span>
+<span class="nc" id="L122">            Travail cur = new Travail(travail.getString(&quot;id&quot;), travail.getString(&quot;reason_category&quot;), travail.getString(&quot;occupancy_name&quot;), quartiers, null, travail.getString(&quot;duration_start_date&quot;).split(&quot;T&quot;)[0], travail.getString(&quot;duration_end_date&quot;).split(&quot;T&quot;)[0], travail.get(&quot;organizationname&quot;).toString(), constructionTypeMapper.getOrDefault(travail.getString(&quot;reason_category&quot;), TypeTravail.AUTRE));</span>
+<span class="nc" id="L123">            cur.setStatus(determineProjectStatus(cur.getDateDebut(), cur.getDateFin()));</span>
+<span class="nc" id="L124">            apiTravaux.add(cur);</span>
+        }
+<span class="nc" id="L126">        return apiTravaux;</span>
+    }
+
+    /**
+     * Va chercher la liste des travaux qui sont stockés localement dans un fichier
+     * @return Une liste de {@link Travail} stockés localement.
+     */
+    public static ArrayList&lt;Travail&gt; getTravauxFromFile() {
+<span class="nc" id="L134">        ArrayList&lt;Travail&gt; travaux =  new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L136">            BufferedReader reader = new BufferedReader(new FileReader(travauxFile));</span>
+            String line;
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            while ((line = reader.readLine()) != null) {</span>
+<span class="nc" id="L139">                String[] data = line.split(&quot;,&quot;);</span>
+<span class="nc" id="L140">                String id = data[0];</span>
+<span class="nc" id="L141">                String titre = data[1];</span>
+<span class="nc" id="L142">                String desc = data[2];</span>
+<span class="nc" id="L143">                String[] quartiers = data[3].split(&quot;;&quot;);</span>
+<span class="nc" id="L144">                String[] ruesAffectees = data[4].split(&quot;;&quot;);</span>
+<span class="nc" id="L145">                String dateDebut = data[5];</span>
+<span class="nc" id="L146">                String dateFin = data[6];</span>
+<span class="nc" id="L147">                String status = data[7];</span>
+<span class="nc" id="L148">                String intervenant = data[8];</span>
+<span class="nc" id="L149">                String type = data[9];</span>
+<span class="nc" id="L150">                StatutProjet statusProjet = null;</span>
+<span class="nc" id="L151">                TypeTravail typeTravail = null;</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">                for (TypeTravail typeT:TypeTravail.values()) {</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">                    if (type.equals(typeT.toString())) {</span>
+<span class="nc" id="L154">                        typeTravail = typeT;</span>
+<span class="nc" id="L155">                        break;</span>
+                    }
+                }
+<span class="nc bnc" id="L158" title="All 2 branches missed.">                for (StatutProjet s:StatutProjet.values()) {</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">                    if (status.equals(s.toString())) {</span>
+<span class="nc" id="L160">                        statusProjet = s;</span>
+                    }
+                }
+<span class="nc" id="L163">                ArrayList&lt;String&gt; quartiersAffectes = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">                for (String s:quartiers) {</span>
+<span class="nc" id="L165">                    quartiersAffectes.add(s);</span>
+                }
+<span class="nc" id="L167">                ArrayList&lt;String&gt; rues = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">                for (String s:ruesAffectees) {</span>
+<span class="nc" id="L169">                    rues.add(s);</span>
+                }
+<span class="nc" id="L171">            Travail travail = new Travail(id, titre, desc, quartiersAffectes, rues, dateDebut, dateFin, intervenant,typeTravail);</span>
+<span class="nc" id="L172">            travail.setStatus(statusProjet);</span>
+
+<span class="nc" id="L174">            travaux.add(travail);</span>
+<span class="nc" id="L175">            }</span>
+<span class="nc" id="L176">            return travaux;</span>
+<span class="nc" id="L177">        } catch (Exception e) {</span>
+<span class="nc" id="L178">            return new ArrayList&lt;&gt;();</span>
+        }
+    }
+
+    /**
+     * Vérifie si une date de donnée se situe dans les prochains 90 jours.
+     * @param date - La date sous format de String
+     * @return &lt;code&gt;true&lt;/code&gt; si la date est dans les prochains 90 jours, &lt;code&gt;false&lt;/code&gt; sinon
+     */
+    private static boolean startsInNextThreeMonths(String date) {
+<span class="nc" id="L188">        LocalDate d = LocalDate.parse(date);</span>
+<span class="nc" id="L189">        LocalDate now = LocalDate.now();</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">        if (now.until(d, ChronoUnit.DAYS) &lt;= 90) {</span>
+<span class="nc" id="L191">            return true;</span>
+        }
+<span class="nc" id="L193">        return false;</span>
+    }
+
+    /**
+     * Fetch la liste des travaux, ceci sera composée des travaux obtenus à partir de l'API et de ceux créés en utilisant l'application
+     * @return Une liste complète de {@link Travail}.
+     */
+    public static ArrayList&lt;Travail&gt; getTravaux() {
+<span class="nc" id="L201">        String apiRes = ApiCaller.get(&quot;https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b&quot;);</span>
+<span class="nc" id="L202">        ArrayList&lt;Travail&gt; travaux = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">        if (apiRes != null) {</span>
+<span class="nc" id="L204">            travaux = parseTravailApiCall(apiRes);</span>
+        }
+<span class="nc" id="L206">        ArrayList&lt;Travail&gt; filtered = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L207">        travaux.addAll(getTravauxFromFile());</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">        for (Travail t:travaux) {</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">            if (t.getStatus().equals(StatutProjet.EN_COURS)) {</span>
+<span class="nc" id="L210">                filtered.add(t);</span>
+<span class="nc bnc" id="L211" title="All 4 branches missed.">            } else if (t.getStatus().equals(StatutProjet.PREVU) &amp;&amp; startsInNextThreeMonths(t.getDateDebut())) {</span>
+<span class="nc" id="L212">                filtered.add(t);</span>
+            }
+
+<span class="nc" id="L215">        }</span>
+<span class="nc" id="L216">        return filtered;</span>
+    }
+
+
+    /**
+     * Fetch la liste des travaux qui possèdent un certain type donné
+     * @param type - Le type par lequel filtrer les travaux
+     * @return Une liste filtrée de {@link Travail}.
+     */
+    public static ArrayList&lt;Travail&gt; getTravauxByType(String type) {
+<span class="nc" id="L226">        TypeTravail t = null;</span>
+<span class="nc bnc" id="L227" title="All 12 branches missed.">        switch (type.toLowerCase()) {</span>
+            case &quot;routiers&quot;:
+<span class="nc" id="L229">                t = TypeTravail.ROUTIERS;</span>
+<span class="nc" id="L230">                break;</span>
+            case &quot;gaz_ou_electricite&quot;:
+<span class="nc" id="L232">                t = TypeTravail.GAZ_OU_ELECTRICITE;</span>
+<span class="nc" id="L233">                break;</span>
+            case &quot;construction_ou_renovation&quot;:
+<span class="nc" id="L235">                t = TypeTravail.CONSTRUCTION_OU_RENOVATION;</span>
+<span class="nc" id="L236">                break;</span>
+            case &quot;entretien_paysager&quot;:
+<span class="nc" id="L238">                t = TypeTravail.ENTRETIEN_PAYSAGER;</span>
+<span class="nc" id="L239">                break;</span>
+            case &quot;transports_en_commun&quot;:
+<span class="nc" id="L241">                t = TypeTravail.TRANSPORTS_EN_COMMUN;</span>
+<span class="nc" id="L242">                break;</span>
+            case &quot;signalisation_et_eclairage&quot;:
+<span class="nc" id="L244">                t = TypeTravail.SIGNALISATION_ET_ECLAIRAGE;</span>
+<span class="nc" id="L245">                break;</span>
+            case &quot;souterrains&quot;:
+<span class="nc" id="L247">                t = TypeTravail.SOUTERRAINS;</span>
+<span class="nc" id="L248">                break;</span>
+            case &quot;residentiels&quot;:
+<span class="nc" id="L250">                t = TypeTravail.RESIDENTIELS;</span>
+<span class="nc" id="L251">                break;</span>
+            case &quot;entretien_urbain&quot;:
+<span class="nc" id="L253">                t = TypeTravail.ENTRETIEN_URBAIN;</span>
+<span class="nc" id="L254">                break;</span>
+            case &quot;entretien_des_reseaux_de_telecommunication&quot;:
+<span class="nc" id="L256">                t = TypeTravail.ENTRETIEN_DES_RESEAUX_DE_TELECOMMUNICATION;</span>
+<span class="nc" id="L257">                break;</span>
+            case &quot;autre&quot;:
+<span class="nc" id="L259">                t = TypeTravail.AUTRE;</span>
+<span class="nc" id="L260">                break;</span>
+            default:
+<span class="nc" id="L262">                t = null;</span>
+                break;
+        }
+<span class="nc" id="L265">        ArrayList&lt;Travail&gt; travaux = getTravaux();</span>
+<span class="nc" id="L266">        ArrayList&lt;Travail&gt; filtered = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">        for (Travail tr:travaux) {</span>
+<span class="nc bnc" id="L268" title="All 2 branches missed.">            if (tr.getType().equals(t)) {</span>
+<span class="nc" id="L269">                filtered.add(tr);</span>
+            }
+<span class="nc" id="L271">        }</span>
+<span class="nc" id="L272">        return filtered;</span>
+    }
+
+    /**
+     * Fetch les travaux qui se passent dans un quartier en particulier
+     * @param quartier - Le quartier par lequel filtrer
+     * @return - La liste des travaux filtrée
+     */
+    public static ArrayList&lt;Travail&gt; getTravauxByQuartier(String quartier) {
+<span class="nc" id="L281">        ArrayList&lt;Travail&gt; travaux = getTravaux();</span>
+<span class="nc" id="L282">        ArrayList&lt;Travail&gt; filtered = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L284" title="All 2 branches missed.">        for (Travail t:travaux) {</span>
+<span class="nc bnc" id="L285" title="All 2 branches missed.">            for (String s:t.getQuartiers()) {</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">                if (s.contains(quartier.toLowerCase())) {</span>
+<span class="nc" id="L287">                    filtered.add(t);</span>
+<span class="nc" id="L288">                    break;</span>
+                }
+<span class="nc" id="L290">            }</span>
+<span class="nc" id="L291">        }</span>
+
+<span class="nc" id="L293">        return filtered;</span>
+    }
+
+/**
+ * Vérifie si une date de fin est valide en s'assurant qu'elle n'est pas antérieure à la date actuelle.
+ *
+ * @param endDate La date de fin sous forme de chaîne au format ISO (yyyy-MM-dd).
+ * @return {@code true} si la date de fin est valide, sinon {@code false}.
+ */
+    public static boolean isEndDateValid(String endDate) {
+        try {
+<span class="nc" id="L304">            LocalDate now = LocalDate.now();</span>
+<span class="nc" id="L305">            LocalDate end = LocalDate.parse(endDate);</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">            if (now.until(end, ChronoUnit.DAYS) &lt; 0) {</span>
+<span class="nc" id="L307">                return false;</span>
+            }
+<span class="nc" id="L309">            return true;</span>
+<span class="nc" id="L310">        } catch (Exception e) {</span>
+<span class="nc" id="L311">            return false;</span>
+        }
+    }
+
+
+/**
+ * Vérifie si tous les quartiers spécifiés existent dans le fichier des quartiers.
+ *
+ * @param quartiers Un tableau de noms de quartiers.
+ * @return {@code true} si tous les quartiers existent, sinon {@code false}.
+ */
+    public static boolean doQuartiersExist(String[] quartiers) {
+        try {
+<span class="nc" id="L324">            BufferedReader reader = new BufferedReader(new FileReader(quartiersFile));</span>
+            String line;
+<span class="nc" id="L326">            HashSet&lt;String&gt; quarts = new HashSet&lt;&gt;();</span>
+<span class="nc bnc" id="L327" title="All 2 branches missed.">            while ((line= reader.readLine()) != null) {</span>
+<span class="nc" id="L328">                quarts.add(line.split(&quot;,&quot;)[1].toLowerCase());</span>
+            }
+<span class="nc bnc" id="L330" title="All 2 branches missed.">            for (String q:quartiers) {</span>
+<span class="nc bnc" id="L331" title="All 2 branches missed.">                if (!quarts.contains(q.toLowerCase())) {</span>
+<span class="nc" id="L332">                    return false;</span>
+                }
+            }
+<span class="nc" id="L335">            return true;</span>
+<span class="nc" id="L336">        } catch (Exception e) {</span>
+<span class="nc" id="L337">            return false;</span>
+        }
+    }
+
+
+/**
+ * Vérifie si les dates de début et de fin sont valides, avec une date de fin postérieure à la date de début.
+ *
+ * @param startDate La date de début au format ISO (yyyy-MM-dd).
+ * @param endDate   La date de fin au format ISO (yyyy-MM-dd).
+ * @return {@code true} si les dates sont valides, sinon {@code false}.
+ */
+    private static boolean areDatesValid(String startDate, String endDate) {
+        try {
+<span class="nc" id="L351">            LocalDate now = LocalDate.now();</span>
+<span class="nc" id="L352">            LocalDate start = LocalDate.parse(startDate);</span>
+<span class="nc" id="L353">            LocalDate end = LocalDate.parse(endDate);</span>
+<span class="nc bnc" id="L354" title="All 4 branches missed.">            if (now.until(end, ChronoUnit.DAYS) &lt; 0 || start.until(end, ChronoUnit.DAYS) &lt;= 0) {</span>
+<span class="nc" id="L355">                return false;</span>
+            }
+<span class="nc" id="L357">            return true;</span>
+<span class="nc" id="L358">        } catch (Exception e) {</span>
+<span class="nc" id="L359">            return false;</span>
+        }
+    }
+
+
+/**
+ * Crée un nouveau travail avec les informations spécifiées et le sauvegarde dans le fichier.
+ *
+ * @param titre            Le titre du travail.
+ * @param description      La description du travail.
+ * @param type             Le type de travail.
+ * @param quartiersAffectes Les quartiers affectés par le travail.
+ * @param ruesAffectees     Les rues affectées par le travail.
+ * @param dateDebut         La date de début du travail au format ISO (yyyy-MM-dd).
+ * @param dateFin           La date de fin du travail au format ISO (yyyy-MM-dd).
+ * @return Le travail créé, ou {@code null} si les dates ne sont pas valides.
+ */
+    public static Travail creerTravail(String titre, String description, TypeTravail type, String[] quartiersAffectes, String[] ruesAffectees, String dateDebut, String dateFin) {
+<span class="nc bnc" id="L377" title="All 2 branches missed.">        if (!areDatesValid(dateDebut, dateFin)) {</span>
+<span class="nc" id="L378">            return null;</span>
+        }
+<span class="nc" id="L380">        ArrayList&lt;Travail&gt; travauxEntrepris = getTravauxFromFile();</span>
+<span class="nc" id="L381">        int id = 0;</span>
+<span class="nc bnc" id="L382" title="All 2 branches missed.">        for (Travail t:travauxEntrepris) {</span>
+<span class="nc" id="L383">            id = Integer.max(id, Integer.parseInt(t.getId())+ 1);</span>
+<span class="nc" id="L384">        }</span>
+<span class="nc" id="L385">        ArrayList&lt;String&gt; quartiers = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L386">        ArrayList&lt;String&gt; rues = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L387" title="All 2 branches missed.">        for (String q:quartiersAffectes) {</span>
+<span class="nc" id="L388">            quartiers.add(q);</span>
+        }
+<span class="nc bnc" id="L390" title="All 2 branches missed.">        for (String r:ruesAffectees) {</span>
+<span class="nc" id="L391">            rues.add(r);</span>
+        }
+<span class="nc" id="L393">        Travail travail = new Travail(String.valueOf(id), titre, description, quartiers, rues, dateDebut, dateFin, MaVille.getCurUser().getAdresseCourriel(), type);</span>
+<span class="nc" id="L394">        saveTravail(travail);</span>
+<span class="nc" id="L395">        return travail;</span>
+    }
+
+
+/**
+ * Sauvegarde un travail dans le fichier des travaux.
+ *
+ * @param travail Le travail à sauvegarder.
+ */
+    private static void saveTravail(Travail travail) {
+        try  {
+<span class="nc" id="L406">            BufferedWriter writer = new BufferedWriter(new FileWriter(travauxFile, true));</span>
+<span class="nc" id="L407">            writer.append(travail.getId() + &quot;,&quot;+travail.getTitre().replace(&quot;,&quot;,&quot;&quot;) + &quot;,&quot;+travail.getDescription().replace(&quot;,&quot;,&quot;&quot;)+&quot;,&quot;+String.join(&quot;;&quot;,travail.getQuartiers()).toLowerCase()+&quot;,&quot;+ String.join(&quot;;&quot;, travail.getRuesAffectees()).toLowerCase()+&quot;,&quot;+travail.getDateDebut() + &quot;,&quot; + travail.getDateFin() + &quot;,&quot; + travail.getStatus().toString() + &quot;,&quot; + travail.getIdentifiantIntervenant() + &quot;,&quot; + travail.getType().toString() + &quot;\n&quot;);</span>
+<span class="nc" id="L408">            writer.close();</span>
+<span class="nc" id="L409">            return;</span>
+<span class="nc" id="L410">        } catch (Exception e) {</span>
+<span class="nc" id="L411">            return;</span>
+        }
+    }
+
+
+ /**
+ * Récupère les travaux associés à un intervenant spécifique.
+ *
+ * @param intervenant L'identifiant de l'intervenant.
+ * @return Une liste de {@link Travail} associés à l'intervenant.
+ */
+    public static ArrayList&lt;Travail&gt; getTravauxByIntervenant(String intervenant) {
+<span class="nc" id="L423">        ArrayList&lt;Travail&gt; travaux = getTravauxFromFile();</span>
+<span class="nc bnc" id="L424" title="All 2 branches missed.">        travaux.removeIf(t -&gt; !t.getIdentifiantIntervenant().equals(intervenant));</span>
+<span class="nc" id="L425">        return travaux;</span>
+    }
+
+/**
+ * Met à jour les informations d'un travail existant dans le fichier.
+ *
+ * @param newTravail Le travail mis à jour.
+ */
+    public static void updateTravail(Travail newTravail) {
+        try {
+<span class="nc" id="L435">            BufferedReader reader = new BufferedReader(new FileReader(travauxFile));</span>
+<span class="nc" id="L436">            ArrayList&lt;String&gt; lines = new ArrayList&lt;&gt;();</span>
+            String line;
+<span class="nc bnc" id="L438" title="All 2 branches missed.">            while ((line = reader.readLine()) != null) {</span>
+<span class="nc bnc" id="L439" title="All 2 branches missed.">                if (!line.split(&quot;,&quot;)[0].equals(newTravail.getId())) {</span>
+<span class="nc" id="L440">                    lines.add(line);</span>
+                }
+            }
+<span class="nc" id="L443">            lines.add(newTravail.getId() + &quot;,&quot;+newTravail.getTitre().replace(&quot;,&quot;,&quot;&quot;) + &quot;,&quot;+newTravail.getDescription().replace(&quot;,&quot;,&quot;&quot;)+&quot;,&quot;+String.join(&quot;;&quot;,newTravail.getQuartiers())+&quot;,&quot;+ String.join(&quot;;&quot;, newTravail.getRuesAffectees())+&quot;,&quot;+newTravail.getDateDebut() + &quot;,&quot; + newTravail.getDateFin() + &quot;,&quot; + newTravail.getStatus().toString() + &quot;,&quot; + newTravail.getIdentifiantIntervenant() + &quot;,&quot; + newTravail.getType().toString());</span>
+<span class="nc" id="L444">            BufferedWriter writer = new BufferedWriter(new FileWriter(travauxFile));</span>
+<span class="nc" id="L445">            writer.write(String.join(&quot;\n&quot;, lines) + &quot;\n&quot;);</span>
+<span class="nc" id="L446">            writer.close();</span>
+<span class="nc" id="L447">        } catch (Exception e) {</span>
+<span class="nc" id="L448">            return;</span>
+<span class="nc" id="L449">        }</span>
+<span class="nc" id="L450">    }</span>
+
+/**
+ * Récupère les travaux dont le titre contient la chaîne spécifiée.
+ *
+ * @param titre Le titre (ou une partie du titre) à rechercher.
+ * @return Une liste de {@link Travail} correspondant au titre spécifié.
+ */
+    public static ArrayList&lt;Travail&gt; getTravauxParTitre(String titre) {
+<span class="nc" id="L459">        ArrayList&lt;Travail&gt; travaux = getTravaux();</span>
+<span class="nc" id="L460">        ArrayList&lt;Travail&gt; filteredTravaux = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L461" title="All 2 branches missed.">        for (Travail t:travaux) {</span>
+<span class="nc bnc" id="L462" title="All 2 branches missed.">            if (t.getTitre().length() &lt; titre.length()) {</span>
+<span class="nc" id="L463">                continue;</span>
+            } else {
+<span class="nc bnc" id="L465" title="All 2 branches missed.">                if (t.getTitre().toLowerCase().contains(titre.toLowerCase())) {</span>
+<span class="nc" id="L466">                    filteredTravaux.add(t);</span>
+                }
+            }
+<span class="nc" id="L469">        }</span>
+<span class="nc" id="L470">        return filteredTravaux;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

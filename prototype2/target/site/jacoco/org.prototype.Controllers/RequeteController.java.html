@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequeteController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MaVille</a> &gt; <a href="index.source.html" class="el_package">org.prototype.Controllers</a> &gt; <span class="el_source">RequeteController.java</span></div><h1>RequeteController.java</h1><pre class="source lang-java linenums">package org.prototype.Controllers;
+
+
+import org.prototype.Models.Requete;
+import org.prototype.Models.RequeteStatut;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+
+/**
+ * Classe qui s'occupe des opérations sur les requêtes, c'est-à-dire le fetching, la création, etc.
+ */
+<span class="nc" id="L17">public class RequeteController {</span>
+
+
+<span class="nc" id="L20">    private static String requetesFile =&quot;src/requetes.csv&quot;;</span>
+    /**
+     * Obtient le fichier des requêtes
+     * @return le fichier contenant les requêtes
+     * */
+    public static String getRequetesFile() {
+<span class="nc" id="L26">        return requetesFile;</span>
+    }
+
+    /**
+     * Permet de changer le chemin vers le fichier des requêtes
+     * @param file Le chemin vers le nouveau fichier.
+     * */
+    public static void setRequetesFile(String file) {
+<span class="nc" id="L34">        requetesFile = file;</span>
+<span class="nc" id="L35">    }</span>
+
+
+    /**
+     * Vérifie si une date
+     * @param date - la date sous format de string
+     * @return - &lt;code&gt;true&lt;/code&gt; si la date est valide, sinon &lt;code&gt;false&lt;/code&gt;
+     */
+    private static boolean isDateValid(String date) {
+        try {
+            // Si la date n'est pas du bon format, une exception sera lancée et on retournera faux.
+<span class="nc" id="L46">            LocalDate dateEsperee = LocalDate.parse(date);</span>
+<span class="nc" id="L47">            LocalDate now = LocalDate.now();</span>
+            // Si la date espérée est avant la date d'aujourd'hui, la date n'est pas valide
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            if (now.until(dateEsperee, ChronoUnit.DAYS) &lt; 0) {</span>
+<span class="nc" id="L50">                return false;</span>
+
+            }
+<span class="nc" id="L53">            return true;</span>
+<span class="nc" id="L54">        } catch (Exception e) {</span>
+<span class="nc" id="L55">            return false;</span>
+        }
+    }
+
+    /**
+     * Sauvegarde une requête en l'écrivant dans un fichier requetes.csv pré-existant
+     * @param r - La requête à sauvegarder dans un fichier
+     */
+    private static void saveRequete(Requete r) throws Exception{
+
+<span class="nc" id="L65">        BufferedWriter writer = new BufferedWriter(new FileWriter(requetesFile, true));</span>
+<span class="nc" id="L66">        writer.append(r.getRequeteId() + &quot;,&quot;+r.getTitre()+&quot;,&quot;+r.getDescription()+&quot;,&quot;+r.getType().toString()+&quot;,&quot;+r.getDateDebutEspere()+&quot;,&quot;+r.getStatut().toString()+&quot;,&quot;+r.getUserID()+&quot;,&quot;+r.getQuartier()+&quot;\n&quot;);</span>
+<span class="nc" id="L67">        writer.close();</span>
+
+<span class="nc" id="L69">    }</span>
+
+    /**
+     * Crée une requête à partir des informations fournies
+     * @param titre - Le titre de la requête
+     * @param description - La description de la requête fourni par le résident
+     * @param typeRequete - Le type de requête entré par le résident
+     * @param dateDebutEspere - La date de début espéré sous format de string
+     * @param userID - L'adresse email du résident ayant soumis la requête
+     * @param quartier - Le quartier du résident ayant soumis la requête
+     * @return - &lt;code&gt;true&lt;/code&gt; si la requête a été créée avec succès, &lt;code&gt;false&lt;/code&gt; sinon
+     */
+    public static boolean creerRequete(String titre, String description, String typeRequete, String dateDebutEspere, String userID, String quartier){
+
+<span class="nc" id="L83">        String type = typeRequete;</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (!isDateValid(dateDebutEspere)) {</span>
+<span class="nc" id="L85">            return false;</span>
+
+        } else {
+            try {
+                // L'appel à getRequetes() est uniquement utilisé pour déterminer le ID de notre nouvelle requête
+<span class="nc" id="L90">                ArrayList&lt;Requete&gt; requetes = RequeteController.getRequetes(false);</span>
+<span class="nc" id="L91">                int id = 0;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                for (Requete r:requetes) {</span>
+<span class="nc" id="L93">                    id = Integer.max(id, r.getRequeteId() + 1);</span>
+<span class="nc" id="L94">                }</span>
+<span class="nc" id="L95">                saveRequete(new Requete(id, titre.replace(&quot;,&quot;, &quot;&quot;), description.replace(&quot;,&quot;, &quot;&quot;), type.replace(&quot;,&quot;, &quot;&quot;), dateDebutEspere, userID, quartier));</span>
+
+<span class="nc" id="L97">            } catch (Exception e) {</span>
+<span class="nc" id="L98">                return false;</span>
+<span class="nc" id="L99">            }</span>
+
+<span class="nc" id="L101">            return true;</span>
+        }
+
+
+    }
+    /**
+     * Fetch la liste des requêtes à partir d'un fichier de données prédéfini
+     * @return - La liste des requêtes
+     */
+    public static ArrayList&lt;Requete&gt; getRequetes(boolean removeClosed){
+<span class="nc" id="L111">        ArrayList&lt;Requete&gt; requetes = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L113">            BufferedReader reader = new BufferedReader(new FileReader(requetesFile));</span>
+            String line;
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            while ((line = reader.readLine()) != null) {</span>
+<span class="nc" id="L116">                String[] data = line.split(&quot;,&quot;);</span>
+<span class="nc" id="L117">                int id = Integer.parseInt(data[0]);</span>
+<span class="nc" id="L118">                String titre = data[1];</span>
+<span class="nc" id="L119">                String description = data[2];</span>
+<span class="nc" id="L120">                String type = data[3];</span>
+<span class="nc" id="L121">                String dateDebutEspere = data[4];</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">                RequeteStatut statut = data[5].equals(RequeteStatut.OUVERTE.toString())?RequeteStatut.OUVERTE:RequeteStatut.FERMEE;</span>
+<span class="nc" id="L123">                String userID = data[6];</span>
+<span class="nc" id="L124">                String quartier = data[7];</span>
+<span class="nc" id="L125">                requetes.add(new Requete(id, titre, description, type, dateDebutEspere, userID, quartier));</span>
+<span class="nc" id="L126">                requetes.get(requetes.size() - 1).setStatut(statut);</span>
+
+<span class="nc" id="L128">            }</span>
+<span class="nc" id="L129">        } catch (Exception e) {};</span>
+        // On enlève les requêtes fermées.
+<span class="nc bnc" id="L131" title="All 2 branches missed.">        if (removeClosed) {requetes.removeIf(r -&gt; r.getStatut().equals(RequeteStatut.FERMEE));}</span>
+
+<span class="nc" id="L133">        return requetes;</span>
+    }
+
+    /**
+     * Fetch les requêtes et filtre la liste par un certain type.
+     * @param type - Le type de requête par lequel filtrer
+     * @return - La liste de requêtes filtrées
+     */
+    public static ArrayList&lt;Requete&gt; getRequeteByType(String type) {
+<span class="nc" id="L142">        ArrayList&lt;Requete&gt; requetesFiltrees = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        for (Requete r:getRequetes(true)) {</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">            if (r.getType().toString().equals(type)) {</span>
+<span class="nc" id="L145">                requetesFiltrees.add(r);</span>
+            }
+<span class="nc" id="L147">        }</span>
+<span class="nc" id="L148">        return requetesFiltrees;</span>
+    }
+    /**
+     * Fetch les requêtes et filtre la liste par un certain quartier.
+     * @param quartier - Le quartier de la requête par lequel filtrer
+     * @return - La liste de requêtes filtrées
+     */    
+    public static ArrayList&lt;Requete&gt; getRequeteByQuartier(String quartier) {
+<span class="nc" id="L156">        ArrayList&lt;Requete&gt; requetesFiltrees = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">        for (Requete r:getRequetes(true)) {</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">            if (r.getQuartier().toLowerCase().equals(quartier.toLowerCase())) {</span>
+<span class="nc" id="L159">                requetesFiltrees.add(r);</span>
+            }
+<span class="nc" id="L161">        }</span>
+<span class="nc" id="L162">        return requetesFiltrees;</span>
+    }
+
+    /**
+     * Fetch les requêtes et filtre la liste par une certaine date.
+     * @param date - Le date de requête par laquelle filtrer
+     * @return - La liste de requêtes filtrées
+     */
+    public static ArrayList&lt;Requete&gt; getRequeteByDate(String date) {
+<span class="nc" id="L171">        ArrayList&lt;Requete&gt; requetesFiltrees = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">        for (Requete r:getRequetes(true)) {</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">            if (r.getDateDebutEspere().toLowerCase().equals(date.toLowerCase())) {</span>
+<span class="nc" id="L174">                requetesFiltrees.add(r);</span>
+            }
+<span class="nc" id="L176">        }</span>
+<span class="nc" id="L177">        return requetesFiltrees;</span>
+    }
+
+
+/**
+ * Récupère une liste de requêtes associées à un utilisateur spécifique.
+ *
+ * @param userID L'identifiant de l'utilisateur pour lequel récupérer les requêtes.
+ * @return Une liste de {@link Requete} appartenant à l'utilisateur spécifié.
+ */
+    public static ArrayList&lt;Requete&gt; getRequeteByUser(String userID) {
+<span class="nc" id="L188">        ArrayList&lt;Requete&gt; requetes = getRequetes(true);</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">        requetes.removeIf(r -&gt; !r.getUserID().equals(userID));</span>
+<span class="nc" id="L190">        return requetes;</span>
+    }
+
+ /**
+ * Ferme une requête donnée en mettant à jour son statut à {@link RequeteStatut#FERMEE}
+ * et sauvegarde les modifications dans le fichier des requêtes.
+ *
+ * @param requete La {@link Requete} à fermer.
+ */
+    public static void fermerRequete(Requete requete) {
+<span class="nc" id="L200">        ArrayList&lt;Requete&gt; requetes = getRequetes(false);</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        requetes.removeIf(r-&gt; r.getRequeteId() == requete.getRequeteId());</span>
+<span class="nc" id="L202">        requete.setStatut(RequeteStatut.FERMEE);</span>
+<span class="nc" id="L203">        requetes.add(requete);</span>
+        try {
+<span class="nc" id="L205">            BufferedWriter writer = new BufferedWriter(new FileWriter(requetesFile));</span>
+<span class="nc" id="L206">            ArrayList&lt;String&gt; lines = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">            for (Requete r:requetes) {</span>
+<span class="nc" id="L208">                lines.add(r.getRequeteId() + &quot;,&quot;+r.getTitre()+&quot;,&quot;+r.getDescription()+&quot;,&quot;+r.getType().toString()+&quot;,&quot;+r.getDateDebutEspere()+&quot;,&quot;+r.getStatut().toString()+&quot;,&quot;+r.getUserID()+&quot;,&quot;+r.getQuartier());</span>
+<span class="nc" id="L209">            }</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">            if (lines.size() != 0) {</span>
+<span class="nc" id="L211">                writer.write(String.join(&quot;\n&quot;, lines) + &quot;\n&quot;);</span>
+            }
+<span class="nc" id="L213">            writer.close();</span>
+<span class="nc" id="L214">        } catch (Exception e){};</span>
+<span class="nc" id="L215">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
